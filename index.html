@@ -166,8 +166,13 @@ main{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem}
 .t-btn.t-primary:hover{opacity:.85}
 .timer-status{font-size:12px;color:var(--ink3);margin-top:.55rem;min-height:16px}
 
-/* ── RANDOMIZER ── */
+/* ── ROULETTE WHEEL ── */
+.wheel-wrap{position:relative;width:180px;height:190px;margin:0 auto .9rem;flex-shrink:0}
+#wheelCanvas{border-radius:50%;box-shadow:0 4px 20px rgba(0,0,0,.18),0 0 0 3px #1C1A16,0 0 0 5px #C8A84B;display:block}
+.wheel-pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:22px;color:#C8A84B;text-shadow:0 2px 4px rgba(0,0,0,.3);line-height:1;z-index:2;pointer-events:none}
 .rand-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column}
+
+
 .rand-result{min-height:76px;display:flex;flex-direction:column;justify-content:center;margin-bottom:.75rem}
 .rand-pair{display:flex;gap:10px;align-items:flex-start;margin-bottom:.25rem}
 .rand-person{flex:1}
@@ -241,19 +246,22 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
 
     <!-- RANDOMIZER -->
     <div class="rand-card">
-      <div class="tool-label">🎲 Рандомайзер ролей</div>
-      <div style="display:flex;gap:6px;margin-bottom:.75rem;flex-wrap:wrap">
-        <button class="t-preset sel" id="fmt11" onclick="setFormat(1,this)">1 заказчик + 1 CS</button>
-        <button class="t-preset" id="fmt21" onclick="setFormat(2,this)">2 заказчика + 1 CS</button>
+      <div class="tool-label">🎰 Рандомайзер ролей</div>
+
+      <!-- Roulette wheel canvas -->
+      <div class="wheel-wrap">
+        <canvas id="wheelCanvas" width="180" height="180"></canvas>
+        <div class="wheel-pointer">▼</div>
       </div>
+
       <div class="rand-result" id="randResult">
-        <div class="rand-empty">Нажмите «Выбрать» — назначим роли случайно</div>
+        <div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>
       </div>
       <div class="rand-controls">
-        <button class="r-btn r-primary" onclick="pickRoles()">🎲 Выбрать</button>
+        <button class="r-btn r-primary" id="spinBtn" onclick="pickRoles()">🎰 Крутить</button>
         <button class="r-btn" onclick="resetRand()">↺ Сброс</button>
       </div>
-      <div class="rand-count" id="randCount">Участников: <span>34</span> · Уже участвовали: <span id="pickedCount">0</span></div>
+      <div class="rand-count" id="randCount">Участников: <span>33</span> · Уже участвовали: <span id="pickedCount">0</span></div>
       <div class="picked-list" id="pickedList"></div>
     </div>
 
@@ -386,13 +394,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
         </div>
         <div class="char-body">Подключается на звонке на 3-й минуте. Более спокойная, хочет решения. Задаёт операционные вопросы: «Что нужно сделать, чтобы запустить сейчас?» Может смягчить Михаила — CS должен это заметить и работать с ней как с союзником.</div>
       </div>
-      <div class="char-card" style="grid-column:1/-1">
-        <div class="char-head">
-          <div class="av av-cs">CS</div>
-          <div><div class="char-name">CS-менеджер</div><div class="char-role">Ваша роль</div></div>
-        </div>
-        <div class="char-body">Задача: не спорить о том, было ли согласование — это тупик. Признать коммуникационный разрыв без обвинений и немедленно перевести фокус на запуск. Михаил эмоционален — работайте с Еленой как союзником, она хочет решения. Угроза эскалации — не катастрофа: работа и эскалация идут параллельно. Ключевой результат звонка: зафиксировать следующий конкретный шаг с датой и ответственным.</div>
-      </div>
     </div>
 
     <div class="timing-row">
@@ -491,13 +492,6 @@ footer{border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;
           <div><div class="char-name">Дмитрий Левин</div><div class="char-role">Юрист компании</div></div>
         </div>
         <div class="char-body">Молчит первые 5 минут. Потом задаёт один точный вопрос: «Вы признаёте, что баг был на вашей стороне?» Каждое слово CS потенциально юридически значимо. Не соглашаться с юридическими формулировками, но и не отрицать очевидный факт бага.</div>
-      </div>
-      <div class="char-card" style="grid-column:1/-1">
-        <div class="char-head">
-          <div class="av av-cs">CS</div>
-          <div><div class="char-name">CS-менеджер</div><div class="char-role">Ваша роль</div></div>
-        </div>
-        <div class="char-body">Задача: признать факт бага и незакрытого диалога — прямо и без оправданий. Алина холодная и точная: ей нужны факты, не сочувствие. Дмитрий — юрист: не принимайте его формулировки, не давайте юридических оценок. Ваши слова: «факт технической проблемы подтверждён, вопрос компенсации — решение руководства». Ключевой результат: зафиксировать сумму, назвать конкретного руководителя и срок ответа, отправить ему письмо с копией заказчику в течение часа после звонка.</div>
       </div>
     </div>
 
@@ -684,99 +678,192 @@ function timerReset() {
   document.getElementById('timerStatus').textContent = 'Нажмите «Старт» чтобы начать отсчёт';
 }
 
-// ── RANDOMIZER ─────────────────────────────────────────
+// ── RANDOMIZER + ROULETTE WHEEL ────────────────────────
 const PARTICIPANTS = [
-  'Kseniya Kadebskaya','Nikita Golodaev','Zakhar Galushkin',
-  'Anastasiya Rusanova','Yuliya Fedchenko','Mariya Logimakhova',
-  'Anastasiya Khizhnyak','Aleksandr Minenok','Mariya Makdonald',
-  'Ekaterina Radkova','Volha Salahub','Milena Borshcheva',
-  'Olga Samoilova','Leonid Matison','Elizaveta Mikhoparkina',
-  'Viktoriya Suhoveeva','Valeriya Grudnina','Anna Aleksandrovich',
-  'Aleksandr Karmanov','Rakhima Aldasheva','Ivan Pritchin',
-  'Halina Pesko','Alena Gorenysheva','Dimitri Marutiani',
-  'Darya Baranova','Olga Zakharenko','Yuliya Poshva',
-  'Natalya Nazarenko','Anton Grishukevich','Stanislav Miletskii',
-  'Valentin Seregin','Valery Budkevich','Aidar Giliazetdinov',
-  'Chingiz Zhumagaliev'
+  'Kseniya Kadebskaya','Nikita Golodaev','Zakhar Galushkin','Anastasiya Rusanova',
+  'Yuliya Fedchenko','Anastasiya Khizhnyak','Aleksandr Minenok',
+  'Mariya Makdonald','Ekaterina Radkova','Volha Salahub','Milena Borshcheva',
+  'Olga Samoilova','Leonid Matison','Elizaveta Mikhoparkina','Viktoriya Suhoveeva',
+  'Valeriya Grudnina','Anna Aleksandrovich','Aleksandr Karmanov','Rakhima Aldasheva',
+  'Ivan Pritchin','Halina Pesko','Alena Gorenysheva','Dimitri Marutiani',
+  'Darya Baranova','Olga Zakharenko','Yuliya Poshva','Natalya Nazarenko',
+  'Anton Grishukevich','Stanislav Miletskii','Valentin Seregin','Valery Budkevich',
+  'Aidar Giliazetdinov','Chingiz Zhumagaliev'
 ];
 
 let remaining = [...PARTICIPANTS];
 let pickedHistory = [];
-let clientCount = 1; // 1 = формат 1+1, 2 = формат 2+1
+let wheelAngle = 0;
+let wheelSpinning = false;
 
-function setFormat(n, el) {
-  clientCount = n;
-  document.querySelectorAll('#fmt11,#fmt21').forEach(b => b.classList.remove('sel'));
-  el.classList.add('sel');
+// ── Draw roulette wheel ─────────────────────────────────
+function drawWheel(angle) {
+  const canvas = document.getElementById('wheelCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 90, cy = 90, r = 84;
+  const segments = 18;
+  const segAngle = (Math.PI * 2) / segments;
+
+  ctx.clearRect(0, 0, 180, 180);
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, r + 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#1C1A16';
+  ctx.fill();
+
+  for (let i = 0; i < segments; i++) {
+    const startA = angle + i * segAngle;
+    const endA   = startA + segAngle;
+    let col;
+    if (i === 0) col = '#1A6B3A';
+    else col = i % 2 === 0 ? '#C0392B' : '#1C1A16';
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, startA, endA);
+    ctx.closePath();
+    ctx.fillStyle = col;
+    ctx.fill();
+    ctx.strokeStyle = '#C8A84B';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Number
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(startA + segAngle / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 9px DM Sans, sans-serif';
+    ctx.fillText(i === 0 ? '0' : String(i), r - 5, 3.5);
+    ctx.restore();
+  }
+
+  // Spokes
+  for (let i = 0; i < segments; i++) {
+    const a = angle + i * segAngle;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+    ctx.strokeStyle = 'rgba(200,168,75,0.25)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Center hub
+  const grad = ctx.createRadialGradient(cx, cy, 2, cx, cy, 18);
+  grad.addColorStop(0, '#E8C96A');
+  grad.addColorStop(1, '#C8A84B');
+  ctx.beginPath();
+  ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+  ctx.fillStyle = '#1C1A16';
+  ctx.fill();
+}
+
+function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+function spinWheel(onDone) {
+  if (wheelSpinning) return;
+  wheelSpinning = true;
+  const spinBtn = document.getElementById('spinBtn');
+  if (spinBtn) { spinBtn.disabled = true; spinBtn.textContent = '🎰 Крутится…'; }
+
+  const totalRotation = (6 + Math.random() * 5) * Math.PI * 2;
+  const duration = 2400;
+  const startAngle = wheelAngle;
+  const startTime = performance.now();
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    wheelAngle = startAngle + totalRotation * easeOut(progress);
+    drawWheel(wheelAngle);
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      wheelSpinning = false;
+      if (spinBtn) { spinBtn.disabled = false; spinBtn.textContent = '🎰 Крутить'; }
+      if (onDone) onDone();
+    }
+  }
+  requestAnimationFrame(frame);
 }
 
 function pickRoles() {
-  const needed = 1 + clientCount; // CS + clients
-  if (remaining.length < needed) {
+  if (wheelSpinning) return;
+
+  if (remaining.length < 2) {
     remaining = [...PARTICIPANTS];
     pickedHistory = [];
     document.getElementById('pickedList').innerHTML = '';
+    document.getElementById('pickedCount').textContent = '0';
   }
-
-  // Pick CS manager
-  const csIdx = Math.floor(Math.random() * remaining.length);
-  const csName = remaining.splice(csIdx, 1)[0];
-
-  // Pick client(s)
-  const clients = [];
-  for (let i = 0; i < clientCount; i++) {
-    const idx = Math.floor(Math.random() * remaining.length);
-    clients.push(remaining.splice(idx, 1)[0]);
-  }
-
-  pickedHistory.push(csName, ...clients);
-
-  // Build result HTML
-  const clientCols = clients.map((name, i) => `
-    <div class="rand-person">
-      <div class="rand-role-label role-cl-lbl">Заказчик${clientCount > 1 ? ' ' + (i + 1) : ''}</div>
-      <div class="rand-name spinning" id="rn-cl${i}">${name}</div>
-    </div>`).join('<div class="rand-sep"></div>');
 
   const res = document.getElementById('randResult');
-  res.innerHTML = `
-    <div class="rand-pair">
-      <div class="rand-person">
-        <div class="rand-role-label role-cs-lbl">CS-менеджер</div>
-        <div class="rand-name spinning" id="rn-cs">${csName}</div>
-      </div>
-      <div class="rand-sep"></div>
-      ${clientCols}
-    </div>`;
+  res.innerHTML = '<div class="rand-empty" style="font-style:normal;font-weight:500;color:#1C1A16;">🎰 Колесо решает…</div>';
 
-  setTimeout(() => {
-    res.querySelectorAll('.rand-name').forEach(el => el.classList.remove('spinning'));
-  }, 50);
+  spinWheel(() => {
+    const csIdx = Math.floor(Math.random() * remaining.length);
+    const csName = remaining.splice(csIdx, 1)[0];
+    const clIdx  = Math.floor(Math.random() * remaining.length);
+    const clName = remaining.splice(clIdx, 1)[0];
+    pickedHistory.push(csName, clName);
 
-  // Update count
-  const used = PARTICIPANTS.length - remaining.length;
-  document.getElementById('pickedCount').textContent = used;
+    res.innerHTML = `
+      <div class="rand-pair">
+        <div class="rand-person">
+          <div class="rand-role-label role-cs-lbl">CS-менеджер</div>
+          <div class="rand-name spinning" id="rn-cs">${csName}</div>
+        </div>
+        <div class="rand-sep"></div>
+        <div class="rand-person">
+          <div class="rand-role-label role-cl-lbl">Заказчик</div>
+          <div class="rand-name spinning" id="rn-cl">${clName}</div>
+        </div>
+      </div>`;
 
-  // Update chip list
-  const list = document.getElementById('pickedList');
-  list.querySelectorAll('.latest').forEach(c => c.classList.remove('latest'));
-  [csName, ...clients].forEach(n => {
-    const chip = document.createElement('span');
-    chip.className = 'picked-chip latest';
-    chip.textContent = n;
-    list.appendChild(chip);
+    setTimeout(() => {
+      const nc = document.getElementById('rn-cs');
+      const nl = document.getElementById('rn-cl');
+      if (nc) nc.classList.remove('spinning');
+      if (nl) nl.classList.remove('spinning');
+    }, 60);
+
+    document.getElementById('pickedCount').textContent = PARTICIPANTS.length - remaining.length;
+
+    const list = document.getElementById('pickedList');
+    list.querySelectorAll('.latest').forEach(c => c.classList.remove('latest'));
+    [csName, clName].forEach(n => {
+      const chip = document.createElement('span');
+      chip.className = 'picked-chip latest';
+      chip.textContent = n;
+      list.appendChild(chip);
+    });
   });
 }
 
 function resetRand() {
   remaining = [...PARTICIPANTS];
   pickedHistory = [];
-  document.getElementById('randResult').innerHTML = '<div class="rand-empty">Нажмите «Выбрать» — назначим роли случайно</div>';
+  document.getElementById('randResult').innerHTML = '<div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>';
   document.getElementById('pickedCount').textContent = '0';
   document.getElementById('pickedList').innerHTML = '';
 }
 
-// init timer display
+// init
+drawWheel(0);
 renderTimer();
 </script>
 </body>
