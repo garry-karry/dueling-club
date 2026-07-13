@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Роль-плей — CS vs Заказчик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EC;--bg2:#EDE9E0;--bg3:#E4E0D5;
+  --ink:#1C1A16;--ink2:#4A4740;--ink3:#8A8680;
+  --teal:#0A7D5C;--teal-l:#D4F5E8;--teal-m:#9FE1CB;
+  --red:#A32D2D;--red-l:#FCEBEB;
+  --amber:#854F0B;--amber-l:#FAEEDA;
+  --blue:#185FA5;--blue-l:#E6F1FB;
+  --purple:#534AB7;--purple-l:#EEEDFE;
+  --gold:#C8A84B;--gold-l:#FBF0D4;
+  --border:rgba(28,26,22,.12);--border-m:rgba(28,26,22,.22);
+  --r:10px;--r-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* ── STICKY HEADER ── */
+.site-header{border-bottom:1px solid var(--border);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(245,242,236,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
+.logo{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;letter-spacing:-.3px;color:var(--ink);flex-shrink:0}
+.logo span{color:var(--teal)}
+/* Timer in header */
+.header-timer{display:none;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:5px 14px}
+.header-timer.visible{display:flex}
+.ht-display{font-family:'Libre Baskerville',serif;font-size:20px;font-weight:700;letter-spacing:-1px;color:var(--ink);min-width:48px;font-variant-numeric:tabular-nums}
+.ht-display.warn{color:var(--amber)}
+.ht-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
+.ht-display.done{color:var(--teal)}
+.ht-btn{font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.ht-btn:hover{background:var(--bg2)}
+.ht-btn.go{background:var(--ink);color:#fff;border-color:var(--ink)}
+.header-meta{font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+
+@keyframes tpulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MAIN ── */
+main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+
+/* ── INTRO ── */
+.intro{margin-bottom:2rem}
+.intro-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.intro h1{font-family:'Libre Baskerville',serif;font-size:clamp(24px,4vw,34px);font-weight:700;line-height:1.2;margin-bottom:.75rem}
+.intro p{font-size:14px;color:var(--ink2);max-width:580px;line-height:1.7}
+.intro-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.meta-pill{font-size:12px;font-weight:500;padding:3px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border)}
+
+/* ── TABS ── */
+.sc-tabs{display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
+.sc-tab{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 16px;border-radius:30px;border:1.5px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;transition:all .2s}
+.sc-tab:hover{background:var(--bg2)}
+.sc-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ── SCENARIO PANEL ── */
+.sc-panel{display:none;animation:fadeIn .25s ease}
+.sc-panel.active{display:block}
+
+/* ── TOOLS PANEL ── */
+.tools-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.75rem}
+@media(max-width:600px){.tools-panel{grid-template-columns:1fr}}
+
+/* ── TIMER CARD ── */
+.timer-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;align-self:start}
+.tool-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem}
+.timer-display{font-family:'Libre Baskerville',serif;font-size:50px;font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;margin-bottom:.75rem;transition:color .3s;font-variant-numeric:tabular-nums}
+.timer-display.warn{color:var(--amber)}
+.timer-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
+.timer-display.done{color:var(--teal)}
+.timer-preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.65rem}
+.t-preset{font-size:12px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.t-preset:hover{background:var(--bg2)}
+.t-preset.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.timer-controls{display:flex;gap:8px}
+.t-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 14px;border-radius:8px;border:1.5px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;transition:all .15s;flex:1}
+.t-btn:hover{background:var(--bg2)}
+.t-btn.t-primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.timer-status{font-size:11px;color:var(--ink3);margin-top:.5rem;min-height:15px}
+
+/* ── ROULETTE / RANDOMIZER ── */
+.rand-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column}
+.wheel-wrap{position:relative;width:160px;height:170px;margin:0 auto .8rem;flex-shrink:0}
+#wheelCanvas{border-radius:50%;box-shadow:0 4px 18px rgba(0,0,0,.18),0 0 0 3px #1C1A16,0 0 0 5px #C8A84B;display:block}
+.wheel-pointer{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:20px;color:#C8A84B;text-shadow:0 2px 4px rgba(0,0,0,.3);line-height:1;z-index:2;pointer-events:none}
+.rand-result{min-height:68px;display:flex;flex-direction:column;justify-content:center;margin-bottom:.6rem}
+.rand-pair{display:flex;gap:8px;align-items:stretch}
+.rand-person{flex:1}
+.rand-role-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px}
+.role-cs-lbl{color:var(--teal)}
+.role-cl-lbl{color:var(--red)}
+.rand-name{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:var(--ink);line-height:1.25;transition:all .15s}
+.rand-name.spinning{opacity:0;transform:translateY(-3px)}
+/* Replace button */
+.rand-replace-row{display:flex;gap:6px;margin-top:4px}
+.replace-btn{font-size:11px;font-weight:500;padding:2px 8px;border-radius:12px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:3px}
+.replace-btn:hover{background:var(--bg2)}
+.replace-btn.cs-replace{border-color:var(--teal);color:var(--teal)}
+.replace-btn.cl-replace{border-color:var(--red);color:var(--red)}
+.rand-sep{width:1px;background:var(--border);flex-shrink:0}
+.rand-empty{font-size:13px;color:var(--ink3);font-style:italic}
+.rand-controls{display:flex;gap:8px;margin-bottom:.55rem}
+.r-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 14px;border-radius:8px;border:1.5px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;transition:all .15s;flex:1}
+.r-btn:hover{background:var(--bg2)}
+.r-btn.r-primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rand-count{font-size:11px;color:var(--ink3);margin-bottom:.4rem}
+.rand-count span{font-weight:500;color:var(--ink2)}
+.picked-list{display:flex;flex-wrap:wrap;gap:3px;max-height:54px;overflow-y:auto}
+.picked-chip{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--bg2);color:var(--ink2)}
+.picked-chip.latest{background:var(--ink);color:#fff;font-weight:500}
+
+/* ── SCENARIO HEADER ── */
+.sc-header{margin-bottom:1.5rem}
+.sc-difficulty{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:3px 11px;border-radius:20px;margin-bottom:.85rem}
+.diff-high{background:var(--red-l);color:var(--red)}
+.diff-med{background:var(--amber-l);color:var(--amber)}
+.diff-vhigh{background:var(--purple-l);color:var(--purple)}
+.sc-header h2{font-family:'Libre Baskerville',serif;font-size:clamp(18px,3vw,24px);font-weight:700;line-height:1.25;margin-bottom:.5rem}
+.sc-header .subtitle{font-size:13.5px;color:var(--ink2);line-height:1.65;max-width:680px}
+
+/* ── BLOCKS ── */
+.block{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:.85rem}
+.block-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:.8rem}
+.block-text{font-size:13.5px;color:var(--ink2);line-height:1.75}
+
+/* ── REAL QUOTE ── */
+.real-quote{margin:1rem 0;background:var(--red-l);border-left:3px solid var(--red);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:.9rem 1.1rem}
+.real-quote .rq-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:.45rem}
+.real-quote p{font-size:13.5px;color:var(--ink);line-height:1.7;font-style:italic}
+
+/* ── CHARACTER CARDS ── */
+.characters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.85rem}
+@media(max-width:580px){.characters{grid-template-columns:1fr}}
+.char-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.char-head{padding:11px 14px;display:flex;align-items:center;gap:11px}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;letter-spacing:.5px}
+.av-cl{background:var(--red-l);color:var(--red)}
+.av-cs{background:var(--teal-l);color:var(--teal)}
+.char-name{font-size:13.5px;font-weight:500;color:var(--ink)}
+.char-role{font-size:11.5px;color:var(--ink3)}
+.char-body{padding:11px 14px;border-top:1px solid var(--border)}
+.char-section{margin-bottom:.65rem}
+.char-section:last-child{margin-bottom:0}
+.char-section-title{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:.3rem}
+.char-section-text{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.char-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.35rem}
+.char-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:var(--bg2);color:var(--ink2)}
+.char-tag.red{background:var(--red-l);color:var(--red)}
+.char-tag.teal{background:var(--teal-l);color:var(--teal)}
+.char-tag.amber{background:var(--amber-l);color:var(--amber)}
+.char-quote{font-size:12px;font-style:italic;color:var(--ink3);margin-top:.4rem;padding:.4rem .7rem;background:var(--bg);border-radius:var(--r-sm);border-left:2px solid var(--border-m);line-height:1.55}
+
+/* ── TIMING PILLS ── */
+.timing-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.85rem}
+.t-pill{font-size:12px;font-weight:500;padding:3px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border)}
+
+/* ── TRAPS ── */
+.trap-list{display:flex;flex-direction:column;gap:7px}
+.trap{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink2);line-height:1.6}
+.trap-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px;font-weight:700}
+.trap-icon.bad{background:var(--red-l);color:var(--red)}
+.trap-icon.good{background:var(--teal-l);color:var(--teal)}
+
+/* ── ACCORDION ── */
+.accordion{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.85rem}
+.accordion-trigger{width:100%;background:#fff;border:none;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;text-align:left;transition:background .15s}
+.accordion-trigger:hover{background:var(--bg2)}
+.accordion-trigger.open{background:var(--ink);color:#fff}
+.trigger-left{display:flex;align-items:center;gap:11px}
+.trigger-icon{width:26px;height:26px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+.accordion-trigger.open .trigger-icon{background:rgba(255,255,255,.15)}
+.trigger-label{font-size:13.5px;font-weight:500;color:inherit}
+.trigger-sub{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.accordion-trigger.open .trigger-sub{color:rgba(255,255,255,.55)}
+.chevron{font-size:16px;color:var(--ink3);transition:transform .25s;line-height:1;flex-shrink:0}
+.accordion-trigger.open .chevron{transform:rotate(180deg);color:rgba(255,255,255,.6)}
+.accordion-body{display:none;background:#fff;border-top:1px solid var(--border)}
+.accordion-body.open{display:block}
+.script-inner{padding:1rem 1.25rem}
+
+/* ── SCRIPT LINES ── */
+.script-line{display:flex;gap:10px;padding:.65rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.script-line:last-child{border-bottom:none;padding-bottom:0}
+.who{min-width:68px;font-size:10.5px;font-weight:500;padding:3px 7px;border-radius:20px;text-align:center;flex-shrink:0;margin-top:2px}
+.who.cl{background:var(--red-l);color:var(--red)}
+.who.cs{background:var(--teal-l);color:var(--teal)}
+.who.note{background:var(--bg2);color:var(--ink3)}
+.line-text{font-size:13px;color:var(--ink);line-height:1.65}
+.line-text em{color:var(--ink3);font-style:normal;font-size:11.5px;display:block;margin-top:2px}
+
+/* ── DEBRIEF ── */
+.debrief-list{display:flex;flex-direction:column;gap:7px}
+.dq{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink2);line-height:1.6}
+.dq-n{min-width:22px;height:22px;border-radius:50%;background:var(--bg2);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px;border:1px solid var(--border)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
+.footer-inner{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
+.footer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:1.5rem}
+.footer-logo{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:#fff}
+.footer-logo span{color:var(--gold)}
+.footer-meta{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* ── HISTORY SECTION IN FOOTER ── */
+.history-title{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.history-list{display:flex;flex-direction:column;gap:6px}
+.hist-item{border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
+.hist-trigger{width:100%;background:rgba(255,255,255,.05);border:none;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;text-align:left;color:#fff;font-family:'DM Sans',sans-serif;transition:background .15s}
+.hist-trigger:hover{background:rgba(255,255,255,.1)}
+.hist-trigger.open{background:rgba(200,168,75,.15)}
+.hist-trigger-left{display:flex;align-items:center;gap:10px}
+.hist-num{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(200,168,75,.2);color:var(--gold);flex-shrink:0}
+.hist-name{font-size:13px;font-weight:500;color:#fff}
+.hist-sub{font-size:11.5px;color:rgba(255,255,255,.45);margin-top:1px}
+.hist-difficulty{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;flex-shrink:0}
+.hd-high{background:rgba(163,45,45,.3);color:#FF9090}
+.hd-med{background:rgba(133,79,11,.3);color:#FFBA7A}
+.hist-chevron{font-size:14px;color:rgba(255,255,255,.35);transition:transform .25s;flex-shrink:0}
+.hist-trigger.open .hist-chevron{transform:rotate(180deg);color:var(--gold)}
+.hist-body{display:none;border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.2);padding:1.25rem}
+.hist-body.open{display:block}
+.hist-block{margin-bottom:1rem}
+.hist-block:last-child{margin-bottom:0}
+.hist-block-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem}
+.hist-block-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7}
+.hist-quote{background:rgba(163,45,45,.2);border-left:2px solid rgba(163,45,45,.6);border-radius:0 6px 6px 0;padding:.7rem .9rem;margin:.6rem 0;font-size:12.5px;color:rgba(255,255,255,.8);font-style:italic;line-height:1.65}
+.hist-chars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+@media(max-width:480px){.hist-chars{grid-template-columns:1fr}}
+.hist-char{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.75rem}
+.hist-char-name{font-size:13px;font-weight:500;color:#fff;margin-bottom:2px}
+.hist-char-role{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:.4rem}
+.hist-char-body{font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
+.hist-traps{display:flex;flex-direction:column;gap:5px}
+.hist-trap{font-size:12px;color:rgba(255,255,255,.65);display:flex;gap:7px;line-height:1.55}
+.hist-trap-icon{font-size:12px;flex-shrink:0}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08)}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">CS<span> · </span>Воркшоп</div>
+
+  <!-- Timer in header — shown after timer starts -->
+  <div class="header-timer" id="headerTimer">
+    <div class="ht-display" id="htDisplay">7:00</div>
+    <button class="ht-btn go" id="htBtn" onclick="timerToggle()">Пауза</button>
+    <button class="ht-btn" onclick="timerReset()">↺</button>
+  </div>
+
+  <div class="header-meta">3 сценария · Роль-плей</div>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="intro-label">Практика</div>
+    <h1>Заказчик vs CS-менеджер</h1>
+    <p>Три сценария на основе реальных ситуаций. Опорный сценарий скрыт до клика — сначала попробуй сам.</p>
+    <div class="intro-meta">
+      <span class="meta-pill">3 сценария</span>
+      <span class="meta-pill">Реальные кейсы</span>
+      <span class="meta-pill">Poker &amp; Casino B2B</span>
+      <span class="meta-pill">Парная работа</span>
+    </div>
+  </div>
+
+  <div class="sc-tabs">
+    <button class="sc-tab active" onclick="showScenario('s1',this)">Сценарий 1 — Антифрод-колл</button>
+    <button class="sc-tab" onclick="showScenario('s2',this)">Сценарий 2 — Полтора года и «за что мы платим?»</button>
+    <button class="sc-tab" onclick="showScenario('s3',this)">Сценарий 3 — Сравнения с конкурентами</button>
+  </div>
+
+  <!-- TOOLS: TIMER + RANDOMIZER -->
+  <div class="tools-panel">
+
+    <div class="timer-card">
+      <div class="tool-label">⏱ Таймер сцены</div>
+      <div class="timer-display" id="timerDisplay">7:00</div>
+      <div class="timer-preset-row">
+        <button class="t-preset sel" onclick="setPreset(7,this)">7 мин</button>
+        <button class="t-preset" onclick="setPreset(10,this)">10 мин</button>
+        <button class="t-preset" onclick="setPreset(12,this)">12 мин</button>
+      </div>
+      <div class="timer-controls">
+        <button class="t-btn t-primary" id="timerStartBtn" onclick="timerToggle()">Старт</button>
+        <button class="t-btn" onclick="timerReset()">Сброс</button>
+      </div>
+      <div class="timer-status" id="timerStatus">Нажмите «Старт» для отсчёта</div>
+    </div>
+
+    <div class="rand-card">
+      <div class="tool-label">🎰 Рандомайзер ролей</div>
+      <div class="wheel-wrap">
+        <canvas id="wheelCanvas" width="160" height="160"></canvas>
+        <div class="wheel-pointer">▼</div>
+      </div>
+      <div class="rand-result" id="randResult">
+        <div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>
+      </div>
+      <div class="rand-controls">
+        <button class="r-btn r-primary" id="spinBtn" onclick="pickRoles()">🎰 Крутить</button>
+        <button class="r-btn" onclick="resetRand()">↺ Сброс</button>
+      </div>
+      <div class="rand-count">Участников: <span>33</span> · Участвовали: <span id="pickedCount">0</span> · <span id="randModeHint" style="color:var(--teal)">(сценарий 1: 1 CS + 2 заказчика)</span></div>
+      <div class="picked-list" id="pickedList"></div>
+    </div>
+
+  </div>
+
+  <!-- ════ SCENARIO 1 ════ -->
+  <div class="sc-panel active" id="s1">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-vhigh">🔒 Очень высокая · Антифрод-колл + техническое давление + накопившийся негатив</div>
+      <h2>«Я работаю с чёрным ящиком» — антифрод-колл и запрос избыточной информации</h2>
+      <p class="subtitle">Клиент с техническим и безопасностным бэкграундом требует раскрыть внутреннюю логику антифрод-системы. Параллельно — накопившееся недовольство: несоответствие онлайна, незакрытые задачи, задержки. Разговор идёт одновременно по нескольким фронтам.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Контекст сценария</div>
+      <div class="block-text">Клиент — покерный оператор с сильной внутренней командой по безопасности. Инициировал колл после того, как система Delphic Oracle заблокировала игрока. Требует понять алгоритм принятия решений, конкретные процентные пороги. Параллельно — Chief поднимает несоответствие онлайна (в лобби 300-400, реально 100), системные задержки, две стороны давят одновременно.</div>
+    </div>
+
+    <div class="block" style="background:var(--red-l);border-color:var(--red)">
+      <div class="block-label" style="color:var(--red)">Из реальных цитат клиента</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        «Меня беспокоит, что я работаю с чёрным ящиком. Я хочу знать, как Дельфийский Оракул принял решение.»<br>
+        «Какой процент? Не 75, да? 72% конкретная рука была сыграна. Какой процент?»<br>
+        «Когда вы говорите, там есть формула, у нас прям радость. Формулу мы любим.»<br>
+        «У нас каждый созвон смотрите — все есть, ничего не решено, встретимся на следующей неделе. Неделя проходит, в чате вообще тишина.»
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">RM</div>
+          <div><div class="char-name">Роман — Security Lead</div><div class="char-role">Специалист по безопасности, технический</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Характер</div>
+            <div class="char-section-text">Говорит методично, требует точных цифр. Не злится — анализирует. Слово «формула» вызывает у него настоящий энтузиазм. При получении конкретики — успокаивается и начинает работать конструктивно. При уходе CS в общие слова — усиливает давление на детали.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Как себя вести в роли</div>
+            <div class="char-section-text">Задавать точные вопросы про проценты, пороги, алгоритм. На «система работает хорошо» — переспрашивать: «Хорошо — это сколько конкретно?» Не агрессивен, но педантичен. Снижает тон только когда CS либо даёт конкретику, либо честно говорит «этого я сейчас не знаю, уточню до [дата]».</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Триггерные фразы</div>
+            <div class="char-tags">
+              <span class="char-tag red">«Чёрный ящик»</span>
+              <span class="char-tag red">«Конкретный процент»</span>
+              <span class="char-tag teal">«Формула» → позитивная реакция</span>
+              <span class="char-tag teal">«Уточню до пятницы» → принимает</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CH</div>
+          <div><div class="char-name">Chief — COO / Операционный директор</div><div class="char-role">Управленец, системный взгляд</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Характер</div>
+            <div class="char-section-text">Вступает после Романа, не перебивает, но его слова тяжелее — он про операционную реальность. Говорит спокойно, но разочарованно. Два месяца просит лидерборд. Видит несоответствие онлайна. Каждую неделю — одни и те же задачи без движения.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Как себя вести в роли</div>
+            <div class="char-section-text">Поднять онлайн (300–400 в лобби, реально 100). Упомянуть лидерборд — «два месяца просим». Сказать про паттерн встреч: «каждый созвон — те же задачи, в чате тишина». Не кричать. Говорить устало и по делу. Ждёт не извинений, а системного изменения.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Ключевая реплика</div>
+            <div class="char-quote">«У нас каждый созвон смотрите вот по этим задачам — всё есть, ничего не решено, встретимся на следующей неделе. Неделя проходит — в чате вообще тишина.»</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="char-card" style="margin-bottom:.85rem">
+      <div class="char-head">
+        <div class="av av-cs">CS</div>
+        <div><div class="char-name">CS-менеджер</div><div class="char-role">Ваша роль</div></div>
+      </div>
+      <div class="char-body">
+        <div class="char-section">
+          <div class="char-section-title">Внутреннее состояние</div>
+          <div class="char-section-text">Два клиента давят по разным фронтам одновременно. Роман хочет технические детали, которых ты, возможно, не знаешь. Chief поднимает системные проблемы с историей. Соблазн переключаться между темами и не закрыть ни одну. Главная ловушка — объяснять вместо того, чтобы фиксировать и двигаться.</div>
+        </div>
+        <div class="char-section">
+          <div class="char-section-title">Задача CS</div>
+          <div class="char-section-text">По антифроду: либо дать конкретику, либо честно назвать дату, когда дашь. Не уходить в «система работает» без цифр. По операционным вопросам: признать паттерн (молчание в чате, повторяющиеся задачи) — и предложить изменение формата, а не очередное «разберёмся».</div>
+        </div>
+        <div class="char-section">
+          <div class="char-section-title">Инструменты</div>
+          <div class="char-tags">
+            <span class="char-tag teal">Честное «не знаю» + дата ответа</span>
+            <span class="char-tag teal">Разделить темы: антифрод отдельно, операционка отдельно</span>
+            <span class="char-tag amber">Признать паттерн молчания в чате</span>
+            <span class="char-tag amber">Новый формат вместо обещания «будем лучше»</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ 12 мин</span>
+      <span class="t-pill">👥 2 заказчика + 1 CS</span>
+      <span class="t-pill">📞 Звонок</span>
+      <span class="t-pill">⚡ Многофронтовое давление</span>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Ловушки — что делать не надо</div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span>Говорить «система работает хорошо» без конкретных цифр — Роман именно за этим и пришёл</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Переключаться между темами хаотично — потерять оба фронта одновременно</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Обещать «будем лучше следить за чатом» — Chief это уже слышал</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Защищать продукт от сравнений с конкурентами — это уведёт в спор, не в решение</div>
+        <div class="trap"><span class="trap-icon good">✓</span>Разделить темы. По антифроду — дать конкретику или честную дату. По операционке — признать паттерн и предложить другой формат работы, а не ещё одно обещание.</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left">
+          <div class="trigger-icon">📋</div>
+          <div><div class="trigger-label">Опорный сценарий</div><div class="trigger-sub">Сначала попробуй сам — потом открой</div></div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="script-inner">
+          <div class="script-line"><span class="who cl">Роман</span><span class="line-text">Меня беспокоит, что я работаю с чёрным ящиком. Я хочу знать, как Дельфийский Оракул принял решение по этому игроку. Конкретно — какой процент?</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Роман, понимаю запрос — вам нужна не общая картина, а конкретная логика по конкретному игроку. Честно: детальный порог по этому кейсу я сейчас не назову точно. Запрошу у команды антифрода — дам вам ответ письменно до завтра 12:00. Это вас устроит?</span></div>
+          <div class="script-line"><span class="who cl">Роман</span><span class="line-text">Устроит, если будет конкретика. Не «система работает», а цифры.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Цифры — понял. Зафиксирую. <em>(переключается на Chief)</em> Chief, я слышу по онлайну и по задачам — давайте по этому отдельно.</span></div>
+          <div class="script-line"><span class="who cl">Chief</span><span class="line-text">У нас каждый созвон — те же задачи, ничего не решено. В чате тишина. Лидерборд просим два месяца.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Это справедливо. Паттерн есть — я его вижу. Предлагаю изменить формат: после каждого созвона я присылаю в чат короткий summary с задачами и датами — не на следующей встрече, а в тот же день. По лидерборду — конкретный статус сегодня до 18:00. Это изменение, а не обещание.</span></div>
+          <div class="script-line"><span class="who note">Ключевой момент</span><span class="line-text">CS не защищает продукт от сравнения с конкурентами. Если звучит «у JackPoker всё работает» — «Понял. Давайте разберёмся конкретно, что именно не работает у вас прямо сейчас — и закроем это.»</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Вопросы для дебрифа</div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span>Как CS справился с запросом технических деталей, которых у него не было — и почему «не знаю + дата» работает лучше, чем общий ответ?</div>
+        <div class="dq"><span class="dq-n">2</span>Как CS переключился между двумя фронтами — и потерял ли что-то при переключении?</div>
+        <div class="dq"><span class="dq-n">3</span>Как признать паттерн молчания в чате, не превращая это в самобичевание — и предложить конкретное изменение?</div>
+        <div class="dq"><span class="dq-n">4</span>Что нужно сделать CS в течение 3 часов после этого звонка?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCENARIO 2 ════ -->
+  <div class="sc-panel" id="s2">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high">💸 Высокая · Долгосрочное разочарование + вопрос о ценности</div>
+      <h2>«Полтора года — и всё то же самое» — фрустрация от долгих процессов и вопрос: за что мы платим?</h2>
+      <p class="subtitle">Клиент работает с компанией уже полтора года. Накопилась системная фрустрация: задержки, банальные просьбы не выполняются, отсутствие прозрачности. Теперь он прямо спрашивает о ценности сотрудничества — и сравнивает стоимость с тем, что получает.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Контекст сценария</div>
+      <div class="block-text">Capo — давний клиент, полтора года в работе. За это время накопился список невыполненных или долго выполняемых запросов — базовых, которые «во всех адекватных приложениях работают изумительно». Сейчас он поднимает вопрос открыто: прозрачность по оплате, ценность продукта, готовность объяснить партнёрам, за что платят деньги. Разговор — на грани решения о продолжении.</div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)">Из реальных цитат клиента</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        «Мы уже с вами работаем полтора года. И это постоянно, то есть это редко, когда вот что-то есть, чтобы хоть что-то сделалось по-человечески и вовремя.»<br>
+        «Мне интересно, когда будет момент оплаты, я хочу прийти к вашему бездеву или к директору… скажу, ребят, вот мы платим, а что?»<br>
+        «У меня и у моих партнеров должно быть понимание, за что мы платим деньги. Просто за платформу? Ну хорошо, ну давайте это будет не 3000 долларов, окей.»<br>
+        «Хотя просьбы самые такие банальные, во всех адекватных приложениях это и так все работает изумительно.»
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CP</div>
+          <div><div class="char-name">Capo</div><div class="char-role">Владелец / CEO, оператор, 1.5 года в работе</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Характер</div>
+            <div class="char-section-text">Говорит прямо, без агрессии, но с тяжёлым весом накопленного. Не истеричен — устал. Уважает прямой разговор. Обращение к директору — не угроза, а попытка найти уровень, где что-то изменится. Если CS даёт честный ответ без отмазок — Capo это ценит и смягчается.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Как себя вести в роли</div>
+            <div class="char-section-text">Говорить спокойно, но настойчиво. Поднять вопрос ценности напрямую: «за что мы платим?» При попытке CS уйти в общие слова — возвращать к конкретике: «Назови мне три вещи, которые я получаю за эти деньги». Если CS признаёт и предлагает конкретный шаг — готов продолжить разговор.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Триггерные фразы</div>
+            <div class="char-tags">
+              <span class="char-tag red">«Полтора года — и то же самое»</span>
+              <span class="char-tag red">«За что мы платим?»</span>
+              <span class="char-tag red">«Пойду к директору»</span>
+              <span class="char-tag teal">Честный ответ без отмазок → смягчается</span>
+            </div>
+          </div>
+          <div class="char-quote">«Просьбы самые банальные. Во всех адекватных приложениях это и так работает изумительно. А вы не можете реализовать это — два месяца мы просим.»</div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">CS</div>
+          <div><div class="char-name">CS-менеджер</div><div class="char-role">Ваша роль</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Внутреннее состояние</div>
+            <div class="char-section-text">Неудобный разговор — полтора года задержек. Соблазн защищать компанию («у нас много клиентов», «это технически сложно») или обещать улучшения в общем. Оба варианта Capo уже слышал. Нужна позиция человека, который не прячется.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Задача CS</div>
+            <div class="char-section-text">Признать накопившееся без самобичевания. Ответить на вопрос «за что платите» честно и конкретно. Не обещать «всё будет лучше» — предложить один конкретный изменимый шаг прямо сейчас. Если Capo хочет говорить с руководством — не блокировать, а организовать.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Инструменты</div>
+            <div class="char-tags">
+              <span class="char-tag teal">Признание без защиты</span>
+              <span class="char-tag teal">Конкретный ответ на «за что платите»</span>
+              <span class="char-tag teal">Один реальный шаг, а не список обещаний</span>
+              <span class="char-tag amber">Встреча с руководством — как инструмент, не угроза</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ 10 мин</span>
+      <span class="t-pill">👥 1 заказчик + 1 CS</span>
+      <span class="t-pill">📞 Звонок</span>
+      <span class="t-pill">🔥 На грани решения</span>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Ловушки — что делать не надо</div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span>«У нас много клиентов, всем сразу не успеть» — это не объяснение для человека, который платит 1.5 года</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Обещать «теперь точно будем лучше» без конкретного изменения — Capo это уже слышал</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Блокировать желание говорить с руководством — это усилит недоверие</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Защищать стоимость абстрактно («платформа, техподдержка, обновления») без привязки к реальности клиента</div>
+        <div class="trap"><span class="trap-icon good">✓</span>Признать полтора года честно. Ответить на «за что платите» конкретно. Предложить один реальный шаг. Встречу с руководством — организовать как инструмент, не блокировать.</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left">
+          <div class="trigger-icon">📋</div>
+          <div><div class="trigger-label">Опорный сценарий</div><div class="trigger-sub">Сначала попробуй сам — потом открой</div></div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="script-inner">
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Мы уже полтора года работаем. И это постоянно — редко когда что-то делается по-человечески и вовремя. Просьбы банальные. Я хочу понять: за что мы платим деньги? Просто за платформу? Тогда давайте не 3000 долларов.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Capo, полтора года — это факт, и я не буду делать вид, что всё было в порядке. Часть того, что вы просили, затянулась дольше, чем должна была. Это честно. По вопросу «за что платите» — давайте я отвечу конкретно, без общих слов. Можете назвать три вещи, которые сейчас в вашем топ-приоритете? Я хочу разобраться именно с ними.</span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Лидерборд — два месяца просим. Хендмиссия. Джекпот. На любой ПП это база. Вы не можете реализовать.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Принял. Вот что я делаю прямо сейчас: по лидерборду — статус сегодня до 18:00 с конкретной датой. Если дата снова «скоро» — я это скажу честно, и мы решим, что делать дальше. По разговору с руководством — я могу организовать это на следующей неделе, если хотите поднять вопрос на другом уровне. Это не проблема, это нормально.</span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Хорошо. Жду статус до 18:00. Если снова тишина — тогда уже к директору.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Договорились. Тишины не будет — до 18:00 напишу вне зависимости от того, есть дата или нет.</span></div>
+          <div class="script-line"><span class="who note">Ключевой момент</span><span class="line-text">CS не защищает стоимость абстрактно. Не говорит «у вас много получается за эти деньги». Вместо этого — берёт конкретный список и даёт конкретный ответ по первому пункту сегодня.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Вопросы для дебрифа</div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span>Как CS признал полтора года без самобичевания и без защиты — что именно в формулировке сработало?</div>
+        <div class="dq"><span class="dq-n">2</span>Почему CS не стал отвечать на «за что платите» сразу, а спросил про приоритеты — и как это изменило разговор?</div>
+        <div class="dq"><span class="dq-n">3</span>Как предложение встречи с руководством стало инструментом, а не угрозой?</div>
+        <div class="dq"><span class="dq-n">4</span>Что произойдёт, если CS напишет в 18:01 с пустым статусом «разбираемся»?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCENARIO 3 ════ -->
+  <div class="sc-panel" id="s3">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med">😤 Средняя · Сравнения с конкурентами + репутационный вопрос</div>
+      <h2>«Только скажешь Evenbet — все плеваться начинают» — сравнение с конкурентами и репутация</h2>
+      <p class="subtitle">Клиент открыто сравнивает продукт с конкурентами и поднимает репутационный вопрос: «с вами неудобно говорить с партнёрами». CS должен не защищаться и не соглашаться огульно — а перевести разговор в конструктивное русло без потери позиции.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Контекст сценария</div>
+      <div class="block-text">Capo работает с несколькими партнёрами и потенциальными инвесторами. Когда называет платформу — слышит негативные реакции. Это влияет на его бизнес напрямую. Параллельно видит, что у конкурентов (JackPoker) те же функции работают стабильно. Это не абстрактная критика — это про деньги и репутацию.</div>
+    </div>
+
+    <div class="block" style="background:#EDE0F8;border-color:var(--purple)">
+      <div class="block-label" style="color:var(--purple)">Из реальных цитат клиента</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        «Ну вот JackPoker, я вижу, что у них всё оптимизировано, структурировано, турнирная сетка отлично отлажена... Разница колоссальная. Это будто бы два разных продукта.»<br>
+        «Только начинаем диалог, мы работаем с Evenbet, все плеваться начинают. Вот с вот этим, на самом деле, бороться надо — в конце концов, это ваша прибыль.»
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CP</div>
+          <div><div class="char-name">Capo</div><div class="char-role">Владелец, тот же клиент — другая тема разговора</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Характер в этой сцене</div>
+            <div class="char-section-text">Говорит не как враг — говорит как человек, которому это реально мешает работать. Репутационный ущерб для него — это потерянные партнёры и деньги. Если CS слышит это как нападение и защищается — Capo закрывается. Если CS слышит это как сигнал — разговор становится продуктивным.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Как себя вести в роли</div>
+            <div class="char-section-text">Привести конкретный пример: турнирная сетка JackPoker vs текущая ситуация. Поднять репутационный момент — «все плеваться начинают». При защите CS — настаивать: «Я не говорю, что вы плохие. Я говорю, что мне с этим работать сложно.» При конструктивном ответе — снизить тон и перейти к конкретике.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Триггерные фразы</div>
+            <div class="char-tags">
+              <span class="char-tag red">«Два разных продукта»</span>
+              <span class="char-tag red">«Все плеваться начинают»</span>
+              <span class="char-tag amber">«Это ваша прибыль» → он на самом деле за вас</span>
+              <span class="char-tag teal">Конкретный план → переходит в партнёрский тон</span>
+            </div>
+          </div>
+          <div class="char-quote">«Это ваша прибыль. Это не только моя проблема — это и ваша тоже.»</div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">CS</div>
+          <div><div class="char-name">CS-менеджер</div><div class="char-role">Ваша роль</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title">Внутреннее состояние</div>
+            <div class="char-section-text">Сравнения с конкурентами — один из самых эмоционально тяжёлых типов разговора. Инстинкт — защищать или объяснять, почему сравнение некорректно. Оба варианта уводят от сути. Ключ: Capo говорит это не для того, чтобы обидеть — он говорит это потому, что ему это реально мешает зарабатывать.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Задача CS</div>
+            <div class="char-section-text">Не защищать продукт. Не спорить со сравнениями. Услышать репутационный сигнал как партнёрский — «ты говоришь мне это, потому что хочешь, чтобы мы исправили». Спросить конкретно: что именно в турнирной сетке не устраивает. Дать понять, что этот разговор — полезный, а не атака.</div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title">Инструменты</div>
+            <div class="char-tags">
+              <span class="char-tag teal">Не спорить — уточнять конкретику</span>
+              <span class="char-tag teal">Принять репутационный сигнал как партнёрский</span>
+              <span class="char-tag teal">«Что конкретно не работает» — как следующий шаг</span>
+              <span class="char-tag amber">Согласиться с проблемой, не с оценкой</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ 8 мин</span>
+      <span class="t-pill">👥 1 заказчик + 1 CS</span>
+      <span class="t-pill">📞 Звонок</span>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Ловушки — что делать не надо</div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span>«Сравнение некорректное, у JackPoker другая аудитория» — это звучит как отмазка</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>«У нас тоже есть турнирная сетка» — защита без признания проблемы не работает</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Соглашаться огульно: «да, мы знаем, у нас всё плохо» — это потеря позиции и доверия</div>
+        <div class="trap"><span class="trap-icon bad">✕</span>Игнорировать репутационный момент — Capo сказал это не для красного словца</div>
+        <div class="trap"><span class="trap-icon good">✓</span>Услышать сравнение как сигнал, не как атаку. Согласиться с конкретной проблемой. Спросить: что именно в турнирной сетке не устраивает — и зафиксировать это как задачу.</div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left">
+          <div class="trigger-icon">📋</div>
+          <div><div class="trigger-label">Опорный сценарий</div><div class="trigger-sub">Сначала попробуй сам — потом открой</div></div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="script-inner">
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Я вижу JackPoker — у них всё оптимизировано, турнирная сетка отлажена. Разница колоссальная. Это как два разных продукта. И когда мы говорим партнёрам «мы с Evenbet» — все плеваться начинают. Это ваша прибыль тоже, не только моя проблема.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Capo, я слышу это не как атаку — я слышу это как сигнал. И то, что вы говорите про партнёров — это важно, потому что это реально влияет на ваш бизнес. Скажите мне конкретно: в турнирной сетке — что именно не работает так, как должно? Хочу зафиксировать точно.</span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Лидерборд, хендмиссия, джекпот — это база. На любой ПП это есть. У вас два месяца это сделать не могут.</span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text">Принял. Это конкретный список — и я с ним работаю. Сейчас — статус по лидерборду до 18:00. По репутационному вопросу: я понимаю, что слова мало что значат после двух месяцев. Но если мы закроем эти три пункта — у вас будет конкретный ответ партнёрам, что изменилось. Это реально.</span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text">Вот это было бы хорошо. Потому что сейчас мне нечего им сказать.</span></div>
+          <div class="script-line"><span class="who note">Ключевой момент</span><span class="line-text">«Это ваша прибыль тоже» — Capo на самом деле на вашей стороне. Он не хочет уйти — он хочет, чтобы вы исправились. CS, который это слышит, выигрывает разговор.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Вопросы для дебрифа</div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span>Как CS услышал «все плеваться начинают» — как атаку или как партнёрский сигнал? Что изменилось бы при первом варианте?</div>
+        <div class="dq"><span class="dq-n">2</span>Почему CS не стал спорить со сравнением с JackPoker — и что сделал вместо этого?</div>
+        <div class="dq"><span class="dq-n">3</span>Как репутационная проблема клиента превратилась в конкретный список задач CS?</div>
+        <div class="dq"><span class="dq-n">4</span>Что клиент получил от этого разговора, чего у него не было до звонка?</div>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+<!-- ════════════════════ FOOTER WITH HISTORY ════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">CS<span> · </span>Воркшоп</div>
+      <div class="footer-meta">Poker &amp; Casino B2B</div>
+    </div>
+
+    <div class="history-title">📁 История — архив предыдущих сценариев</div>
+
+    <div class="history-list">
+      <!-- HISTORY 1 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H1</span>
+            <div>
+              <div class="hist-name">«Это не мы — это они» — граница мышления АМ</div>
+              <div class="hist-sub">АМ отделяет себя от команды и транслирует это заказчику</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-med">Средняя</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Контекст</div>
+            <div class="hist-block-text">АМ в разговоре с заказчиком говорит «техническая команда задерживает — это не от меня зависит». Заказчик слышит две разных компании — и теряет доверие к вендору как системе. Паттерн проявляется в переписке и звонках.</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Персонажи</div>
+            <div class="hist-chars">
+              <div class="hist-char">
+                <div class="hist-char-name">Заказчик — Operations Manager</div>
+                <div class="hist-char-role">Опытный, замечает противоречия в коммуникации</div>
+                <div class="hist-char-body">Устал от ощущения, что «правая рука не знает, что делает левая». Не злится — разочарован. Начинает рассматривать альтернативы.</div>
+              </div>
+              <div class="hist-char">
+                <div class="hist-char-name">CS-менеджер</div>
+                <div class="hist-char-role">Ваша роль</div>
+                <div class="hist-char-body">Задача: говорить «мы» вместо «они». Оставаться владельцем вопроса, даже если исполнитель — другая команда. Эмпатия без осуждения команды.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевые замены</div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Техническая команда задерживает — это не я» → <strong>«Со стороны компании есть задержка — вот что мы делаем»</strong></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Я уже передал — теперь от меня ничего не зависит» → <strong>«Я веду этот вопрос и дам ответ до [дата]»</strong></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Я понимаю, это ужасно — они нас подвели» → <strong>«Ситуация не такая, какой должна быть — вот план»</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 2 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H2</span>
+            <div>
+              <div class="hist-name">VIP-игрок в общем чате — системная жалоба</div>
+              <div class="hist-sub">Ранняя версия сценария 1 — разбор паттерна «разберёмся»</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high">Высокая</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Что разбирали</div>
+            <div class="hist-block-text">Тот же кейс с VIP-игроком, но фокус был на паттерне «разберёмся» — как пустое обещание накапливается и взрывается. Разбирали, почему каждое «разберёмся» без даты — это кредит доверия в минус.</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевой вывод сессии</div>
+            <div class="hist-block-text">«Разберёмся» без даты и имени — это согласие без действия. Заказчик не знает, когда ждать. Правильно: «Разберусь и напишу вам до пятницы 17:00 — без исключений».</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Реальная цитата из переписки</div>
+            <div class="hist-quote">«Это просто какой-то ужас! Мы вас просим об одном и том же изо дня в день... Это наш прямой убыток, который происходит по вашей вине.»</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- HISTORY 3 — former Scenario 2 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H3</span>
+            <div>
+              <div class="hist-name">«Когда это наконец закончится?» — самовыдуманные сроки и платёжная интеграция</div>
+              <div class="hist-sub">Заказчик видит всю переписку с платёжкой, но апеллирует к сроку, который никто не подтверждал</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high">Высокая</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Контекст</div>
+            <div class="hist-block-text">Заказчику интегрируют платёжное решение. Он в общем чате с интеграционным саппортом платёжки — вся переписка перед ним. Видно, что задержки на стороне платёжки. Но заказчик не разделяет зоны ответственности. Сам установил дедлайн — никто не апрувил — и каждые 2–3 дня пишет: «Когда?»</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Персонажи</div>
+            <div class="hist-chars">
+              <div class="hist-char">
+                <div class="hist-char-name">Operations Director, оператор</div>
+                <div class="hist-char-role">Требовательный, апеллирует к несогласованной дате</div>
+                <div class="hist-char-body">«Вы говорили 15-го!» / «Мне всё равно кто виноват — я плачу вам». Смягчается только при конкретном новом горизонте + ритме обновлений.</div>
+              </div>
+              <div class="hist-char">
+                <div class="hist-char-name">CS-менеджер</div>
+                <div class="hist-char-role">Ваша роль</div>
+                <div class="hist-char-body">Задача: не перекладывать на платёжку. Признать несогласованный дедлайн. Дать реалистичный горизонт. Взять ритм проактивных обновлений.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевые ловушки</div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Это платёжка виновата» — заказчику всё равно, он платит вам</div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Вы же сами видите в чате» — видит, но не хочет разбираться</div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span>Признать ошибку в коммуникации → реалистичный горизонт → ритм обновлений каждые 2–3 дня без запроса</div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевая реплика CS</div>
+            <div class="hist-quote">«15-е как дедлайн не было подтверждено с нашей стороны — это была оценка, не гарантия. Я должен был это проговорить явно. Среда, до 17:00 — апдейт от меня, без вашего запроса.»</div>
+          </div>
+        </div>
+      </div>
+    <div class="footer-copy">EvenBet Gaming · CS Воркшоп · Конфиденциально</div>
+  </div>
+</footer>
+
+<script>
+// ── TABS ───────────────────────────────────────────────
+function showScenario(id, btn) {
+  document.querySelectorAll('.sc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sc-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  activeScenario = id;
+  // Re-render randomizer pair if already picked — mode may have changed
+  if (currentPair.cs) renderPair();
+  // Update hint text
+  const hint = document.getElementById('randModeHint');
+  if (hint) hint.textContent = id === 's1' ? '(сценарий 1: 1 CS + 2 заказчика)' : '(1 CS + 1 заказчик)';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  btn.classList.toggle('open', !open);
+}
+function toggleHist(btn) {
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  btn.classList.toggle('open', !open);
+}
+
+// ── TIMER ──────────────────────────────────────────────
+let timerTotal = 7 * 60, timerLeft = 7 * 60, timerRunning = false, timerInterval = null;
+
+function setPreset(mins, el) {
+  if (timerRunning) return;
+  document.querySelectorAll('.t-preset').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  timerTotal = mins * 60; timerLeft = mins * 60;
+  renderTimer(); renderHeaderTimer();
+  document.getElementById('timerStatus').textContent = 'Нажмите «Старт» для отсчёта';
+}
+function renderTimer() {
+  const m = Math.floor(timerLeft/60), s = timerLeft%60;
+  const t = m+':'+String(s).padStart(2,'0');
+  const el = document.getElementById('timerDisplay');
+  el.textContent = t; el.className = 'timer-display';
+  const pct = timerLeft/timerTotal;
+  if (timerLeft===0) el.classList.add('done');
+  else if (pct<=.15) el.classList.add('danger');
+  else if (pct<=.3) el.classList.add('warn');
+}
+function renderHeaderTimer() {
+  const m = Math.floor(timerLeft/60), s = timerLeft%60;
+  const t = m+':'+String(s).padStart(2,'0');
+  const el = document.getElementById('htDisplay');
+  el.textContent = t; el.className = 'ht-display';
+  const pct = timerLeft/timerTotal;
+  if (timerLeft===0) el.classList.add('done');
+  else if (pct<=.15) el.classList.add('danger');
+  else if (pct<=.3) el.classList.add('warn');
+}
+function timerToggle() {
+  const btn = document.getElementById('timerStartBtn');
+  const htBtn = document.getElementById('htBtn');
+  if (timerLeft===0) { timerReset(); return; }
+  if (timerRunning) {
+    clearInterval(timerInterval); timerRunning=false;
+    btn.textContent='Продолжить'; htBtn.textContent='▶';
+    htBtn.className='ht-btn';
+    document.getElementById('timerStatus').textContent='Пауза';
+  } else {
+    timerRunning=true;
+    btn.textContent='Пауза'; htBtn.textContent='Пауза';
+    htBtn.className='ht-btn go';
+    // Show header timer
+    document.getElementById('headerTimer').classList.add('visible');
+    document.getElementById('timerStatus').textContent='Идёт…';
+    timerInterval = setInterval(()=>{
+      if (timerLeft<=0) {
+        clearInterval(timerInterval); timerRunning=false;
+        btn.textContent='Сброс'; htBtn.textContent='↺';
+        htBtn.className='ht-btn';
+        document.getElementById('timerStatus').textContent='⏰ Время вышло!';
+        renderTimer(); renderHeaderTimer();
+        try {
+          const ctx=new(window.AudioContext||window.webkitAudioContext)();
+          [0,.25,.5].forEach(t=>{
+            const o=ctx.createOscillator(),g=ctx.createGain();
+            o.connect(g);g.connect(ctx.destination);
+            o.frequency.value=880;
+            g.gain.setValueAtTime(.3,ctx.currentTime+t);
+            g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+t+.2);
+            o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+.2);
+          });
+        }catch(e){}
+        return;
+      }
+      timerLeft--;
+      renderTimer(); renderHeaderTimer();
+      const pct=timerLeft/timerTotal;
+      if (timerLeft===Math.floor(timerTotal*.3)) document.getElementById('timerStatus').textContent='⚠ Осталось 30% времени';
+      if (timerLeft===60) document.getElementById('timerStatus').textContent='⚡ Осталась 1 минута!';
+    },1000);
+  }
+}
+function timerReset() {
+  clearInterval(timerInterval); timerRunning=false; timerLeft=timerTotal;
+  renderTimer(); renderHeaderTimer();
+  const btn=document.getElementById('timerStartBtn');
+  const htBtn=document.getElementById('htBtn');
+  btn.textContent='Старт';
+  htBtn.textContent='Пауза'; htBtn.className='ht-btn go';
+  document.getElementById('headerTimer').classList.remove('visible');
+  document.getElementById('timerStatus').textContent='Нажмите «Старт» для отсчёта';
+}
+
+// ── ROULETTE WHEEL ─────────────────────────────────────
+const PARTICIPANTS = [
+  'Kseniya Kadebskaya','Nikita Golodaev','Zakhar Galushkin','Anastasiya Rusanova',
+  'Yuliya Fedchenko','Anastasiya Khizhnyak','Aleksandr Minenok',
+  'Mariya Makdonald','Ekaterina Radkova','Volha Salahub','Milena Borshcheva',
+  'Olga Samoilova','Leonid Matison','Elizaveta Mikhoparkina','Viktoriya Suhoveeva',
+  'Valeriya Grudnina','Anna Aleksandrovich','Aleksandr Karmanov','Rakhima Aldasheva',
+  'Ivan Pritchin','Halina Pesko','Alena Gorenysheva','Dimitri Marutiani',
+  'Darya Baranova','Olga Zakharenko','Yuliya Poshva','Natalya Nazarenko',
+  'Anton Grishukevich','Stanislav Miletskii','Valentin Seregin','Valery Budkevich',
+  'Aidar Giliazetdinov','Chingiz Zhumagaliev','Viktoriya Ledeneva','Mariya Zmitrovich'
+];
+let remaining=[...PARTICIPANTS], pickedHistory=[], currentPair={cs:null,cl:null,cl2:null};
+let wheelAngle=0, wheelSpinning=false;
+let activeScenario='s1'; // track which scenario is shown
+
+function getMode(){ return activeScenario==='s1' ? 'two-clients' : 'one-client'; }
+
+function drawWheel(angle){
+  const canvas=document.getElementById('wheelCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const cx=80,cy=80,r=76;
+  const segments=18,segAngle=(Math.PI*2)/segments;
+  ctx.clearRect(0,0,160,160);
+  ctx.beginPath();ctx.arc(cx,cy,r+3,0,Math.PI*2);
+  ctx.fillStyle='#1C1A16';ctx.fill();
+  for(let i=0;i<segments;i++){
+    const sa=angle+i*segAngle,ea=sa+segAngle;
+    const col=i===0?'#1A6B3A':i%2===0?'#C0392B':'#1C1A16';
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();
+    ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle='#C8A84B';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(sa+segAngle/2);
+    ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 8px DM Sans,sans-serif';
+    ctx.fillText(i===0?'0':String(i),r-5,3);ctx.restore();
+  }
+  const g=ctx.createRadialGradient(cx,cy,2,cx,cy,16);
+  g.addColorStop(0,'#E8C96A');g.addColorStop(1,'#C8A84B');
+  ctx.beginPath();ctx.arc(cx,cy,16,0,Math.PI*2);
+  ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#1C1A16';ctx.fill();
+}
+function easeOut(t){return 1-Math.pow(1-t,3)}
+function spinWheel(onDone){
+  if(wheelSpinning)return;
+  wheelSpinning=true;
+  const spinBtn=document.getElementById('spinBtn');
+  if(spinBtn){spinBtn.disabled=true;spinBtn.textContent='🎰 Крутится…';}
+  const total=(6+Math.random()*5)*Math.PI*2,dur=2400,start=wheelAngle,t0=performance.now();
+  function frame(now){
+    const el=now-t0,p=Math.min(el/dur,1);
+    wheelAngle=start+total*easeOut(p);drawWheel(wheelAngle);
+    if(p<1){requestAnimationFrame(frame);}
+    else{
+      wheelSpinning=false;
+      if(spinBtn){spinBtn.disabled=false;spinBtn.textContent='🎰 Крутить';}
+      if(onDone)onDone();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function pickRoles(){
+  if(wheelSpinning)return;
+  const need = getMode()==='two-clients' ? 3 : 2;
+  if(remaining.length<need){remaining=[...PARTICIPANTS];pickedHistory=[];document.getElementById('pickedList').innerHTML='';document.getElementById('pickedCount').textContent='0';}
+  const res=document.getElementById('randResult');
+  res.innerHTML='<div class="rand-empty" style="font-style:normal;font-weight:500">🎰 Колесо решает…</div>';
+  spinWheel(()=>{
+    const ci=Math.floor(Math.random()*remaining.length);
+    const csName=remaining.splice(ci,1)[0];
+    const li=Math.floor(Math.random()*remaining.length);
+    const clName=remaining.splice(li,1)[0];
+    let cl2Name=null;
+    if(getMode()==='two-clients'){
+      const li2=Math.floor(Math.random()*remaining.length);
+      cl2Name=remaining.splice(li2,1)[0];
+    }
+    currentPair={cs:csName,cl:clName,cl2:cl2Name};
+    pickedHistory.push(csName,clName);
+    if(cl2Name) pickedHistory.push(cl2Name);
+    renderPair();
+    document.getElementById('pickedCount').textContent=PARTICIPANTS.length-remaining.length;
+    const list=document.getElementById('pickedList');
+    list.querySelectorAll('.latest').forEach(c=>c.classList.remove('latest'));
+    const names=cl2Name?[csName,clName,cl2Name]:[csName,clName];
+    names.forEach(n=>{
+      const ch=document.createElement('span');
+      ch.className='picked-chip latest';ch.textContent=n;list.appendChild(ch);
+    });
+  });
+}
+
+function renderPair(){
+  const res=document.getElementById('randResult');
+  if(!currentPair.cs){res.innerHTML='<div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>';return;}
+  const twoClients = getMode()==='two-clients';
+  const cl2Block = twoClients && currentPair.cl2 ? `
+      <div class="rand-sep"></div>
+      <div class="rand-person">
+        <div class="rand-role-label role-cl-lbl">Заказчик 2</div>
+        <div class="rand-name spinning" id="rn-cl2">${currentPair.cl2}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cl-replace" onclick="replaceOne('cl2')">↺ Заменить</button>
+        </div>
+      </div>` : '';
+  res.innerHTML=`
+    <div class="rand-pair">
+      <div class="rand-person">
+        <div class="rand-role-label role-cs-lbl">CS-менеджер</div>
+        <div class="rand-name spinning" id="rn-cs">${currentPair.cs}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cs-replace" onclick="replaceOne('cs')">↺ Заменить</button>
+        </div>
+      </div>
+      <div class="rand-sep"></div>
+      <div class="rand-person">
+        <div class="rand-role-label role-cl-lbl">${twoClients?'Заказчик 1':'Заказчик'}</div>
+        <div class="rand-name spinning" id="rn-cl">${currentPair.cl}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cl-replace" onclick="replaceOne('cl')">↺ Заменить</button>
+        </div>
+      </div>
+      ${cl2Block}
+    </div>`;
+  setTimeout(()=>{
+    ['rn-cs','rn-cl','rn-cl2'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.classList.remove('spinning');
+    });
+  },60);
+}
+
+function replaceOne(role){
+  const excluded=[currentPair.cs,currentPair.cl,currentPair.cl2].filter(Boolean);
+  let newName;
+  if(remaining.length<1){
+    const pool=PARTICIPANTS.filter(n=>!excluded.includes(n));
+    if(!pool.length)return;
+    newName=pool[Math.floor(Math.random()*pool.length)];
+    remaining.push(currentPair[role]);
+  } else {
+    const old=currentPair[role];
+    const idx=Math.floor(Math.random()*remaining.length);
+    newName=remaining.splice(idx,1)[0];
+    remaining.push(old);
+    pickedHistory.push(newName);
+  }
+  currentPair[role]=newName;
+  document.getElementById('pickedCount').textContent=PARTICIPANTS.length-remaining.length;
+
+  // Update only the specific name element in-place — no full re-render
+  const idMap={cs:'rn-cs',cl:'rn-cl',cl2:'rn-cl2'};
+  const el=document.getElementById(idMap[role]);
+  if(el){
+    el.classList.add('spinning');
+    setTimeout(()=>{
+      el.textContent=newName;
+      el.classList.remove('spinning');
+    },150);
+  }
+
+  // Update chip list
+  const list=document.getElementById('pickedList');
+  list.querySelectorAll('.latest').forEach(c=>c.classList.remove('latest'));
+  const ch=document.createElement('span');ch.className='picked-chip latest';ch.textContent=newName;list.appendChild(ch);
+}
+
+function resetRand(){
+  remaining=[...PARTICIPANTS];pickedHistory=[];currentPair={cs:null,cl:null,cl2:null};
+  document.getElementById('randResult').innerHTML='<div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>';
+  document.getElementById('pickedCount').textContent='0';
+  document.getElementById('pickedList').innerHTML='';
+}
+
+drawWheel(0);renderTimer();renderHeaderTimer();
+</script>
+</body>
+</html>
