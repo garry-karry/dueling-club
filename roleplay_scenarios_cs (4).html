@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Роль-плей — CS vs Заказчик</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F2EC;--bg2:#EDE9E0;--bg3:#E4E0D5;
+  --ink:#1C1A16;--ink2:#4A4740;--ink3:#8A8680;
+  --teal:#0A7D5C;--teal-l:#D4F5E8;--teal-m:#9FE1CB;
+  --red:#A32D2D;--red-l:#FCEBEB;
+  --amber:#854F0B;--amber-l:#FAEEDA;
+  --blue:#185FA5;--blue-l:#E6F1FB;
+  --purple:#534AB7;--purple-l:#EEEDFE;
+  --gold:#C8A84B;--gold-l:#FBF0D4;
+  --border:rgba(28,26,22,.12);--border-m:rgba(28,26,22,.22);
+  --r:10px;--r-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+
+/* ── STICKY HEADER ── */
+.site-header{border-bottom:1px solid var(--border);padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(245,242,236,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
+.logo{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;letter-spacing:-.3px;color:var(--ink);flex-shrink:0}
+.logo span{color:var(--teal)}
+/* Timer in header */
+.header-timer{display:none;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:5px 14px}
+.header-timer.visible{display:flex}
+.ht-display{font-family:'Libre Baskerville',serif;font-size:20px;font-weight:700;letter-spacing:-1px;color:var(--ink);min-width:48px;font-variant-numeric:tabular-nums}
+.ht-display.warn{color:var(--amber)}
+.ht-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
+.ht-display.done{color:var(--teal)}
+.ht-btn{font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.ht-btn:hover{background:var(--bg2)}
+.ht-btn.go{background:var(--ink);color:#fff;border-color:var(--ink)}
+.header-meta{font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+
+@keyframes tpulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MAIN ── */
+main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+
+/* ── INTRO ── */
+.intro{margin-bottom:2rem}
+.intro-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.6rem}
+.intro h1{font-family:'Libre Baskerville',serif;font-size:clamp(24px,4vw,34px);font-weight:700;line-height:1.2;margin-bottom:.75rem}
+.intro p{font-size:14px;color:var(--ink2);max-width:580px;line-height:1.7}
+.intro-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.meta-pill{font-size:12px;font-weight:500;padding:3px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border)}
+
+/* ── TABS ── */
+.sc-tabs{display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
+.sc-tab{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 16px;border-radius:30px;border:1.5px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;transition:all .2s}
+.sc-tab:hover{background:var(--bg2)}
+.sc-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ── SCENARIO PANEL ── */
+.sc-panel{display:none;animation:fadeIn .25s ease}
+.sc-panel.active{display:block}
+
+/* ── TOOLS PANEL ── */
+.tools-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.75rem}
+@media(max-width:600px){.tools-panel{grid-template-columns:1fr}}
+
+/* ── TIMER CARD ── */
+.timer-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;align-self:start}
+.tool-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem}
+.timer-display{font-family:'Libre Baskerville',serif;font-size:50px;font-weight:700;color:var(--ink);letter-spacing:-2px;line-height:1;margin-bottom:.75rem;transition:color .3s;font-variant-numeric:tabular-nums}
+.timer-display.warn{color:var(--amber)}
+.timer-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
+.timer-display.done{color:var(--teal)}
+.timer-preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.65rem}
+.t-preset{font-size:12px;font-weight:500;padding:4px 11px;border-radius:20px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.t-preset:hover{background:var(--bg2)}
+.t-preset.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.timer-controls{display:flex;gap:8px}
+.t-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 14px;border-radius:8px;border:1.5px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;transition:all .15s;flex:1}
+.t-btn:hover{background:var(--bg2)}
+.t-btn.t-primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.timer-status{font-size:11px;color:var(--ink3);margin-top:.5rem;min-height:15px}
+
+/* ── ROULETTE / RANDOMIZER ── */
+.rand-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;display:flex;flex-direction:column}
+.wheel-wrap{position:relative;width:160px;height:170px;margin:0 auto .8rem;flex-shrink:0}
+#wheelCanvas{border-radius:50%;box-shadow:0 4px 18px rgba(0,0,0,.18),0 0 0 3px #1C1A16,0 0 0 5px #C8A84B;display:block}
+.wheel-pointer{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:20px;color:#C8A84B;text-shadow:0 2px 4px rgba(0,0,0,.3);line-height:1;z-index:2;pointer-events:none}
+.rand-result{min-height:68px;display:flex;flex-direction:column;justify-content:center;margin-bottom:.6rem}
+.rand-pair{display:flex;gap:8px;align-items:stretch}
+.rand-person{flex:1}
+.rand-role-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px}
+.role-cs-lbl{color:var(--teal)}
+.role-cl-lbl{color:var(--red)}
+.rand-name{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:var(--ink);line-height:1.25;transition:all .15s}
+.rand-name.spinning{opacity:0;transform:translateY(-3px)}
+/* Replace button */
+.rand-replace-row{display:flex;gap:6px;margin-top:4px}
+.replace-btn{font-size:11px;font-weight:500;padding:2px 8px;border-radius:12px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:3px}
+.replace-btn:hover{background:var(--bg2)}
+.replace-btn.cs-replace{border-color:var(--teal);color:var(--teal)}
+.replace-btn.cl-replace{border-color:var(--red);color:var(--red)}
+.rand-sep{width:1px;background:var(--border);flex-shrink:0}
+.rand-empty{font-size:13px;color:var(--ink3);font-style:italic}
+.rand-controls{display:flex;gap:8px;margin-bottom:.55rem}
+.r-btn{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:7px 14px;border-radius:8px;border:1.5px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;transition:all .15s;flex:1}
+.r-btn:hover{background:var(--bg2)}
+.r-btn.r-primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rand-count{font-size:11px;color:var(--ink3);margin-bottom:.4rem}
+.rand-count span{font-weight:500;color:var(--ink2)}
+.picked-list{display:flex;flex-wrap:wrap;gap:3px;max-height:54px;overflow-y:auto}
+.picked-chip{font-size:10px;padding:2px 7px;border-radius:10px;background:var(--bg2);color:var(--ink2)}
+.picked-chip.latest{background:var(--ink);color:#fff;font-weight:500}
+
+/* ── SCENARIO HEADER ── */
+.sc-header{margin-bottom:1.5rem}
+.sc-difficulty{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:3px 11px;border-radius:20px;margin-bottom:.85rem}
+.diff-high{background:var(--red-l);color:var(--red)}
+.diff-med{background:var(--amber-l);color:var(--amber)}
+.diff-vhigh{background:var(--purple-l);color:var(--purple)}
+.sc-header h2{font-family:'Libre Baskerville',serif;font-size:clamp(18px,3vw,24px);font-weight:700;line-height:1.25;margin-bottom:.5rem}
+.sc-header .subtitle{font-size:13.5px;color:var(--ink2);line-height:1.65;max-width:680px}
+
+/* ── BLOCKS ── */
+.block{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:.85rem}
+.block-label{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:.8rem}
+.block-text{font-size:13.5px;color:var(--ink2);line-height:1.75}
+
+/* ── REAL QUOTE ── */
+.real-quote{margin:1rem 0;background:var(--red-l);border-left:3px solid var(--red);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:.9rem 1.1rem}
+.real-quote .rq-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:.45rem}
+.real-quote p{font-size:13.5px;color:var(--ink);line-height:1.7;font-style:italic}
+
+/* ── CHARACTER CARDS ── */
+.characters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.85rem}
+@media(max-width:580px){.characters{grid-template-columns:1fr}}
+.char-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.char-head{padding:11px 14px;display:flex;align-items:center;gap:11px}
+.av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;letter-spacing:.5px}
+.av-cl{background:var(--red-l);color:var(--red)}
+.av-cs{background:var(--teal-l);color:var(--teal)}
+.char-name{font-size:13.5px;font-weight:500;color:var(--ink)}
+.char-role{font-size:11.5px;color:var(--ink3)}
+.char-body{padding:11px 14px;border-top:1px solid var(--border)}
+.char-section{margin-bottom:.65rem}
+.char-section:last-child{margin-bottom:0}
+.char-section-title{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:.3rem}
+.char-section-text{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.char-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.35rem}
+.char-tag{font-size:11px;padding:2px 8px;border-radius:12px;background:var(--bg2);color:var(--ink2)}
+.char-tag.red{background:var(--red-l);color:var(--red)}
+.char-tag.teal{background:var(--teal-l);color:var(--teal)}
+.char-tag.amber{background:var(--amber-l);color:var(--amber)}
+.char-quote{font-size:12px;font-style:italic;color:var(--ink3);margin-top:.4rem;padding:.4rem .7rem;background:var(--bg);border-radius:var(--r-sm);border-left:2px solid var(--border-m);line-height:1.55}
+
+/* ── TIMING PILLS ── */
+.timing-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.85rem}
+.t-pill{font-size:12px;font-weight:500;padding:3px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border)}
+
+/* ── TRAPS ── */
+.trap-list{display:flex;flex-direction:column;gap:7px}
+.trap{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink2);line-height:1.6}
+.trap-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:2px;font-weight:700}
+.trap-icon.bad{background:var(--red-l);color:var(--red)}
+.trap-icon.good{background:var(--teal-l);color:var(--teal)}
+
+/* ── ACCORDION ── */
+.accordion{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:.85rem}
+.accordion-trigger{width:100%;background:#fff;border:none;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;text-align:left;transition:background .15s}
+.accordion-trigger:hover{background:var(--bg2)}
+.accordion-trigger.open{background:var(--ink);color:#fff}
+.trigger-left{display:flex;align-items:center;gap:11px}
+.trigger-icon{width:26px;height:26px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
+.accordion-trigger.open .trigger-icon{background:rgba(255,255,255,.15)}
+.trigger-label{font-size:13.5px;font-weight:500;color:inherit}
+.trigger-sub{font-size:11.5px;color:var(--ink3);margin-top:1px}
+.accordion-trigger.open .trigger-sub{color:rgba(255,255,255,.55)}
+.chevron{font-size:16px;color:var(--ink3);transition:transform .25s;line-height:1;flex-shrink:0}
+.accordion-trigger.open .chevron{transform:rotate(180deg);color:rgba(255,255,255,.6)}
+.accordion-body{display:none;background:#fff;border-top:1px solid var(--border)}
+.accordion-body.open{display:block}
+.script-inner{padding:1rem 1.25rem}
+
+/* ── SCRIPT LINES ── */
+.script-line{display:flex;gap:10px;padding:.65rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.script-line:last-child{border-bottom:none;padding-bottom:0}
+.who{min-width:68px;font-size:10.5px;font-weight:500;padding:3px 7px;border-radius:20px;text-align:center;flex-shrink:0;margin-top:2px}
+.who.cl{background:var(--red-l);color:var(--red)}
+.who.cs{background:var(--teal-l);color:var(--teal)}
+.who.note{background:var(--bg2);color:var(--ink3)}
+.line-text{font-size:13px;color:var(--ink);line-height:1.65}
+.line-text em{color:var(--ink3);font-style:normal;font-size:11.5px;display:block;margin-top:2px}
+
+/* ── DEBRIEF ── */
+.debrief-list{display:flex;flex-direction:column;gap:7px}
+.dq{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink2);line-height:1.6}
+.dq-n{min-width:22px;height:22px;border-radius:50%;background:var(--bg2);color:var(--ink2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px;border:1px solid var(--border)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
+.footer-inner{max-width:920px;margin:0 auto;padding:2rem 1.5rem}
+.footer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:1.5rem}
+.footer-logo{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:#fff}
+.footer-logo span{color:var(--gold)}
+.footer-meta{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* ── HISTORY SECTION IN FOOTER ── */
+.history-title{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.history-list{display:flex;flex-direction:column;gap:6px}
+.hist-item{border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
+.hist-trigger{width:100%;background:rgba(255,255,255,.05);border:none;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;text-align:left;color:#fff;font-family:'DM Sans',sans-serif;transition:background .15s}
+.hist-trigger:hover{background:rgba(255,255,255,.1)}
+.hist-trigger.open{background:rgba(200,168,75,.15)}
+.hist-trigger-left{display:flex;align-items:center;gap:10px}
+.hist-num{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;background:rgba(200,168,75,.2);color:var(--gold);flex-shrink:0}
+.hist-name{font-size:13px;font-weight:500;color:#fff}
+.hist-sub{font-size:11.5px;color:rgba(255,255,255,.45);margin-top:1px}
+.hist-difficulty{font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;flex-shrink:0}
+.hd-high{background:rgba(163,45,45,.3);color:#FF9090}
+.hd-med{background:rgba(133,79,11,.3);color:#FFBA7A}
+.hist-chevron{font-size:14px;color:rgba(255,255,255,.35);transition:transform .25s;flex-shrink:0}
+.hist-trigger.open .hist-chevron{transform:rotate(180deg);color:var(--gold)}
+.hist-body{display:none;border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.2);padding:1.25rem}
+.hist-body.open{display:block}
+.hist-block{margin-bottom:1rem}
+.hist-block:last-child{margin-bottom:0}
+.hist-block-label{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.5rem}
+.hist-block-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7}
+.hist-quote{background:rgba(163,45,45,.2);border-left:2px solid rgba(163,45,45,.6);border-radius:0 6px 6px 0;padding:.7rem .9rem;margin:.6rem 0;font-size:12.5px;color:rgba(255,255,255,.8);font-style:italic;line-height:1.65}
+.hist-chars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+@media(max-width:480px){.hist-chars{grid-template-columns:1fr}}
+.hist-char{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.75rem}
+.hist-char-name{font-size:13px;font-weight:500;color:#fff;margin-bottom:2px}
+.hist-char-role{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:.4rem}
+.hist-char-body{font-size:12px;color:rgba(255,255,255,.65);line-height:1.6}
+.hist-traps{display:flex;flex-direction:column;gap:5px}
+.hist-trap{font-size:12px;color:rgba(255,255,255,.65);display:flex;gap:7px;line-height:1.55}
+.hist-trap-icon{font-size:12px;flex-shrink:0}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08)}
+
+/* ── LANG TOGGLE ── */
+.lang-toggle{display:flex;gap:2px;background:var(--bg2);border-radius:20px;padding:2px;border:1px solid var(--border)}
+.lang-btn{font-size:12px;font-weight:500;padding:4px 11px;border-radius:16px;border:none;background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.lang-btn.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+[data-lang="en"] .ru-only{display:none}
+[data-lang="ru"] .en-only{display:none}
+</style>
+</head>
+<body data-lang="ru">
+
+<header class="site-header">
+  <div class="logo">CS<span> · </span><span class="ru-only">Воркшоп</span><span class="en-only">Workshop</span></div>
+
+  <!-- Timer in header — shown after timer starts -->
+  <div class="header-timer" id="headerTimer">
+    <div class="ht-display" id="htDisplay">7:00</div>
+    <button class="ht-btn go" id="htBtn" onclick="timerToggle()">Pause</button>
+    <button class="ht-btn" onclick="timerReset()">↺</button>
+  </div>
+
+
+  <div class="lang-toggle" id="langToggle">
+    <button class="lang-btn active" onclick="setLang('ru',this)">RU</button>
+    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+  </div>
+  <div class="header-meta"><span class="ru-only">3 сценария · Роль-плей</span><span class="en-only">3 scenarios · Role-play</span></div>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
+    <h1><span class="ru-only">Заказчик vs CS-менеджер</span><span class="en-only">Client vs CS Manager</span></h1>
+    <p><span class="ru-only">Три сценария на основе реальных ситуаций. Опорный сценарий скрыт до клика — сначала попробуй сам.</span><span class="en-only">Three scenarios based on real situations. The reference script is hidden until clicked — try on your own first.</span></p>
+    <div class="intro-meta">
+      <span class="meta-pill"><span class="ru-only">3 сценария</span><span class="en-only">3 scenarios</span></span>
+      <span class="meta-pill"><span class="ru-only">Реальные кейсы</span><span class="en-only">Real cases</span></span>
+      <span class="meta-pill">Poker &amp; Casino B2B</span>
+      <span class="meta-pill"><span class="ru-only">Парная работа</span><span class="en-only">Pair work</span></span>
+    </div>
+  </div>
+
+  <div class="sc-tabs">
+    <button class="sc-tab active" onclick="showScenario('s1',this)"><span class="ru-only">Сценарий 1 — Полтора года и «за что мы платим?»</span><span class="en-only">Scenario 1 — "18 Months and What Are We Paying For?"</span></button>
+    <button class="sc-tab" onclick="showScenario('s2',this)"><span class="ru-only">Сценарий 2 — Сравнения с конкурентами</span><span class="en-only">Scenario 2 — Competitor Comparisons</span></button>
+    <button class="sc-tab" onclick="showScenario('s3',this)"><span class="ru-only">Сценарий 3 — Истерика из-за очереди</span><span class="en-only">Scenario 3 — Meltdown Over the Queue</span></button>
+    <button class="sc-tab" onclick="showScenario('s4',this)"><span class="ru-only">Сценарий 4 — «Я подразумевал другое»</span><span class="en-only">Scenario 4 — "I Meant Something Different"</span></button>
+    <button class="sc-tab" onclick="showScenario('s5',this)"><span class="ru-only">Сценарий 5 — Баг или настройка?</span><span class="en-only">Scenario 5 — Bug or Configuration?</span></button>
+  </div>
+
+  <!-- TOOLS: TIMER + RANDOMIZER -->
+  <div class="tools-panel">
+
+    <div class="timer-card">
+      <div class="tool-label">⏱ <span class="ru-only">Таймер сцены</span><span class="en-only">Scene Timer</span></div>
+      <div class="timer-display" id="timerDisplay">7:00</div>
+      <div class="timer-preset-row">
+        <button class="t-preset sel" onclick="setPreset(7,this)">7 мин</button>
+        <button class="t-preset" onclick="setPreset(10,this)">10 мин</button>
+        <button class="t-preset" onclick="setPreset(12,this)">12 мин</button>
+      </div>
+      <div class="timer-controls">
+        <button class="t-btn t-primary" id="timerStartBtn" onclick="timerToggle()"><span class="ru-only">Старт</span><span class="en-only">Start</span></button>
+        <button class="t-btn" onclick="timerReset()"><span class="ru-only">Сброс</span><span class="en-only">Reset</span></button>
+      </div>
+      <div class="timer-status" id="timerStatus"><span class="ru-only">Нажмите «Старт» для отсчёта</span><span class="en-only">Press Start to begin</span></div>
+    </div>
+
+    <div class="rand-card">
+      <div class="tool-label">🎰 <span class="ru-only">Рандомайзер ролей</span><span class="en-only">Role Randomizer</span></div>
+      <div class="wheel-wrap">
+        <canvas id="wheelCanvas" width="160" height="160"></canvas>
+        <div class="wheel-pointer">▼</div>
+      </div>
+      <div class="rand-result" id="randResult">
+        <div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>
+      </div>
+      <div class="rand-controls">
+        <button class="r-btn r-primary" id="spinBtn" onclick="pickRoles()">🎰 <span class="ru-only">Крутить</span><span class="en-only">Spin</span></button>
+        <button class="r-btn" onclick="resetRand()">↺ <span class="ru-only">Сброс</span><span class="en-only">Reset</span></button>
+      </div>
+      <div class="rand-count"><span class="ru-only">Участников:</span><span class="en-only">Participants:</span> <span>34</span> · <span class="ru-only">Участвовали:</span><span class="en-only">Used:</span> <span id="pickedCount">0</span> · <span id="randModeHint" style="color:var(--teal)">(1 CS + 1 заказчик)</span></div>
+      <div class="picked-list" id="pickedList"></div>
+    </div>
+
+  </div>
+
+  <!-- ════ SCENARIO 1 ════ -->
+  <div class="sc-panel active" id="s1">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high"><span class="ru-only">💸 Высокая · Долгосрочное разочарование + вопрос о ценности</span><span class="en-only">💸 High · Long-term Frustration + Value Question</span></div>
+      <h2><span class="ru-only">«Полтора года — и всё то же самое» — фрустрация от долгих процессов и вопрос: за что мы платим?</span><span class="en-only">"18 Months and Nothing Has Changed" — Frustration With Long Delays and the Question: What Are We Paying For?</span></h2>
+      <p class="subtitle"><span class="ru-only">Клиент работает с компанией уже полтора года. Накопилась системная фрустрация: задержки, банальные просьбы не выполняются, отсутствие прозрачности. Теперь он прямо спрашивает о ценности сотрудничества — и сравнивает стоимость с тем, что получает.</span><span class="en-only">The client has been working with the company for 18 months. Systemic frustration has built up: delays, basic requests going unfulfilled, lack of transparency. Now he's asking directly about the value of the partnership — and comparing the price to what he's receiving.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">Capo — давний клиент, полтора года в работе. За это время накопился список невыполненных или долго выполняемых запросов — базовых, которые «во всех адекватных приложениях работают изумительно». Сейчас он поднимает вопрос открыто: прозрачность по оплате, ценность продукта, готовность объяснить партнёрам, за что платят деньги. Разговор — на грани решения о продолжении.</span><span class="en-only">Capo is a long-term client, 18 months in. Over that time, a list of unfulfilled or slow requests has built up — basic things that "every decent platform handles effortlessly." Now he's raising the question openly: payment transparency, product value, ability to explain to partners what they're paying for. The conversation is on the edge of a continuity decision.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Из реальных цитат клиента</span><span class="en-only">Real client quotes</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        «Мы уже с вами работаем полтора года. И это постоянно, то есть это редко, когда вот что-то есть, чтобы хоть что-то сделалось по-человечески и вовремя.»<br>
+        «Мне интересно, когда будет момент оплаты, я хочу прийти к вашему бездеву или к директору… скажу, ребят, вот мы платим, а что?»<br>
+        «У меня и у моих партнеров должно быть понимание, за что мы платим деньги. Просто за платформу? Ну хорошо, ну давайте это будет не 3000 долларов, окей.»<br>
+        «Хотя просьбы самые такие банальные, во всех адекватных приложениях это и так все работает изумительно.»
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CP</div>
+          <div><div class="char-name">Capo</div><div class="char-role"><span class="ru-only">Владелец / CEO, оператор, 1.5 года в работе</span><span class="en-only">Owner / CEO, operator, 1.5 years working together</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Говорит прямо, без агрессии, но с тяжёлым весом накопленного. Не истеричен — устал. Уважает прямой разговор. Обращение к директору — не угроза, а попытка найти уровень, где что-то изменится. Если CS даёт честный ответ без отмазок — Capo это ценит и смягчается.</span><span class="en-only">Speaks directly, no aggression, but carries the weight of accumulated frustration. Not hysterical — tired. Respects a straight conversation. The mention of going to the director isn't a threat — it's an attempt to find the level where things actually change. If CS gives an honest answer without deflection, Capo appreciates it and softens.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Говорить спокойно, но настойчиво. Поднять вопрос ценности напрямую: «за что мы платим?» При попытке CS уйти в общие слова — возвращать к конкретике: «Назови мне три вещи, которые я получаю за эти деньги». Если CS признаёт и предлагает конкретный шаг — готов продолжить разговор.</span><span class="en-only">Speak calmly but persistently. Raise the value question directly: "What are we paying for?" If CS goes vague — push back: "Name me three things I'm getting for this money." If CS acknowledges and proposes a concrete step — willing to continue the conversation.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Полтора года — и то же самое»</span><span class="en-only">"18 months — and the same thing"</span></span>
+              <span class="char-tag red"><span class="ru-only">«За что мы платим?»</span><span class="en-only">"What are we paying for?"</span></span>
+              <span class="char-tag red"><span class="ru-only">«Пойду к директору»</span><span class="en-only">"I'll go to your director"</span></span>
+              <span class="char-tag teal"><span class="ru-only">Честный ответ без отмазок → смягчается</span><span class="en-only">Honest answer without excuses → softens</span></span>
+            </div>
+          </div>
+          <div class="char-quote"><span class="ru-only">«Просьбы самые банальные. Во всех адекватных приложениях это и так работает изумительно. А вы не можете реализовать это — два месяца мы просим.»</span><span class="en-only">"The requests are the most basic things. Every decent platform handles these out of the box. But you can't deliver — we've been asking for two months."</span></div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">CS</div>
+          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Неудобный разговор — полтора года задержек. Соблазн защищать компанию («у нас много клиентов», «это технически сложно») или обещать улучшения в общем. Оба варианта Capo уже слышал. Нужна позиция человека, который не прячется.</span><span class="en-only">An uncomfortable conversation — 18 months of delays. Temptation: defend the company ("we have many clients," "it's technically complex") or promise general improvements. Capo has heard both. What's needed is the posture of someone who doesn't hide.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Признать накопившееся без самобичевания. Ответить на вопрос «за что платите» честно и конкретно. Не обещать «всё будет лучше» — предложить один конкретный изменимый шаг прямо сейчас. Если Capo хочет говорить с руководством — не блокировать, а организовать.</span><span class="en-only">Acknowledge the accumulated history without self-flagellating. Answer "what are you paying for" honestly and specifically. Don't promise "things will be better" — offer one concrete, actionable step right now. If Capo wants to talk to leadership — don't block it, facilitate it.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Признание без защиты</span><span class="en-only">Acknowledgement without defense</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретный ответ на «за что платите»</span><span class="en-only">Specific answer to 'what are you paying for'</span></span>
+              <span class="char-tag teal"><span class="ru-only">Один реальный шаг, а не список обещаний</span><span class="en-only">One real action, not a list of promises</span></span>
+              <span class="char-tag amber"><span class="ru-only">Встреча с руководством — как инструмент, не угроза</span><span class="en-only">Meeting with leadership — as a tool, not a threat</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">10 мин</span><span class="en-only">10 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
+      <span class="t-pill"><span class="ru-only">🔥 На грани решения</span><span class="en-only">🔥 On the edge</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Ловушки — что делать не надо</span><span class="en-only">Traps — what not to do</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«У нас много клиентов, всем сразу не успеть» — это не объяснение для человека, который платит 1.5 года</span><span class="en-only">'We have many clients, we can't do everything at once' — not an explanation for someone who has been paying for 18 months</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Обещать «теперь точно будем лучше» без конкретного изменения — Capo это уже слышал</span><span class="en-only">Promising 'things will be different now' without a concrete change — Capo has heard that before</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Блокировать желание говорить с руководством — это усилит недоверие</span><span class="en-only">Blocking the desire to talk to leadership — this will increase distrust</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Защищать стоимость абстрактно («платформа, техподдержка, обновления») без привязки к реальности клиента</span><span class="en-only">Defending cost abstractly ('platform, support, updates') without tying it to the client's reality</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать полтора года честно. Ответить на «за что платите» конкретно. Предложить один реальный шаг. Встречу с руководством — организовать как инструмент, не блокировать.</span><span class="en-only">Acknowledge the 18 months honestly. Answer 'what are you paying for' specifically. Offer one real step. Facilitate the meeting with leadership — don't block it.</span></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left">
+          <div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="script-inner">
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Мы уже полтора года работаем. И это постоянно — редко когда что-то делается по-человечески и вовремя. Просьбы банальные. Я хочу понять: за что мы платим деньги? Просто за платформу? Тогда давайте не 3000 долларов.</span><span class="en-only">We've been working together for 18 months. And it's constant — rarely does anything get done properly and on time. Basic requests. I want to understand: what are we paying for? Just the platform? Then let's not make it $3,000.</span></span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Capo, полтора года — это факт, и я не буду делать вид, что всё было в порядке. Часть того, что вы просили, затянулась дольше, чем должна была. Это честно. По вопросу «за что платите» — давайте я отвечу конкретно, без общих слов. Можете назвать три вещи, которые сейчас в вашем топ-приоритете? Я хочу разобраться именно с ними.</span><span class="en-only">Capo, 18 months is a fact — I'm not going to pretend everything was fine. Some of what you asked for took longer than it should have. That's honest. On the 'what are you paying for' question — let me answer specifically, no vague words. Can you name the three things that are top priority for you right now? I want to focus on exactly those.</span></span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Лидерборд — два месяца просим. Хендмиссия. Джекпот. На любой ПП это база. Вы не можете реализовать.</span><span class="en-only">Leaderboard — we've been asking for two months. Hand missions. Jackpot. On any poker platform, this is standard. You can't deliver.</span></span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Принял. Вот что я делаю прямо сейчас: по лидерборду — статус сегодня до 18:00 с конкретной датой. Если дата снова «скоро» — я это скажу честно, и мы решим, что делать дальше. По разговору с руководством — я могу организовать это на следующей неделе, если хотите поднять вопрос на другом уровне. Это не проблема, это нормально.</span><span class="en-only">Heard. Here's what I'm doing right now: on the leaderboard — status today by 18:00 with a specific date. If the date is 'soon' again — I'll say that honestly and we'll decide what to do next. On the leadership conversation — I can set that up next week if you want to escalate. That's not a problem, it's the right move.</span></span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Хорошо. Жду статус до 18:00. Если снова тишина — тогда уже к директору.</span><span class="en-only">Fine. I'm waiting for a status update by 18:00. If it's silence again — then I'm going straight to the director.</span></span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Договорились. Тишины не будет — до 18:00 напишу вне зависимости от того, есть дата или нет.</span><span class="en-only">Deal. There will be no silence — I'll write to you by 18:00 regardless of whether I have a date or not.</span></span></div>
+          <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">CS не защищает стоимость абстрактно. Не говорит «у вас много получается за эти деньги». Вместо этого — берёт конкретный список и даёт конкретный ответ по первому пункту сегодня.</span><span class="en-only">CS doesn't defend the cost in abstract terms. Doesn't say 'you get a lot for your money.' Instead — takes the specific list and gives a concrete answer on the first item today.</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для дебрифа</span><span class="en-only">Debrief questions</span></div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span><span class="ru-only">Как CS признал полтора года без самобичевания и без защиты — что именно в формулировке сработало?</span><span class="en-only">How did CS acknowledge 18 months without self-flagellating or defending — what exactly in the wording worked?</span></div>
+        <div class="dq"><span class="dq-n">2</span><span class="ru-only">Почему CS не стал отвечать на «за что платите» сразу, а спросил про приоритеты — и как это изменило разговор?</span><span class="en-only">Why did CS not answer 'what are you paying for' immediately, but instead asked about priorities — and how did that change the conversation?</span></div>
+        <div class="dq"><span class="dq-n">3</span><span class="ru-only">Как предложение встречи с руководством стало инструментом, а не угрозой?</span><span class="en-only">How did the offer of a meeting with leadership become a tool rather than a threat?</span></div>
+        <div class="dq"><span class="dq-n">4</span><span class="ru-only">Что произойдёт, если CS напишет в 18:01 с пустым статусом «разбираемся»?</span><span class="en-only">What happens if CS writes at 18:01 with an empty status 'we're working on it'?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCENARIO 2 ════ -->
+  <div class="sc-panel" id="s2">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med"><span class="ru-only">😤 Средняя · Сравнения с конкурентами + репутационный вопрос</span><span class="en-only">😤 Medium · Competitor Comparisons + Reputation Issue</span></div>
+      <h2><span class="ru-only">«Только скажешь Evenbet — все плеваться начинают» — сравнение с конкурентами и репутация</span><span class="en-only">"Just Mention Evenbet and Everyone Cringes" — Competitor Comparisons and Reputation</span></h2>
+      <p class="subtitle"><span class="ru-only">Клиент открыто сравнивает продукт с конкурентами и поднимает репутационный вопрос: «с вами неудобно говорить с партнёрами». CS должен не защищаться и не соглашаться огульно — а перевести разговор в конструктивное русло без потери позиции.</span><span class="en-only">The client openly compares the product with competitors and raises a reputation issue: 'it's awkward to mention you to our partners.' CS must not defend or wholesale agree — but redirect toward a constructive path without losing their position.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">Capo работает с несколькими партнёрами и потенциальными инвесторами. Когда называет платформу — слышит негативные реакции. Это влияет на его бизнес напрямую. Параллельно видит, что у конкурентов (JackPoker) те же функции работают стабильно. Это не абстрактная критика — это про деньги и репутацию.</span><span class="en-only">Capo works with several partners and potential investors. When he names the platform — he gets negative reactions. This affects his business directly. He also sees that competitors (JackPoker) run the same features stably. This isn't abstract criticism — it's about money and reputation.</span></div>
+    </div>
+
+    <div class="block" style="background:#EDE0F8;border-color:var(--purple)">
+      <div class="block-label" style="color:var(--purple)"><span class="ru-only">Из реальных цитат клиента</span><span class="en-only">Real client quotes</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        «Ну вот JackPoker, я вижу, что у них всё оптимизировано, структурировано, турнирная сетка отлично отлажена... Разница колоссальная. Это будто бы два разных продукта.»<br>
+        «Только начинаем диалог, мы работаем с Evenbet, все плеваться начинают. Вот с вот этим, на самом деле, бороться надо — в конце концов, это ваша прибыль.»
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CP</div>
+          <div><div class="char-name">Capo</div><div class="char-role"><span class="ru-only">Владелец, тот же клиент — другая тема разговора</span><span class="en-only">Owner, same client — different topic</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Характер в этой сцене</span><span class="en-only">Character in this scene</span></div>
+            <div class="char-section-text"><span class="ru-only">Говорит не как враг — говорит как человек, которому это реально мешает работать. Репутационный ущерб для него — это потерянные партнёры и деньги. Если CS слышит это как нападение и защищается — Capo закрывается. Если CS слышит это как сигнал — разговор становится продуктивным.</span><span class="en-only">He's not speaking as an enemy — he's speaking as someone whose work is genuinely impacted. Reputational damage means lost partners and lost money for him. If CS hears this as an attack and gets defensive — Capo shuts down. If CS hears it as a signal — the conversation becomes productive.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Привести конкретный пример: турнирная сетка JackPoker vs текущая ситуация. Поднять репутационный момент — «все плеваться начинают». При защите CS — настаивать: «Я не говорю, что вы плохие. Я говорю, что мне с этим работать сложно.» При конструктивном ответе — снизить тон и перейти к конкретике.</span><span class="en-only">Give a concrete example: JackPoker's tournament grid vs the current situation. Raise the reputation point — 'everyone cringes.' If CS gets defensive — push back: 'I'm not saying you're bad. I'm saying it makes my work harder.' With a constructive response — lower the tone and move to specifics.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Два разных продукта»</span><span class="en-only">"Two completely different products"</span></span>
+              <span class="char-tag red"><span class="ru-only">«Все плеваться начинают»</span><span class="en-only">"Everyone cringes"</span></span>
+              <span class="char-tag amber"><span class="ru-only">«Это ваша прибыль» → он на самом деле за вас</span><span class="en-only">'This is your revenue' → he's actually on your side</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретный план → переходит в партнёрский тон</span><span class="en-only">Concrete plan → shifts to partner tone</span></span>
+            </div>
+          </div>
+          <div class="char-quote">«Это ваша прибыль. Это не только моя проблема — это и ваша тоже.»</div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">CS</div>
+          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Сравнения с конкурентами — один из самых эмоционально тяжёлых типов разговора. Инстинкт — защищать или объяснять, почему сравнение некорректно. Оба варианта уводят от сути. Ключ: Capo говорит это не для того, чтобы обидеть — он говорит это потому, что ему это реально мешает зарабатывать.</span><span class="en-only">Competitor comparisons are one of the emotionally heaviest types of conversation. The instinct: defend, or explain why the comparison is unfair. Both miss the point. The key: Capo isn't saying this to hurt — he's saying it because it genuinely impacts his ability to earn.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Не защищать продукт. Не спорить со сравнениями. Услышать репутационный сигнал как партнёрский — «ты говоришь мне это, потому что хочешь, чтобы мы исправили». Спросить конкретно: что именно в турнирной сетке не устраивает. Дать понять, что этот разговор — полезный, а не атака.</span><span class="en-only">Don't defend the product. Don't argue with the comparisons. Hear the reputation signal as a partner signal — 'you're telling me this because you want us to fix it.' Ask specifically: what exactly about the tournament grid is the problem. Make clear this conversation is useful, not an attack.</span></div>
+          </div>
+          <div class="char-section">
+            <div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Не спорить — уточнять конкретику</span><span class="en-only">Don't argue — clarify specifics</span></span>
+              <span class="char-tag teal"><span class="ru-only">Принять репутационный сигнал как партнёрский</span><span class="en-only">Receive the reputation signal as a partner signal</span></span>
+              <span class="char-tag teal"><span class="ru-only">«Что конкретно не работает» — как следующий шаг</span><span class="en-only">'What specifically doesn't work' — as the next step</span></span>
+              <span class="char-tag amber"><span class="ru-only">Согласиться с проблемой, не с оценкой</span><span class="en-only">Agree with the problem, not the judgment</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Ловушки — что делать не надо</span><span class="en-only">Traps — what not to do</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Сравнение некорректное, у JackPoker другая аудитория» — это звучит как отмазка</span><span class="en-only">'The comparison isn't fair, JackPoker has a different audience' — this sounds like an excuse</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«У нас тоже есть турнирная сетка» — защита без признания проблемы не работает</span><span class="en-only">'We also have a tournament grid' — defense without acknowledging the problem doesn't work</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Соглашаться огульно: «да, мы знаем, у нас всё плохо» — это потеря позиции и доверия</span><span class="en-only">Blanket agreement: 'yes, we know, everything is bad' — this loses position and trust</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Игнорировать репутационный момент — Capo сказал это не для красного словца</span><span class="en-only">Ignoring the reputation point — Capo didn't say that for effect</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Услышать сравнение как сигнал, не как атаку. Согласиться с конкретной проблемой. Спросить: что именно в турнирной сетке не устраивает — и зафиксировать это как задачу.</span><span class="en-only">Hear the comparison as a signal, not an attack. Agree with the specific problem. Ask: what exactly about the tournament grid isn't working — and log it as a task.</span></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left">
+          <div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div>
+        <div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body">
+        <div class="script-inner">
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Я вижу JackPoker — у них всё оптимизировано, турнирная сетка отлажена. Разница колоссальная. Это как два разных продукта. И когда мы говорим партнёрам «мы с Evenbet» — все плеваться начинают. Это ваша прибыль тоже, не только моя проблема.</span><span class="en-only">I see JackPoker — everything is optimized, tournament grid is solid. The difference is massive. It's like two completely different products. And when we tell partners 'we're with Evenbet' — everyone cringes. This is your revenue too, not just my problem.</span></span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Capo, я слышу это не как атаку — я слышу это как сигнал. И то, что вы говорите про партнёров — это важно, потому что это реально влияет на ваш бизнес. Скажите мне конкретно: в турнирной сетке — что именно не работает так, как должно? Хочу зафиксировать точно.</span><span class="en-only">Capo, I'm not hearing this as an attack — I'm hearing it as a signal. And what you're saying about the partners — that matters, because it genuinely impacts your business. Tell me specifically: in the tournament grid — what exactly isn't working the way it should? I want to log it precisely.</span></span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Лидерборд, хендмиссия, джекпот — это база. На любой ПП это есть. У вас два месяца это сделать не могут.</span><span class="en-only">Leaderboard, hand missions, jackpot — that's standard. Every poker platform has it. You haven't been able to deliver this for two months.</span></span></div>
+          <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Принял. Это конкретный список — и я с ним работаю. Сейчас — статус по лидерборду до 18:00. По репутационному вопросу: я понимаю, что слова мало что значат после двух месяцев. Но если мы закроем эти три пункта — у вас будет конкретный ответ партнёрам, что изменилось. Это реально.</span><span class="en-only">Heard. That's a concrete list — and I'm working through it. Right now — leaderboard status by 18:00. On the reputation issue: I understand words don't mean much after two months. But if we close these three items — you'll have a concrete answer for your partners about what changed. That's real.</span></span></div>
+          <div class="script-line"><span class="who cl">Capo</span><span class="line-text"><span class="ru-only">Вот это было бы хорошо. Потому что сейчас мне нечего им сказать.</span><span class="en-only">That would be good. Because right now I have nothing to tell them.</span></span></div>
+          <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">«Это ваша прибыль тоже» — Capo на самом деле на вашей стороне. Он не хочет уйти — он хочет, чтобы вы исправились. CS, который это слышит, выигрывает разговор.</span><span class="en-only">'This is your revenue too' — Capo is actually on your side. He doesn't want to leave — he wants you to fix things. The CS who hears that, wins the conversation.</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для дебрифа</span><span class="en-only">Debrief questions</span></div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span><span class="ru-only">Как CS услышал «все плеваться начинают» — как атаку или как партнёрский сигнал? Что изменилось бы при первом варианте?</span><span class="en-only">How did CS hear 'everyone cringes' — as an attack or as a partner signal? What would have changed with the first interpretation?</span></div>
+        <div class="dq"><span class="dq-n">2</span><span class="ru-only">Почему CS не стал спорить со сравнением с JackPoker — и что сделал вместо этого?</span><span class="en-only">Why did CS not argue with the JackPoker comparison — and what did they do instead?</span></div>
+        <div class="dq"><span class="dq-n">3</span><span class="ru-only">Как репутационная проблема клиента превратилась в конкретный список задач CS?</span><span class="en-only">How did the client's reputation problem become a concrete list of CS tasks?</span></div>
+        <div class="dq"><span class="dq-n">4</span><span class="ru-only">Что клиент получил от этого разговора, чего у него не было до звонка?</span><span class="en-only">What did the client get from this conversation that they didn't have before the call?</span></div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ════ SCENARIO 3 (GarantPoker #1) ════ -->
+  <div class="sc-panel" id="s3">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high">😤 <span class="ru-only">Высокая · Истерика на звонке + «это в очереди»</span><span class="en-only">High · Meltdown on call + 'it's in the queue'</span></div>
+      <h2><span class="ru-only">«Почему промо не в работе?» — заказчик психует из-за очереди</span><span class="en-only">'Why isn't promo being worked on?' — client loses it over the queue</span></h2>
+      <p class="subtitle"><span class="ru-only">На звонке 29 июля заказчик выходит вдвоём с коллегой. Задача заведена 4 дня назад. Они кричат, почему промо на саппорте и не взято в работу. При ответе «в очереди» начинается истерика — и они сбрасывают трубку. CS должен удержать разговор, объяснить принцип очереди и не допустить обрыва.</span><span class="en-only">On the July 29 call, the client joins with a colleague. The task was created 4 days ago. They shout about why promo is still in support and not being worked on. The answer 'it's in the queue' triggers a meltdown — they hang up. CS must hold the conversation, explain the queue principle, and prevent the disconnect.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">Заказчик завёл задачу по настройке промо 4 дня назад. По внутренним процессам задача стоит в очереди — это было объяснено ранее. Заказчик не понимает, как работает очередь в продуктовой компании, и воспринимает это как игнорирование. На звонке — двое, они поддерживают друг друга в агрессии.</span><span class="en-only">The client created a promo setup task 4 days ago. Per internal process, the task is in the queue — this was explained before. The client doesn't understand how a product company's queue works and interprets it as being ignored. On the call — two people, reinforcing each other's aggression.</span></div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cl">G1</div>
+          <div><div class="char-name"><span class="ru-only">Заказчик — основной</span><span class="en-only">Client — primary</span></div><div class="char-role"><span class="ru-only">Владелец / операционный директор</span><span class="en-only">Owner / Operations Director</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Не понимает принцип очереди — считает, что задача 4-дневной давности должна уже быть в работе. Быстро переходит на повышенный тон. При отсутствии немедленного ответа — сбрасывает трубку. Коллега рядом усиливает уверенность в своей правоте.</span><span class="en-only">Doesn't understand the queue principle — believes a 4-day-old task should already be in progress. Quickly escalates in tone. Without an immediate answer — hangs up. The colleague nearby reinforces their conviction of being right.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать раздражённо: «4 дня прошло — почему не взяли в работу?» При ответе «очередь» — усилить: «Какая очередь?! Мы платим деньги!» Если CS теряется — пригрозить сбросить трубку. При чётком и спокойном объяснении с датой — снизить тон.</span><span class="en-only">Start irritated: '4 days have passed — why isn't it being worked on?' On hearing 'queue' — escalate: 'What queue?! We're paying money!' If CS falters — threaten to hang up. With a clear, calm explanation and a date — lower the tone.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Это в очереди»</span><span class="en-only">'It's in the queue'</span></span>
+              <span class="char-tag red"><span class="ru-only">«Мы работаем над этим»</span><span class="en-only">'We're working on it'</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретная дата + следующий шаг → снижает тон</span><span class="en-only">Specific date + next step → lowers tone</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cl">G2</div>
+          <div><div class="char-name"><span class="ru-only">Коллега — заместитель</span><span class="en-only">Colleague — Deputy</span></div><div class="char-role"><span class="ru-only">Операционный менеджер / Head of Product</span><span class="en-only">Operations Manager / Head of Product</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Подключается через 1–2 минуты. Поддерживает основного заказчика — но не дублирует его слова, добавляет свой угол. Акцент на деньгах: «Мы платим — значит, должно быть сделано». Менее эмоционален, но столь же настойчив. Если основной начинает успокаиваться — коллега может подхватить и снова разжечь.</span><span class="en-only">Joins after 1–2 minutes. Supports the primary client — but doesn't repeat his words, adds a different angle. Focus on money: 'We're paying — so it should be done.' Less emotional but equally persistent. If the primary starts to calm down — the colleague can pick it back up and re-escalate.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Войти в разговор резко: «Какая очередь?! Это неприемлемо!» Если CS объясняет очередь — перебить: «Нас не интересует ваш процесс — нас интересует результат». Снизить тон только вместе с основным заказчиком, когда CS называет конкретную дату.</span><span class="en-only">Enter the conversation sharply: 'What queue?! This is unacceptable!' If CS explains the queue — interrupt: 'We don't care about your process — we care about results.' Only soften together with the primary client when CS names a specific date.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Ключевая реплика</span><span class="en-only">Key line</span></div>
+            <div class="char-quote"><span class="ru-only">«Мы платим деньги — это должно быть сделано, а не стоять в какой-то очереди!»</span><span class="en-only">"We're paying money — this should be done, not sitting in some queue!"</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cs">CS</div>
+          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Принцип очереди объяснялся уже не раз. Желание сказать «мы уже объясняли» — сильное. Но это не поможет. Задача: объяснить очередь ещё раз — без раздражения, с конкретикой. Удержать разговор до того, как они бросят трубку.</span><span class="en-only">The queue principle has been explained before. The urge to say 'we already explained this' is strong. But it won't help. The task: explain the queue once more — without irritation, with specifics. Hold the conversation before they hang up.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Не защищаться и не повторять «в очереди» как мантру. Объяснить принцип кратко и по-человечески. Дать конкретную дату начала работы. Предложить фиксированный формат обновлений по статусу — чтобы заказчик не чувствовал себя в пустоте.</span><span class="en-only">Don't get defensive and don't repeat 'it's in the queue' like a mantra. Explain the principle briefly and humanly. Give a specific start date. Offer a fixed update format on status — so the client doesn't feel left in the dark.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Конкретная дата вместо «в очереди»</span><span class="en-only">Specific date instead of 'in the queue'</span></span>
+              <span class="char-tag teal"><span class="ru-only">Объяснение очереди без лекции</span><span class="en-only">Explaining the queue without a lecture</span></span>
+              <span class="char-tag amber"><span class="ru-only">Удержать разговор до первого успокоения</span><span class="en-only">Hold conversation until first de-escalation</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">2 заказчика + 1 CS</span><span class="en-only">2 clients + 1 CS</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
+      <span class="t-pill">⚡ <span class="ru-only">Риск сброса трубки</span><span class="en-only">Risk of hang-up</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Ловушки — что делать не надо</span><span class="en-only">Traps — what not to do</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Мы уже объясняли про очередь» — это звучит как упрёк и усиливает агрессию</span><span class="en-only">'We already explained the queue' — sounds like a rebuke and increases aggression</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Повторять «в очереди» без конкретики — именно это их и бесит</span><span class="en-only">Repeating 'in the queue' without specifics — that's exactly what frustrates them</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Повышать тон в ответ — потеряешь разговор мгновенно</span><span class="en-only">Raising your tone in response — you'll lose the conversation instantly</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать, что ожидание неприятно. Объяснить принцип в одном предложении. Дать конкретную дату. Предложить апдейт к концу недели без их запроса.</span><span class="en-only">Acknowledge that waiting is unpleasant. Explain the principle in one sentence. Give a specific date. Offer an update by end of week without them asking.</span></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Почему промо до сих пор не взяли в работу?! Мы завели задачу 4 дня назад. Что вообще происходит?</span><span class="en-only">Why isn't the promo being worked on yet?! We created the task 4 days ago. What is going on?</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Слышу вас. Четыре дня — это действительно долго, когда вопрос важный. Задача стоит в очереди разработки — это не значит, что она потеряна. Это значит, что перед ней есть ещё несколько задач. По моей оценке — возьмут в работу к концу следующей недели. Я напишу вам в пятницу с конкретным статусом, даже если новостей нет.</span><span class="en-only">I hear you. Four days is a long time when the issue matters. The task is in the development queue — that doesn't mean it's lost. It means there are a few tasks ahead of it. My estimate: it will be picked up by end of next week. I'll write to you on Friday with a specific status, even if there's no news.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Коллега</span><span class="en-only">Colleague</span></span><span class="line-text"><span class="ru-only">Какая очередь?! Мы платим деньги, это должно быть сделано!</span><span class="en-only">What queue?! We're paying money, this should be done!</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Понимаю фрустрацию — это справедливо. Очередь — это порядок, который позволяет нам не ломать другие ваши задачи ради этой. Конкретно: задача начнётся не позже [дата]. Пятница — апдейт от меня. Это не отмазка — это реальный срок.</span><span class="en-only">I understand the frustration — it's fair. The queue is a process that allows us not to break your other tasks for this one. Specifically: the task will start no later than [date]. Friday — update from me. This isn't an excuse — it's a real deadline.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">Если всё равно сбрасывают трубку — не звони обратно сразу. Напиши в чат: «Понимаю, что разговор прервался. Вот конкретно: [дата]. Пятница — статус от меня.» Письменное слово здесь надёжнее звонка.</span><span class="en-only">If they hang up anyway — don't call back immediately. Write in chat: 'I understand the call was cut short. Here's the concrete answer: [date]. Friday — status from me.' Written word is more reliable here than a call.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для дебрифа</span><span class="en-only">Debrief questions</span></div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span><span class="ru-only">Как объяснить очередь так, чтобы это не звучало как отговорка — а как профессиональный процесс?</span><span class="en-only">How do you explain the queue so it doesn't sound like an excuse — but like a professional process?</span></div>
+        <div class="dq"><span class="dq-n">2</span><span class="ru-only">Что делать, если клиент сбросил трубку — как восстановить коммуникацию?</span><span class="en-only">What do you do if the client hangs up — how do you restore communication?</span></div>
+        <div class="dq"><span class="dq-n">3</span><span class="ru-only">Как удержать спокойный тон, когда на тебя кричат двое одновременно?</span><span class="en-only">How do you maintain a calm tone when two people are shouting at you simultaneously?</span></div>
+        <div class="dq"><span class="dq-n">4</span><span class="ru-only">Что можно было сделать раньше, чтобы этот звонок не произошёл?</span><span class="en-only">What could have been done earlier to prevent this call from happening?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCENARIO 4 (GarantPoker #2) ════ -->
+  <div class="sc-panel" id="s4">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high">🔀 <span class="ru-only">Высокая · «Я подразумевал другое» — недосказанные ожидания и претензии</span><span class="en-only">High · 'I meant something different' — unstated expectations and complaints</span></div>
+      <h2><span class="ru-only">«Вы сделали не так, как я хотел» — фриспины и невысказанные детали</span><span class="en-only">'You didn't do it the way I wanted' — freespins and unspoken details</span></h2>
+      <p class="subtitle"><span class="ru-only">Заказчик описал механику фриспинов частично. CS настроил промо по тому, что было сказано. Заказчик звонит и говорит, что его «обманули» — он подразумевал другое. Классический паттерн: детали выходят через наводящие вопросы постфактум.</span><span class="en-only">The client partially described the freespins mechanics. CS configured the promo based on what was said. The client calls and says they were 'deceived' — they meant something different. Classic pattern: details emerge through leading questions after the fact.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">После звонка 27 августа заказчик описал детали для фриспинов. Казино-менеджер сообщил, что фриспины с условием «депозит» настраиваются через промо — это стандартная механика. Заказчик звонит и заявляет, что его обманули: он «подразумевал» другое. При этом детали, которые он «подразумевал», в переписке не фигурировали. Это не первый такой случай: аналогичная ситуация была с NNCP-отчётом для аффилятов.</span><span class="en-only">After the August 27 call, the client described freespins details. The casino manager informed them that freespins with a 'deposit' condition are configured through promo — standard mechanics. The client calls saying they were deceived: they 'meant' something different. Yet the details they 'meant' never appeared in the chat. This isn't the first such case: the same pattern occurred with the NNCP affiliate report.</span></div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cl">GP</div>
+          <div><div class="char-name"><span class="ru-only">Заказчик — GarantPoker</span><span class="en-only">Client — GarantPoker</span></div><div class="char-role"><span class="ru-only">Владелец / product owner</span><span class="en-only">Owner / product owner</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Искренне убеждён, что говорил всё правильно. Не лжёт — он действительно так думал. Детали не фиксирует письменно — обсуждает устно и ожидает, что другая сторона «додумает» остальное. Когда результат не совпадает с ожиданиями — это для него «обман».</span><span class="en-only">Genuinely convinced he communicated everything correctly. Not lying — he truly thought so. Doesn't write down details — discusses verbally and expects the other side to 'figure out' the rest. When the result doesn't match expectations — it's 'deception' in his mind.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать обиженно: «Меня обманули. Я говорил, что хочу X, а вы сделали Y». При вопросе «где это было зафиксировано?» — настаивать: «Я говорил об этом на звонке». Снизить тон только когда CS предложит совместно зафиксировать требования и двигаться дальше.</span><span class="en-only">Start offended: 'I was deceived. I said I wanted X, and you did Y.' On the question 'where was this recorded?' — insist: 'I mentioned it on the call.' Only soften when CS proposes jointly documenting requirements and moving forward.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Меня обманули»</span><span class="en-only">'I was deceived'</span></span>
+              <span class="char-tag red"><span class="ru-only">«Я подразумевал другое»</span><span class="en-only">'I meant something different'</span></span>
+              <span class="char-tag teal"><span class="ru-only">«Давайте зафиксируем» → снижает тон</span><span class="en-only">'Let's document it' → lowers tone</span></span>
+            </div>
+          </div>
+          <div class="char-quote"><span class="ru-only">«Почему вы так сделали? Я же говорил, что хочу по-другому!»</span><span class="en-only">'Why did you do it this way? I said I wanted it differently!'</span></div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cs">CS</div>
+          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Раздражение: это уже второй раз с аналогичным паттерном. Соблазн сказать «но вы же не написали это» — это правда, но не поможет. Задача: не доказать свою правоту, а разобраться и двигаться вперёд. И выстроить процесс, чтобы этого не повторилось.</span><span class="en-only">Irritation: this is the second time with the same pattern. Temptation to say 'but you didn't write that' — true, but won't help. The task: not to prove yourself right, but to figure it out and move forward. And to build a process so this doesn't happen again.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Не спорить о том, говорил ли заказчик это раньше. Признать, что был коммуникационный разрыв. Зафиксировать требования прямо сейчас — письменно, совместно. Ввести правило: все детали до начала настройки — в письменном виде. Это не наказание, а защита обеих сторон.</span><span class="en-only">Don't argue about whether the client said it before. Acknowledge there was a communication gap. Document requirements right now — in writing, together. Establish a rule: all details before setup begins — in writing. This isn't punishment, it protects both sides.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Признание разрыва без спора о фактах</span><span class="en-only">Acknowledge the gap without arguing facts</span></span>
+              <span class="char-tag teal"><span class="ru-only">Совместная фиксация требований прямо сейчас</span><span class="en-only">Joint documentation of requirements right now</span></span>
+              <span class="char-tag amber"><span class="ru-only">Ввести правило на будущее как защиту</span><span class="en-only">Introduce a rule for the future as protection</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Ловушки — что делать не надо</span><span class="en-only">Traps — what not to do</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Вы этого не писали» — правда, но звучит как обвинение и уводит в спор</span><span class="en-only">'You didn't write that' — true, but sounds like an accusation and leads to argument</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Мы всё сделали по техзаданию» — закрывает диалог, не решает проблему</span><span class="en-only">'We did everything per the spec' — closes dialogue, doesn't solve the problem</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Переделывать молча без нового соглашения — паттерн повторится снова</span><span class="en-only">Redoing it silently without a new agreement — the pattern will repeat again</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать коммуникационный разрыв. Зафиксировать требования прямо сейчас. Установить правило: детали — письменно до начала работы. Это защищает обоих.</span><span class="en-only">Acknowledge the communication gap. Document requirements right now. Establish the rule: details in writing before work begins. This protects both parties.</span></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Я говорил, что хочу фриспины без депозита. Почему настроили через промо с депозитом? Меня обманули.</span><span class="en-only">I said I wanted freespins without a deposit. Why was it set up through promo with a deposit? I was deceived.</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Слышу вас — результат не совпал с тем, что вы ожидали. Между нами был коммуникационный разрыв: в переписке после звонка деталь про тип условия не была зафиксирована. Не буду спорить о том, кто прав — важнее разобраться сейчас. Давайте вместе прямо сейчас запишем точную механику, которую вы хотите — и я передам команде с этим уточнением.</span><span class="en-only">I hear you — the result didn't match what you expected. There was a communication gap between us: after the call, the detail about the condition type wasn't documented in the chat. I won't argue about who's right — what matters is sorting it out now. Let's write down the exact mechanics you want together right now — and I'll pass it to the team with this clarification.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Но я же говорил об этом! Почему вы не уточнили?</span><span class="en-only">But I did say this! Why didn't you clarify?</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Согласен — уточняющий вопрос по этой детали должен был быть задан. Это наш промах. Чтобы это не повторилось: предлагаю правило — все финальные детали перед началом настройки фиксируем письменно в чате. Это защищает вас от ситуации «сделали не то» и нас от переделок. Удобно?</span><span class="en-only">Agreed — the clarifying question on this detail should have been asked. That's our miss. To prevent this from repeating: I'm proposing a rule — all final details before setup begins get documented in writing in the chat. This protects you from 'done wrong' situations and us from rework. Works for you?</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">После сцены</span><span class="en-only">After scene</span></span><span class="line-text"><span class="ru-only">CS отправляет в чат краткое письменное резюме: «Уточнённые требования по фриспинам: [список]. Подтвердите, пожалуйста». Это создаёт новую точку отсчёта.</span><span class="en-only">CS sends a short written summary to the chat: 'Clarified freespins requirements: [list]. Please confirm.' This creates a new reference point.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для дебрифа</span><span class="en-only">Debrief questions</span></div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span><span class="ru-only">Как признать коммуникационный разрыв, не признавая вину и не обвиняя клиента?</span><span class="en-only">How do you acknowledge a communication gap without admitting guilt or blaming the client?</span></div>
+        <div class="dq"><span class="dq-n">2</span><span class="ru-only">Почему «давайте зафиксируем прямо сейчас» работает лучше, чем спор о том, кто что говорил?</span><span class="en-only">Why does 'let's document it right now' work better than arguing about who said what?</span></div>
+        <div class="dq"><span class="dq-n">3</span><span class="ru-only">Как ввести правило письменной фиксации так, чтобы клиент воспринял это как защиту, а не наказание?</span><span class="en-only">How do you introduce the written documentation rule so the client sees it as protection, not punishment?</span></div>
+        <div class="dq"><span class="dq-n">4</span><span class="ru-only">Что должен сделать CS в течение часа после этого разговора?</span><span class="en-only">What should CS do within an hour after this conversation?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════ SCENARIO 5 (GarantPoker #3) ════ -->
+  <div class="sc-panel" id="s5">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med">🐛 <span class="ru-only">Средняя · Клиент не отличает баг от настройки</span><span class="en-only">Medium · Client can't tell a bug from a configuration</span></div>
+      <h2><span class="ru-only">«Это баг или так задумано?» — претензии к поведению продукта без понимания механики</span><span class="en-only">'Is this a bug or intentional?' — complaints about product behaviour without understanding the mechanics</span></h2>
+      <p class="subtitle"><span class="ru-only">Заказчик пишет язвительное сообщение в чат о том, что что-то не работает. Саппорт реагирует через 8 минут. Выясняется, что это не баг — это настройка модуля. Заказчик не видит разницы и обвиняет компанию. CS должен объяснить разницу, не унижая клиента.</span><span class="en-only">The client sends a sarcastic message to the chat saying something isn't working. Support responds within 8 minutes. It turns out it's not a bug — it's a module configuration. The client sees no difference and blames the company. CS needs to explain the difference without belittling the client.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">Заказчик пишет в чат язвительное сообщение про то, что что-то не работает — тон с претензией. Саппорт отвечает через 8 минут. Заказчик, видимо, не видел ответа — и пишет ещё более язвительное сообщение. Оказывается, что поведение продукта — это не баг, а ожидаемая работа непонастроенного модуля. У заказчика нет понимания, что такое баг, а что такое настройка.</span><span class="en-only">The client sends a sarcastic message to the chat that something isn't working — accusatory in tone. Support responds in 8 minutes. The client apparently didn't see the reply — and sends an even more sarcastic message. It turns out the product behaviour is not a bug, but expected behaviour of an unconfigured module. The client has no understanding of the difference between a bug and a configuration.</span></div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cl">GP</div>
+          <div><div class="char-name"><span class="ru-only">Заказчик — GarantPoker</span><span class="en-only">Client — GarantPoker</span></div><div class="char-role"><span class="ru-only">Владелец, технически не подготовлен</span><span class="en-only">Owner, not technically prepared</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Язвителен, когда раздражён. Не понимает разницу между багом и настройкой — и не знает, что не понимает. Претензионный тон — его норма. При объяснении «это настройка, а не баг» — воспринимает это как попытку переложить ответственность.</span><span class="en-only">Sarcastic when irritated. Doesn't understand the difference between a bug and configuration — and doesn't know he doesn't understand. Accusatory tone is his norm. When told 'this is configuration, not a bug' — he perceives it as an attempt to shift responsibility.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать с язвительного: «Ну что, снова не работает». На объяснение «это настройка» — скептически: «То есть вы говорите, что всё нормально, просто мы что-то не так настроили?» Принять только тогда, когда CS объяснит конкретно, что нужно настроить и сколько это займёт.</span><span class="en-only">Start sarcastic: 'Oh great, it's not working again.' On 'this is configuration' — skeptically: 'So you're saying everything is fine, we just configured it wrong?' Only accept when CS explains specifically what needs to be configured and how long it will take.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Снова не работает»</span><span class="en-only">'Not working again'</span></span>
+              <span class="char-tag red"><span class="ru-only">«Это что, нормально?»</span><span class="en-only">'Is this normal?'</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретный шаг + срок → принимает</span><span class="en-only">Specific step + deadline → accepts</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head"><div class="av av-cs">CS</div>
+          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Раздражение от язвительного тона — при том что саппорт ответил за 8 минут, а заказчик не заметил. Соблазн указать на это. Но важнее: объяснить разницу между багом и настройкой так, чтобы заказчик понял и не почувствовал себя дураком.</span><span class="en-only">Irritation at the sarcastic tone — especially since support responded in 8 minutes and the client didn't notice. Temptation to point this out. But more importantly: explain the difference between a bug and configuration so the client understands without feeling stupid.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Не указывать на то, что саппорт уже отвечал (даже если хочется). Объяснить разницу без технического жаргона. Дать понять: это решаемо, вот конкретный шаг. Не унижать заказчика за незнание технических деталей.</span><span class="en-only">Don't point out that support already replied (even if tempted). Explain the difference without technical jargon. Make clear: this is solvable, here's the specific step. Don't belittle the client for not knowing technical details.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Объяснение без жаргона</span><span class="en-only">Explanation without jargon</span></span>
+              <span class="char-tag teal"><span class="ru-only">Баг vs настройка — в одном предложении</span><span class="en-only">Bug vs configuration — in one sentence</span></span>
+              <span class="char-tag amber"><span class="ru-only">Не тыкать носом в игнорированный ответ</span><span class="en-only">Don't rub their nose in the ignored reply</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">💬 <span class="ru-only">Чат + звонок</span><span class="en-only">Chat + call</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Ловушки — что делать не надо</span><span class="en-only">Traps — what not to do</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Мы ответили 8 минут назад» — правда, но звучит как упрёк, а не помощь</span><span class="en-only">'We replied 8 minutes ago' — true, but sounds like a rebuke, not help</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Объяснять разницу баг/настройка технически — заказчик потеряется и решит, что вы уклоняетесь</span><span class="en-only">Explaining the bug/configuration difference technically — the client will get lost and think you're dodging</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Сказать «это не баг, всё нормально» без предложения решения — клиент слышит «нас устраивает»</span><span class="en-only">Saying 'it's not a bug, everything is fine' without a solution — client hears 'we're okay with this'</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Объяснить просто: «это не сломано — это ещё не настроено». Дать конкретный следующий шаг с датой. Не указывать на проигнорированный ответ саппорта.</span><span class="en-only">Explain simply: 'it's not broken — it's not configured yet.' Give a specific next step with a date. Don't point out the ignored support reply.</span></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Ну что, снова у нас что-то не работает. Когда это закончится?</span><span class="en-only">Well, something isn't working for us again. When will this end?</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Вижу сообщение — разбираюсь. Уточни, пожалуйста, что именно не работает — чтобы понять сразу: это баг или что-то, что нужно донастроить. Это важно: если баг — фиксируем срочно, если настройка — даю дату и план.</span><span class="en-only">I see the message — looking into it. Please clarify what exactly isn't working — so I can tell right away: is it a bug or something that needs configuring. This matters: if it's a bug — we fix it urgently, if it's configuration — I give you a date and a plan.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Вот, [описывает поведение]. Это что, нормально?</span><span class="en-only">Here, [describes behaviour]. Is this normal?</span></span></div>
+        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Понял. Это не баг — это модуль, который ещё не настроен под вашу механику. Простыми словами: продукт работает, но под ваши условия его нужно «дообучить». Вот конкретно что делаем: [шаг]. Срок — [дата]. Если что-то идёт не так в процессе — сразу пишу вам.</span><span class="en-only">Got it. This isn't a bug — it's a module that hasn't been configured for your mechanics yet. In simple terms: the product works, but it needs to be 'tuned' for your conditions. Here's specifically what we do: [step]. Deadline — [date]. If anything goes wrong in the process — I write to you immediately.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">CS не упоминает, что саппорт уже отвечал 8 минут назад. Это факт, который не помогает сейчас — только раздражит. Фокус — на решении, а не на правоте.</span><span class="en-only">CS doesn't mention that support already replied 8 minutes ago. That fact doesn't help right now — it'll only irritate. Focus on the solution, not on being right.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для дебрифа</span><span class="en-only">Debrief questions</span></div>
+      <div class="debrief-list">
+        <div class="dq"><span class="dq-n">1</span><span class="ru-only">Как объяснить разницу между багом и настройкой клиенту без технического бэкграунда — в одном предложении?</span><span class="en-only">How do you explain the difference between a bug and configuration to a non-technical client — in one sentence?</span></div>
+        <div class="dq"><span class="dq-n">2</span><span class="ru-only">Почему CS не должен указывать на проигнорированный ответ саппорта — и что он делает вместо этого?</span><span class="en-only">Why shouldn't CS point out the ignored support reply — and what do they do instead?</span></div>
+        <div class="dq"><span class="dq-n">3</span><span class="ru-only">Как реагировать на язвительный тон, не зеркалируя его и не делая вид, что его нет?</span><span class="en-only">How do you respond to a sarcastic tone without mirroring it or pretending it doesn't exist?</span></div>
+        <div class="dq"><span class="dq-n">4</span><span class="ru-only">Что можно сделать проактивно, чтобы у клиента было понимание: что такое баг, а что — настройка?</span><span class="en-only">What can be done proactively so the client understands: what is a bug vs what is a configuration?</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ════════════════════ FOOTER WITH HISTORY ════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">CS<span> · </span><span class="ru-only">Воркшоп</span><span class="en-only">Workshop</span></div>
+      <div class="footer-meta">Poker &amp; Casino B2B</div>
+    </div>
+
+    <div class="history-title">📁 <span class="ru-only">История — архив предыдущих сценариев</span><span class="en-only">Archive — previous scenarios</span></div>
+
+    <div class="history-list">
+      <!-- HISTORY 1 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H1</span>
+            <div>
+              <div class="hist-name">«Это не мы — это они» — граница мышления АМ</div>
+              <div class="hist-sub">АМ отделяет себя от команды и транслирует это заказчику</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-med">Средняя</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Контекст</div>
+            <div class="hist-block-text">АМ в разговоре с заказчиком говорит «техническая команда задерживает — это не от меня зависит». Заказчик слышит две разных компании — и теряет доверие к вендору как системе. Паттерн проявляется в переписке и звонках.</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Персонажи</div>
+            <div class="hist-chars">
+              <div class="hist-char">
+                <div class="hist-char-name">Заказчик — Operations Manager</div>
+                <div class="hist-char-role">Опытный, замечает противоречия в коммуникации</div>
+                <div class="hist-char-body">Устал от ощущения, что «правая рука не знает, что делает левая». Не злится — разочарован. Начинает рассматривать альтернативы.</div>
+              </div>
+              <div class="hist-char">
+                <div class="hist-char-name">CS-менеджер</div>
+                <div class="hist-char-role">Ваша роль</div>
+                <div class="hist-char-body">Задача: говорить «мы» вместо «они». Оставаться владельцем вопроса, даже если исполнитель — другая команда. Эмпатия без осуждения команды.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевые замены</div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Техническая команда задерживает — это не я» → <strong>«Со стороны компании есть задержка — вот что мы делаем»</strong></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Я уже передал — теперь от меня ничего не зависит» → <strong>«Я веду этот вопрос и дам ответ до [дата]»</strong></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Я понимаю, это ужасно — они нас подвели» → <strong>«Ситуация не такая, какой должна быть — вот план»</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 2 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H2</span>
+            <div>
+              <div class="hist-name">VIP-игрок в общем чате — системная жалоба</div>
+              <div class="hist-sub">Ранняя версия сценария 1 — разбор паттерна «разберёмся»</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high">Высокая</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Что разбирали</div>
+            <div class="hist-block-text">Тот же кейс с VIP-игроком, но фокус был на паттерне «разберёмся» — как пустое обещание накапливается и взрывается. Разбирали, почему каждое «разберёмся» без даты — это кредит доверия в минус.</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевой вывод сессии</div>
+            <div class="hist-block-text">«Разберёмся» без даты и имени — это согласие без действия. Заказчик не знает, когда ждать. Правильно: «Разберусь и напишу вам до пятницы 17:00 — без исключений».</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Реальная цитата из переписки</div>
+            <div class="hist-quote">«Это просто какой-то ужас! Мы вас просим об одном и том же изо дня в день... Это наш прямой убыток, который происходит по вашей вине.»</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- HISTORY 3 — former Scenario 2 -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H3</span>
+            <div>
+              <div class="hist-name">«Когда это наконец закончится?» — самовыдуманные сроки и платёжная интеграция</div>
+              <div class="hist-sub">Заказчик видит всю переписку с платёжкой, но апеллирует к сроку, который никто не подтверждал</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high">Высокая</span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label">Контекст</div>
+            <div class="hist-block-text">Заказчику интегрируют платёжное решение. Он в общем чате с интеграционным саппортом платёжки — вся переписка перед ним. Видно, что задержки на стороне платёжки. Но заказчик не разделяет зоны ответственности. Сам установил дедлайн — никто не апрувил — и каждые 2–3 дня пишет: «Когда?»</div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Персонажи</div>
+            <div class="hist-chars">
+              <div class="hist-char">
+                <div class="hist-char-name">Operations Director, оператор</div>
+                <div class="hist-char-role">Требовательный, апеллирует к несогласованной дате</div>
+                <div class="hist-char-body">«Вы говорили 15-го!» / «Мне всё равно кто виноват — я плачу вам». Смягчается только при конкретном новом горизонте + ритме обновлений.</div>
+              </div>
+              <div class="hist-char">
+                <div class="hist-char-name">CS-менеджер</div>
+                <div class="hist-char-role">Ваша роль</div>
+                <div class="hist-char-body">Задача: не перекладывать на платёжку. Признать несогласованный дедлайн. Дать реалистичный горизонт. Взять ритм проактивных обновлений.</div>
+              </div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевые ловушки</div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Это платёжка виновата» — заказчику всё равно, он платит вам</div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span>«Вы же сами видите в чате» — видит, но не хочет разбираться</div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span>Признать ошибку в коммуникации → реалистичный горизонт → ритм обновлений каждые 2–3 дня без запроса</div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label">Ключевая реплика CS</div>
+            <div class="hist-quote">«15-е как дедлайн не было подтверждено с нашей стороны — это была оценка, не гарантия. Я должен был это проговорить явно. Среда, до 17:00 — апдейт от меня, без вашего запроса.»</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 4 — former Scenario 1: Anti-fraud call -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H4</span>
+            <div>
+              <div class="hist-name"><span class="ru-only">«Я работаю с чёрным ящиком» — антифрод-колл и запрос избыточной информации</span><span class="en-only">"I'm Working With a Black Box" — Anti-fraud Call and Demand for Information</span></div>
+              <div class="hist-sub"><span class="ru-only">Технический специалист требует раскрыть логику системы + Chief про операционные провалы</span><span class="en-only">Security specialist demands system logic + Chief on operational failures</span></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high"><span class="ru-only">Очень высокая</span><span class="en-only">Very high</span></span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Контекст</span><span class="en-only">Context</span></div>
+            <div class="hist-block-text"><span class="ru-only">Клиент — покерный оператор с сильной командой по безопасности. После блокировки игрока системой Delphic Oracle требует раскрыть алгоритм и конкретные проценты. Параллельно Chief поднимает несоответствие онлайна (300–400 в лобби, реально 100) и паттерн пустых встреч. Два фронта одновременно.</span><span class="en-only">The client is a poker operator with a strong security team. After Delphic Oracle flagged a player, they demand to understand the algorithm and specific thresholds. In parallel, Chief raises the online discrepancy (300–400 shown, ~100 real) and the pattern of meetings with no follow-through. Two fronts at once.</span></div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Персонажи</span><span class="en-only">Characters</span></div>
+            <div class="hist-chars">
+              <div class="hist-char">
+                <div class="hist-char-name">Roman — Security Lead</div>
+                <div class="hist-char-role"><span class="ru-only">Технический, педантичный, любит формулы</span><span class="en-only">Technical, pedantic, loves formulas</span></div>
+                <div class="hist-char-body"><span class="ru-only">Требует конкретный процент. Слово «формула» вызывает энтузиазм. Принимает честное «не знаю + дата».</span><span class="en-only">Demands a specific percentage. The word "formula" excites him. Accepts an honest "I don't know + date."</span></div>
+              </div>
+              <div class="hist-char">
+                <div class="hist-char-name">Chief — COO</div>
+                <div class="hist-char-role"><span class="ru-only">Управленец, системный взгляд, разочарован</span><span class="en-only">Manager, systemic view, disappointed</span></div>
+                <div class="hist-char-body"><span class="ru-only">Два месяца просит лидерборд. Каждый созвон — те же задачи. В чате тишина неделями.</span><span class="en-only">Two months asking for a leaderboard. Every call — same tasks. Weeks of silence in the chat.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Ключевые ловушки</span><span class="en-only">Key traps</span></div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">«Система работает хорошо» без цифр — именно за этим Роман и пришёл</span><span class="en-only">"The system works fine" without numbers — that's exactly why Roman is here</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Обещать «будем лучше следить за чатом» — Chief это слышал</span><span class="en-only">Promising "we'll monitor chat better" — Chief has heard it before</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Разделить темы. Честное «не знаю + дата» по антифроду. Признать паттерн — предложить новый формат (summary после каждого созвона в тот же день).</span><span class="en-only">Split the topics. Honest "I don't know + date" on anti-fraud. Acknowledge the pattern — propose a new format (summary after every call, same day).</span></div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Реальные цитаты</span><span class="en-only">Real quotes</span></div>
+            <div class="hist-quote">«Меня беспокоит, что я работаю с чёрным ящиком... Какой процент? Не 75, да? 72% конкретная рука была сыграна. Какой процент?»</div>
+            <div class="hist-quote" style="margin-top:6px">«У нас каждый созвон смотрите вот по этим задачам все есть, ничего не решено, встретимся на следующей неделе. Неделя проходит, в чате вообще тишина.»</div>
+          </div>
+        </div>
+      </div>
+    <div class="footer-copy"><span class="ru-only">EvenBet Gaming · CS Воркшоп · Конфиденциально</span><span class="en-only">EvenBet Gaming · CS Workshop · Confidential</span></div>
+  </div>
+</footer>
+
+<script>
+// ── TABS ───────────────────────────────────────────────
+function showScenario(id, btn) {
+  document.querySelectorAll('.sc-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sc-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  activeScenario = id;
+  // Re-render randomizer pair if already picked — mode may have changed
+  if (currentPair.cs) renderPair();
+  // Update hint text
+    const hint = document.getElementById('randModeHint');
+  if (hint) hint.textContent = activeScenario === 's3'
+    ? (document.body.dataset.lang === 'en' ? '(scenario 3: 1 CS + 2 clients)' : '(сценарий 3: 1 CS + 2 заказчика)')
+    : (document.body.dataset.lang === 'en' ? '(1 CS + 1 client)' : '(1 CS + 1 заказчик)');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  btn.classList.toggle('open', !open);
+}
+function toggleHist(btn) {
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  btn.classList.toggle('open', !open);
+}
+
+// ── TIMER ──────────────────────────────────────────────
+let timerTotal = 7 * 60, timerLeft = 7 * 60, timerRunning = false, timerInterval = null;
+
+function setPreset(mins, el) {
+  if (timerRunning) return;
+  document.querySelectorAll('.t-preset').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  timerTotal = mins * 60; timerLeft = mins * 60;
+  renderTimer(); renderHeaderTimer();
+  document.getElementById('timerStatus').textContent = '<span class="ru-only">Нажмите «Старт» для отсчёта</span><span class="en-only">Press Start to begin</span>';
+}
+function renderTimer() {
+  const m = Math.floor(timerLeft/60), s = timerLeft%60;
+  const t = m+':'+String(s).padStart(2,'0');
+  const el = document.getElementById('timerDisplay');
+  el.textContent = t; el.className = 'timer-display';
+  const pct = timerLeft/timerTotal;
+  if (timerLeft===0) el.classList.add('done');
+  else if (pct<=.15) el.classList.add('danger');
+  else if (pct<=.3) el.classList.add('warn');
+}
+function renderHeaderTimer() {
+  const m = Math.floor(timerLeft/60), s = timerLeft%60;
+  const t = m+':'+String(s).padStart(2,'0');
+  const el = document.getElementById('htDisplay');
+  el.textContent = t; el.className = 'ht-display';
+  const pct = timerLeft/timerTotal;
+  if (timerLeft===0) el.classList.add('done');
+  else if (pct<=.15) el.classList.add('danger');
+  else if (pct<=.3) el.classList.add('warn');
+}
+function timerToggle() {
+  const btn = document.getElementById('timerStartBtn');
+  const htBtn = document.getElementById('htBtn');
+  if (timerLeft===0) { timerReset(); return; }
+  if (timerRunning) {
+    clearInterval(timerInterval); timerRunning=false;
+    btn.innerHTML='<span class="ru-only">Продолжить</span><span class="en-only">Resume</span>'; htBtn.textContent='▶';
+    htBtn.className='ht-btn';
+    document.getElementById('timerStatus').textContent=(document.body.dataset.lang==='en'?'Paused':'Пауза');
+  } else {
+    timerRunning=true;
+    btn.innerHTML='<span class="ru-only">Пауза</span><span class="en-only">Pause</span>'; htBtn.textContent=(document.body.dataset.lang==='en'?'Pause':'Пауза');
+    htBtn.className='ht-btn go';
+    // Show header timer
+    document.getElementById('headerTimer').classList.add('visible');
+    document.getElementById('timerStatus').textContent=(document.body.dataset.lang==='en'?'Running…':'Идёт…');
+    timerInterval = setInterval(()=>{
+      if (timerLeft<=0) {
+        clearInterval(timerInterval); timerRunning=false;
+        btn.innerHTML='<span class="ru-only">Сброс</span><span class="en-only">Reset</span>'; htBtn.textContent='↺';
+        htBtn.className='ht-btn';
+        document.getElementById('timerStatus').textContent=(document.body.dataset.lang==='en'?'⏰ Time is up!':'⏰ Время вышло!');
+        renderTimer(); renderHeaderTimer();
+        try {
+          const ctx=new(window.AudioContext||window.webkitAudioContext)();
+          [0,.25,.5].forEach(t=>{
+            const o=ctx.createOscillator(),g=ctx.createGain();
+            o.connect(g);g.connect(ctx.destination);
+            o.frequency.value=880;
+            g.gain.setValueAtTime(.3,ctx.currentTime+t);
+            g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+t+.2);
+            o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+.2);
+          });
+        }catch(e){}
+        return;
+      }
+      timerLeft--;
+      renderTimer(); renderHeaderTimer();
+      const pct=timerLeft/timerTotal;
+      if (timerLeft===Math.floor(timerTotal*.3)) document.getElementById('timerStatus').textContent=(document.body.dataset.lang==='en'?'⚠ 30% time remaining':'⚠ Осталось 30% времени');
+      if (timerLeft===60) document.getElementById('timerStatus').textContent=(document.body.dataset.lang==='en'?'⚡ 1 minute left!':'⚡ Осталась 1 минута!');
+    },1000);
+  }
+}
+function timerReset() {
+  clearInterval(timerInterval); timerRunning=false; timerLeft=timerTotal;
+  renderTimer(); renderHeaderTimer();
+  const btn=document.getElementById('timerStartBtn');
+  const htBtn=document.getElementById('htBtn');
+  btn.innerHTML='<span class="ru-only">Старт</span><span class="en-only">Start</span>';
+  htBtn.textContent=(document.body.dataset.lang==='en'?'Pause':'Пауза'); htBtn.className='ht-btn go';
+  document.getElementById('headerTimer').classList.remove('visible');
+  document.getElementById('timerStatus').innerHTML='<span class="ru-only">Нажмите «Старт» для отсчёта</span><span class="en-only">Press Start to begin</span>';
+}
+
+// ── ROULETTE WHEEL ─────────────────────────────────────
+const PARTICIPANTS = [
+  'Kseniya Kadebskaya','Nikita Golodaev','Zakhar Galushkin','Anastasiya Rusanova',
+  'Yuliya Fedchenko','Anastasiya Khizhnyak','Aleksandr Minenok',
+  'Mariya Makdonald','Ekaterina Radkova','Volha Salahub','Milena Borshcheva',
+  'Olga Samoilova','Leonid Matison','Elizaveta Mikhoparkina','Viktoriya Suhoveeva',
+  'Valeriya Grudnina','Anna Aleksandrovich','Aleksandr Karmanov','Rakhima Aldasheva',
+  'Ivan Pritchin','Halina Pesko','Alena Gorenysheva','Dimitri Marutiani',
+  'Darya Baranova','Olga Zakharenko','Yuliya Poshva','Natalya Nazarenko',
+  'Anton Grishukevich','Stanislav Miletskii','Valentin Seregin','Valery Budkevich',
+  'Aidar Giliazetdinov','Chingiz Zhumagaliev','Viktoriya Ledeneva','Mariya Zmitrovich',
+  'Ilona Kursitys'
+];
+let remaining=[...PARTICIPANTS], pickedHistory=[], currentPair={cs:null,cl:null,cl2:null};
+let wheelAngle=0, wheelSpinning=false;
+let activeScenario='s1'; // track which scenario is shown
+
+function getMode(){ return activeScenario==='s3' ? 'two-clients' : 'one-client'; }
+
+function drawWheel(angle){
+  const canvas=document.getElementById('wheelCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const cx=80,cy=80,r=76;
+  const segments=18,segAngle=(Math.PI*2)/segments;
+  ctx.clearRect(0,0,160,160);
+  ctx.beginPath();ctx.arc(cx,cy,r+3,0,Math.PI*2);
+  ctx.fillStyle='#1C1A16';ctx.fill();
+  for(let i=0;i<segments;i++){
+    const sa=angle+i*segAngle,ea=sa+segAngle;
+    const col=i===0?'#1A6B3A':i%2===0?'#C0392B':'#1C1A16';
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,sa,ea);ctx.closePath();
+    ctx.fillStyle=col;ctx.fill();
+    ctx.strokeStyle='#C8A84B';ctx.lineWidth=1;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(sa+segAngle/2);
+    ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font='bold 8px DM Sans,sans-serif';
+    ctx.fillText(i===0?'0':String(i),r-5,3);ctx.restore();
+  }
+  const g=ctx.createRadialGradient(cx,cy,2,cx,cy,16);
+  g.addColorStop(0,'#E8C96A');g.addColorStop(1,'#C8A84B');
+  ctx.beginPath();ctx.arc(cx,cy,16,0,Math.PI*2);
+  ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#1C1A16';ctx.fill();
+}
+function easeOut(t){return 1-Math.pow(1-t,3)}
+function spinWheel(onDone){
+  if(wheelSpinning)return;
+  wheelSpinning=true;
+  const spinBtn=document.getElementById('spinBtn');
+  if(spinBtn){spinBtn.disabled=true;spinBtn.textContent='🎰 Крутится…';}
+  const total=(6+Math.random()*5)*Math.PI*2,dur=2400,start=wheelAngle,t0=performance.now();
+  function frame(now){
+    const el=now-t0,p=Math.min(el/dur,1);
+    wheelAngle=start+total*easeOut(p);drawWheel(wheelAngle);
+    if(p<1){requestAnimationFrame(frame);}
+    else{
+      wheelSpinning=false;
+      if(spinBtn){spinBtn.disabled=false;spinBtn.textContent='🎰 Крутить';}
+      if(onDone)onDone();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function pickRoles(){
+  if(wheelSpinning)return;
+  const need = getMode()==='two-clients' ? 3 : 2;
+  if(remaining.length<need){remaining=[...PARTICIPANTS];pickedHistory=[];document.getElementById('pickedList').innerHTML='';document.getElementById('pickedCount').textContent='0';}
+  const res=document.getElementById('randResult');
+  res.innerHTML='<div class="rand-empty" style="font-style:normal;font-weight:500">🎰 Колесо решает…</div>';
+  spinWheel(()=>{
+    const ci=Math.floor(Math.random()*remaining.length);
+    const csName=remaining.splice(ci,1)[0];
+    const li=Math.floor(Math.random()*remaining.length);
+    const clName=remaining.splice(li,1)[0];
+    let cl2Name=null;
+    if(getMode()==='two-clients'){
+      const li2=Math.floor(Math.random()*remaining.length);
+      cl2Name=remaining.splice(li2,1)[0];
+    }
+    currentPair={cs:csName,cl:clName,cl2:cl2Name};
+    pickedHistory.push(csName,clName);
+    if(cl2Name) pickedHistory.push(cl2Name);
+    renderPair();
+    document.getElementById('pickedCount').textContent=PARTICIPANTS.length-remaining.length;
+    const list=document.getElementById('pickedList');
+    list.querySelectorAll('.latest').forEach(c=>c.classList.remove('latest'));
+    const names=cl2Name?[csName,clName,cl2Name]:[csName,clName];
+    names.forEach(n=>{
+      const ch=document.createElement('span');
+      ch.className='picked-chip latest';ch.textContent=n;list.appendChild(ch);
+    });
+  });
+}
+
+function renderPair(){
+  const res=document.getElementById('randResult');
+  if(!currentPair.cs){res.innerHTML='<div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>';return;}
+  const twoClients = getMode()==='two-clients';
+  const cl2Block = twoClients && currentPair.cl2 ? `
+      <div class="rand-sep"></div>
+      <div class="rand-person">
+        <div class="rand-role-label role-cl-lbl">Заказчик 2</div>
+        <div class="rand-name spinning" id="rn-cl2">${currentPair.cl2}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cl-replace" onclick="replaceOne('cl2')">↺ Заменить</button>
+        </div>
+      </div>` : '';
+  res.innerHTML=`
+    <div class="rand-pair">
+      <div class="rand-person">
+        <div class="rand-role-label role-cs-lbl">CS-менеджер</div>
+        <div class="rand-name spinning" id="rn-cs">${currentPair.cs}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cs-replace" onclick="replaceOne('cs')">↺ Заменить</button>
+        </div>
+      </div>
+      <div class="rand-sep"></div>
+      <div class="rand-person">
+        <div class="rand-role-label role-cl-lbl">${twoClients?'Заказчик 1':'Заказчик'}</div>
+        <div class="rand-name spinning" id="rn-cl">${currentPair.cl}</div>
+        <div class="rand-replace-row">
+          <button class="replace-btn cl-replace" onclick="replaceOne('cl')">↺ Заменить</button>
+        </div>
+      </div>
+      ${cl2Block}
+    </div>`;
+  setTimeout(()=>{
+    ['rn-cs','rn-cl','rn-cl2'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.classList.remove('spinning');
+    });
+  },60);
+}
+
+function replaceOne(role){
+  const excluded=[currentPair.cs,currentPair.cl,currentPair.cl2].filter(Boolean);
+  let newName;
+  if(remaining.length<1){
+    const pool=PARTICIPANTS.filter(n=>!excluded.includes(n));
+    if(!pool.length)return;
+    newName=pool[Math.floor(Math.random()*pool.length)];
+    remaining.push(currentPair[role]);
+  } else {
+    const old=currentPair[role];
+    const idx=Math.floor(Math.random()*remaining.length);
+    newName=remaining.splice(idx,1)[0];
+    remaining.push(old);
+    pickedHistory.push(newName);
+  }
+  currentPair[role]=newName;
+  document.getElementById('pickedCount').textContent=PARTICIPANTS.length-remaining.length;
+
+  // Update only the specific name element in-place — no full re-render
+  const idMap={cs:'rn-cs',cl:'rn-cl',cl2:'rn-cl2'};
+  const el=document.getElementById(idMap[role]);
+  if(el){
+    el.classList.add('spinning');
+    setTimeout(()=>{
+      el.textContent=newName;
+      el.classList.remove('spinning');
+    },150);
+  }
+
+  // Update chip list
+  const list=document.getElementById('pickedList');
+  list.querySelectorAll('.latest').forEach(c=>c.classList.remove('latest'));
+  const ch=document.createElement('span');ch.className='picked-chip latest';ch.textContent=newName;list.appendChild(ch);
+}
+
+function resetRand(){
+  remaining=[...PARTICIPANTS];pickedHistory=[];currentPair={cs:null,cl:null,cl2:null};
+  document.getElementById('randResult').innerHTML='<div class="rand-empty">Нажмите «Крутить» — колесо решит!</div>';
+  document.getElementById('pickedCount').textContent='0';
+  document.getElementById('pickedList').innerHTML='';
+}
+
+function setLang(lang, btn) {
+  document.body.dataset.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const status = document.getElementById('timerStatus');
+  if (status && !timerRunning) {
+    status.textContent = lang === 'en' ? 'Press Start to begin' : 'Нажмите «Старт» для отсчёта';
+  }
+  const res = document.getElementById('randResult');
+  if (res && currentPair && !currentPair.cs) {
+    res.innerHTML = '<div class="rand-empty">' + (lang === 'en' ? 'Press Spin — the wheel decides!' : 'Нажмите «Крутить» — колесо решит!') + '</div>';
+  }
+  const sb = document.getElementById('spinBtn');
+  if (sb && !wheelSpinning) sb.innerHTML = lang === 'en' ? '🎰 Spin' : '🎰 <span class="ru-only">Крутить</span><span class="en-only">Spin</span>';
+  const hint = document.getElementById('randModeHint');
+  if (hint) hint.textContent = activeScenario === 's3'
+    ? (lang === 'en' ? '(scenario 3: 1 CS + 2 clients)' : '(сценарий 3: 1 CS + 2 заказчика)')
+    : (lang === 'en' ? '(1 CS + 1 client)' : '(1 CS + 1 заказчик)');
+}
+
+drawWheel(0);renderTimer();renderHeaderTimer();
+</script>
+</body>
+</html>
