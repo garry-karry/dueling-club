@@ -286,6 +286,20 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 
 /* ── POST-PRACTICE QUIZ ── */
 .flow-note{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-bottom:.85rem;font-style:italic}
+
+/* ── THEORY DIGEST ── */
+.theory-block{background:var(--blue-l);border:1px solid rgba(24,95,165,.25);border-radius:var(--r);padding:1.1rem 1.3rem;margin-bottom:.85rem}
+.theory-list{display:flex;flex-direction:column;gap:9px;margin-top:.7rem}
+.theory-item{display:flex;gap:9px;font-size:13px;color:var(--ink2);line-height:1.65}
+.theory-item b{color:var(--ink)}
+.theory-icon{color:var(--blue);flex-shrink:0;font-weight:700}
+.theory-source{font-size:11px;color:var(--ink3);margin-top:.8rem;font-style:italic;border-top:1px solid rgba(24,95,165,.15);padding-top:.6rem}
+
+/* ── GROUP DISCUSSION (facilitator-led, after pairs reconvene) ── */
+.group-list{display:flex;flex-direction:column;gap:8px}
+.group-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink2);line-height:1.6}
+.group-n{min-width:22px;height:22px;border-radius:50%;background:var(--gold-l);color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px}
+
 .quiz-list{display:flex;flex-direction:column;gap:10px}
 .quiz-item{border:1px solid var(--border);border-radius:var(--r-sm);padding:.8rem .95rem;background:var(--bg);transition:box-shadow .2s var(--ease)}
 .quiz-item:hover{box-shadow:var(--shadow-lift)}
@@ -647,6 +661,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Теория, которая здесь работает</span><span class="en-only">The theory behind this case</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only"><b>Позиция vs интерес</b> (Фишер и Юри, «Переговоры без поражения»): «вы сделали не так» — это позиция. Настоящий интерес клиента — не столкнуться с этим снова и почувствовать, что его услышали.</span><span class="en-only"><b>Position vs. interest</b> (Fisher &amp; Ury, "Getting to Yes"): "you did it wrong" is a position. The client's real interest is not hitting this again and feeling heard.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only"><b>Отделяйте человека от проблемы:</b> коммуникационный разрыв — общая проблема, которую решаете вместе, а не повод искать виноватого.</span><span class="en-only"><b>Separate the person from the problem:</b> the communication gap is a shared problem to solve together, not a reason to find someone at fault.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only"><b>Активное слушание:</b> прежде чем отвечать по существу, покажите, что услышали ожидание клиента — своими словами, до того как объяснять свою сторону.</span><span class="en-only"><b>Active listening:</b> before responding on substance, show you heard the client's expectation — in your own words, before explaining your side.</span></div>
+        <div class="theory-item"><span class="theory-icon">④</span><span class="ru-only"><b>Письменная фиксация как инструмент медиации:</b> разбивайте спорный вопрос на конкретные пункты и фиксируйте письменно — так проще прийти к согласию, чем спорить в общем.</span><span class="en-only"><b>Written documentation as a mediation tool:</b> break the disputed issue into concrete points and write them down — that's easier to agree on than arguing in the abstract.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля «CS как продукт» вашего курса + принципы переговорной теории Гарвардской школы и практики медиации.</span><span class="en-only">Drawing on the "CS as a Product" module of your course, plus Harvard-style negotiation theory and mediation practice.</span></div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -701,6 +726,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           </div>
           <div class="quiz-feedback"><span class="ru-only">Не спорит о прошлом, создаёт новую точку отсчёта и защищает обе стороны на будущее.</span><span class="en-only">Doesn't argue about the past, creates a new reference point, and protects both sides going forward.</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
+      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки лучше всего помогли снизить напряжение в разговоре?</span><span class="en-only">Which phrases worked best to lower the tension in the conversation?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что оказалось сложнее: признать разрыв в коммуникации или предложить конкретное решение?</span><span class="en-only">What was harder: acknowledging the communication gap, or offering a concrete solution?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какое правило на будущее группа хотела бы взять себе в постоянную практику?</span><span class="en-only">What rule for the future would the group want to adopt as standard practice?</span></div>
       </div>
     </div>
   </div>
@@ -778,6 +813,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Теория, которая здесь работает</span><span class="en-only">The theory behind this case</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only"><b>Проясняющий вопрос раньше диагноза:</b> сначала понять, что видит клиент, потом классифицировать баг/настройку — а не наоборот. Это база активного слушания в переговорах.</span><span class="en-only"><b>Clarifying question before diagnosis:</b> first understand what the client is seeing, then classify it as a bug or a config gap — not the other way around. Basic active listening.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only"><b>Простой язык вместо жаргона:</b> подстраивайте объяснение под систему координат собеседника, а не под свой профессиональный лексикон — принцип из переговорной теории «говори на языке интересов, а не позиций».</span><span class="en-only"><b>Plain language over jargon:</b> adapt the explanation to the listener's frame of reference, not your professional vocabulary — the "speak to interests, not positions" principle.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only"><b>Не отвечайте тем же тоном на язвительность</b> — базовый принцип деэскалации: спокойный, ровный тон снижает температуру разговора, а не эскалирует её.</span><span class="en-only"><b>Don't mirror a sarcastic tone</b> — a core de-escalation principle: a calm, level tone lowers the temperature instead of raising it.</span></div>
+        <div class="theory-item"><span class="theory-icon">④</span><span class="ru-only"><b>Отвечайте по существу, а не на прошлые промахи:</b> фокус на решении, а не на собственной правоте — так фокус разговора остаётся на общей цели, а не на том, кто прав.</span><span class="en-only"><b>Respond to substance, not to past slip-ups:</b> focus on the fix, not on being right — keeps the conversation on the shared goal instead of who's correct.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля «Язык обязательств» вашего курса + принципы деэскалации из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Language of Commitment" module of your course, plus de-escalation principles from negotiation and mediation practice.</span></div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -832,6 +878,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           </div>
           <div class="quiz-feedback"><span class="ru-only">Просто, без жаргона, и сразу с конкретным следующим шагом — понятно и не унизительно.</span><span class="en-only">Simple, jargon-free, and comes with a concrete next step right away — clear and not belittling.</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
+      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки помогли объяснить баг/настройку просто, без технического жаргона?</span><span class="en-only">Which phrasings helped explain bug vs. configuration simply, without jargon?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее: не среагировать на язвительный тон или не уйти в технические детали?</span><span class="en-only">What was harder: not reacting to the sarcastic tone, or not diving into technical detail?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие идеи есть, чтобы клиенты сами понимали разницу баг/настройка ещё до звонка?</span><span class="en-only">What ideas came up for helping clients understand bug vs. configuration before they even call?</span></div>
       </div>
     </div>
   </div>
@@ -918,6 +974,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Теория, которая здесь работает</span><span class="en-only">The theory behind this case</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only"><b>Деэскалация:</b> подтвердить услышанное без осуждения, сохранять спокойный темп речи, использовать паузу вместо мгновенного ответа — базовый набор техник снижения напряжения в переговорах.</span><span class="en-only"><b>De-escalation:</b> acknowledge what you heard without judgment, keep a calm pace, use a pause instead of an instant reply — the basic toolkit for lowering tension in negotiation.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only"><b>Называть поведение, а не человека</b> — классический приём «отделить людей от проблемы» (Фишер и Юри): критика поведения не звучит как атака на личность и не провоцирует защиту.</span><span class="en-only"><b>Name the behavior, not the person</b> — the classic "separate people from the problem" principle (Fisher &amp; Ury): criticizing behavior doesn't read as a personal attack and doesn't trigger defensiveness.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only"><b>Различайте паттерн и разовую вспышку:</b> если поведение повторяется системно, нужен другой уровень ответа — это принцип эскалационной лестницы (модуль курса «Токсичный клиент»).</span><span class="en-only"><b>Tell a pattern apart from a one-off outburst:</b> systemic repetition calls for a different level of response — the escalation-ladder principle from your course's "Toxic Client" module.</span></div>
+        <div class="theory-item"><span class="theory-icon">④</span><span class="ru-only"><b>Эскалация как инструмент заботы, а не капитуляция:</b> подключение третьей стороны (тимлида) — стандартный медиаторский приём, когда прямые попытки не снижают температуру.</span><span class="en-only"><b>Escalation as an act of care, not surrender:</b> bringing in a third party (a team lead) is a standard mediation move when direct attempts aren't lowering the temperature.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля «Токсичный клиент» вашего курса + принципы деэскалации и медиации из переговорной практики.</span><span class="en-only">Drawing on the "Toxic Client" module of your course, plus de-escalation and mediation principles from negotiation practice.</span></div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -972,6 +1039,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           </div>
           <div class="quiz-feedback"><span class="ru-only">Обесценивает то, что клиент только что выразил — лучше сначала признать, потом переходить к фактам.</span><span class="en-only">It dismisses what the client just expressed — better to acknowledge first, then move to facts.</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
+      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Что помогало сохранять спокойный темп речи, когда напряжение росло?</span><span class="en-only">What helped keep a calm pace as the tension rose?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Как отличить разовую вспышку от системного паттерна на практике?</span><span class="en-only">How do you tell a one-off outburst apart from a systemic pattern in practice?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Когда эскалация — это забота о разговоре, а когда — уход от ответственности?</span><span class="en-only">When is escalating an act of care for the conversation, and when is it avoiding responsibility?</span></div>
       </div>
     </div>
   </div>
@@ -1058,6 +1135,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Теория, которая здесь работает</span><span class="en-only">The theory behind this case</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only"><b>Пять шагов восстановления доверия</b> (модуль курса «Доверие после провала»): признать без условий → услышать эмоцию → объяснить, не оправдываясь → предложить конкретный план → отдать контроль заказчику.</span><span class="en-only"><b>Five steps to rebuild trust</b> (your course's "Trust After Failure" module): acknowledge with no conditions → hear the emotion → explain without excusing → offer a concrete plan → give the client control.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only"><b>Разделяйте эмоциональную и операционную часть жалобы</b> — сначала эмоция, потом факты. Смешивание этих слоёв — частая причина, почему разговор буксует.</span><span class="en-only"><b>Separate the emotional and operational parts of a complaint</b> — emotion first, then facts. Mixing these layers is a common reason conversations stall.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only"><b>«Мы», а не «они»:</b> заказчик воспринимает вас как единую точку контакта, а не представителя команды, которая его подвела — принцип из того же модуля курса.</span><span class="en-only"><b>"We," not "they":</b> the client sees you as a single point of contact, not a representative of the team that let them down — a principle from the same course module.</span></div>
+        <div class="theory-item"><span class="theory-icon">④</span><span class="ru-only"><b>Доверие восстанавливают действия, а не слова</b> — принцип, общий и для переговорной теории, и для медиации: конкретный проверяемый план убедительнее любого нового обещания.</span><span class="en-only"><b>Trust is rebuilt by actions, not words</b> — a principle shared by negotiation theory and mediation alike: a concrete, verifiable plan is more convincing than any new promise.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля «Доверие после провала» вашего курса + общие принципы восстановления доверия из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Trust After Failure" module of your course, plus general trust-repair principles from negotiation and mediation practice.</span></div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -1112,6 +1200,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           </div>
           <div class="quiz-feedback"><span class="ru-only">Отдаёт контроль клиенту вместо очередного обещания — это язык действий.</span><span class="en-only">Hands control to the client instead of another promise — this is the language of actions.</span></div>
         </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
+      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки признания без условий прозвучали убедительно?</span><span class="en-only">Which unconditional-acknowledgment phrasings landed convincingly?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что сложнее: говорить «мы» вместо «они», или отдавать клиенту контроль над проверками?</span><span class="en-only">What's harder: saying "we" instead of "they," or handing the client control over the checkpoints?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие конкретные действия (не обещания) группа предложила бы в похожей ситуации?</span><span class="en-only">What concrete actions (not promises) would the group propose in a similar situation?</span></div>
       </div>
     </div>
   </div>
@@ -2223,6 +2321,23 @@ const GEN_TOX_EXTRA_TRIGGERS = {
        chaotic:["«Забудьте, что я говорил вчера — сейчас срочно вот это»"], silent_bomb:["Молчит несколько дней, потом одно длинное сообщение со всем накопленным сразу"] }
 };
 
+const GEN_TOX_THEORY = {
+  ru:{
+    none:["Активное слушание и разделение позиции и интереса (Фишер и Юри, «Переговоры без поражения») — здесь этого обычно достаточно."],
+    aggressor:["Деэскалация: спокойный темп речи и пауза вместо мгновенного ответа снижают температуру разговора.","Называть поведение, а не человека — принцип «отделить людей от проблемы»."],
+    manipulator:["Опирайтесь на факты, а не на оценки — сравнения и намёки лучше всего снимаются конкретикой, а не эмоциональным ответом.","Не оправдывайтесь — спокойно излагайте факты, это и есть позиция силы здесь."],
+    chaotic:["Навязывайте структуру извне: письменные приоритеты снижают хаос лучше, чем споры о срочности в моменте."],
+    silent_bomb:["Проактивные чек-ины предотвращают накопление — не дожидайтесь взрыва, чтобы затронуть тему."]
+  },
+  en:{
+    none:["Active listening and separating position from interest (Fisher & Ury, \"Getting to Yes\") — usually enough on its own here."],
+    aggressor:["De-escalation: a calm pace and a pause instead of an instant reply lower the temperature.","Name the behavior, not the person — the \"separate people from the problem\" principle."],
+    manipulator:["Anchor on facts, not judgments — comparisons and veiled threats are best defused with specifics, not an emotional reply.","Don't get defensive — calmly stating facts is the position of strength here."],
+    chaotic:["Impose structure from outside: written priorities cut through chaos better than arguing about urgency in the moment."],
+    silent_bomb:["Proactive check-ins prevent buildup — don't wait for the blow-up to raise the topic."]
+  }
+};
+
 const GEN_TEMPLATES = {
   en:{
     value_question:{
@@ -2686,6 +2801,17 @@ function genGenerate(){
     return `<div class="script-line"><span class="who ${whoCls}">${whoLbl}</span><span class="line-text">${genEscape(line.text)}</span></div>`;
   }).join('');
   const debriefHtml = sc.debrief.map((q,i)=>`<div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">${i+1}</span>${genEscape(q)}</div>`).join('');
+  const toxTheory = (GEN_TOX_THEORY[lang][genFields.toxicity]||[]).map((t,i)=>`<div class="theory-item"><span class="theory-icon">${i+1}</span>${genEscape(t)}</div>`).join('');
+  const groupQuestions = lang==='en' ? [
+    "What phrasing worked best to lower the tension — without naming who used it?",
+    "What was harder in this scenario: staying calm, or being concrete?",
+    "What would the group want to try differently next time in a similar situation?"
+  ] : [
+    "Какие формулировки лучше всего снижали напряжение — не называя, кто их использовал?",
+    "Что было сложнее в этом сценарии: сохранять спокойствие или быть конкретным?",
+    "Что группа хотела бы попробовать иначе в следующий раз в похожей ситуации?"
+  ];
+  const groupHtml = groupQuestions.map((q,i)=>`<div class="group-item"><span class="group-n">${i+1}</span>${genEscape(q)}</div>`).join('');
 
   document.getElementById('genResult').innerHTML = `
     <div class="block">
@@ -2710,6 +2836,11 @@ function genGenerate(){
       <div class="block-label">${lang==='en'?'Conversation forks — what people usually try':'Развилки разговора — что обычно пробуют'}</div>
       <div class="trap-list">${trapsHtml}${toolsHtml}</div>
     </div>
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 ${lang==='en'?'The theory behind this case':'Теория, которая здесь работает'}</div>
+      <div class="theory-list">${toxTheory}</div>
+      <div class="theory-source">${lang==='en'?'Drawing on your course modules plus general negotiation and mediation theory (Fisher &amp; Ury, de-escalation practice).':'По мотивам модулей вашего курса + общая переговорная и медиаторская теория (Фишер и Юри, практика деэскалации).'}</div>
+    </div>
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -2725,6 +2856,11 @@ function genGenerate(){
       <div class="block-label">${lang==='en'?"Questions for your pair's own debrief":'Вопросы для разбора внутри пары'}</div>
       <div class="flow-note">${lang==='en'?'This is a generated scenario, not a real client — the checklist is only for you, nobody collects the answers.':'Это сгенерированный сценарий, а не реальный клиент — чек-лист только для вас, ответы никто не собирает.'}</div>
       <div class="debrief-list">${debriefHtml}</div>
+    </div>
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 ${lang==='en'?'Group discussion — after the pairs':'Общее обсуждение — после пар'}</div>
+      <div class="flow-note">${lang==='en'?"Once everyone's back, discuss together — without naming who did what, just the techniques and insights.":'Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.'}</div>
+      <div class="group-list">${groupHtml}</div>
     </div>`;
   document.getElementById('genResult').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
