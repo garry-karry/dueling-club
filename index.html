@@ -523,8 +523,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="warmup-format-note">
-      <p><span class="ru-only"><b>Лучше в общем формате.</b> Материал безопасный — риска «опозориться» здесь почти нет. Один человек проговаривает реплику вслух перед всей группой (рулетка ниже выбирает, кто) — это тренирует именно навык говорить при всех, но на материале без цены ошибки. Приватные пары приберегите для боевых кейсов, где ставки настоящие.</span><span class="en-only"><b>Group format works better here.</b> The material is safe — there's almost no risk of "embarrassing yourself." One person says a line out loud in front of the whole group (the wheel below picks who) — this trains the skill of speaking in front of others, on material with no real cost to getting it wrong. Save private pairs for the real cases, where the stakes are real.</span></p>
-      <button class="wu-group-btn" onclick="goToGroupWarmup()">🎰 <span class="ru-only">Переключить на групповой показ</span><span class="en-only">Switch to group demo</span></button>
+      <p><span class="ru-only"><b>Лучше в общем формате.</b> Материал безопасный, поэтому его можно спокойно проговаривать при всех — как общий брейншторм: ведущий читает карточку, и группа вместе вслух обсуждает возможные варианты, без отдельного выступающего. Приватные пары приберегите для боевых кейсов.</span><span class="en-only"><b>Group format works better here.</b> The material is safe, so it's fine to talk it through with everyone — think of it as an open brainstorm: the facilitator reads a card, and the group discusses possible answers out loud together, with no one singled out. Save private pairs for the real cases.</span></p>
     </div>
 
     <div class="warmup-grid">
@@ -1689,11 +1688,6 @@ function setPracticeMode(mode, btn){
   btn.classList.add('active');
   document.getElementById('modePairs').classList.toggle('active', mode==='pairs');
   document.getElementById('modeWheel').classList.toggle('active', mode==='wheel');
-}
-
-function goToGroupWarmup(){
-  setPracticeMode('wheel', document.getElementById('modeTabWheel'));
-  document.querySelector('.rand-card').scrollIntoView({behavior:'smooth', block:'center'});
 }
 
 function tryFormPairsNoAttach(names){
