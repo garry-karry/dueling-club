@@ -52,10 +52,9 @@ button:active{transform:scale(.96)}
 /* Timer in header */
 .header-timer{display:none;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:5px 8px 5px 14px}
 .header-timer.visible{display:flex}
-.ht-presets{display:flex;gap:3px}
-.ht-preset{font-size:11px;font-weight:500;padding:3px 8px;border-radius:14px;border:1px solid var(--border-m);background:transparent;color:var(--ink2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
-.ht-preset:hover{background:var(--bg2)}
-.ht-preset.sel{background:var(--teal);color:#fff;border-color:var(--teal)}
+.ht-select{font-size:13px;font-weight:500;padding:3px 6px;border-radius:14px;border:1px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif}
+.ht-select:disabled{opacity:.5;cursor:not-allowed}
+.ht-unit{font-size:11px;color:var(--ink3)}
 .ht-display{font-family:'Libre Baskerville',serif;font-size:20px;font-weight:700;letter-spacing:-1px;color:var(--ink);min-width:48px;font-variant-numeric:tabular-nums}
 .ht-display.warn{color:var(--amber)}
 .ht-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
@@ -420,11 +419,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
   <!-- Timer — now lives permanently in the header -->
   <div class="header-timer visible" id="headerTimer">
-    <div class="ht-presets">
-      <button class="ht-preset sel" onclick="setPreset(7,this)">7</button>
-      <button class="ht-preset" onclick="setPreset(10,this)">10</button>
-      <button class="ht-preset" onclick="setPreset(12,this)">12</button>
-    </div>
+    <select class="ht-select" id="htMinutesSelect" onchange="setTimerMinutes(this)"></select>
+    <span class="ht-unit"><span class="ru-only">мин</span><span class="en-only">min</span></span>
     <div class="ht-display" id="htDisplay">7:00</div>
     <button class="ht-btn go" id="htBtn" onclick="timerToggle()"><span class="ru-only">Старт</span><span class="en-only">Start</span></button>
     <button class="ht-btn" onclick="timerReset()">↺</button>
@@ -1726,10 +1722,15 @@ function answerQuiz(btn, chosen){
 // ── TIMER (lives in the header only) ───────────────────
 let timerTotal = 7 * 60, timerLeft = 7 * 60, timerRunning = false, timerInterval = null;
 
-function setPreset(mins, el) {
-  if (timerRunning) return;
-  document.querySelectorAll('.ht-preset').forEach(b => b.classList.remove('sel'));
-  el.classList.add('sel');
+function initTimerSelect() {
+  const sel = document.getElementById('htMinutesSelect');
+  let opts = '';
+  for (let m = 1; m <= 15; m++) opts += `<option value="${m}"${m===7?' selected':''}>${m}</option>`;
+  sel.innerHTML = opts;
+}
+function setTimerMinutes(sel) {
+  if (timerRunning) { sel.value = Math.round(timerTotal/60); return; }
+  const mins = parseInt(sel.value, 10) || 1;
   timerTotal = mins * 60; timerLeft = mins * 60;
   renderHeaderTimer();
 }
@@ -1745,18 +1746,22 @@ function renderHeaderTimer() {
 }
 function timerToggle() {
   const htBtn = document.getElementById('htBtn');
+  const sel = document.getElementById('htMinutesSelect');
   if (timerLeft===0) { timerReset(); return; }
   if (timerRunning) {
     clearInterval(timerInterval); timerRunning=false;
     htBtn.textContent='▶'; htBtn.className='ht-btn';
+    sel.disabled = false;
   } else {
     timerRunning=true;
     htBtn.textContent=(document.body.dataset.lang==='en'?'Pause':'Пауза');
     htBtn.className='ht-btn go';
+    sel.disabled = true;
     timerInterval = setInterval(()=>{
       if (timerLeft<=0) {
         clearInterval(timerInterval); timerRunning=false;
         htBtn.textContent='↺'; htBtn.className='ht-btn';
+        sel.disabled = false;
         renderHeaderTimer();
         try {
           const ctx=new(window.AudioContext||window.webkitAudioContext)();
@@ -1781,6 +1786,7 @@ function timerReset() {
   renderHeaderTimer();
   const htBtn=document.getElementById('htBtn');
   htBtn.textContent=(document.body.dataset.lang==='en'?'Start':'Старт'); htBtn.className='ht-btn go';
+  document.getElementById('htMinutesSelect').disabled = false;
 }
 
 // ── PRACTICE MODE TOGGLE (pairs vs. group demo) ───────
@@ -2884,6 +2890,7 @@ function genGenerate(){
 
 renderAttendanceList();
 document.getElementById('participantCountWheel').textContent=PARTICIPANT_NAMES.length;
+initTimerSelect();
 drawWheel(0);renderHeaderTimer();
 </script>
 </body>
