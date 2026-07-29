@@ -297,6 +297,13 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 .theory-icon{color:var(--blue);flex-shrink:0;font-weight:700}
 .theory-source{font-size:11px;color:var(--ink3);margin-top:.8rem;font-style:italic;border-top:1px solid rgba(24,95,165,.15);padding-top:.6rem}
 
+/* ── ENGLISH PHRASE BANK (quick-recall lines for real calls) ── */
+.phrase-bank{display:flex;flex-direction:column;gap:8px}
+.phrase-card{background:#fff;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:.6rem .9rem;transition:box-shadow .2s var(--ease)}
+.phrase-card:hover{box-shadow:var(--shadow-lift)}
+.phrase-en{font-size:13.5px;color:var(--ink);font-style:italic;line-height:1.5}
+.phrase-ru{font-size:11.5px;color:var(--ink3);margin-top:3px;font-style:normal}
+
 /* ── GROUP DISCUSSION (facilitator-led, after pairs reconvene) ── */
 .group-list{display:flex;flex-direction:column;gap:8px}
 .group-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink2);line-height:1.6;text-align:justify}
@@ -668,6 +675,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       <div class="theory-source"><span class="ru-only">По мотивам модуля курса «CS как продукт» + принципы переговорной теории Гарвардской школы и активного слушания.</span><span class="en-only">Drawing on the "CS as a Product" course module, plus Harvard-style negotiation theory and active-listening practice.</span></div>
     </div>
 
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">"I hear you — the result doesn't match what you expected."</div><div class="phrase-ru">Слышу вас — результат не совпал с ожиданиями.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"Let's document the exact mechanics you want, right now."</div><div class="phrase-ru">Давайте прямо сейчас зафиксируем точную механику, которую вы хотите.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"That's on us — let's put a rule in place so this doesn't repeat."</div><div class="phrase-ru">Это наш промах — давайте введём правило, чтобы это не повторилось.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I won't argue about who's right — let's fix it going forward."</div><div class="phrase-ru">Не буду спорить, кто прав — давайте решим, как двигаться дальше.</div></div>
+      </div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -819,6 +836,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
         <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Отвечайте по существу, а не на прошлые промахи: фокус на решении, а не на собственной правоте — так фокус разговора остаётся на общей цели.</span><span class="en-only">Respond to substance, not to past slip-ups: focus on the fix, not on being right — keeps the conversation on the shared goal.</span></div>
       </div>
       <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Язык обязательств» + принципы деэскалации из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Language of Commitment" course module, plus de-escalation principles from negotiation and mediation practice.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">"I see it — let me look into it. Can you tell me exactly what's happening?"</div><div class="phrase-ru">Вижу — разбираюсь. Уточните, пожалуйста, что именно происходит.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"It's not broken — it just needs to be configured for your case."</div><div class="phrase-ru">Это не сломано — просто нужно донастроить под ваш случай.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"Here's exactly what we do next, and here's the deadline."</div><div class="phrase-ru">Вот что мы делаем дальше конкретно, и вот срок.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I want to focus on the fix, not on who's right."</div><div class="phrase-ru">Хочу сосредоточиться на решении, а не на том, кто прав.</div></div>
+      </div>
     </div>
 
     <div class="accordion">
@@ -983,6 +1010,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Токсичный клиент» + принципы деэскалации и медиации из переговорной практики.</span><span class="en-only">Drawing on the "Toxic Client" course module, plus de-escalation and mediation principles from negotiation practice.</span></div>
     </div>
 
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">"This tone is getting in the way of us finding a solution."</div><div class="phrase-ru">Этот тон мешает нам найти решение.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I hear you, and I'm not going to pretend this is fine."</div><div class="phrase-ru">Слышу вас, и не буду делать вид, что всё в порядке.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"Let's bring in my team lead to look at the pattern, not just today's call."</div><div class="phrase-ru">Предлагаю подключить моего руководителя, чтобы разобрать паттерн, а не только сегодняшний случай.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"This isn't a step back — it's the next step."</div><div class="phrase-ru">Это не отступление — это следующий шаг.</div></div>
+      </div>
+    </div>
+
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
         <div class="trigger-left"><div class="trigger-icon">📋</div>
@@ -1143,6 +1180,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
         <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Доверие восстанавливают действия, а не слова — принцип, общий и для переговорной теории, и для медиации: конкретный проверяемый план убедительнее любого нового обещания.</span><span class="en-only">Trust is rebuilt by actions, not words — a principle shared by negotiation theory and mediation alike: a concrete, verifiable plan is more convincing than any new promise.</span></div>
       </div>
       <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Доверие после провала» + общие принципы восстановления доверия из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Trust After Failure" course module, plus general trust-repair principles from negotiation and mediation practice.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">"You're right — and I'm not going to look for mitigating circumstances."</div><div class="phrase-ru">Вы правы — и я не буду искать смягчающие обстоятельства.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I understand words don't mean much right now — that's why I want to show it through actions."</div><div class="phrase-ru">Понимаю, что слова сейчас мало что значат — именно поэтому хочу показать это действиями.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"You set the checkpoints — if there's no update, that's your signal to escalate."</div><div class="phrase-ru">Точки проверки назначаете вы — если статуса нет, это сигнал эскалировать.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"We're taking direct ownership of this — not the dev team, me personally."</div><div class="phrase-ru">Мы берём это под личный контроль — не разработка, а я лично.</div></div>
+      </div>
     </div>
 
     <div class="accordion">
@@ -2822,6 +2869,16 @@ function genGenerate(){
   const debriefHtml = sc.debrief.map((q,i)=>`<div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">${i+1}</span>${genEscape(q)}</div>`).join('');
   const tox = GEN_TOX_THEORY[lang][genFields.toxicity] || GEN_TOX_THEORY[lang].none;
   const toxBullets = tox.bullets.map((t,i)=>`<div class="theory-item"><span class="theory-icon">${i+1}</span>${genEscape(t)}</div>`).join('');
+
+  // Phrase bank: pull the "you" lines in EN (to use verbatim in real calls) with a RU gloss alongside.
+  const scEN = lang==='en' ? sc : genBuildScenario('en', seed);
+  const scRU = lang==='ru' ? sc : genBuildScenario('ru', seed);
+  const phraseHtml = scEN.script.map((line, i) => {
+    if (line.who !== 'you') return '';
+    const ruLine = scRU.script[i] && scRU.script[i].who === 'you' ? scRU.script[i].text : '';
+    return `<div class="phrase-card"><div class="phrase-en">"${genEscape(line.text)}"</div>${ruLine?`<div class="phrase-ru">${genEscape(ruLine)}</div>`:''}</div>`;
+  }).join('');
+
   const groupQuestions = lang==='en' ? [
     "What phrasing worked best to lower the tension — without naming who used it?",
     "What was harder in this scenario: staying calm, or being concrete?",
@@ -2856,6 +2913,10 @@ function genGenerate(){
     <div class="block">
       <div class="block-label">${lang==='en'?'Conversation forks — what people usually try':'Развилки разговора — что обычно пробуют'}</div>
       <div class="trap-list">${trapsHtml}${toolsHtml}</div>
+    </div>
+    <div class="block">
+      <div class="block-label">💬 ${lang==='en'?'Ready-to-use English phrases':'Готовые фразы на английском'}</div>
+      <div class="phrase-bank">${phraseHtml}</div>
     </div>
     <div class="theory-block">
       <div class="block-label" style="color:var(--blue)">📚 ${lang==='en'?'Technique: '+genEscape(tox.name):'Приём: '+genEscape(tox.name)}</div>
