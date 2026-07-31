@@ -1925,44 +1925,91 @@ function formAllPairs(){
     pairsState=[];
     return;
   }
-  let result=null;
-  for(let attempt=0; attempt<300 && !result; attempt++){
-    result=tryFormTriosNoAttach(shuffleArr(presentNames));
+  const RESERVE_OBSERVER = 'Mariya Logimakhova';
+  const hasReserve = presentNames.includes(RESERVE_OBSERVER);
+  const pool = hasReserve ? presentNames.filter(n=>n!==RESERVE_OBSERVER) : presentNames;
+
+  let result=null, forMaria=null;
+
+  if(pool.length>=3){
+    for(let attempt=0; attempt<1000 && !result; attempt++){
+      const attemptResult = tryFormTriosNoAttach(shuffleArr(pool));
+      if(!attemptResult) continue;
+      if(!hasReserve){ result=attemptResult; break; }
+      // With Maria reserved: make sure whoever ends up in her pair doesn't share her team.
+      let candidates=[...attemptResult.leftover];
+      if(candidates.length===0 && attemptResult.groups.length>=2){
+        // pool divided perfectly into trios — borrow two different trios' observers to build Maria's pair
+        const gis = shuffleArr(attemptResult.groups.map((_,i)=>i)).slice(0,2);
+        gis.forEach(gi=>{
+          candidates.push(attemptResult.groups[gi][2]);
+          attemptResult.groups[gi] = attemptResult.groups[gi].slice(0,2);
+        });
+      } else if(candidates.length===1 && attemptResult.groups.length){
+        const gi = Math.floor(Math.random()*attemptResult.groups.length);
+        candidates.push(attemptResult.groups[gi][2]);
+        attemptResult.groups[gi] = attemptResult.groups[gi].slice(0,2); // that trio becomes a plain pair
+      }
+      const pairOk = candidates.length!==2 || (
+        TEAM_OF[candidates[0]]!==TEAM_OF[candidates[1]] &&
+        TEAM_OF[candidates[0]]!==TEAM_OF[RESERVE_OBSERVER] &&
+        TEAM_OF[candidates[1]]!==TEAM_OF[RESERVE_OBSERVER]
+      );
+      const singleOk = candidates.length!==1 || TEAM_OF[candidates[0]]!==TEAM_OF[RESERVE_OBSERVER];
+      if(pairOk && singleOk){ result=attemptResult; forMaria=candidates; }
+    }
   }
   if(!result){
     // extremely unlikely fallback if team sizes ever make it impossible — group regardless of team
-    const shuffled=shuffleArr(presentNames);
+    const shuffled=shuffleArr(pool);
     const groups=[];
     let i=0;
     while(i<shuffled.length){
       if(shuffled.length-i<=2){ if(groups.length) groups[groups.length-1].push(...shuffled.slice(i)); i=shuffled.length; }
       else { groups.push(shuffled.slice(i,i+3)); i+=3; }
     }
-    result={groups, leftover:[]};
+    result={groups, leftover: pool.length<3 ? [...pool] : []};
+    if(hasReserve){
+      forMaria=[...result.leftover];
+      if(forMaria.length===0 && result.groups.length){
+        forMaria=result.groups[result.groups.length-1].splice(2,1);
+      } else if(forMaria.length===1 && result.groups.length){
+        forMaria.push(result.groups[result.groups.length-1].splice(2,1)[0]);
+      }
+    }
   }
   pairsState = result.groups.map(g=>{
     const roles=[g[0],g[1]];
     if(Math.random()<0.5) roles.reverse();
-    return {cs:roles[0], cl:roles[1], observers:[g[2]]};
+    return {cs:roles[0], cl:roles[1], observers: g[2] ? [g[2]] : []};
   });
-  // Seat any leftover (0, 1, or 2 people): first try a team-compatible slot in an existing group
-  const stillLeftover=[];
-  result.leftover.forEach(person=>{
-    const idx = pairsState.findIndex(gr =>
-      TEAM_OF[gr.cs]!==TEAM_OF[person] && TEAM_OF[gr.cl]!==TEAM_OF[person] &&
-      !gr.observers.some(o=>TEAM_OF[o]===TEAM_OF[person])
-    );
-    if(idx!==-1) pairsState[idx].observers.push(person);
-    else stillLeftover.push(person);
-  });
-  // Anyone left without a compatible slot: if it's a pair with different teams, seat them together as their own group
-  if(stillLeftover.length===2 && TEAM_OF[stillLeftover[0]]!==TEAM_OF[stillLeftover[1]]){
-    pairsState.push({cs:stillLeftover[0], cl:stillLeftover[1], observers:[]});
-  } else {
-    // last resort — extremely rare with these team sizes
-    stillLeftover.forEach(person=>{
-      if(pairsState.length) pairsState[pairsState.length-1].observers.push(person);
-    });
+
+  // Leftover people never become a second observer anywhere — instead they form their own
+  // separate pair, with the reserved observer (Maria) watching that one pair.
+  if(hasReserve && forMaria){
+    if(forMaria.length===2){
+      pairsState.push({cs:forMaria[0], cl:forMaria[1], observers:[RESERVE_OBSERVER]});
+    } else if(forMaria.length===1){
+      // still just one person (team-safe retries were exhausted) — Maria pairs with them directly instead
+      pairsState.push({cs:forMaria[0], cl:RESERVE_OBSERVER, observers:[]});
+    }
+  } else if(!hasReserve && result.leftover.length){
+    // No reserved observer available today — borrow from an existing trio to complete a plain pair
+    // for the leftover person(s), rather than ever creating a second observer slot.
+    let stillLeftover=[...result.leftover];
+    if(stillLeftover.length===1 && pairsState.length){
+      let donorIdx = pairsState.findIndex(gr => gr.observers.length && TEAM_OF[gr.observers[0]]!==TEAM_OF[stillLeftover[0]]);
+      if(donorIdx===-1) donorIdx = pairsState.findIndex(gr => gr.observers.length);
+      if(donorIdx!==-1) stillLeftover.push(pairsState[donorIdx].observers.pop());
+    }
+    if(stillLeftover.length===2 && TEAM_OF[stillLeftover[0]]!==TEAM_OF[stillLeftover[1]]){
+      pairsState.push({cs:stillLeftover[0], cl:stillLeftover[1], observers:[]});
+    } else {
+      // last resort — extremely rare with these team sizes
+      stillLeftover.forEach(person=>{
+        if(pairsState.length) pairsState[pairsState.length-1].observers.push(person);
+      });
+    }
   }
   renderPairsGrid();
 }
