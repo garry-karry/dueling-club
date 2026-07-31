@@ -1927,6 +1927,27 @@ function formAllPairs(){
   }
   const RESERVE_OBSERVER = 'Mariya Logimakhova';
   const hasReserve = presentNames.includes(RESERVE_OBSERVER);
+
+  // If everyone present divides evenly into complete trios, Maria just participates normally —
+  // the special reserved-observer routing below only kicks in when there's an actual remainder.
+  if(presentNames.length % 3 === 0){
+    let evenResult=null;
+    for(let attempt=0; attempt<1000 && !evenResult; attempt++){
+      const attemptResult = tryFormTriosNoAttach(shuffleArr(presentNames));
+      if(attemptResult && attemptResult.leftover.length===0) evenResult=attemptResult;
+    }
+    if(evenResult){
+      pairsState = evenResult.groups.map(g=>{
+        const roles=[g[0],g[1]];
+        if(Math.random()<0.5) roles.reverse();
+        return {cs:roles[0], cl:roles[1], observers:[g[2]]};
+      });
+      renderPairsGrid();
+      return;
+    }
+    // if that somehow failed under team constraints, fall through to the reserved-observer path below
+  }
+
   const pool = hasReserve ? presentNames.filter(n=>n!==RESERVE_OBSERVER) : presentNames;
 
   let result=null, forMaria=null;
