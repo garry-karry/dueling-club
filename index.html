@@ -304,6 +304,12 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 .phrase-en{font-size:13.5px;color:var(--ink);font-style:italic;line-height:1.5}
 .phrase-ru{font-size:11.5px;color:var(--ink3);margin-top:3px;font-style:normal}
 
+/* ── OBSERVER TASK (third role in each group of three) ── */
+.observer-block{background:var(--gold-l);border:1px solid rgba(200,168,75,.4);border-radius:var(--r);padding:1.1rem 1.3rem;margin-bottom:.85rem}
+.observer-list{display:flex;flex-direction:column;gap:8px;margin-top:.6rem}
+.observer-item{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--ink2);line-height:1.6;text-align:justify}
+.observer-n{min-width:22px;height:22px;border-radius:50%;background:#fff;color:var(--amber);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px;border:1px solid rgba(200,168,75,.4)}
+
 /* ── GROUP DISCUSSION (facilitator-led, after pairs reconvene) ── */
 .group-list{display:flex;flex-direction:column;gap:8px}
 .group-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink2);line-height:1.6;text-align:justify}
@@ -484,7 +490,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
       <!-- PAIRS MODE (default) — everyone splits into simultaneous pairs, no shared audience -->
       <div class="mode-panel active" id="modePairs">
-        <p class="mode-note"><span class="ru-only">Каждая пара расходится в своё пространство (комнату, зум-брейкаут) и тренируется одновременно с остальными. Вернувшись — чек-лист и мини-квиз внизу сценария помогут свериться вдвоём, без общего разбора.</span><span class="en-only">Each pair moves to its own space (room, Zoom breakout) and practices at the same time as everyone else. When you're back, the checklist and mini-quiz at the bottom of the scenario help you compare notes — no group review.</span></p>
+        <p class="mode-note"><span class="ru-only">Группы по три расходятся в своё пространство (комнату, зум-брейкаут) и тренируются одновременно с остальными: заказчик, менеджер и наблюдатель. Вернувшись — чек-лист и мини-квиз внизу сценария помогут свериться вместе, без общего разбора.</span><span class="en-only">Groups of three move to their own space (room, Zoom breakout) and practice at the same time as everyone else: client, manager, and observer. When you're back, the checklist and mini-quiz at the bottom of the scenario help you compare notes — no group review.</span></p>
 
         <div class="attendance-block">
           <div class="attendance-head">
@@ -505,7 +511,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           <button class="r-btn r-primary" onclick="formAllPairs()">👥 <span class="ru-only">Сформировать пары</span><span class="en-only">Form pairs</span></button>
           <button class="r-btn" onclick="resetPairs()">↺ <span class="ru-only">Заново</span><span class="en-only">Reshuffle</span></button>
         </div>
-        <div class="rand-count"><span class="ru-only">Отмечено:</span><span class="en-only">Checked in:</span> <span id="participantCountPairs">34</span> <span class="ru-only">из</span><span class="en-only">of</span> <span id="participantCountTotal">34</span> · <span id="pairsModeHint" style="color:var(--teal)">(1 CS + 1 заказчик <span class="ru-only">в паре</span><span class="en-only">per pair</span>)</span></div>
+        <div class="rand-count"><span class="ru-only">Отмечено:</span><span class="en-only">Checked in:</span> <span id="participantCountPairs">34</span> <span class="ru-only">из</span><span class="en-only">of</span> <span id="participantCountTotal">34</span> · <span id="pairsModeHint" style="color:var(--teal)">(1 CS + 1 <span class="ru-only">заказчик + 1 наблюдатель в группе</span><span class="en-only">client + 1 observer per group</span>)</span></div>
         <div class="pairs-grid" id="pairsGrid"></div>
       </div>
 
@@ -648,9 +654,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Проверка понимания</span><span class="en-only">Observer's task — Perception Check</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Прозвучала ли отчётливая фраза-парафраз («правильно понимаю, что вы ожидали...») <b>до того</b>, как CS начал объяснять свою позицию — или CS сразу перешёл к оправданиям?</span><span class="en-only">Was there a clear paraphrase ("if I understand right, you expected...") <b>before</b> CS started explaining their own position — or did CS jump straight to justifying?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Прозвучало ли обвинение («вы этого не писали») вместо признания коммуникационного разрыва?</span><span class="en-only">Did an accusation slip in ("you never wrote that") instead of acknowledging the communication gap?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Договорились ли стороны о конкретном письменном шаге на будущее, а не только «разобрались» с прошлым?</span><span class="en-only">Did the two agree on a concrete written step for the future, or only "sort out" the past?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. После сцены дайте обратную связь только по этим трём пунктам — по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. After the scene, give feedback only on these three points — on the technique, not the person.</span></div>
+    </div>
+
     <div class="timing-row">
       <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
     </div>
 
@@ -811,9 +827,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Язык собеседника</span><span class="en-only">Observer's task — Frame-Matching</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Задал ли CS проясняющий вопрос («что именно происходит?») <b>до того</b>, как начал объяснять техническую суть — или сразу начал диагностировать?</span><span class="en-only">Did CS ask a clarifying question ("what exactly is happening?") <b>before</b> explaining the technical substance — or start diagnosing right away?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Прозвучал ли технический жаргон, который мог запутать нетехнического заказчика, вместо простого языка?</span><span class="en-only">Did technical jargon slip in that could confuse a non-technical client, instead of plain language?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Ответил ли CS на язвительный тон тем же тоном, или сохранил спокойствие и перешёл к решению?</span><span class="en-only">Did CS mirror the sarcastic tone, or stay calm and move to a solution?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. После сцены дайте обратную связь только по этим трём пунктам — по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. After the scene, give feedback only on these three points — on the technique, not the person.</span></div>
+    </div>
+
     <div class="timing-row">
       <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">💬 <span class="ru-only">Чат + звонок</span><span class="en-only">Chat + call</span></span>
     </div>
 
@@ -982,9 +1008,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Вербальная деэскалация</span><span class="en-only">Observer's task — Verbal De-escalation</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Изменился ли темп речи CS в ответ на повышение тона клиента — ускорился (зеркалирование) или, наоборот, замедлился?</span><span class="en-only">Did CS's speaking pace change in response to the client's rising tone — did it speed up (mirroring) or actually slow down?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Называл ли CS поведение («этот тон») вместо человека («вы»)?</span><span class="en-only">Did CS name the behavior ("this tone") rather than the person ("you")?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Если паттерн (третий раз за месяц) прозвучал — предложил ли CS эскалацию как инструмент, а не как капитуляцию?</span><span class="en-only">If the pattern (third time this month) came up, did CS offer escalation as a tool, not as surrender?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. После сцены дайте обратную связь только по этим трём пунктам — по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. After the scene, give feedback only on these three points — on the technique, not the person.</span></div>
+    </div>
+
     <div class="timing-row">
       <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
       <span class="t-pill">🔁 <span class="ru-only">Третий раз за месяц</span><span class="en-only">Third time this month</span></span>
     </div>
@@ -1154,9 +1190,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Протокол восстановления доверия</span><span class="en-only">Observer's task — 5-Step Trust Repair Protocol</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Было ли признание провала <b>без условий и без «но»</b> — или CS смягчил его оговорками?</span><span class="en-only">Was the acknowledgment of the failure <b>unconditional, with no "but"</b> — or did CS soften it with caveats?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Использовал ли CS «мы», а не «команда разработки» / «они»?</span><span class="en-only">Did CS say "we," rather than "the dev team" or "they"?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Была ли инициатива по точкам проверки отдана клиенту — или контроль остался у CS?</span><span class="en-only">Was the initiative over checkpoints handed to the client — or did CS keep control?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. После сцены дайте обратную связь только по этим трём пунктам — по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. After the scene, give feedback only on these three points — on the technique, not the person.</span></div>
+    </div>
+
     <div class="timing-row">
       <span class="t-pill">⏱ <span class="ru-only">9 мин</span><span class="en-only">9 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS</span><span class="en-only">1 client + 1 CS</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
       <span class="t-pill">🧊 <span class="ru-only">Второй срыв подряд</span><span class="en-only">Second miss in a row</span></span>
     </div>
@@ -1844,17 +1890,20 @@ function setPracticeMode(mode, btn){
   document.getElementById('modeWheel').classList.toggle('active', mode==='wheel');
 }
 
-function tryFormPairsNoAttach(names){
+function tryFormTriosNoAttach(names){
   const pool=[...names];
-  const pairs=[];
-  while(pool.length>1){
+  const groups=[];
+  while(pool.length>=3){
     const a=pool.shift();
-    const idx=pool.findIndex(b=>TEAM_OF[b]!==TEAM_OF[a]);
-    if(idx===-1) return null;
-    const b=pool.splice(idx,1)[0];
-    pairs.push([a,b]);
+    const bIdx=pool.findIndex(x=>TEAM_OF[x]!==TEAM_OF[a]);
+    if(bIdx===-1) return null;
+    const b=pool.splice(bIdx,1)[0];
+    const cIdx=pool.findIndex(x=>TEAM_OF[x]!==TEAM_OF[a] && TEAM_OF[x]!==TEAM_OF[b]);
+    if(cIdx===-1) return null;
+    const c=pool.splice(cIdx,1)[0];
+    groups.push([a,b,c]);
   }
-  return {pairs, leftover: pool.length===1 ? pool[0] : null};
+  return {groups, leftover: pool}; // 0, 1, or 2 people left over
 }
 
 function shuffleArr(arr){
@@ -1866,101 +1915,125 @@ function shuffleArr(arr){
   return a;
 }
 
-// pairsState: array of {cs, cl, extra} — the single source of truth for the pairing tool.
+// pairsState: array of {cs, cl, observers:[...]} — the single source of truth for the pairing tool.
 let pairsState = [];
 
 function formAllPairs(){
   const presentNames = getPresentNames();
-  if(presentNames.length<2){
-    document.getElementById('pairsGrid').innerHTML = `<div class="rand-empty">${document.body.dataset.lang==='en'?'Check in at least two people in Step 0 first.':'Отметьте в Шаге 0 хотя бы двух человек.'}</div>`;
+  if(presentNames.length<3){
+    document.getElementById('pairsGrid').innerHTML = `<div class="rand-empty">${document.body.dataset.lang==='en'?'Check in at least three people in Step 0 first.':'Отметьте в Шаге 0 хотя бы трёх человек.'}</div>`;
     pairsState=[];
     return;
   }
   let result=null;
   for(let attempt=0; attempt<300 && !result; attempt++){
-    result=tryFormPairsNoAttach(shuffleArr(presentNames));
+    result=tryFormTriosNoAttach(shuffleArr(presentNames));
   }
   if(!result){
-    // extremely unlikely fallback if team sizes ever make it impossible — pair regardless of team
+    // extremely unlikely fallback if team sizes ever make it impossible — group regardless of team
     const shuffled=shuffleArr(presentNames);
-    const pairs=[];
+    const groups=[];
     let i=0;
     while(i<shuffled.length){
-      if(shuffled.length-i===1){ if(pairs.length) pairs[pairs.length-1].push(shuffled[i]); i++; }
-      else { pairs.push([shuffled[i],shuffled[i+1]]); i+=2; }
+      if(shuffled.length-i<=2){ if(groups.length) groups[groups.length-1].push(...shuffled.slice(i)); i=shuffled.length; }
+      else { groups.push(shuffled.slice(i,i+3)); i+=3; }
     }
-    result={pairs, leftover:null};
+    result={groups, leftover:[]};
   }
-  pairsState = result.pairs.map(p=>{
-    const arr=[...p];
-    if(Math.random()<0.5){ [arr[0],arr[1]]=[arr[1],arr[0]]; }
-    return {cs:arr[0], cl:arr[1], extra:null};
+  pairsState = result.groups.map(g=>{
+    const roles=[g[0],g[1]];
+    if(Math.random()<0.5) roles.reverse();
+    return {cs:roles[0], cl:roles[1], observers:[g[2]]};
   });
-  // If there's a single leftover (odd headcount), try to seat them as a third right away
-  if(result.leftover){
-    const leftover=result.leftover;
-    const compatibleIdx = pairsState.findIndex(c=>TEAM_OF[c.cs]!==TEAM_OF[leftover] && TEAM_OF[c.cl]!==TEAM_OF[leftover]);
-    if(compatibleIdx!==-1) pairsState[compatibleIdx].extra=leftover;
-    else if(pairsState.length) pairsState[pairsState.length-1].extra=leftover;
+  // Seat any leftover (0, 1, or 2 people): first try a team-compatible slot in an existing group
+  const stillLeftover=[];
+  result.leftover.forEach(person=>{
+    const idx = pairsState.findIndex(gr =>
+      TEAM_OF[gr.cs]!==TEAM_OF[person] && TEAM_OF[gr.cl]!==TEAM_OF[person] &&
+      !gr.observers.some(o=>TEAM_OF[o]===TEAM_OF[person])
+    );
+    if(idx!==-1) pairsState[idx].observers.push(person);
+    else stillLeftover.push(person);
+  });
+  // Anyone left without a compatible slot: if it's a pair with different teams, seat them together as their own group
+  if(stillLeftover.length===2 && TEAM_OF[stillLeftover[0]]!==TEAM_OF[stillLeftover[1]]){
+    pairsState.push({cs:stillLeftover[0], cl:stillLeftover[1], observers:[]});
+  } else {
+    // last resort — extremely rare with these team sizes
+    stillLeftover.forEach(person=>{
+      if(pairsState.length) pairsState[pairsState.length-1].observers.push(person);
+    });
   }
   renderPairsGrid();
 }
 
 function pairsAssignedSet(){
-  return new Set(pairsState.flatMap(c=>[c.cs,c.cl,c.extra].filter(Boolean)));
+  return new Set(pairsState.flatMap(g=>[g.cs,g.cl,...g.observers].filter(Boolean)));
 }
 
-function replacePairMember(pairIdx, role){
-  const card=pairsState[pairIdx];
-  const outgoing=card[role];
+function replacePairMember(groupIdx, role){
+  const g=pairsState[groupIdx];
+  const outgoing=g[role];
   if(!outgoing) return;
-  const others=['cs','cl','extra'].filter(r=>r!==role).map(r=>card[r]).filter(Boolean);
+  const others=[role==='cs'?g.cl:g.cs, ...g.observers].filter(Boolean);
   const assigned=pairsAssignedSet();
   const spare=getPresentNames().filter(n=>!assigned.has(n));
   let candidates=spare.filter(n=>!others.some(o=>TEAM_OF[o]===TEAM_OF[n]));
-  if(!candidates.length && spare.length) candidates=spare;
   if(candidates.length){
-    card[role]=candidates[Math.floor(Math.random()*candidates.length)];
+    g[role]=candidates[Math.floor(Math.random()*candidates.length)];
     renderPairsGrid();
     return;
   }
-  // No one spare — swap with a compatible person from a different pair
+  // No one spare — swap with a compatible person from a different group (cs, cl, or any observer slot)
   const swapOptions=[];
-  pairsState.forEach((c,idx)=>{
-    if(idx===pairIdx) return;
-    ['cs','cl','extra'].forEach(r=>{
-      const candidate=c[r];
+  pairsState.forEach((gr,gi)=>{
+    if(gi===groupIdx) return;
+    const slots=[['cs',gr.cs],['cl',gr.cl],...gr.observers.map((o,oi)=>[{obs:oi},o])];
+    slots.forEach(([slot,candidate])=>{
       if(!candidate) return;
       const candidateOk=!others.some(o=>TEAM_OF[o]===TEAM_OF[candidate]);
-      const otherCardOthers=['cs','cl','extra'].filter(rr=>rr!==r).map(rr=>c[rr]).filter(Boolean);
-      const outgoingOk=!otherCardOthers.some(o=>TEAM_OF[o]===TEAM_OF[outgoing]);
-      if(candidateOk && outgoingOk) swapOptions.push({idx, role:r});
+      const otherMembers=[gr.cs,gr.cl,...gr.observers].filter(n=>n!==candidate);
+      const outgoingOk=!otherMembers.some(o=>TEAM_OF[o]===TEAM_OF[outgoing]);
+      if(candidateOk && outgoingOk) swapOptions.push({gi, slot});
     });
   });
   if(swapOptions.length){
     const pick=swapOptions[Math.floor(Math.random()*swapOptions.length)];
-    const candidateName=pairsState[pick.idx][pick.role];
-    pairsState[pick.idx][pick.role]=outgoing;
-    card[role]=candidateName;
+    const otherGroup=pairsState[pick.gi];
+    let candidateName;
+    if(pick.slot==='cs'||pick.slot==='cl'){ candidateName=otherGroup[pick.slot]; otherGroup[pick.slot]=outgoing; }
+    else { candidateName=otherGroup.observers[pick.slot.obs]; otherGroup.observers[pick.slot.obs]=outgoing; }
+    g[role]=candidateName;
     renderPairsGrid();
   }
   // else: no valid replacement anywhere — leave as is (extremely rare with these team sizes)
 }
 
-function addThird(pairIdx){
-  const card=pairsState[pairIdx];
-  const others=[card.cs, card.cl].filter(Boolean);
+function replaceObserver(groupIdx, obsIdx){
+  const g=pairsState[groupIdx];
+  const outgoing=g.observers[obsIdx];
+  const others=[g.cs, g.cl, ...g.observers.filter((_,i)=>i!==obsIdx)];
   const assigned=pairsAssignedSet();
   const spare=getPresentNames().filter(n=>!assigned.has(n));
-  if(!spare.length) return;
   const candidates=spare.filter(n=>!others.some(o=>TEAM_OF[o]===TEAM_OF[n]));
-  const pool=candidates.length?candidates:spare;
-  card.extra=pool[Math.floor(Math.random()*pool.length)];
+  if(!candidates.length) return;
+  g.observers[obsIdx]=candidates[Math.floor(Math.random()*candidates.length)];
   renderPairsGrid();
 }
 
-function removeThird(pairIdx){
-  pairsState[pairIdx].extra=null;
+function addObserver(groupIdx){
+  const g=pairsState[groupIdx];
+  const others=[g.cs, g.cl, ...g.observers];
+  const assigned=pairsAssignedSet();
+  const spare=getPresentNames().filter(n=>!assigned.has(n));
+  const candidates=spare.filter(n=>!others.some(o=>TEAM_OF[o]===TEAM_OF[n]));
+  if(!candidates.length) return;
+  g.observers.push(candidates[Math.floor(Math.random()*candidates.length)]);
+  renderPairsGrid();
+}
+
+function removeObserver(groupIdx, obsIdx){
+  pairsState[groupIdx].observers.splice(obsIdx,1);
   renderPairsGrid();
 }
 
@@ -1968,22 +2041,23 @@ function renderPairsGrid(){
   const grid=document.getElementById('pairsGrid');
   if(!grid) return;
   const en=document.body.dataset.lang==='en';
-  grid.innerHTML=pairsState.map((c,idx)=>{
-    const thirdRow = c.extra ? `
+  grid.innerHTML=pairsState.map((g,idx)=>{
+    const obsRows = g.observers.map((name,oi)=>`
         <div class="pc-person">
-          <span>${c.extra}</span>
+          <span>${name}</span>
           <span class="pc-btns">
-            <button class="pc-icon-btn" onclick="replacePairMember(${idx},'extra')" title="${en?'Replace':'Заменить'}">↺</button>
-            <button class="pc-icon-btn pc-remove" onclick="removeThird(${idx})" title="${en?'Remove':'Убрать'}">✕</button>
+            <span class="pc-role-tag">${en?'Observer':'Наблюдатель'}</span>
+            <button class="pc-icon-btn" onclick="replaceObserver(${idx},${oi})" title="${en?'Replace':'Заменить'}">↺</button>
+            <button class="pc-icon-btn pc-remove" onclick="removeObserver(${idx},${oi})" title="${en?'Remove':'Убрать'}">✕</button>
           </span>
-        </div>` : `
-        <button class="pc-add-third" onclick="addThird(${idx})">+ ${en?'third person':'третий'}</button>`;
+        </div>`).join('');
     return `
       <div class="pair-card">
-        <span class="pc-num">${en?'Pair':'Пара'} ${idx+1}</span>
-        <div class="pc-person"><b>${c.cs}</b><span class="pc-btns"><span class="pc-role-tag">CS</span><button class="pc-icon-btn" onclick="replacePairMember(${idx},'cs')" title="${en?'Replace':'Заменить'}">↺</button></span></div>
-        <div class="pc-person"><span class="pc-cl">${c.cl}</span><span class="pc-btns"><span class="pc-role-tag">${en?'Client':'Заказчик'}</span><button class="pc-icon-btn" onclick="replacePairMember(${idx},'cl')" title="${en?'Replace':'Заменить'}">↺</button></span></div>
-        ${thirdRow}
+        <span class="pc-num">${en?'Group':'Группа'} ${idx+1}</span>
+        <div class="pc-person"><b>${g.cs}</b><span class="pc-btns"><span class="pc-role-tag">CS</span><button class="pc-icon-btn" onclick="replacePairMember(${idx},'cs')" title="${en?'Replace':'Заменить'}">↺</button></span></div>
+        <div class="pc-person"><span class="pc-cl">${g.cl}</span><span class="pc-btns"><span class="pc-role-tag">${en?'Client':'Заказчик'}</span><button class="pc-icon-btn" onclick="replacePairMember(${idx},'cl')" title="${en?'Replace':'Заменить'}">↺</button></span></div>
+        ${obsRows}
+        <button class="pc-add-third" onclick="addObserver(${idx})">+ ${en?'observer':'наблюдатель'}</button>
       </div>`;
   }).join('');
 }
@@ -2380,27 +2454,37 @@ const GEN_TOX_EXTRA_TRIGGERS = {
 const GEN_TOX_THEORY = {
   ru:{
     none:{ name:"Активное слушание", def:"Прежде чем отвечать по существу, показать, что услышали собеседника — своими словами, до объяснения своей позиции. База переговорной теории и техник Карла Роджерса.",
-      bullets:["Разделяйте позицию и интерес (Фишер и Юри) — то, что говорят, и то, что на самом деле важно, часто разные вещи.","Здесь низкие ставки токсичности — этого приёма обычно достаточно, чтобы разговор остался конструктивным."] },
+      bullets:["Разделяйте позицию и интерес (Фишер и Юри) — то, что говорят, и то, что на самом деле важно, часто разные вещи.","Здесь низкие ставки токсичности — этого приёма обычно достаточно, чтобы разговор остался конструктивным."],
+      observer:["Прозвучал ли парафраз ожидания собеседника до того, как CS начал отвечать по существу?","Не перешёл ли CS сразу к своей позиции, не показав, что услышал?"] },
     aggressor:{ name:"Вербальная деэскалация", def:"Набор речевых действий, снижающих накал без уступок по сути: подтвердить услышанное без осуждения, замедлить свой темп речи, использовать паузу вместо мгновенного ответа.",
-      bullets:["Называть поведение, а не человека — принцип «отделить людей от проблемы» (Фишер и Юри).","Не зеркалить тон и скорость — зеркалирование почти всегда приводит к мгновенной эскалации."] },
+      bullets:["Называть поведение, а не человека — принцип «отделить людей от проблемы» (Фишер и Юри).","Не зеркалить тон и скорость — зеркалирование почти всегда приводит к мгновенной эскалации."],
+      observer:["Замедлился темп речи CS в ответ на давление — или ускорился (зеркалирование)?","Называл ли CS поведение («этот тон»), а не человека («вы»)?"] },
     manipulator:{ name:"Заземление на фактах", def:"Отвечать на сравнения, намёки и завуалированные угрозы конкретными фактами, а не эмоциональной защитой или обещаниями — это лишает манипуляцию опоры.",
-      bullets:["Опирайтесь на факты, а не на оценки — сравнения лучше всего снимаются конкретикой.","Не оправдывайтесь — спокойное изложение фактов и есть позиция силы здесь."] },
+      bullets:["Опирайтесь на факты, а не на оценки — сравнения лучше всего снимаются конкретикой.","Не оправдывайтесь — спокойное изложение фактов и есть позиция силы здесь."],
+      observer:["Ответил ли CS фактами на сравнение или намёк, или начал оправдываться?","Не поддался ли CS на завуалированную угрозу уйти, изменив позицию без нужды?"] },
     chaotic:{ name:"Структура извне", def:"Когда приоритеты меняются ежедневно, структуру необходимо задать снаружи: письменный, согласованный список приоритетов на фиксированный период — а не переговоры о срочности каждый раз заново.",
-      bullets:["Письменная фиксация приоритетов снижает хаос лучше, чем устные договорённости.","Регулярный ритм пересмотра (например, раз в неделю) — а не по первому требованию."] },
+      bullets:["Письменная фиксация приоритетов снижает хаос лучше, чем устные договорённости.","Регулярный ритм пересмотра (например, раз в неделю) — а не по первому требованию."],
+      observer:["Предложил ли CS зафиксировать приоритеты письменно, а не согласился спорить о срочности устно?","Появился ли конкретный ритм пересмотра, а не расплывчатое «как получится»?"] },
     silent_bomb:{ name:"Проактивный чек-ин", def:"Молчание, за которым стоит накопление претензий, снимается не терпеливым ожиданием, а регулярными, инициированными вами проверками состояния — до того как накопится взрыв.",
-      bullets:["Проактивные чек-ины предотвращают накопление — не дожидайтесь, чтобы клиент сам поднял тему.","Задавайте открытые вопросы регулярно, а не только когда что-то уже пошло не так."] }
+      bullets:["Проактивные чек-ины предотвращают накопление — не дожидайтесь, чтобы клиент сам поднял тему.","Задавайте открытые вопросы регулярно, а не только когда что-то уже пошло не так."],
+      observer:["Задал ли CS открытый вопрос о состоянии дел, а не дождался, пока клиент сам заговорит?","Предложил ли CS регулярный ритм проверок на будущее?"] }
   },
   en:{
     none:{ name:"Active Listening", def:"Before responding on substance, show you heard the other person — in your own words, before explaining your own position. A staple of negotiation theory and Carl Rogers' techniques.",
-      bullets:["Separate position from interest (Fisher & Ury) — what's said and what actually matters are often different things.","Stakes are low here — this technique alone is usually enough to keep the conversation constructive."] },
+      bullets:["Separate position from interest (Fisher & Ury) — what's said and what actually matters are often different things.","Stakes are low here — this technique alone is usually enough to keep the conversation constructive."],
+      observer:["Was there a paraphrase of the other person's expectation before CS responded on substance?","Did CS jump straight to their own position without showing they'd heard first?"] },
     aggressor:{ name:"Verbal De-escalation", def:"A set of verbal moves that lower intensity without conceding on substance: acknowledge without judgment, slow your own pace, use a pause instead of an instant reply.",
-      bullets:["Name the behavior, not the person — the \"separate people from the problem\" principle (Fisher & Ury).","Don't mirror the tone or speed — mirroring almost always leads to instant escalation."] },
+      bullets:["Name the behavior, not the person — the \"separate people from the problem\" principle (Fisher & Ury).","Don't mirror the tone or speed — mirroring almost always leads to instant escalation."],
+      observer:["Did CS's pace slow down under pressure — or speed up (mirroring)?","Did CS name the behavior (\"this tone\") rather than the person (\"you\")?"] },
     manipulator:{ name:"Fact-Anchoring", def:"Respond to comparisons, veiled threats, and hints with concrete facts rather than emotional defensiveness or promises — this strips the manipulation of its leverage.",
-      bullets:["Anchor on facts, not judgments — comparisons are best defused with specifics.","Don't get defensive — calmly stating facts is the position of strength here."] },
+      bullets:["Anchor on facts, not judgments — comparisons are best defused with specifics.","Don't get defensive — calmly stating facts is the position of strength here."],
+      observer:["Did CS answer the comparison or hint with facts, or start getting defensive?","Did CS give in to a veiled threat to leave, shifting position without real need?"] },
     chaotic:{ name:"External Structure Imposition", def:"When priorities shift daily, structure has to come from outside: a written, agreed priority list for a fixed period — not re-negotiating urgency every single time.",
-      bullets:["Written priorities cut through chaos better than verbal agreements.","A regular review rhythm (e.g. weekly) beats renegotiating on demand."] },
+      bullets:["Written priorities cut through chaos better than verbal agreements.","A regular review rhythm (e.g. weekly) beats renegotiating on demand."],
+      observer:["Did CS propose writing priorities down, rather than agreeing to argue urgency verbally?","Did a concrete review rhythm emerge, rather than a vague \"we'll see\"?"] },
     silent_bomb:{ name:"Proactive Check-in", def:"Silence that hides a building grievance isn't solved by patient waiting — it's solved by regular check-ins that you initiate, before the buildup turns into an outburst.",
-      bullets:["Proactive check-ins prevent buildup — don't wait for the client to raise it themselves.","Ask open questions on a regular cadence, not only once something's already gone wrong."] }
+      bullets:["Proactive check-ins prevent buildup — don't wait for the client to raise it themselves.","Ask open questions on a regular cadence, not only once something's already gone wrong."],
+      observer:["Did CS ask an open question about how things stood, rather than waiting for the client to speak up?","Did CS propose a regular check-in rhythm going forward?"] }
   }
 };
 
@@ -2923,6 +3007,11 @@ function genGenerate(){
       <div class="theory-def"><b>${lang==='en'?'What it is:':'Что это:'}</b> ${genEscape(tox.def)}</div>
       <div class="theory-list">${toxBullets}</div>
       <div class="theory-source">${lang==='en'?'Drawing on the course modules plus general negotiation and mediation theory (Fisher &amp; Ury, de-escalation practice).':'По мотивам модулей курса + общая переговорная и медиаторская теория (Фишер и Юри, практика деэскалации).'}</div>
+    </div>
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 ${lang==='en'?"Observer's task — "+genEscape(tox.name):'Задача наблюдателя — '+genEscape(tox.name)}</div>
+      <div class="observer-list">${(tox.observer||[]).map((q,i)=>`<div class="observer-item"><span class="observer-n">${i+1}</span>${genEscape(q)}</div>`).join('')}</div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0">${lang==='en'?"Don't jump into the conversation. After the scene, give feedback only on these points — on the technique, not the person.":'Не вмешивайтесь в разговор. После сцены дайте обратную связь только по этим пунктам — по приёму, а не по человеку.'}</div>
     </div>
     <div class="accordion">
       <button class="accordion-trigger" onclick="toggleAccordion(this)">
