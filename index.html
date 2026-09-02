@@ -345,6 +345,14 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 .gen-generate-btn{font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;padding:10px 20px;border-radius:24px;border:none;background:var(--grad-purple);color:#fff;cursor:pointer;transition:transform .15s var(--ease),box-shadow .15s var(--ease);box-shadow:0 6px 20px rgba(83,74,183,.28)}
 .gen-generate-btn:hover{opacity:.88}
 .gen-generate-note{font-size:11.5px;color:var(--ink3)}
+.history-strip{display:flex;flex-wrap:wrap;gap:6px;margin:1rem 0 0}
+.history-chip{font-size:11.5px;font-weight:500;padding:5px 12px;border-radius:16px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border);cursor:pointer;transition:all .15s}
+.history-chip:hover{background:var(--bg3)}
+.history-chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hidden-info-toggle{width:100%;background:var(--purple-l);border:1px dashed var(--purple);border-radius:var(--r-sm);padding:.6rem .9rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:12.5px;font-weight:500;color:var(--purple);text-align:left}
+.hidden-info-toggle:hover{background:#E4E1FB}
+.hidden-info-body{display:none;padding:.8rem .9rem;font-size:12.5px;color:var(--ink2);line-height:1.6;background:#fff;border:1px solid var(--purple-l);border-top:none;border-radius:0 0 var(--r-sm) var(--r-sm)}
+.hidden-info-body.open{display:block}
 .gen-persona{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
 .gen-persona-av{width:44px;height:44px;border-radius:50%;background:var(--grad-purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;box-shadow:0 4px 14px rgba(83,74,183,.3)}
 .gen-persona-name{font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;color:var(--ink)}
@@ -450,9 +458,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="intro">
     <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
     <h1><span class="ru-only">CS-менеджер и заказчик — <span class="grad-text">трудный разговор</span></span><span class="en-only">CS Manager and Client — <span class="grad-text">a Difficult Conversation</span></span></h1>
-    <p><span class="ru-only">Четыре сценария на основе реальных ситуаций и материалов воркшопа — тренируетесь в своей паре, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Four scenarios based on real situations and workshop material — you practice in your own pair, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
+    <p><span class="ru-only">Пять сценариев на основе реальных ситуаций и материалов воркшопа — тренируетесь в своей паре, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Five scenarios based on real situations and workshop material — you practice in your own pair, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
     <div class="intro-meta">
-      <span class="meta-pill"><span class="ru-only">4 сценария</span><span class="en-only">4 scenarios</span></span>
+      <span class="meta-pill"><span class="ru-only">5 сценариев</span><span class="en-only">5 scenarios</span></span>
       <span class="meta-pill"><span class="ru-only">Реальные кейсы</span><span class="en-only">Real cases</span></span>
       <span class="meta-pill">Poker &amp; Casino B2B</span>
       <span class="meta-pill"><span class="ru-only">Работа в парах</span><span class="en-only">Pair work</span></span>
@@ -474,6 +482,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     <button class="sc-tab" onclick="showScenario('s5',this)"><span class="ru-only">Сценарий 2 — Баг или настройка?</span><span class="en-only">Scenario 2 — Bug or Configuration?</span></button>
     <button class="sc-tab" onclick="showScenario('s6',this)"><span class="ru-only">Сценарий 3 — Токсичный клиент: Агрессор</span><span class="en-only">Scenario 3 — Toxic Client: The Aggressor</span></button>
     <button class="sc-tab" onclick="showScenario('s7',this)"><span class="ru-only">Сценарий 4 — После провала: доверие</span><span class="en-only">Scenario 4 — After a Failure: Trust</span></button>
+    <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 5 — Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 5 — Tech Director: Passive Aggression</span></button>
     <button class="sc-tab" onclick="showScenario('generator',this)">🎲 <span class="ru-only">Генератор своего сценария</span><span class="en-only">Build-your-own Generator</span></button>
   </div>
 
@@ -1306,6 +1315,188 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
   </div>
 
+  <!-- ════ SCENARIO 8: Passive-aggressive Technical Director (internal cross-functional communication) ════ -->
+  <div class="sc-panel" id="s8">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med">🙃 <span class="ru-only">Средняя · Пассивная агрессия в переписке с техдиректором</span><span class="en-only">Medium · Passive aggression from the technical director</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Отделение содержания от тона</span><span class="en-only">Technique in focus: Content/Tone Separation</span></div>
+      <h2><span class="ru-only">«Ну наконец-то ответили» — пассивная агрессия вместо прямой претензии</span><span class="en-only">"Oh, finally you replied" — passive aggression instead of a direct complaint</span></h2>
+      <p class="subtitle"><span class="ru-only">Технический директор partner-компании не конфликтует напрямую — вместо этого сарказм, риторические вопросы, уколы вскользь. AM должен спокойно воспринимать тон, вычленять из сообщений фактическую суть и не пасовать под давлением — не извиняясь за характер собеседника и не отвечая тем же тоном.</span><span class="en-only">The technical director at a partner company never confronts directly — instead, sarcasm, rhetorical questions, offhand jabs. AM needs to stay calm about the tone, extract the actual substance from the messages, and not cave under the pressure — without apologizing for the other person's manner or mirroring their tone.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">Переписка с техническим директором по интеграции идёт постоянно, но каждое сообщение приходит с эмоциональной подкладкой — сарказмом, вздохами, намёками на некомпетентность, без единой прямой претензии. Задача — не увязнуть в тоне и не спасовать, продолжая двигать вопрос по существу.</span><span class="en-only">The back-and-forth with the technical director about the integration is constant, but every message arrives with an emotional undertone — sarcasm, sighs, hints at incompetence, never a single direct complaint. The task is not to get stuck in the tone and not to cave, while still moving the actual issue forward.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«Ну наконец-то, я уже думал, придётся напоминать в третий раз.»<br>«Окей, как скажете — если вы вообще читаете, что я пишу.»<br>«Не то чтобы это было критично, но раз уж вы спросили...»</span><span class="en-only">"Oh, finally — I was starting to think I'd need to remind you a third time."<br>"Okay, sure, whatever you say — if you're even reading what I write."<br>"Not that it's critical, but since you asked..."</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">ТД</div>
+          <div><div class="char-name"><span class="ru-only">Технический директор</span><span class="en-only">Technical Director</span></div><div class="char-role"><span class="ru-only">Партнёр по интеграции</span><span class="en-only">Integration partner</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Не конфликтует напрямую — избегает прямой конфронтации, но добивается своего через давление тоном: сарказм, риторические вопросы, уколы вскользь вместо прямой претензии.</span><span class="en-only">Never confronts directly — avoids direct confrontation but pushes through tone pressure instead: sarcasm, rhetorical questions, offhand jabs rather than a direct complaint.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать с колкости про задержку ответа. На спокойный содержательный ответ по фактам — постепенно снижать сарказм. На извинения за тон или ответный сарказм — усиливать давление.</span><span class="en-only">Start with a jab about the delayed reply. In response to a calm, substance-focused answer — gradually ease off the sarcasm. In response to an apology for the tone, or matching sarcasm — increase the pressure.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Ну наконец-то»</span><span class="en-only">"Oh, finally"</span></span>
+              <span class="char-tag red"><span class="ru-only">«Видимо, у вас дела поважнее»</span><span class="en-only">"I guess you had more important things to do"</span></span>
+              <span class="char-tag teal"><span class="ru-only">Ответ по фактам без реакции на тон → снижает сарказм</span><span class="en-only">A factual reply with no reaction to the tone → sarcasm eases off</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Соблазн — либо извиниться за то, что собеседник раздражён, либо ответить таким же сарказмом. Оба варианта проигрышные: первый закрепляет тон как рычаг давления, второй эскалирует конфликт.</span><span class="en-only">The temptation is either to apologize for the other person's irritation, or to match their sarcasm. Both lose: the first cements tone as a lever of pressure, the second escalates the conflict.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM's objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Отвечать на содержание запроса, не реагируя на эмоциональную окраску. Держать свою позицию по срокам и фактам. Если паттерн повторяется системно — назвать его прямо, но не обвинительно.</span><span class="en-only">Respond to the substance of the request without reacting to the emotional coloring. Hold your position on deadlines and facts. If the pattern repeats systemically, name it directly, but not accusingly.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Ответ по существу, а не по тону</span><span class="en-only">Reply to substance, not tone</span></span>
+              <span class="char-tag teal"><span class="ru-only">Не зеркалить тон</span><span class="en-only">Don't mirror the tone</span></span>
+              <span class="char-tag amber"><span class="ru-only">Прямое, но не обвинительное называние паттерна</span><span class="en-only">Direct but non-accusatory naming of the pattern</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Отделение содержания от тона</span><span class="en-only">Observer's task — Content/Tone Separation</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Ответил ли AM на содержание запроса, проигнорировав пассивно-агрессивный тон — или начал оправдываться за тон/за себя?</span><span class="en-only">Did AM respond to the substance of the request, ignoring the passive-aggressive tone — or start justifying the tone or themselves?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Не съехал ли AM в такой же саркастичный или пассивно-агрессивный ответ?</span><span class="en-only">Did AM avoid sliding into an equally sarcastic or passive-aggressive reply?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Удержал ли AM свою позицию по фактам и срокам, не спасовав под давлением тона?</span><span class="en-only">Did AM hold their position on facts and deadlines, without caving under the pressure of the tone?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
+      <span class="t-pill">👥 <span class="ru-only">1 технический директор + 1 AM + 1 наблюдатель</span><span class="en-only">1 tech director + 1 AM + 1 observer</span></span>
+      <span class="t-pill">💬 <span class="ru-only">Переписка</span><span class="en-only">Chat</span></span>
+      <span class="t-pill">🙃 <span class="ru-only">Регулярный паттерн, не разовый случай</span><span class="en-only">Regular pattern, not a one-off</span></span>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора — что обычно пробуют</span><span class="en-only">Conversation forks — what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Извиняться за то, что собеседник раздражён, вместо ответа по факту — закрепляет тон как рычаг давления</span><span class="en-only">Apologizing for the other person's irritation instead of answering the facts — cements tone as a lever of pressure</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Отвечать тем же тоном (сарказм на сарказм) — эскалирует, а не решает</span><span class="en-only">Answering in the same tone (sarcasm for sarcasm) — escalates rather than resolves</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Полностью игнорировать паттерн, если он повторяется раз за разом — молчаливое согласие закрепляет его</span><span class="en-only">Fully ignoring the pattern when it keeps repeating — silent tolerance cements it</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Отвечать на содержание, не зеркалить тон, держать позицию по фактам; при системном повторении — назвать паттерн прямо и не обвинительно.</span><span class="en-only">Respond to the substance, don't mirror the tone, hold your position on the facts; if it's a systemic pattern, name it directly and without accusation.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Отделение содержания от тона</span><span class="en-only">Technique: Content/Tone Separation</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> пассивно-агрессивное сообщение почти всегда состоит из двух слоёв — фактического запроса и эмоциональной окраски (сарказм, намёк, упрёк). Задача — сознательно отвечать на первый слой, оставляя второй без реакции, но не делая вид, что его не существует вовсе.</span><span class="en-only"><b>What it is:</b> a passive-aggressive message almost always has two layers — the factual request and the emotional coloring (sarcasm, hint, reproach). The task is to consciously respond to the first layer, leaving the second without a reaction, without pretending it doesn't exist at all.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">«Техника заезженной пластинки» (ассертивная коммуникация): спокойно повторять свою фактическую позицию, не вовлекаясь в эмоциональную пикировку.</span><span class="en-only">The "broken record" technique (assertive communication): calmly repeat your factual position without getting drawn into an emotional back-and-forth.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Называть наблюдаемый паттерн прямо, но не обвинительно, если он системный — не после первой колкости, а если это повторяется раз за разом.</span><span class="en-only">Name the observed pattern directly but not accusingly, when it's systemic — not after the first jab, but once it keeps recurring.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Извиняться уместно только за реальный факт (например, за задержку ответа) — не за то, что собеседник раздражён или расстроен: это не ваша ответственность.</span><span class="en-only">An apology is appropriate only for a real fact (e.g. a delayed reply) — not for the other person's irritation or upset: that isn't your responsibility.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам практики ассертивной коммуникации + переговорная теория (Фишер и Юри, техники деэскалации).</span><span class="en-only">Drawing on assertive-communication practice, plus negotiation theory (Fisher &amp; Ury, de-escalation techniques).</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">"I see your message about the integration — we're on track for Friday."</div><div class="phrase-ru">Вижу ваше сообщение про интеграцию — по срокам всё в порядке, успеваем к пятнице.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I hear that response speed matters to you — here's what caused the delay, and here's a faster channel for urgent things."</div><div class="phrase-ru">Понимаю, что скорость ответа для вас важна — вот причина задержки, и вот более быстрый канал для срочных вопросов.</div></div>
+        <div class="phrase-card"><div class="phrase-en">"Let's keep this specific — what exactly do you need from me, and by when?"</div><div class="phrase-ru">Давайте конкретнее — что именно вам нужно от меня и к какому сроку?</div></div>
+        <div class="phrase-card"><div class="phrase-en">"I've noticed some sharp comments in the last few messages — if something's off, I'd rather talk about it directly."</div><div class="phrase-ru">Заметил резкие комментарии в последних сообщениях — если что-то не так, давайте обсудим это прямо.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Технический директор</span><span class="en-only">Technical Director</span></span><span class="line-text"><span class="ru-only">Ну наконец-то ответ. Я уже начал думать, что придётся напоминать в третий раз — видимо, у вас дела поважнее.</span><span class="en-only">Oh, finally a reply. I was starting to think I'd need to remind you a third time — I guess you had more important things to do.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Вижу ваше сообщение про интеграцию — по срокам всё в порядке, тестовую версию отправим к пятнице. Что по API-документации, успеваете обновить до этого?</span><span class="en-only">I see your message about the integration — we're on track, we'll send the test build by Friday. How's the API documentation — will it be updated by then?</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Технический директор</span><span class="en-only">Technical Director</span></span><span class="line-text"><span class="ru-only">Ну да, конечно, как скажете. Не то чтобы это было критично, но было бы неплохо, если бы вы хоть иногда отвечали быстрее — хотя, конечно, кому я это говорю.</span><span class="en-only">Sure, okay, whatever you say. Not that it's critical, but it'd be nice if you replied faster sometimes — though of course, why am I even saying this.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Понимаю, что скорость ответа для вас важна. В этот раз задержка была из-за [причина]. Если для срочных вопросов нужен более быстрый канал — давайте договоримся об этом отдельно, чтобы не гадать каждый раз.</span><span class="en-only">I hear that response speed matters to you. This time the delay was due to [reason]. If you need a faster channel for urgent things, let's set that up separately, so we're not guessing each time.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM не извиняется за тон и не оправдывается за характер собеседника — признаёт только реальный факт задержки и сразу предлагает конкретное решение, а не просто «закрывает» тему.</span><span class="en-only">AM doesn't apologize for the tone or justify the other person's manner — only acknowledges the real fact of the delay, and immediately offers a concrete solution rather than just closing the topic.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как отделить содержание сообщения от его пассивно-агрессивного тона?</span><span class="en-only">How do you separate a message's substance from its passive-aggressive tone?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Что помогает не отвечать тем же тоном?</span><span class="en-only">What helps you avoid answering in the same tone?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Как держать свою позицию по фактам, не переходя в оправдания?</span><span class="en-only">How do you hold your position on the facts without slipping into excuses?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Когда стоит назвать паттерн вслух, а когда — просто продолжать работать по существу?</span><span class="en-only">When is it worth naming the pattern out loud, and when should you just keep working on the substance?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз — ловушка или хороший ход?</span><span class="en-only">Mini-quiz — trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз — вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time — decide together whether it's a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Извините, что вас это расстроило, постараюсь больше так не делать»</span><span class="en-only">"Sorry that upset you, I'll try not to do that again"</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Извиняется за эмоцию собеседника, а не за реальный факт — закрепляет тон как рабочий рычаг давления.</span><span class="en-only">Apologizes for the other person's emotion, not for an actual fact — cements tone as a working lever of pressure.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Ну раз вам так неймётся, вот вам ответ»</span><span class="en-only">"Well since you're so impatient, here's your answer"</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Зеркалирование сарказма эскалирует конфликт вместо того, чтобы снизить напряжение.</span><span class="en-only">Mirroring the sarcasm escalates the conflict instead of lowering the tension.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«Вижу ваш вопрос про интеграцию — по срокам всё в порядке, отправим к пятнице»</span><span class="en-only">"I see your question about the integration — we're on track, sending it by Friday"</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Отвечает на содержание, полностью пропуская эмоциональную окраску — фокус остаётся на фактах.</span><span class="en-only">Responds to the substance, entirely skipping the emotional coloring — the focus stays on the facts.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
+      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки лучше всего помогали отвечать на суть, не реагируя на тон?</span><span class="en-only">Which phrasings worked best for answering the substance without reacting to the tone?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее — не оправдываться за тон или не зеркалить его?</span><span class="en-only">What was harder — not justifying the tone, or not mirroring it?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Когда, по мнению группы, стоит прямо назвать пассивно-агрессивный паттерн, а когда — просто продолжать работать?</span><span class="en-only">When does the group think it's worth naming the passive-aggressive pattern directly, and when is it better to just keep working?</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ════ SCENARIO GENERATOR (ported from the account-manager-cs Negotiation Dueling Club) ════ -->
   <div class="sc-panel" id="generator">
     <div class="sc-header">
@@ -1394,6 +1585,40 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           <button class="gen-pill" onclick="genSetField('problem','priority_conflict',this)"><span class="ru-only">Конфликт приоритетов</span><span class="en-only">Priority conflict</span></button>
           <button class="gen-pill" onclick="genSetField('problem','budget_cut',this)"><span class="ru-only">Сокращение бюджета</span><span class="en-only">Budget cut</span></button>
           <button class="gen-pill" onclick="genSetField('problem','return_to_office',this)"><span class="ru-only">Возврат в офис</span><span class="en-only">Return to office</span></button>
+          <button class="gen-pill" onclick="genSetField('problem','passive_aggressive_techdir',this)"><span class="ru-only">Техдиректор: пассивная агрессия</span><span class="en-only">Tech director: passive aggression</span></button>
+        </div>
+      </div>
+
+      <div class="gen-field">
+        <div class="gen-field-label"><span class="ru-only">Навык, который отрабатываем</span><span class="en-only">Skill you're practicing</span></div>
+        <div class="gen-pills" data-field="skill">
+          <button class="gen-pill active" onclick="genSetField('skill','deescalation',this)"><span class="ru-only">Деэскалация</span><span class="en-only">De-escalation</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','holding_position',this)"><span class="ru-only">Отстаивание позиции</span><span class="en-only">Holding your position</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','clarifying',this)"><span class="ru-only">Уточняющие вопросы</span><span class="en-only">Clarifying questions</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','refusing',this)"><span class="ru-only">Отказ без конфликта</span><span class="en-only">Refusing without conflict</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','deadlines',this)"><span class="ru-only">Переговоры о сроках</span><span class="en-only">Negotiating deadlines</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','manipulation',this)"><span class="ru-only">Работа с манипуляцией</span><span class="en-only">Handling manipulation</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','aggression',this)"><span class="ru-only">Работа с агрессией</span><span class="en-only">Handling aggression</span></button>
+          <button class="gen-pill" onclick="genSetField('skill','win_win',this)"><span class="ru-only">Взаимовыгодное решение</span><span class="en-only">Win-win solution</span></button>
+        </div>
+      </div>
+
+      <div class="gen-field">
+        <div class="gen-field-label"><span class="ru-only">Острота конфликта</span><span class="en-only">Conflict intensity</span></div>
+        <div class="gen-pills" data-field="intensity">
+          <button class="gen-pill" onclick="genSetField('intensity','warmup',this)"><span class="ru-only">Разминка</span><span class="en-only">Warm-up</span></button>
+          <button class="gen-pill active" onclick="genSetField('intensity','standard',this)"><span class="ru-only">Стандартная</span><span class="en-only">Standard</span></button>
+          <button class="gen-pill" onclick="genSetField('intensity','high',this)"><span class="ru-only">Острая</span><span class="en-only">High</span></button>
+        </div>
+      </div>
+
+      <div class="gen-field">
+        <div class="gen-field-label"><span class="ru-only">Информационная асимметрия</span><span class="en-only">Information asymmetry</span></div>
+        <div class="gen-pills" data-field="infoAsymmetry">
+          <button class="gen-pill active" onclick="genSetField('infoAsymmetry','same',this)"><span class="ru-only">У обоих одна картина</span><span class="en-only">Both see the same picture</span></button>
+          <button class="gen-pill" onclick="genSetField('infoAsymmetry','ai_knows_more',this)"><span class="ru-only">Собеседник знает больше</span><span class="en-only">They know more</span></button>
+          <button class="gen-pill" onclick="genSetField('infoAsymmetry','ai_hides',this)"><span class="ru-only">Собеседник кое-что скрывает</span><span class="en-only">They're withholding something</span></button>
+          <button class="gen-pill" onclick="genSetField('infoAsymmetry','different_versions',this)"><span class="ru-only">У каждого своя версия</span><span class="en-only">Each has their own version</span></button>
         </div>
       </div>
 
@@ -1403,6 +1628,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
 
+    <div class="history-strip" id="genHistoryStrip"></div>
     <div id="genResult"></div>
   </div>
 
@@ -2420,9 +2646,11 @@ function setLang(lang, btn) {
 // ── SCENARIO GENERATOR (ported from account-manager-cs: Negotiation Dueling Club) ──
 const genFields = {
   gender:'male', character:'direct', experience:'experienced', temperament:'calm',
-  toxicity:'aggressor', commStyle:'blunt', problem:'value_question'
+  toxicity:'aggressor', commStyle:'blunt', problem:'value_question',
+  skill:'deescalation', intensity:'standard', infoAsymmetry:'same'
 };
 const genUsedFingerprints = new Set();
+const genHistory = []; // session-only list of {label, seed} for the history strip
 let genCurrentSeed = null;
 
 function genSetField(field, value, btn){
@@ -2477,7 +2705,10 @@ const GEN_POOLS = {
     durations:{en:["starting next quarter","starting this month"],ru:["со следующего квартала","с этого месяца"]} },
   return_to_office:{ roles:{en:["Team member","Employee representative"],ru:["Сотрудник","Представитель команды"]},
     features:{en:["a full 5-day return to the office","3 office days a week","a new attendance policy"],ru:["полный возврат в офис 5 дней в неделю","3 дня в офисе в неделю","новую политику посещаемости"]},
-    durations:{en:["starting next month","starting next quarter"],ru:["со следующего месяца","с нового квартала"]} }
+    durations:{en:["starting next month","starting next quarter"],ru:["со следующего месяца","с нового квартала"]} },
+  passive_aggressive_techdir:{ roles:{en:["Partner's Technical Director","CTO of an adjacent team"],ru:["Технический директор партнёра","CTO смежной команды"]},
+    features:{en:["an API integration","the affiliate report format","a documentation update"],ru:["интеграцию API","формат отчёта для аффилиатов","обновление документации"]},
+    durations:{en:["for the third time this month","not for the first time"],ru:["в третий раз за месяц","не в первый раз"]} }
 };
 
 const GEN_CHAR_DESC = {
@@ -2519,42 +2750,82 @@ const GEN_TOX_EXTRA_TRIGGERS = {
        chaotic:["«Забудьте, что я говорил вчера — сейчас срочно вот это»"], silent_bomb:["Молчит несколько дней, потом одно длинное сообщение со всем накопленным сразу"] }
 };
 
-const GEN_TOX_THEORY = {
+// ── SKILL (primary technique selector — ported from the negotiation-duel project) ──
+const GEN_SKILL_THEORY = {
   ru:{
-    none:{ name:"Активное слушание", def:"Прежде чем отвечать по существу, показать, что услышали собеседника — своими словами, до объяснения своей позиции. База переговорной теории и техник Карла Роджерса.",
-      bullets:["Разделяйте позицию и интерес (Фишер и Юри) — то, что говорят, и то, что на самом деле важно, часто разные вещи.","Здесь низкие ставки токсичности — этого приёма обычно достаточно, чтобы разговор остался конструктивным."],
-      observer:["Прозвучал ли парафраз ожидания собеседника до того, как CS начал отвечать по существу?","Не перешёл ли CS сразу к своей позиции, не показав, что услышал?"] },
-    aggressor:{ name:"Вербальная деэскалация", def:"Набор речевых действий, снижающих накал без уступок по сути: подтвердить услышанное без осуждения, замедлить свой темп речи, использовать паузу вместо мгновенного ответа.",
-      bullets:["Называть поведение, а не человека — принцип «отделить людей от проблемы» (Фишер и Юри).","Не зеркалить тон и скорость — зеркалирование почти всегда приводит к мгновенной эскалации."],
-      observer:["Замедлился темп речи CS в ответ на давление — или ускорился (зеркалирование)?","Называл ли CS поведение («этот тон»), а не человека («вы»)?"] },
-    manipulator:{ name:"Заземление на фактах", def:"Отвечать на сравнения, намёки и завуалированные угрозы конкретными фактами, а не эмоциональной защитой или обещаниями — это лишает манипуляцию опоры.",
-      bullets:["Опирайтесь на факты, а не на оценки — сравнения лучше всего снимаются конкретикой.","Не оправдывайтесь — спокойное изложение фактов и есть позиция силы здесь."],
-      observer:["Ответил ли CS фактами на сравнение или намёк, или начал оправдываться?","Не поддался ли CS на завуалированную угрозу уйти, изменив позицию без нужды?"] },
-    chaotic:{ name:"Структура извне", def:"Когда приоритеты меняются ежедневно, структуру необходимо задать снаружи: письменный, согласованный список приоритетов на фиксированный период — а не переговоры о срочности каждый раз заново.",
-      bullets:["Письменная фиксация приоритетов снижает хаос лучше, чем устные договорённости.","Регулярный ритм пересмотра (например, раз в неделю) — а не по первому требованию."],
-      observer:["Предложил ли CS зафиксировать приоритеты письменно, а не согласился спорить о срочности устно?","Появился ли конкретный ритм пересмотра, а не расплывчатое «как получится»?"] },
-    silent_bomb:{ name:"Проактивный чек-ин", def:"Молчание, за которым стоит накопление претензий, снимается не терпеливым ожиданием, а регулярными, инициированными вами проверками состояния — до того как накопится взрыв.",
-      bullets:["Проактивные чек-ины предотвращают накопление — не дожидайтесь, чтобы клиент сам поднял тему.","Задавайте открытые вопросы регулярно, а не только когда что-то уже пошло не так."],
-      observer:["Задал ли CS открытый вопрос о состоянии дел, а не дождался, пока клиент сам заговорит?","Предложил ли CS регулярный ритм проверок на будущее?"] }
+    deescalation:{ name:"Вербальная деэскалация", def:"Снижать накал разговора без уступок по сути: подтвердить услышанное без осуждения, замедлить свой темп речи, использовать паузу вместо мгновенного ответа.",
+      bullets:["Называть поведение, а не человека — принцип «отделить людей от проблемы» (Фишер и Юри).","Не зеркалить тон и скорость собеседника."],
+      observer:["Замедлился темп речи в ответ на давление — или ускорился (зеркалирование)?","Названо ли поведение, а не человек?"] },
+    holding_position:{ name:"Отстаивание позиции", def:"Удерживать свою позицию по фактам, не соглашаясь под давлением и не соскальзывая в оправдания. Твёрдость — в содержании, не в тоне.",
+      bullets:["«Техника заезженной пластинки»: спокойно повторять свою позицию, не вовлекаясь в эмоциональный спор.","Твёрдость не равна грубости — тон ровный, содержание неизменное."],
+      observer:["Удержана ли позиция по существу, или она смягчилась под давлением?","Не перешёл ли ответ в оправдания вместо повторения позиции?"] },
+    clarifying:{ name:"Уточняющие вопросы", def:"Задавать открытый уточняющий вопрос до того, как реагировать или делать выводы — чтобы не отвечать на придуманную проблему вместо реальной.",
+      bullets:["Открытый вопрос вместо предположения о том, что имел в виду собеседник.","Проверка понимания (perception check) перед реакцией по существу."],
+      observer:["Был задан уточняющий вопрос до реакции — или сразу пошёл ответ на предположение?","Проверено ли понимание своими словами?"] },
+    refusing:{ name:"Отказ без конфликта", def:"Сказать «нет» по существу — коротко, ясно, без избыточных оправданий и без агрессии, с уважением к собеседнику.",
+      bullets:["Отказ = факт + причина (не оправдание) + альтернатива, если она есть.","Не растягивать отказ в длинные извинения — это ослабляет позицию."],
+      observer:["Прозвучал ли ясный отказ, а не размытое «постараюсь»?","Не было ли избыточных оправданий вместо краткой причины?"] },
+    deadlines:{ name:"Переговоры о сроках", def:"Договариваться о реалистичных сроках, предлагая конкретные варианты вместо простого «не успеваем» или «постараемся».",
+      bullets:["Предложение вариантов (раньше/позже/по частям) вместо голого отказа.","Конкретная дата вместо расплывчатого «скоро» или «на днях»."],
+      observer:["Предложены ли конкретные варианты сроков?","Названа ли точная дата, а не расплывчатое обещание?"] },
+    manipulation:{ name:"Заземление на фактах", def:"Отвечать на сравнения, намёки и завуалированные угрозы конкретными фактами, а не эмоциональной защитой или обещаниями.",
+      bullets:["Опирайтесь на факты, а не на оценки — сравнения лучше всего снимаются конкретикой.","Не оправдывайтесь — спокойное изложение фактов и есть позиция силы."],
+      observer:["Ответ строился на фактах, или начались оправдания?","Не поддался ли собеседнику, изменив позицию без реального повода?"] },
+    aggression:{ name:"Работа с агрессией", def:"Не отвечать тем же тоном на открытую агрессию — повышенный голос, прямые унижения. Снижать температуру, оставаясь по существу.",
+      bullets:["Признать эмоцию собеседника вслух, не соглашаясь с её формой выражения.","Пауза перед ответом снижает температуру лучше, чем мгновенная реакция."],
+      observer:["Ответ был ровным, или тон эскалировал вместе с собеседником?","Была ли пауза перед ответом на выпад?"] },
+    win_win:{ name:"Поиск взаимовыгодного решения", def:"Искать решение, учитывающее интересы обеих сторон, а не только позицию того, кто громче или настойчивее.",
+      bullets:["Позиция vs интерес (Фишер и Юри) — искать, что на самом деле важно за заявленным требованием.","Вопрос «что если...» часто открывает третий вариант, которого не было в исходных позициях."],
+      observer:["Был задан вопрос про интересы собеседника, а не только про его требование?","Предложен ли вариант, устраивающий обе стороны, а не продавлена своя позиция?"] }
   },
   en:{
-    none:{ name:"Active Listening", def:"Before responding on substance, show you heard the other person — in your own words, before explaining your own position. A staple of negotiation theory and Carl Rogers' techniques.",
-      bullets:["Separate position from interest (Fisher & Ury) — what's said and what actually matters are often different things.","Stakes are low here — this technique alone is usually enough to keep the conversation constructive."],
-      observer:["Was there a paraphrase of the other person's expectation before CS responded on substance?","Did CS jump straight to their own position without showing they'd heard first?"] },
-    aggressor:{ name:"Verbal De-escalation", def:"A set of verbal moves that lower intensity without conceding on substance: acknowledge without judgment, slow your own pace, use a pause instead of an instant reply.",
-      bullets:["Name the behavior, not the person — the \"separate people from the problem\" principle (Fisher & Ury).","Don't mirror the tone or speed — mirroring almost always leads to instant escalation."],
-      observer:["Did CS's pace slow down under pressure — or speed up (mirroring)?","Did CS name the behavior (\"this tone\") rather than the person (\"you\")?"] },
-    manipulator:{ name:"Fact-Anchoring", def:"Respond to comparisons, veiled threats, and hints with concrete facts rather than emotional defensiveness or promises — this strips the manipulation of its leverage.",
-      bullets:["Anchor on facts, not judgments — comparisons are best defused with specifics.","Don't get defensive — calmly stating facts is the position of strength here."],
-      observer:["Did CS answer the comparison or hint with facts, or start getting defensive?","Did CS give in to a veiled threat to leave, shifting position without real need?"] },
-    chaotic:{ name:"External Structure Imposition", def:"When priorities shift daily, structure has to come from outside: a written, agreed priority list for a fixed period — not re-negotiating urgency every single time.",
-      bullets:["Written priorities cut through chaos better than verbal agreements.","A regular review rhythm (e.g. weekly) beats renegotiating on demand."],
-      observer:["Did CS propose writing priorities down, rather than agreeing to argue urgency verbally?","Did a concrete review rhythm emerge, rather than a vague \"we'll see\"?"] },
-    silent_bomb:{ name:"Proactive Check-in", def:"Silence that hides a building grievance isn't solved by patient waiting — it's solved by regular check-ins that you initiate, before the buildup turns into an outburst.",
-      bullets:["Proactive check-ins prevent buildup — don't wait for the client to raise it themselves.","Ask open questions on a regular cadence, not only once something's already gone wrong."],
-      observer:["Did CS ask an open question about how things stood, rather than waiting for the client to speak up?","Did CS propose a regular check-in rhythm going forward?"] }
+    deescalation:{ name:"Verbal De-escalation", def:"Lower the intensity of a conversation without conceding on substance: acknowledge without judgment, slow your own pace, use a pause instead of an instant reply.",
+      bullets:["Name the behavior, not the person — the \"separate people from the problem\" principle (Fisher & Ury).","Don't mirror the other person's tone or speed."],
+      observer:["Did the pace slow down under pressure — or speed up (mirroring)?","Was the behavior named, rather than the person?"] },
+    holding_position:{ name:"Holding Your Position", def:"Hold your position on the facts without caving under pressure or sliding into excuses. Firmness is in the content, not the tone.",
+      bullets:["The \"broken record\" technique: calmly repeat your position without getting drawn into an emotional argument.","Firmness isn't rudeness — the tone stays level, the content stays unchanged."],
+      observer:["Was the position held on substance, or did it soften under pressure?","Did the reply slide into excuses instead of repeating the position?"] },
+    clarifying:{ name:"Clarifying Questions", def:"Ask an open clarifying question before reacting or drawing conclusions — so you don't answer an imagined problem instead of the real one.",
+      bullets:["An open question instead of assuming what the other person meant.","A perception check before reacting on substance."],
+      observer:["Was a clarifying question asked before reacting — or did the reply jump straight to an assumption?","Was understanding checked in the person's own words?"] },
+    refusing:{ name:"Refusing Without Conflict", def:"Say \"no\" on substance — short, clear, without excessive apology and without aggression, while respecting the other person.",
+      bullets:["A refusal = fact + reason (not an excuse) + an alternative, if one exists.","Don't stretch a refusal into a long apology — it weakens your position."],
+      observer:["Was there a clear refusal, rather than a vague \"I'll try\"?","Were there excessive apologies instead of a brief reason?"] },
+    deadlines:{ name:"Negotiating Deadlines", def:"Negotiate realistic deadlines by offering concrete options instead of a flat \"we can't make it\" or \"we'll try.\"",
+      bullets:["Offering options (earlier/later/in parts) instead of a flat no.","A specific date instead of a vague \"soon\" or \"in a few days.\""],
+      observer:["Were concrete timeline options offered?","Was a specific date named, rather than a vague promise?"] },
+    manipulation:{ name:"Fact-Anchoring", def:"Respond to comparisons, veiled threats, and hints with concrete facts rather than emotional defensiveness or promises.",
+      bullets:["Anchor on facts, not judgments — comparisons are best defused with specifics.","Don't get defensive — calmly stating facts is the position of strength."],
+      observer:["Was the reply grounded in facts, or did it turn into excuses?","Did the person give in to pressure, shifting position without real cause?"] },
+    aggression:{ name:"Handling Aggression", def:"Don't mirror open aggression — a raised voice, direct put-downs — with the same tone. Lower the temperature while staying on substance.",
+      bullets:["Acknowledge the other person's emotion out loud, without agreeing with how it's expressed.","A pause before replying lowers the temperature better than an instant reaction."],
+      observer:["Was the reply level, or did the tone escalate along with the other person?","Was there a pause before responding to the jab?"] },
+    win_win:{ name:"Finding a Win-Win", def:"Look for a solution that accounts for both sides' interests, rather than just the position of whoever is louder or more insistent.",
+      bullets:["Position vs. interest (Fisher & Ury) — look for what actually matters behind the stated demand.","A \"what if...\" question often opens a third option that wasn't in the original positions."],
+      observer:["Was a question asked about the other person's interests, not just their demand?","Was an option proposed that works for both sides, rather than just pushing one's own position?"] }
   }
 };
+
+const GEN_INTENSITY_FLAVOR = {
+  ru:{ warmup:"Разговор пока лёгкий — ставки невысокие, это хорошая возможность потренировать приём на спокойном материале.",
+       standard:"Обычный рабочий конфликт — реальный, но управляемый: ничего катастрофического, но требует внимания.",
+       high:"Разговор острый — ставки высокие, тема задевает за живое, и это стоит учитывать в темпе и тоне ответа." },
+  en:{ warmup:"The conversation is still light — low stakes, a good chance to practice the technique on calm material.",
+       standard:"An ordinary work conflict — real but manageable: nothing catastrophic, but it needs attention.",
+       high:"The conversation is sharp — the stakes are high, the topic really stings, and that's worth factoring into your pace and tone." }
+};
+
+const GEN_ASYMMETRY_REVEAL = {
+  ru:{ same:null,
+       ai_knows_more:"На самом деле собеседник знает больше, чем показывает изначально — точная причина обычно раскрывается, только если задать прямой уточняющий вопрос, а не принимать первую версию за полную картину.",
+       ai_hides:"Собеседник намеренно не договаривает важную деталь — она всплывёт, только если её правильно и настойчиво выспросить, а не проглотить с первого раза расплывчатый ответ.",
+       different_versions:"У собеседника есть своя, полностью честная версия произошедшего — она не обязательно противоречит вашей по фактам, но расставляет акценты совсем иначе." },
+  en:{ same:null,
+       ai_knows_more:"The other person actually knows more than they let on at first — the real reason usually only surfaces if you ask a direct clarifying question instead of taking the first version as the whole picture.",
+       ai_hides:"The other person is deliberately withholding an important detail — it only comes out if you draw it out well, rather than accepting a vague answer at face value.",
+       different_versions:"The other person has their own, entirely honest version of what happened — it doesn't necessarily contradict yours on the facts, but it puts the emphasis in a very different place." }
+};
+
 
 const GEN_TEMPLATES = {
   en:{
@@ -2739,6 +3010,20 @@ const GEN_TEMPLATES = {
       ],
       debrief:p=>[`How do you acknowledge a decision is inconvenient without sounding defensive?`,`Why does naming the real reason matter, even if it's unpopular?`,`Where's the line between flexibility and undermining the decision?`],
       keyNote:p=>`Resistance drops not by selling the decision as good, but through honesty that it's inconvenient, paired with clarity about what can actually be adjusted.`
+    },
+    passive_aggressive_techdir:{
+      context:p=>`${p.name} communicates about ${p.feature} ${p.duration} — never with a direct complaint, always with sarcasm, sighs, and hints at incompetence layered over an ordinary factual request. The task is to respond to the substance without reacting to the tone, and without caving under the pressure of it.`,
+      triggers:p=>[`"Oh, finally — I was starting to think I'd need to remind you a third time"`,`"Sure, whatever you say — if you're even reading what I write"`,`A factual reply with no reaction to the tone → the sarcasm eases off`],
+      traps:p=>[`Apologizing for the other person's irritation instead of answering the facts — this cements tone as a lever of pressure`,`Answering in the same tone (sarcasm for sarcasm) — escalates rather than resolves`,`Fully ignoring the pattern when it keeps repeating — silent tolerance cements it`],
+      tools:p=>[`Respond to the substance, not the tone`,`Don't mirror the sarcasm or the sigh`,`If the pattern is systemic, name it directly and without accusation`],
+      script:p=>[
+        {who:"client",text:`Oh, finally a reply about ${p.feature}. I was starting to think I'd need to remind you a third time — I guess you had more important things to do.`},
+        {who:"you",text:`I see your message about ${p.feature} — we're on track, I'll have an update for you by [date]. What exactly do you need from me first?`},
+        {who:"client",text:`Sure, okay, whatever you say. Not that it's critical, but it'd be nice if you replied faster sometimes — though of course, why am I even saying this.`},
+        {who:"you",text:`I hear that response speed matters to you. This time the delay was due to [reason]. If you need a faster channel for urgent things, let's set one up separately, so we're not guessing each time.`}
+      ],
+      debrief:p=>[`How do you separate a message's substance from its passive-aggressive tone?`,`What helps you avoid answering in the same tone?`,`When is it worth naming the pattern out loud, versus just continuing to work on the substance?`],
+      keyNote:p=>`Don't apologize for the tone or for the other person's manner — only acknowledge the real fact (like a delay), and offer a concrete solution rather than just closing the topic.`
     }
   },
   ru:{
@@ -2923,6 +3208,20 @@ const GEN_TEMPLATES = {
       ],
       debrief:p=>[`Как признать неудобство решения, не занимая при этом оборонительную позицию?`,`Почему важно назвать настоящую причину, даже непопулярную?`,`Где проходит грань между гибкостью и размыванием решения?`],
       keyNote:p=>`Сопротивление снижается не через продажу решения как хорошего, а через честность о том, что оно неудобно, и ясность в том, что реально можно скорректировать.`
+    },
+    passive_aggressive_techdir:{
+      context:p=>`${p.name} общается по поводу «${p.feature}» ${p.duration} — никогда прямой претензией, всегда сарказмом, вздохами и намёками на некомпетентность поверх обычного фактического запроса. Задача — отвечать на суть, не реагируя на тон, и не пасовать под его давлением.`,
+      triggers:p=>[`«Ну наконец-то, я уже думал придётся напоминать в третий раз»`,`«Окей, как скажете — если вы вообще читаете, что я пишу»`,`Ответ по фактам без реакции на тон → сарказм снижается`],
+      traps:p=>[`Извиняться за то, что собеседник раздражён, вместо ответа по факту — закрепляет тон как рычаг давления`,`Отвечать тем же тоном (сарказм на сарказм) — эскалирует, а не решает`,`Полностью игнорировать паттерн, если он повторяется раз за разом — молчаливое согласие закрепляет его`],
+      tools:p=>[`Отвечать на содержание, а не на тон`,`Не зеркалить сарказм или вздох`,`Если паттерн системный — назвать его прямо и не обвинительно`],
+      script:p=>[
+        {who:"client",text:`Ну наконец-то ответ про «${p.feature}». Я уже начал думать, что придётся напоминать в третий раз — видимо, у вас дела поважнее.`},
+        {who:"you",text:`Вижу ваше сообщение про «${p.feature}» — по срокам всё в порядке, статус пришлю к [дата]. Что именно вам нужно от меня в первую очередь?`},
+        {who:"client",text:`Ну да, конечно, как скажете. Не то чтобы это было критично, но было бы неплохо, если бы вы хоть иногда отвечали быстрее — хотя, конечно, кому я это говорю.`},
+        {who:"you",text:`Понимаю, что скорость ответа для вас важна. В этот раз задержка была из-за [причина]. Если для срочных вопросов нужен более быстрый канал — давайте договоримся об этом отдельно, чтобы не гадать каждый раз.`}
+      ],
+      debrief:p=>[`Как отделить содержание сообщения от его пассивно-агрессивного тона?`,`Что помогает не отвечать тем же тоном?`,`Когда стоит назвать паттерн вслух, а когда — просто продолжать работать по существу?`],
+      keyNote:p=>`Не извиняйтесь за тон или за характер собеседника — признавайте только реальный факт (например, задержку) и сразу предлагайте конкретное решение, а не просто закрывайте тему.`
     }
   }
 };
@@ -2989,7 +3288,8 @@ const GEN_ROLE_LABELS = {
   underperformance_talk:{you:{ru:'Руководитель',en:'Manager'},counterpart:{ru:'Сотрудник',en:'Team member'}},
   priority_conflict:{you:{ru:'Вы',en:'You'},counterpart:{ru:'Коллега',en:'Colleague'}},
   budget_cut:{you:{ru:'Вы',en:'You'},counterpart:{ru:'Руководитель',en:'Manager'}},
-  return_to_office:{you:{ru:'Руководитель',en:'Manager'},counterpart:{ru:'Сотрудник',en:'Team member'}}
+  return_to_office:{you:{ru:'Руководитель',en:'Manager'},counterpart:{ru:'Сотрудник',en:'Team member'}},
+  passive_aggressive_techdir:{you:{ru:'AM',en:'AM'},counterpart:{ru:'Технический директор',en:'Technical Director'}}
 };
 
 function genGenerate(){
@@ -3007,20 +3307,57 @@ function genGenerate(){
   } while(genUsedFingerprints.has(fp) && attempts<25);
   genUsedFingerprints.add(fp);
   genCurrentSeed=seed;
+
+  const skillLbl = (GEN_SKILL_THEORY.ru[seed.skill]||GEN_SKILL_THEORY.ru.deescalation).name;
+  const label = skillLbl.length>22 ? skillLbl.slice(0,20)+'…' : skillLbl;
+  genHistory.push({label, seed});
+  if(genHistory.length>8) genHistory.shift();
+
+  genRenderResult(seed, lang);
+  genRenderHistoryStrip(genHistory.length-1);
+}
+
+function genRenderHistoryStrip(activeIdx){
+  const el = document.getElementById('genHistoryStrip');
+  if(!el) return;
+  el.innerHTML = genHistory.map((h,i)=>
+    `<button class="history-chip ${i===activeIdx?'active':''}" onclick="genRevisit(${i})">${genEscape(h.label)}</button>`
+  ).join('');
+}
+
+function genRevisit(idx){
+  const item = genHistory[idx];
+  if(!item) return;
+  const lang = document.body.dataset.lang==='en' ? 'en' : 'ru';
+  genCurrentSeed = item.seed;
+  genRenderResult(item.seed, lang);
+  genRenderHistoryStrip(idx);
+}
+
+function genToggleHidden(btn){
+  const body = btn.nextElementSibling;
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  btn.querySelector('.chevron').textContent = !open ? '▴' : '▾';
+}
+
+function genRenderResult(seed, lang){
   const sc=genBuildScenario(lang, seed);
 
   const triggersHtml = sc.triggers.map(t=>`<span class="char-tag red">${genEscape(t)}</span>`).join('');
   const trapsHtml = sc.traps.map(t=>`<div class="trap"><span class="trap-icon bad">✕</span>${genEscape(t)}</div>`).join('');
   const toolsHtml = sc.tools.map(t=>`<div class="trap"><span class="trap-icon good">✓</span>${genEscape(t)}</div>`).join('');
-  const roleLbl = GEN_ROLE_LABELS[genFields.problem] || GEN_ROLE_LABELS.value_question;
+  const roleLbl = GEN_ROLE_LABELS[seed.problem] || GEN_ROLE_LABELS.value_question;
   const scriptHtml = sc.script.map(line=>{
     const whoLbl = line.who==='client' ? roleLbl.counterpart[lang] : roleLbl.you[lang];
     const whoCls = line.who==='client' ? 'cl' : 'cs';
     return `<div class="script-line"><span class="who ${whoCls}">${whoLbl}</span><span class="line-text">${genEscape(line.text)}</span></div>`;
   }).join('');
   const debriefHtml = sc.debrief.map((q,i)=>`<div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">${i+1}</span>${genEscape(q)}</div>`).join('');
-  const tox = GEN_TOX_THEORY[lang][genFields.toxicity] || GEN_TOX_THEORY[lang].none;
-  const toxBullets = tox.bullets.map((t,i)=>`<div class="theory-item"><span class="theory-icon">${i+1}</span>${genEscape(t)}</div>`).join('');
+  const skill = GEN_SKILL_THEORY[lang][seed.skill] || GEN_SKILL_THEORY[lang].deescalation;
+  const skillBullets = skill.bullets.map((t,i)=>`<div class="theory-item"><span class="theory-icon">${i+1}</span>${genEscape(t)}</div>`).join('');
+  const intensityFlavor = GEN_INTENSITY_FLAVOR[lang][seed.intensity] || GEN_INTENSITY_FLAVOR[lang].standard;
+  const hiddenInfo = GEN_ASYMMETRY_REVEAL[lang][seed.infoAsymmetry];
 
   // Phrase bank: pull the "you" lines in EN (to use verbatim in real calls) with a RU gloss alongside.
   const scEN = lang==='en' ? sc : genBuildScenario('en', seed);
@@ -3044,7 +3381,7 @@ function genGenerate(){
 
   document.getElementById('genResult').innerHTML = `
     <div class="block">
-      <div class="technique-badge">🎯 ${lang==='en'?'Technique in focus: '+genEscape(tox.name):'Отрабатываемый приём: '+genEscape(tox.name)}</div>
+      <div class="technique-badge">🎯 ${lang==='en'?'Technique in focus: '+genEscape(skill.name):'Отрабатываемый приём: '+genEscape(skill.name)}</div>
       <div class="gen-persona">
         <div class="gen-persona-av">${genEscape(sc.avatar)}</div>
         <div>
@@ -3056,8 +3393,14 @@ function genGenerate(){
     </div>
     <div class="block">
       <div class="block-label">${lang==='en'?'Context':'Контекст'}</div>
-      <div class="block-text">${genEscape(sc.context)}</div>
+      <div class="block-text">${genEscape(sc.context)} ${genEscape(intensityFlavor)}</div>
     </div>
+    ${hiddenInfo ? `
+    <button class="hidden-info-toggle" onclick="genToggleHidden(this)">
+      <span>🔍 ${lang==='en'?'Hidden information (facilitator / observer only)':'Скрытая информация (только для ведущего/наблюдателя)'}</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="hidden-info-body">${genEscape(hiddenInfo)}</div>` : ''}
     <div class="block">
       <div class="block-label">${lang==='en'?'Trigger phrases':'Триггерные фразы'}</div>
       <div class="char-tags">${triggersHtml}</div>
@@ -3071,14 +3414,14 @@ function genGenerate(){
       <div class="phrase-bank">${phraseHtml}</div>
     </div>
     <div class="theory-block">
-      <div class="block-label" style="color:var(--blue)">📚 ${lang==='en'?'Technique: '+genEscape(tox.name):'Приём: '+genEscape(tox.name)}</div>
-      <div class="theory-def"><b>${lang==='en'?'What it is:':'Что это:'}</b> ${genEscape(tox.def)}</div>
-      <div class="theory-list">${toxBullets}</div>
+      <div class="block-label" style="color:var(--blue)">📚 ${lang==='en'?'Technique: '+genEscape(skill.name):'Приём: '+genEscape(skill.name)}</div>
+      <div class="theory-def"><b>${lang==='en'?'What it is:':'Что это:'}</b> ${genEscape(skill.def)}</div>
+      <div class="theory-list">${skillBullets}</div>
       <div class="theory-source">${lang==='en'?'Drawing on the course modules plus general negotiation and mediation theory (Fisher &amp; Ury, de-escalation practice).':'По мотивам модулей курса + общая переговорная и медиаторская теория (Фишер и Юри, практика деэскалации).'}</div>
     </div>
     <div class="observer-block">
-      <div class="block-label" style="color:var(--amber)">👁 ${lang==='en'?"Observer's task — "+genEscape(tox.name):'Задача наблюдателя — '+genEscape(tox.name)}</div>
-      <div class="observer-list">${(tox.observer||[]).map((q,i)=>`<div class="observer-item"><span class="observer-n">${i+1}</span>${genEscape(q)}</div>`).join('')}</div>
+      <div class="block-label" style="color:var(--amber)">👁 ${lang==='en'?"Observer's task — "+genEscape(skill.name):'Задача наблюдателя — '+genEscape(skill.name)}</div>
+      <div class="observer-list">${(skill.observer||[]).map((q,i)=>`<div class="observer-item"><span class="observer-n">${i+1}</span>${genEscape(q)}</div>`).join('')}</div>
       <div class="flow-note" style="margin-top:.7rem;margin-bottom:0">${lang==='en'?"Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these points: on the technique, not the person.":'Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти пункты: по приёму, а не по человеку.'}</div>
     </div>
     <div class="accordion">
