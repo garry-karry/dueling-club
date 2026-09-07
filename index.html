@@ -487,7 +487,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   </div>
 
   <!-- PAIRING TOOL (timer now lives in the header) -->
-  <div class="tools-panel">
+  <div class="tools-panel" style="display:none">
 
     <div class="rand-card">
       <div class="tool-label">👥 <span class="ru-only">Как тренируемся сегодня</span><span class="en-only">How we practice today</span></div>
@@ -550,7 +550,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     <div class="sc-header">
       <div class="sc-difficulty" style="background:var(--teal-l);color:var(--teal)">🌤 <span class="ru-only">Разминка · Без риска</span><span class="en-only">Warm-up · No stakes</span></div>
       <h2><span class="ru-only">Лёгкий старт — прежде чем переходить к боевым кейсам</span><span class="en-only">Easy start — before moving to the real cases</span></h2>
-      <p class="subtitle"><span class="ru-only">Пять минут на нейтральном материале, чтобы войти в роль и снять неловкость первого шага — лучше всего вместе, на общий круг. Никаких конфликтов и дебрифа — просто разговор. Затем переходите к «Сценарий 1» и расходитесь по парам.</span><span class="en-only">Five minutes on neutral material to get into the role and shake off the awkwardness of the first step — best done together, as a group. No conflict, no debrief — just a conversation. Then move on to "Scenario 1" and split into pairs.</span></p>
+      <p class="subtitle"><span class="ru-only">Пять минут на нейтральном материале, чтобы войти в роль и снять неловкость первого шага — лучше всего вместе, на общий круг. Никаких конфликтов и дебрифа — просто разговор. Затем переходите к «Сценарий 1».</span><span class="en-only">Five minutes on neutral material to get into the role and shake off the awkwardness of the first step — best done together, as a group. No conflict, no debrief — just a conversation. Then move on to "Scenario 1."</span></p>
     </div>
 
     <div class="warmup-intro">
@@ -597,10 +597,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       <div class="warmup-card">
         <div class="warmup-card-top">
           <div class="warmup-num">5</div>
-          <div class="warmup-text"><b><span class="ru-only">Разгонная</span><span class="en-only">Icebreaker</span></b><span class="ru-only">Не про клиента: «Удалёнка vs офис» — что удобнее для командной работы в CS?</span><span class="en-only">Not about a client: "Remote vs office" — what works better for CS teamwork?</span></div>
+          <div class="warmup-text"><b><span class="ru-only">Разгонная</span><span class="en-only">Icebreaker</span></b><span class="ru-only">«Удалёнка vs офис» — что удобнее для командной работы в CS?</span><span class="en-only">"Remote vs office" — what works better for CS teamwork?</span></div>
         </div>
-        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Заметки ведущего</span><span class="en-only">Facilitator notes</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">Правильного ответа нет — это открытая тема для двух коротких позиций «за» и «против». Если группа буксует, подскажите зацепку: «а как это влияет на скорость ответа клиенту?»</span><span class="en-only">There's no right answer — it's an open topic for two short "for" and "against" positions. If the group stalls, offer a hook: "how does this affect response speed to the client?"</span></div></div>
+        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
+        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">Правильного ответа нет — это открытая тема для двух коротких позиций «за» и «против». Зацепка для обсуждения: «а как это влияет на скорость ответа клиенту?»</span><span class="en-only">There's no right answer — it's an open topic for two short "for" and "against" positions. A hook for discussion: "how does this affect response speed to the client?"</span></div></div>
       </div>
     </div>
   </div>
@@ -1989,6 +1989,9 @@ function showScenario(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   activeScenario = id;
+  // Hide the pairing/randomizer tool entirely on the warmup tab — it's a group activity there
+  const toolsPanel = document.querySelector('.tools-panel');
+  if (toolsPanel) toolsPanel.style.display = (id === 'warmup') ? 'none' : '';
   // Re-render randomizer pair if already picked — mode may have changed
   if (currentPair.cs) renderPair();
   // Update hint text
