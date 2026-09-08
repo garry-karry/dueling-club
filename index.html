@@ -519,7 +519,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
         <div class="pairs-controls">
           <button class="r-btn r-primary" onclick="formAllPairs()">👥 <span class="ru-only">Сформировать пары</span><span class="en-only">Form pairs</span></button>
           <button class="r-btn" onclick="resetPairs()">↺ <span class="ru-only">Заново</span><span class="en-only">Reshuffle</span></button>
-          <button class="r-btn" onclick="exportPairsCSV()">⬇ <span class="ru-only">Экспорт CSV</span><span class="en-only">Export CSV</span></button>
+          <button class="r-btn" onclick="exportPairsCSV()">⬇ <span class="ru-only">Экспорт в Teams (CSV)</span><span class="en-only">Export for Teams (CSV)</span></button>
         </div>
         <div class="rand-count"><span class="ru-only">Отмечено:</span><span class="en-only">Checked in:</span> <span id="participantCountPairs">34</span> <span class="ru-only">из</span><span class="en-only">of</span> <span id="participantCountTotal">34</span> · <span id="pairsModeHint" style="color:var(--teal)">(1 CS + 1 <span class="ru-only">заказчик + 1 наблюдатель в группе</span><span class="en-only">client + 1 observer per group</span>)</span></div>
         <div class="pairs-grid" id="pairsGrid"></div>
@@ -2343,77 +2343,93 @@ function resetPairs(){
 function exportPairsCSV(){
   if(!pairsState.length) return;
   const en = document.body.dataset.lang==='en';
-  const headers = en
-    ? ['Group','CS','Client','Observer(s)']
-    : ['Группа','CS','Заказчик','Наблюдатель(и)'];
+  // Microsoft Teams' "Import from CSV" for breakout rooms requires exactly these two
+  // columns — room name first, then the participant's email address, one row per person.
+  const headers = ['Pre-assign Room Name','Email Address'];
   const csvEscape = v => {
     const s = String(v==null ? '' : v);
     return /[",\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
   };
-  const rows = pairsState.map((g,idx)=>[
-    idx+1, g.cs, g.cl, g.observers.filter(Boolean).join('; ')
-  ]);
+  const roomLabel = idx => (en ? 'Group ' : 'Группа ') + (idx+1);
+  const rows = [];
+  const skipped = [];
+  pairsState.forEach((g,idx)=>{
+    const room = roomLabel(idx);
+    [g.cs, g.cl, ...g.observers].filter(Boolean).forEach(name=>{
+      const email = EMAIL_OF[name];
+      if(email) rows.push([room, email]);
+      else skipped.push(name);
+    });
+  });
   const csv = '\uFEFF' + [headers, ...rows].map(r=>r.map(csvEscape).join(',')).join('\r\n');
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   const stamp = new Date().toISOString().slice(0,10);
   a.href = url;
-  a.download = `dueling-club-pairs-${stamp}.csv`;
+  a.download = `teams-breakout-rooms-${stamp}.csv`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+  if(skipped.length){
+    alert((en
+      ? 'No email on file for: '
+      : 'Нет email в базе для: ') + skipped.join(', ') + (en
+      ? '. They were left out of the file — add them manually in Teams.'
+      : '. Их пришлось исключить из файла — добавьте вручную в Teams.'));
+  }
 }
 
 // ── ROULETTE WHEEL ─────────────────────────────────────
 const PARTICIPANTS = [
-  {name:'Mariya Logimakhova', team:'AM (L)'},
-  {name:'Aleksandr Minenok', team:'AM (L)'},
-  {name:'Ekaterina Radzkova', team:'AM (L)'},
-  {name:'Ilona Kursitys', team:'AM (L)'},
-  {name:'Milena Borshcheva', team:'AM (L)'},
-  {name:'Mariya Makdonald', team:'AM (L)'},
-  {name:'Olga Samoilova', team:'AM (L)'},
+  {name:'Mariya Logimakhova', team:'AM (L)', email:'Mariya.Logimakhova@evenbetgaming.com'},
+  {name:'Aleksandr Minenok', team:'AM (L)', email:'Aleksandr.Minenok@evenbetgaming.com'},
+  {name:'Ekaterina Radkova', team:'AM (L)', email:'Ekaterina.Radkova@evenbetgaming.com'},
+  {name:'Ilona Kursitys', team:'AM (L)', email:'Ilona.Kursitys@evenbetgaming.com'},
+  {name:'Milena Borshcheva', team:'AM (L)', email:'Milena.Borshcheva@evenbetgaming.com'},
+  {name:'Mariya Makdonald', team:'AM (L)', email:'Mariya.Makdonald@evenbetgaming.com'},
+  {name:'Olga Samoilova', team:'AM (L)', email:'Olga.Samoilova@evenbetgaming.com'},
 
-  {name:'Darya Baranova', team:'AM (B)'},
-  {name:'Olga Zakharenko', team:'AM (B)'},
-  {name:'Stanislav Miletskii', team:'AM (B)'},
-  {name:'Volha Salahub', team:'AM (B)'},
-  {name:'Anastasiya Khizhnyak', team:'AM (B)'},
+  {name:'Darya Baranova', team:'AM (B)', email:'darya.baranova@evenbetgaming.com'},
+  {name:'Olga Zakharenko', team:'AM (B)', email:'Olga.Zakharenko@evenbetgaming.com'},
+  {name:'Stanislav Miletskii', team:'AM (B)', email:'Stanislav.Miletskii@evenbetgaming.com'},
+  {name:'Volha Salahub', team:'AM (B)', email:'Volha.Salahub@evenbetgaming.com'},
+  {name:'Anastasiya Khizhnyak', team:'AM (B)', email:'Anastasiya.Khizhnyak@evenbetgaming.com'},
 
-  {name:'Natalya Nazarenko', team:'AM (N)'},
-  {name:'Valery Budkevich', team:'AM (N)'},
-  {name:'Valentin Seregin', team:'AM (N)'},
-  {name:'Anton Grishukevich', team:'AM (N)'},
+  {name:'Natalya Nazarenko', team:'AM (N)', email:'Natalya.Nazarenko@evenbetgaming.com'},
+  {name:'Valery Budkevich', team:'AM (N)', email:'Valery.Budkevich@evenbetgaming.com'},
+  {name:'Valentin Seregin', team:'AM (N)', email:'Valentin.Seregin@evenbetgaming.com'},
+  {name:'Anton Grishukevich', team:'AM (N)', email:'Anton.Grishukevich@evenbetgaming.com'},
 
-  {name:'Ivan Pritchin', team:'AM (P)'},
-  {name:'Aidar Giliazetdinov', team:'AM (P)'},
-  {name:'Alena Gorenysheva', team:'AM (P)'},
-  {name:'Dimitri Marutiani', team:'AM (P)'},
-  {name:'Yuliya Poshva', team:'AM (P)'},
+  {name:'Ivan Pritchin', team:'AM (P)', email:'ivan.pritchin@evenbetgaming.com'},
+  {name:'Aidar Giliazetdinov', team:'AM (P)', email:'Aidar.Giliazetdinov@evenbetgaming.com'},
+  {name:'Alena Gorenysheva', team:'AM (P)', email:'Alena.Gorenysheva@evenbetgaming.com'},
+  {name:'Dimitri Marutiani', team:'AM (P)', email:'Dimitri.Marutiani@evenbetgaming.com'},
+  {name:'Yuliya Poshva', team:'AM (P)', email:'Yuliya.Poshva@evenbetgaming.com'},
 
-  {name:'Elizaveta Mikhoparkina', team:'AM Casino (L)'},
-  {name:'Chingiz Zhumagaliev', team:'AM Casino (L)'},
-  {name:'Valeryia Grudnina', team:'AM Casino (L)'},
+  {name:'Elizaveta Mikhoparkina', team:'AM Casino (L)', email:'Elizaveta.Mikhoparkina@evenbetgaming.com'},
+  {name:'Chingiz Zhumagaliev', team:'AM Casino (L)', email:'Chingiz.Zhumagaliev@evenbetgaming.com'},
+  {name:'Valeriya Grudnina', team:'AM Casino (L)', email:'Valeriya.Grudnina@evenbetgaming.com'},
 
-  {name:'Viktoriya Suhoveeva', team:'AM Casino (V)'},
-  {name:'Aleksandr Karmanov', team:'AM Casino (V)'},
-  {name:'Anna Aleksandrovich', team:'AM Casino (V)'},
-  {name:'Rakhima Aldasheva', team:'AM Casino (V)'},
+  {name:'Viktoriya Suhoveeva', team:'AM Casino (V)', email:'Viktoriya.Peregudova@evenbetgaming.com'},
+  {name:'Aleksandr Karmanov', team:'AM Casino (V)', email:'aleksandr.karmanov@evenbetgaming.com'},
+  {name:'Anna Aleksandrovich', team:'AM Casino (V)', email:'Anna.Aleksandrovich@evenbetgaming.com'},
+  {name:'Rakhima Aldasheva', team:'AM Casino (V)', email:'Rakhima.Aldasheva@evenbetgaming.com'},
 
-  {name:'Viktoriya Ledeneva', team:'Support'},
-  {name:'Mariya Zmitrovich', team:'Support'},
+  {name:'Viktoriya Ledeneva', team:'Support', email:'vLedeneva@evenbetgaming.com'},
+  {name:'Mariya Zmitrovich', team:'Support', email:'Mariya.Zmitrovich@evenbetgaming.com'},
 
-  {name:'Nikita Golodaev', team:'Business manager'},
+  {name:'Nikita Golodaev', team:'Business manager', email:'nikita.golodaev@evenbetgaming.com'},
 
-  {name:'Zakhar Galushkin', team:'Operation Efficiency'},
-  {name:'Kseniya Kadebskaya', team:'Operation Efficiency'},
-  {name:'Anastasiya Rusanova', team:'Operation Efficiency'},
-  {name:'Yuliya Fedchenko', team:'Operation Efficiency'}
+  {name:'Zakhar Galushkin', team:'Operation Efficiency', email:'zg@evenbetgaming.com'},
+  {name:'Kseniya Kadebskaya', team:'Operation Efficiency', email:'Kseniya.Kadebskaya@evenbetgaming.com'},
+  {name:'Anastasiya Rusanova', team:'Operation Efficiency', email:'Anastasiya.Rusanova@evenbetgaming.com'},
+  {name:'Yuliya Fedchenko', team:'Operation Efficiency', email:'Yuliya.Fedchenko@evenbetgaming.com'}
 ];
 const PARTICIPANT_NAMES = PARTICIPANTS.map(p=>p.name);
 const TEAM_OF = Object.fromEntries(PARTICIPANTS.map(p=>[p.name, p.team]));
+const EMAIL_OF = Object.fromEntries(PARTICIPANTS.map(p=>[p.name, p.email||'']));
 
 // ── ATTENDANCE (Step 0) — who's actually here today ────
 const attendance = Object.fromEntries(PARTICIPANT_NAMES.map(n=>[n,true]));
