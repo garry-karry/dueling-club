@@ -241,6 +241,14 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 
 /* ── TIMING PILLS ── */
 .timing-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:.85rem}
+.time-budget{display:flex;flex-wrap:wrap;gap:0;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1rem;overflow:hidden}
+.tb-item{flex:1 1 120px;padding:.65rem .9rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
+.tb-item:last-child{border-right:none}
+.tb-label{font-size:10.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:4px}
+.tb-val{font-size:15px;font-weight:700;color:var(--ink);font-family:'Libre Baskerville',serif}
+.tb-item.tb-total{background:var(--teal-l)}
+.tb-item.tb-total .tb-label{color:var(--teal)}
+.tb-item.tb-total .tb-val{color:var(--teal)}
 .t-pill{font-size:12px;font-weight:500;padding:3px 11px;border-radius:20px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border)}
 
 /* ── TRAPS ── */
@@ -458,9 +466,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="intro">
     <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
     <h1><span class="ru-only">CS-менеджер и заказчик — <span class="grad-text">трудный разговор</span></span><span class="en-only">CS Manager and Client — <span class="grad-text">a Difficult Conversation</span></span></h1>
-    <p><span class="ru-only">Пять сценариев на основе реальных ситуаций и материалов воркшопа — тренируетесь в своей паре, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Five scenarios based on real situations and workshop material — you practice in your own pair, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
+    <p><span class="ru-only">Три сценария на основе реальных ситуаций и материалов воркшопа — тренируетесь в своей паре, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Three scenarios based on real situations and workshop material — you practice in your own pair, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
     <div class="intro-meta">
-      <span class="meta-pill"><span class="ru-only">5 сценариев</span><span class="en-only">5 scenarios</span></span>
+      <span class="meta-pill"><span class="ru-only">3 сценария</span><span class="en-only">3 scenarios</span></span>
       <span class="meta-pill"><span class="ru-only">Реальные кейсы</span><span class="en-only">Real cases</span></span>
       <span class="meta-pill">Poker &amp; Casino B2B</span>
       <span class="meta-pill"><span class="ru-only">Работа в парах</span><span class="en-only">Pair work</span></span>
@@ -478,11 +486,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
   <div class="sc-tabs">
     <button class="sc-tab active" onclick="showScenario('warmup',this)">🌤 <span class="ru-only">Разминка — лёгкий старт</span><span class="en-only">Warm-up — easy start</span></button>
-    <button class="sc-tab" onclick="showScenario('s4',this)"><span class="ru-only">Сценарий 1 — «Я подразумевал другое»</span><span class="en-only">Scenario 1 — "I Meant Something Different"</span></button>
-    <button class="sc-tab" onclick="showScenario('s5',this)"><span class="ru-only">Сценарий 2 — Баг или настройка?</span><span class="en-only">Scenario 2 — Bug or Configuration?</span></button>
-    <button class="sc-tab" onclick="showScenario('s6',this)"><span class="ru-only">Сценарий 3 — Токсичный клиент: Агрессор</span><span class="en-only">Scenario 3 — Toxic Client: The Aggressor</span></button>
-    <button class="sc-tab" onclick="showScenario('s7',this)"><span class="ru-only">Сценарий 4 — После провала: доверие</span><span class="en-only">Scenario 4 — After a Failure: Trust</span></button>
-    <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 5 — Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 5 — Tech Director: Passive Aggression</span></button>
+    <button class="sc-tab" onclick="showScenario('s6',this)"><span class="ru-only">Сценарий 1 — Токсичный клиент: Агрессор</span><span class="en-only">Scenario 1 — Toxic Client: The Aggressor</span></button>
+    <button class="sc-tab" onclick="showScenario('s7',this)"><span class="ru-only">Сценарий 2 — После провала: доверие</span><span class="en-only">Scenario 2 — After a Failure: Trust</span></button>
+    <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 3 — Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 3 — Tech Director: Passive Aggression</span></button>
     <button class="sc-tab" onclick="showScenario('generator',this)">🎲 <span class="ru-only">Генератор своего сценария</span><span class="en-only">Build-your-own Generator</span></button>
   </div>
 
@@ -551,403 +557,45 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     <div class="sc-header">
       <div class="sc-difficulty" style="background:var(--teal-l);color:var(--teal)">🌤 <span class="ru-only">Разминка · Без риска</span><span class="en-only">Warm-up · No stakes</span></div>
       <h2><span class="ru-only">Лёгкий старт — прежде чем переходить к боевым кейсам</span><span class="en-only">Easy start — before moving to the real cases</span></h2>
-      <p class="subtitle"><span class="ru-only">Пять минут на нейтральном материале, чтобы войти в роль и снять неловкость первого шага — лучше всего вместе, на общий круг. Никаких конфликтов и дебрифа — просто разговор. Затем переходите к «Сценарий 1».</span><span class="en-only">Five minutes on neutral material to get into the role and shake off the awkwardness of the first step — best done together, as a group. No conflict, no debrief — just a conversation. Then move on to "Scenario 1."</span></p>
+      <p class="subtitle"><span class="ru-only">5 минут на нейтральном материале, чтобы войти в роль — лучше всего вместе, на общий круг. Всего три карточки, чтобы уложиться по времени и на этой же встрече взять два боевых сценария. Затем переходите к «Сценарий 1».</span><span class="en-only">5 minutes on neutral material to get into the role — best done together, as a group. Just three cards, so there's time left in the session for two real scenarios. Then move on to "Scenario 1."</span></p>
     </div>
 
     <div class="warmup-intro">
-      <span class="ru-only">Как в дебат-клубе: сначала разгонная тема без ставок, чтобы связки речи разогрелись, а раскрытие роли не пугало. Правильных ответов нет — под каждой карточкой есть ориентир, если хочется свериться.</span><span class="en-only">Like a debate club: a low-stakes warm-up topic first, so your speaking muscles loosen up and stepping into a role feels less exposing. There's no single right answer — each card has a reference point underneath if you want to check yourself.</span>
+      <span class="ru-only">Как в дебат-клубе: сначала разгонная тема без ставок, чтобы связки речи разогрелись. Правильных ответов нет — под каждой карточкой есть ориентир, если хочется свериться.</span><span class="en-only">Like a debate club: a low-stakes warm-up topic first, so your speaking muscles loosen up. There's no single right answer — each card has a reference point underneath if you want to check yourself.</span>
     </div>
 
     <div class="warmup-format-note">
       <p style="text-align:justify"><span class="ru-only"><b>Лучше в общем формате.</b> Материал безопасный, поэтому его можно спокойно проговаривать при всех — как общий брейншторм: ведущий читает карточку, и группа вместе вслух обсуждает возможные варианты, без отдельного выступающего. Приватные пары приберегите для боевых кейсов.</span><span class="en-only"><b>Group format works better here.</b> The material is safe, so it's fine to talk it through with everyone — think of it as an open brainstorm: the facilitator reads a card, and the group discusses possible answers out loud together, with no one singled out. Save private pairs for the real cases.</span></p>
     </div>
 
+    <div class="time-budget">
+      <div class="tb-item tb-total" style="flex:1 1 100%"><span class="tb-label">⏱ <span class="ru-only">Время на разминку</span><span class="en-only">Warm-up time</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
     <div class="warmup-grid">
       <div class="warmup-card">
         <div class="warmup-card-top">
           <div class="warmup-num">1</div>
-          <div class="warmup-text"><b><span class="ru-only">Нейтральное</span><span class="en-only">Neutral</span></b><span class="ru-only">Заказчик благодарит за быстрый ответ и просит совет, как удобнее настроить обычный виджет на сайте.</span><span class="en-only">The client thanks you for a fast reply and asks for advice on the easiest way to set up a regular widget.</span></div>
+          <div class="warmup-text"><b><span class="ru-only">Проверка понимания</span><span class="en-only">Perception check</span></b><span class="ru-only">Заказчик коротко пишет: «Слушайте, а этот новый отчёт реально удобный». Как ответить так, чтобы было видно — вы услышали именно ЭТО улучшение, а не просто сказали «спасибо»?</span><span class="en-only">The client writes briefly: "Hey, this new report is actually really convenient." How do you reply so it's clear you heard this specific improvement — not just a generic "thanks"?</span></div>
         </div>
         <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">«Спасибо! В настройках виджета есть пресет по умолчанию — обычно проще всего оттолкнуться от него. Могу прислать короткую инструкцию, если удобно?» — <b>коротко, конкретно, с шагом дальше</b>, а не общими словами.</span><span class="en-only">"Thanks! There's a default preset in the widget settings — usually the easiest starting point. I can send you a short guide, if that's useful?" — <b>short, concrete, with a next step</b>, not vague reassurance.</span></div></div>
+        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">«Рада, что зашло — особенно та часть с фильтрами, её долго обсуждали внутри. Возьму в копилку, что именно это оказалось полезным.» Названо <b>конкретное</b> улучшение, а не общая благодарность.</span><span class="en-only">"Glad it landed — especially the filtering part, we debated that one internally for a while. Good to know that specific piece was the useful bit." Names the <b>specific</b> improvement, not a generic thank-you.</span></div></div>
       </div>
       <div class="warmup-card">
         <div class="warmup-card-top">
           <div class="warmup-num">2</div>
-          <div class="warmup-text"><b><span class="ru-only">Любопытство</span><span class="en-only">Curiosity</span></b><span class="ru-only">Заказчик спрашивает, когда выйдет новая фича — просто интересуется, без напряжения.</span><span class="en-only">The client asks when a new feature is coming out — just curious, no tension.</span></div>
+          <div class="warmup-text"><b><span class="ru-only">Конкретика вместо расплывчатости</span><span class="en-only">Specifics over vagueness</span></b><span class="ru-only">Заказчик с лёгким нетерпением спрашивает: «Ну и когда уже будет готово?» Ответьте так, чтобы это была дата, а не «скоро» или «работаем над этим».</span><span class="en-only">The client asks, a little impatiently: "So when will this actually be done?" Answer with a date — not "soon" or "we're working on it."</span></div>
         </div>
         <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">Из модуля «Язык обязательств»: «Точной даты пока нет — <b>это моя оценка, а не гарантия</b>: ориентировочно месяц-полтора. Как только окно сузится — напишу вам первому.» Оценка вместо точки — окно, а не дата.</span><span class="en-only">From the "Language of Commitment" module: "No exact date yet — <b>this is my estimate, not a guarantee</b>: roughly a month to six weeks. I'll write to you first once the window narrows." An estimate, not a point — a window, not a date.</span></div></div>
+        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">«К среде дам точный статус. Если станет ясно раньше — напишу сразу, не буду ждать среды просто чтобы отчитаться по графику.» Конкретная дата + обещание не тянуть до неё специально.</span><span class="en-only">"I'll have a firm status by Wednesday. If it's clear sooner, I'll write right away — I won't wait until Wednesday just to check a box." A concrete date, plus a promise not to stall until it.</span></div></div>
       </div>
       <div class="warmup-card">
         <div class="warmup-card-top">
           <div class="warmup-num">3</div>
-          <div class="warmup-text"><b><span class="ru-only">Мелкая идея</span><span class="en-only">Small idea</span></b><span class="ru-only">Заказчик предлагает небольшое улучшение интерфейса и спрашивает вашу обратную связь.</span><span class="en-only">The client suggests a small interface improvement and asks for your feedback.</span></div>
+          <div class="warmup-text"><b><span class="ru-only">Разгонная</span><span class="en-only">Icebreaker</span></b><span class="ru-only">Какое слово вы чаще всего используете, отказывая заказчику — и есть ли в нём скрытое оправдание, без которого отказ прозвучал бы увереннее?</span><span class="en-only">What word do you use most often when refusing a client — and does it carry a hidden excuse that a more confident refusal wouldn't need?</span></div>
         </div>
-        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">«Спасибо, что подсветили — идея хорошая. Записываю в бэклог с вашим именем, чтобы не потерялась. Попадёт ли в ближайший спринт — пока не скажу точно, но статус пришлю.» Идея не теряется, ожидание не завышается.</span><span class="en-only">"Thanks for flagging this — it's a good idea. I'm logging it in the backlog under your name so it doesn't get lost. I can't say yet whether it makes the next sprint, but I'll send a status." The idea isn't lost, and expectations aren't inflated.</span></div></div>
-      </div>
-      <div class="warmup-card">
-        <div class="warmup-card-top">
-          <div class="warmup-num">4</div>
-          <div class="warmup-text"><b><span class="ru-only">Оргвопрос</span><span class="en-only">Logistics</span></b><span class="ru-only">Заказчик уточняет удобное время для следующего созвона — часовые пояса разные.</span><span class="en-only">The client is checking the best time for the next call — different time zones.</span></div>
-        </div>
-        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">«Предлагаю два варианта: вторник в 11:00 по вашему времени или четверг в 15:00 — что удобнее? Заодно поставлю созвон регулярным, чтобы не согласовывать каждый раз заново.» Конкретные слоты, а не «когда вам удобно?».</span><span class="en-only">"I'd suggest two options: Tuesday at 11:00 your time, or Thursday at 15:00 — which works better? I'll also make this a recurring slot so we're not re-scheduling every time." Concrete slots, not an open "whenever works for you?"</span></div></div>
-      </div>
-      <div class="warmup-card">
-        <div class="warmup-card-top">
-          <div class="warmup-num">5</div>
-          <div class="warmup-text"><b><span class="ru-only">Разгонная</span><span class="en-only">Icebreaker</span></b><span class="ru-only">«Удалёнка vs офис» — что удобнее для командной работы в CS?</span><span class="en-only">"Remote vs office" — what works better for CS teamwork?</span></div>
-        </div>
-        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Ориентир</span><span class="en-only">Reference point</span></span><span class="chevron">▾</span></button>
-        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">Правильного ответа нет — это открытая тема для двух коротких позиций «за» и «против». Зацепка для обсуждения: «а как это влияет на скорость ответа клиенту?»</span><span class="en-only">There's no right answer — it's an open topic for two short "for" and "against" positions. A hook for discussion: "how does this affect response speed to the client?"</span></div></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════ SCENARIO 4 (GarantPoker #2) ════ -->
-  <div class="sc-panel" id="s4">
-    <div class="sc-header">
-      <div class="sc-difficulty diff-high">🔀 <span class="ru-only">Высокая · «Я подразумевал другое» — недосказанные ожидания и претензии</span><span class="en-only">High · 'I meant something different' — unstated expectations and complaints</span></div>
-      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Проверка понимания</span><span class="en-only">Technique in focus: Perception Check</span></div>
-      <h2><span class="ru-only">«Вы сделали не так, как я хотел» — фриспины и невысказанные детали</span><span class="en-only">'You didn't do it the way I wanted' — freespins and unspoken details</span></h2>
-      <p class="subtitle"><span class="ru-only">Заказчик описал механику фриспинов частично. CS настроил промо по тому, что было сказано. Заказчик звонит и говорит, что его «обманули» — он подразумевал другое. Классический паттерн: детали выходят через наводящие вопросы постфактум.</span><span class="en-only">The client partially described the freespins mechanics. CS configured the promo based on what was said. The client calls and says they were 'deceived' — they meant something different. Classic pattern: details emerge through leading questions after the fact.</span></p>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
-      <div class="block-text"><span class="ru-only">После звонка 27 августа заказчик описал детали для фриспинов. Казино-менеджер сообщил, что фриспины с условием «депозит» настраиваются через промо — это стандартная механика. Заказчик звонит и заявляет, что его обманули: он «подразумевал» другое. При этом детали, которые он «подразумевал», в переписке не фигурировали. Это не первый такой случай: аналогичная ситуация была с NNCP-отчётом для аффилятов.</span><span class="en-only">After the August 27 call, the client described freespins details. The casino manager informed them that freespins with a 'deposit' condition are configured through promo — standard mechanics. The client calls saying they were deceived: they 'meant' something different. Yet the details they 'meant' never appeared in the chat. This isn't the first such case: the same pattern occurred with the NNCP affiliate report.</span></div>
-    </div>
-
-    <div class="characters">
-      <div class="char-card">
-        <div class="char-head"><div class="av av-cl">GP</div>
-          <div><div class="char-name"><span class="ru-only">Заказчик — GarantPoker</span><span class="en-only">Client — GarantPoker</span></div><div class="char-role"><span class="ru-only">Владелец / product owner</span><span class="en-only">Owner / product owner</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
-            <div class="char-section-text"><span class="ru-only">Искренне убеждён, что говорил всё правильно. Не лжёт — он действительно так думал. Детали не фиксирует письменно — обсуждает устно и ожидает, что другая сторона «додумает» остальное. Когда результат не совпадает с ожиданиями — это для него «обман».</span><span class="en-only">Genuinely convinced he communicated everything correctly. Not lying — he truly thought so. Doesn't write down details — discusses verbally and expects the other side to 'figure out' the rest. When the result doesn't match expectations — it's 'deception' in his mind.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
-            <div class="char-section-text"><span class="ru-only">Начать обиженно: «Меня обманули. Я говорил, что хочу X, а вы сделали Y». При вопросе «где это было зафиксировано?» — настаивать: «Я говорил об этом на звонке». Снизить тон только когда CS предложит совместно зафиксировать требования и двигаться дальше.</span><span class="en-only">Start offended: 'I was deceived. I said I wanted X, and you did Y.' On the question 'where was this recorded?' — insist: 'I mentioned it on the call.' Only soften when CS proposes jointly documenting requirements and moving forward.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
-            <div class="char-tags">
-              <span class="char-tag red"><span class="ru-only">«Меня обманули»</span><span class="en-only">'I was deceived'</span></span>
-              <span class="char-tag red"><span class="ru-only">«Я подразумевал другое»</span><span class="en-only">'I meant something different'</span></span>
-              <span class="char-tag teal"><span class="ru-only">«Давайте зафиксируем» → снижает тон</span><span class="en-only">'Let's document it' → lowers tone</span></span>
-            </div>
-          </div>
-          <div class="char-quote"><span class="ru-only">«Почему вы так сделали? Я же говорил, что хочу по-другому!»</span><span class="en-only">'Why did you do it this way? I said I wanted it differently!'</span></div>
-        </div>
-      </div>
-      <div class="char-card">
-        <div class="char-head"><div class="av av-cs">CS</div>
-          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
-            <div class="char-section-text"><span class="ru-only">Раздражение: это уже второй раз с аналогичным паттерном. Соблазн сказать «но вы же не написали это» — это правда, но не поможет. Задача: не доказать свою правоту, а разобраться и двигаться вперёд. И выстроить процесс, чтобы этого не повторилось.</span><span class="en-only">Irritation: this is the second time with the same pattern. Temptation to say 'but you didn't write that' — true, but won't help. The task: not to prove yourself right, but to figure it out and move forward. And to build a process so this doesn't happen again.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
-            <div class="char-section-text"><span class="ru-only">Не спорить о том, говорил ли заказчик это раньше. Признать, что был коммуникационный разрыв. Зафиксировать требования прямо сейчас — письменно, совместно. Ввести правило: все детали до начала настройки — в письменном виде. Это не наказание, а защита обеих сторон.</span><span class="en-only">Don't argue about whether the client said it before. Acknowledge there was a communication gap. Document requirements right now — in writing, together. Establish a rule: all details before setup begins — in writing. This isn't punishment, it protects both sides.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
-            <div class="char-tags">
-              <span class="char-tag teal"><span class="ru-only">Признание разрыва без спора о фактах</span><span class="en-only">Acknowledge the gap without arguing facts</span></span>
-              <span class="char-tag teal"><span class="ru-only">Совместная фиксация требований прямо сейчас</span><span class="en-only">Joint documentation of requirements right now</span></span>
-              <span class="char-tag amber"><span class="ru-only">Ввести правило на будущее как защиту</span><span class="en-only">Introduce a rule for the future as protection</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="observer-block">
-      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Проверка понимания</span><span class="en-only">Observer's task — Perception Check</span></div>
-      <div class="observer-list">
-        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Прозвучала ли отчётливая фраза-парафраз («правильно понимаю, что вы ожидали...») <b>до того</b>, как CS начал объяснять свою позицию — или CS сразу перешёл к оправданиям?</span><span class="en-only">Was there a clear paraphrase ("if I understand right, you expected...") <b>before</b> CS started explaining their own position — or did CS jump straight to justifying?</span></div>
-        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Прозвучало ли обвинение («вы этого не писали») вместо признания коммуникационного разрыва?</span><span class="en-only">Did an accusation slip in ("you never wrote that") instead of acknowledging the communication gap?</span></div>
-        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Договорились ли стороны о конкретном письменном шаге на будущее, а не только «разобрались» с прошлым?</span><span class="en-only">Did the two agree on a concrete written step for the future, or only "sort out" the past?</span></div>
-      </div>
-      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these three points: on the technique, not the person.</span></div>
-    </div>
-
-    <div class="timing-row">
-      <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
-      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Развилки разговора — что обычно пробуют</span><span class="en-only">Conversation forks — what people usually try</span></div>
-      <div class="trap-list">
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Вы этого не писали» — правда, но звучит как обвинение и уводит в спор</span><span class="en-only">'You didn't write that' — true, but sounds like an accusation and leads to argument</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Мы всё сделали по техзаданию» — закрывает диалог, не решает проблему</span><span class="en-only">'We did everything per the spec' — closes dialogue, doesn't solve the problem</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Переделывать молча без нового соглашения — паттерн повторится снова</span><span class="en-only">Redoing it silently without a new agreement — the pattern will repeat again</span></div>
-        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать коммуникационный разрыв. Зафиксировать требования прямо сейчас. Установить правило: детали — письменно до начала работы. Это защищает обоих.</span><span class="en-only">Acknowledge the communication gap. Document requirements right now. Establish the rule: details in writing before work begins. This protects both parties.</span></div>
-      </div>
-    </div>
-
-    <div class="theory-block">
-      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Проверка понимания (Perception Check)</span><span class="en-only">Technique: Perception Check</span></div>
-      <div class="theory-def"><span class="ru-only"><b>Что это:</b> прежде чем реагировать на претензию, вслух проговорить своими словами, как вы поняли ожидание собеседника — и только после этого переходить к своей позиции. Приём из активного слушания (Carl Rogers) и переговорной теории: разводит «что человек сказал» и «что он имел в виду», прежде чем спорить.</span><span class="en-only"><b>What it is:</b> before reacting to a complaint, say out loud, in your own words, how you understood the other person's expectation — only then move to your own position. A core active-listening technique (Carl Rogers) and a negotiation staple: it separates "what was said" from "what was meant" before any argument starts.</span></div>
-      <div class="theory-list">
-        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Здесь клиент говорит «я подразумевал другое» — конфликт из-за разного понимания, а не из-за злого умысла. Проверка понимания снимает именно этот тип конфликта.</span><span class="en-only">Here the client says "I meant something different" — a conflict of understanding, not of bad faith. A perception check is exactly the tool for this type of conflict.</span></div>
-        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Отделяйте человека от проблемы (Фишер и Юри): коммуникационный разрыв — общая проблема, которую решаете вместе, а не повод искать виноватого.</span><span class="en-only">Separate the person from the problem (Fisher &amp; Ury): the communication gap is a shared problem to solve together, not a reason to find fault.</span></div>
-        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Письменная фиксация закрепляет проверенное понимание — разбейте спорный вопрос на конкретные пункты и зафиксируйте письменно, это проще, чем спорить в общем.</span><span class="en-only">Written documentation locks in the checked understanding — break the disputed issue into concrete points and write them down; that's easier than arguing in the abstract.</span></div>
-      </div>
-      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «CS как продукт» + принципы переговорной теории Гарвардской школы и активного слушания.</span><span class="en-only">Drawing on the "CS as a Product" course module, plus Harvard-style negotiation theory and active-listening practice.</span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
-      <div class="phrase-bank">
-        <div class="phrase-card"><div class="phrase-en">"I hear you — the result doesn't match what you expected."</div><div class="phrase-ru">Слышу вас — результат не совпал с ожиданиями.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"Let's document the exact mechanics you want, right now."</div><div class="phrase-ru">Давайте прямо сейчас зафиксируем точную механику, которую вы хотите.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"That's on us — let's put a rule in place so this doesn't repeat."</div><div class="phrase-ru">Это наш промах — давайте введём правило, чтобы это не повторилось.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"I won't argue about who's right — let's fix it going forward."</div><div class="phrase-ru">Не буду спорить, кто прав — давайте решим, как двигаться дальше.</div></div>
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)">
-        <div class="trigger-left"><div class="trigger-icon">📋</div>
-          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
-        </div><div class="chevron">▾</div>
-      </button>
-      <div class="accordion-body"><div class="script-inner">
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Я говорил, что хочу фриспины без депозита. Почему настроили через промо с депозитом? Меня обманули.</span><span class="en-only">I said I wanted freespins without a deposit. Why was it set up through promo with a deposit? I was deceived.</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Слышу вас — результат не совпал с тем, что вы ожидали. Между нами был коммуникационный разрыв: в переписке после звонка деталь про тип условия не была зафиксирована. Не буду спорить о том, кто прав — важнее разобраться сейчас. Давайте вместе прямо сейчас запишем точную механику, которую вы хотите — и я передам команде с этим уточнением.</span><span class="en-only">I hear you — the result didn't match what you expected. There was a communication gap between us: after the call, the detail about the condition type wasn't documented in the chat. I won't argue about who's right — what matters is sorting it out now. Let's write down the exact mechanics you want together right now — and I'll pass it to the team with this clarification.</span></span></div>
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Но я же говорил об этом! Почему вы не уточнили?</span><span class="en-only">But I did say this! Why didn't you clarify?</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Согласен — уточняющий вопрос по этой детали должен был быть задан. Это наш промах. Чтобы это не повторилось: предлагаю правило — все финальные детали перед началом настройки фиксируем письменно в чате. Это защищает вас от ситуации «сделали не то» и нас от переделок. Удобно?</span><span class="en-only">Agreed — the clarifying question on this detail should have been asked. That's our miss. To prevent this from repeating: I'm proposing a rule — all final details before setup begins get documented in writing in the chat. This protects you from 'done wrong' situations and us from rework. Works for you?</span></span></div>
-        <div class="script-line"><span class="who note"><span class="ru-only">После сцены</span><span class="en-only">After scene</span></span><span class="line-text"><span class="ru-only">CS отправляет в чат краткое письменное резюме: «Уточнённые требования по фриспинам: [список]. Подтвердите, пожалуйста». Это создаёт новую точку отсчёта.</span><span class="en-only">CS sends a short written summary to the chat: 'Clarified freespins requirements: [list]. Please confirm.' This creates a new reference point.</span></span></div>
-      </div></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
-      <div class="debrief-list">
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как признать коммуникационный разрыв, не признавая вину и не обвиняя клиента?</span><span class="en-only">How do you acknowledge a communication gap without admitting guilt or blaming the client?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Почему «давайте зафиксируем прямо сейчас» работает лучше, чем спор о том, кто что говорил?</span><span class="en-only">Why does 'let's document it right now' work better than arguing about who said what?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Как ввести правило письменной фиксации так, чтобы клиент воспринял это как защиту, а не наказание?</span><span class="en-only">How do you introduce the written documentation rule so the client sees it as protection, not punishment?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Что должен сделать CS в течение часа после этого разговора?</span><span class="en-only">What should CS do within an hour after this conversation?</span></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">🧩 <span class="ru-only">Мини-квиз — ловушка или хороший ход?</span><span class="en-only">Mini-quiz — trap or good move?</span></div>
-      <div class="flow-note"><span class="ru-only">По одной реплике за раз — вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time — decide together whether it's a trap or a good move, then click your answer to see a short explanation.</span></div>
-      <div class="quiz-list">
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«Вы этого не писали»</span><span class="en-only">"You didn't write that"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Формально правда, но звучит как обвинение и уводит разговор в спор о том, кто прав.</span><span class="en-only">Technically true, but it sounds like an accusation and pulls the conversation into an argument about who's right.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«Мы всё сделали по техзаданию»</span><span class="en-only">"We did everything per the spec"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Закрывает диалог и не решает проблему клиента — формально правы, а толку нет.</span><span class="en-only">It closes the dialogue and doesn't solve the client's problem — technically right, but useless.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="good">
-          <div class="quiz-q"><span class="ru-only">«Давайте вместе прямо сейчас зафиксируем точную механику письменно»</span><span class="en-only">"Let's document the exact mechanics together, in writing, right now"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Не спорит о прошлом, создаёт новую точку отсчёта и защищает обе стороны на будущее.</span><span class="en-only">Doesn't argue about the past, creates a new reference point, and protects both sides going forward.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="group-discuss-block">
-      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
-      <div class="group-list">
-        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки лучше всего помогли снизить напряжение в разговоре?</span><span class="en-only">Which phrases worked best to lower the tension in the conversation?</span></div>
-        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что оказалось сложнее: признать разрыв в коммуникации или предложить конкретное решение?</span><span class="en-only">What was harder: acknowledging the communication gap, or offering a concrete solution?</span></div>
-        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какое правило на будущее группа хотела бы взять себе в постоянную практику?</span><span class="en-only">What rule for the future would the group want to adopt as standard practice?</span></div>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ════ SCENARIO 5 (GarantPoker #3) ════ -->
-  <div class="sc-panel" id="s5">
-    <div class="sc-header">
-      <div class="sc-difficulty diff-med">🐛 <span class="ru-only">Средняя · Клиент не отличает баг от настройки</span><span class="en-only">Medium · Client can't tell a bug from a configuration</span></div>
-      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Язык собеседника</span><span class="en-only">Technique in focus: Frame-Matching</span></div>
-      <h2><span class="ru-only">«Это баг или так задумано?» — претензии к поведению продукта без понимания механики</span><span class="en-only">'Is this a bug or intentional?' — complaints about product behaviour without understanding the mechanics</span></h2>
-      <p class="subtitle"><span class="ru-only">Заказчик пишет язвительное сообщение в чат о том, что что-то не работает. Саппорт реагирует через 8 минут. Выясняется, что это не баг — это настройка модуля. Заказчик не видит разницы и обвиняет компанию. CS должен объяснить разницу, не унижая клиента.</span><span class="en-only">The client sends a sarcastic message to the chat saying something isn't working. Support responds within 8 minutes. It turns out it's not a bug — it's a module configuration. The client sees no difference and blames the company. CS needs to explain the difference without belittling the client.</span></p>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
-      <div class="block-text"><span class="ru-only">Заказчик пишет в чат язвительное сообщение про то, что что-то не работает — тон с претензией. Саппорт отвечает через 8 минут. Заказчик, видимо, не видел ответа — и пишет ещё более язвительное сообщение. Оказывается, что поведение продукта — это не баг, а ожидаемая работа непонастроенного модуля. У заказчика нет понимания, что такое баг, а что такое настройка.</span><span class="en-only">The client sends a sarcastic message to the chat that something isn't working — accusatory in tone. Support responds in 8 minutes. The client apparently didn't see the reply — and sends an even more sarcastic message. It turns out the product behaviour is not a bug, but expected behaviour of an unconfigured module. The client has no understanding of the difference between a bug and a configuration.</span></div>
-    </div>
-
-    <div class="characters">
-      <div class="char-card">
-        <div class="char-head"><div class="av av-cl">GP</div>
-          <div><div class="char-name"><span class="ru-only">Заказчик — GarantPoker</span><span class="en-only">Client — GarantPoker</span></div><div class="char-role"><span class="ru-only">Владелец, технически не подготовлен</span><span class="en-only">Owner, not technically prepared</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
-            <div class="char-section-text"><span class="ru-only">Язвителен, когда раздражён. Не понимает разницу между багом и настройкой — и не знает, что не понимает. Претензионный тон — его норма. При объяснении «это настройка, а не баг» — воспринимает это как попытку переложить ответственность.</span><span class="en-only">Sarcastic when irritated. Doesn't understand the difference between a bug and configuration — and doesn't know he doesn't understand. Accusatory tone is his norm. When told 'this is configuration, not a bug' — he perceives it as an attempt to shift responsibility.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
-            <div class="char-section-text"><span class="ru-only">Начать с язвительного: «Ну что, снова не работает». На объяснение «это настройка» — скептически: «То есть вы говорите, что всё нормально, просто мы что-то не так настроили?» Принять только тогда, когда CS объяснит конкретно, что нужно настроить и сколько это займёт.</span><span class="en-only">Start sarcastic: 'Oh great, it's not working again.' On 'this is configuration' — skeptically: 'So you're saying everything is fine, we just configured it wrong?' Only accept when CS explains specifically what needs to be configured and how long it will take.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
-            <div class="char-tags">
-              <span class="char-tag red"><span class="ru-only">«Снова не работает»</span><span class="en-only">'Not working again'</span></span>
-              <span class="char-tag red"><span class="ru-only">«Это что, нормально?»</span><span class="en-only">'Is this normal?'</span></span>
-              <span class="char-tag teal"><span class="ru-only">Конкретный шаг + срок → принимает</span><span class="en-only">Specific step + deadline → accepts</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="char-card">
-        <div class="char-head"><div class="av av-cs">CS</div>
-          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
-            <div class="char-section-text"><span class="ru-only">Раздражение от язвительного тона — при том что саппорт ответил за 8 минут, а заказчик не заметил. Соблазн указать на это. Но важнее: объяснить разницу между багом и настройкой так, чтобы заказчик понял и не почувствовал себя дураком.</span><span class="en-only">Irritation at the sarcastic tone — especially since support responded in 8 minutes and the client didn't notice. Temptation to point this out. But more importantly: explain the difference between a bug and configuration so the client understands without feeling stupid.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
-            <div class="char-section-text"><span class="ru-only">Не указывать на то, что саппорт уже отвечал (даже если хочется). Объяснить разницу без технического жаргона. Дать понять: это решаемо, вот конкретный шаг. Не унижать заказчика за незнание технических деталей.</span><span class="en-only">Don't point out that support already replied (even if tempted). Explain the difference without technical jargon. Make clear: this is solvable, here's the specific step. Don't belittle the client for not knowing technical details.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
-            <div class="char-tags">
-              <span class="char-tag teal"><span class="ru-only">Объяснение без жаргона</span><span class="en-only">Explanation without jargon</span></span>
-              <span class="char-tag teal"><span class="ru-only">Баг vs настройка — в одном предложении</span><span class="en-only">Bug vs configuration — in one sentence</span></span>
-              <span class="char-tag amber"><span class="ru-only">Не тыкать носом в игнорированный ответ</span><span class="en-only">Don't rub their nose in the ignored reply</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="observer-block">
-      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Язык собеседника</span><span class="en-only">Observer's task — Frame-Matching</span></div>
-      <div class="observer-list">
-        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Задал ли CS проясняющий вопрос («что именно происходит?») <b>до того</b>, как начал объяснять техническую суть — или сразу начал диагностировать?</span><span class="en-only">Did CS ask a clarifying question ("what exactly is happening?") <b>before</b> explaining the technical substance — or start diagnosing right away?</span></div>
-        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Прозвучал ли технический жаргон, который мог запутать нетехнического заказчика, вместо простого языка?</span><span class="en-only">Did technical jargon slip in that could confuse a non-technical client, instead of plain language?</span></div>
-        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Ответил ли CS на язвительный тон тем же тоном, или сохранил спокойствие и перешёл к решению?</span><span class="en-only">Did CS mirror the sarcastic tone, or stay calm and move to a solution?</span></div>
-      </div>
-      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these three points: on the technique, not the person.</span></div>
-    </div>
-
-    <div class="timing-row">
-      <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
-      <span class="t-pill">💬 <span class="ru-only">Чат + звонок</span><span class="en-only">Chat + call</span></span>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Развилки разговора — что обычно пробуют</span><span class="en-only">Conversation forks — what people usually try</span></div>
-      <div class="trap-list">
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Мы ответили 8 минут назад» — правда, но звучит как упрёк, а не помощь</span><span class="en-only">'We replied 8 minutes ago' — true, but sounds like a rebuke, not help</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Объяснять разницу баг/настройка технически — заказчик потеряется и решит, что вы уклоняетесь</span><span class="en-only">Explaining the bug/configuration difference technically — the client will get lost and think you're dodging</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Сказать «это не баг, всё нормально» без предложения решения — клиент слышит «нас устраивает»</span><span class="en-only">Saying 'it's not a bug, everything is fine' without a solution — client hears 'we're okay with this'</span></div>
-        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Объяснить просто: «это не сломано — это ещё не настроено». Дать конкретный следующий шаг с датой. Не указывать на проигнорированный ответ саппорта.</span><span class="en-only">Explain simply: 'it's not broken — it's not configured yet.' Give a specific next step with a date. Don't point out the ignored support reply.</span></div>
-      </div>
-    </div>
-
-    <div class="theory-block">
-      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Язык собеседника (Frame-Matching)</span><span class="en-only">Technique: Frame-Matching</span></div>
-      <div class="theory-def"><span class="ru-only"><b>Что это:</b> объяснение строится не из вашей системы координат («баг vs настройка»), а из системы координат собеседника («работает / не работает»). Сначала проясняющий вопрос, чтобы понять, что видит клиент, и только потом — простыми словами перевести техническую суть без жаргона.</span><span class="en-only"><b>What it is:</b> the explanation is built from the listener's frame of reference ("does it work or not"), not your own ("bug vs. configuration"). Ask a clarifying question first to see what the client is actually seeing, then translate the technical substance into plain words, no jargon.</span></div>
-      <div class="theory-list">
-        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Проясняющий вопрос раньше диагноза: сначала понять, что видит клиент, потом классифицировать баг/настройку — а не наоборот.</span><span class="en-only">Clarifying question before diagnosis: first understand what the client is seeing, then classify it as a bug or a config gap — not the other way around.</span></div>
-        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Не отвечайте тем же тоном на язвительность — базовый принцип деэскалации: спокойный, ровный тон снижает температуру разговора, а не эскалирует её.</span><span class="en-only">Don't mirror a sarcastic tone — a core de-escalation principle: a calm, level tone lowers the temperature instead of raising it.</span></div>
-        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Отвечайте по существу, а не на прошлые промахи: фокус на решении, а не на собственной правоте — так фокус разговора остаётся на общей цели.</span><span class="en-only">Respond to substance, not to past slip-ups: focus on the fix, not on being right — keeps the conversation on the shared goal.</span></div>
-      </div>
-      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Язык обязательств» + принципы деэскалации из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Language of Commitment" course module, plus de-escalation principles from negotiation and mediation practice.</span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
-      <div class="phrase-bank">
-        <div class="phrase-card"><div class="phrase-en">"I see it — let me look into it. Can you tell me exactly what's happening?"</div><div class="phrase-ru">Вижу — разбираюсь. Уточните, пожалуйста, что именно происходит.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"It's not broken — it just needs to be configured for your case."</div><div class="phrase-ru">Это не сломано — просто нужно донастроить под ваш случай.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"Here's exactly what we do next, and here's the deadline."</div><div class="phrase-ru">Вот что мы делаем дальше конкретно, и вот срок.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"I want to focus on the fix, not on who's right."</div><div class="phrase-ru">Хочу сосредоточиться на решении, а не на том, кто прав.</div></div>
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)">
-        <div class="trigger-left"><div class="trigger-icon">📋</div>
-          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
-        </div><div class="chevron">▾</div>
-      </button>
-      <div class="accordion-body"><div class="script-inner">
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Ну что, снова у нас что-то не работает. Когда это закончится?</span><span class="en-only">Well, something isn't working for us again. When will this end?</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Вижу сообщение — разбираюсь. Уточни, пожалуйста, что именно не работает — чтобы понять сразу: это баг или что-то, что нужно донастроить. Это важно: если баг — фиксируем срочно, если настройка — даю дату и план.</span><span class="en-only">I see the message — looking into it. Please clarify what exactly isn't working — so I can tell right away: is it a bug or something that needs configuring. This matters: if it's a bug — we fix it urgently, if it's configuration — I give you a date and a plan.</span></span></div>
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Вот, [описывает поведение]. Это что, нормально?</span><span class="en-only">Here, [describes behaviour]. Is this normal?</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Понял. Это не баг — это модуль, который ещё не настроен под вашу механику. Простыми словами: продукт работает, но под ваши условия его нужно «дообучить». Вот конкретно что делаем: [шаг]. Срок — [дата]. Если что-то идёт не так в процессе — сразу пишу вам.</span><span class="en-only">Got it. This isn't a bug — it's a module that hasn't been configured for your mechanics yet. In simple terms: the product works, but it needs to be 'tuned' for your conditions. Here's specifically what we do: [step]. Deadline — [date]. If anything goes wrong in the process — I write to you immediately.</span></span></div>
-        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">CS не упоминает, что саппорт уже отвечал 8 минут назад. Это факт, который не помогает сейчас — только раздражит. Фокус — на решении, а не на правоте.</span><span class="en-only">CS doesn't mention that support already replied 8 minutes ago. That fact doesn't help right now — it'll only irritate. Focus on the solution, not on being right.</span></span></div>
-      </div></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
-      <div class="debrief-list">
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как объяснить разницу между багом и настройкой клиенту без технического бэкграунда — в одном предложении?</span><span class="en-only">How do you explain the difference between a bug and configuration to a non-technical client — in one sentence?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Почему CS не должен указывать на проигнорированный ответ саппорта — и что он делает вместо этого?</span><span class="en-only">Why shouldn't CS point out the ignored support reply — and what do they do instead?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Как реагировать на язвительный тон, не зеркалируя его и не делая вид, что его нет?</span><span class="en-only">How do you respond to a sarcastic tone without mirroring it or pretending it doesn't exist?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Что можно сделать проактивно, чтобы у клиента было понимание: что такое баг, а что — настройка?</span><span class="en-only">What can be done proactively so the client understands: what is a bug vs what is a configuration?</span></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">🧩 <span class="ru-only">Мини-квиз — ловушка или хороший ход?</span><span class="en-only">Mini-quiz — trap or good move?</span></div>
-      <div class="flow-note"><span class="ru-only">По одной реплике за раз — вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time — decide together whether it's a trap or a good move, then click your answer to see a short explanation.</span></div>
-      <div class="quiz-list">
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«Мы ответили 8 минут назад»</span><span class="en-only">"We replied 8 minutes ago"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Формально правда, но звучит как упрёк, а не помощь — клиент слышит «сам виноват».</span><span class="en-only">Technically true, but sounds like a rebuke, not help — the client hears "your own fault."</span></div>
-        </div>
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«Это не баг, всё нормально» — без предложения решения</span><span class="en-only">"It's not a bug, everything is fine" — with no proposed solution</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Клиент слышит «нас всё устраивает» — даже если технически вы правы, это звучит как отмашка.</span><span class="en-only">The client hears "we're fine with this" — even if you're technically right, it sounds dismissive.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="good">
-          <div class="quiz-q"><span class="ru-only">«Это не сломано — это ещё не настроено. Вот шаг и дата»</span><span class="en-only">"It's not broken — it's not configured yet. Here's the step and the date"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Просто, без жаргона, и сразу с конкретным следующим шагом — понятно и не унизительно.</span><span class="en-only">Simple, jargon-free, and comes with a concrete next step right away — clear and not belittling.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="group-discuss-block">
-      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
-      <div class="group-list">
-        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки помогли объяснить баг/настройку просто, без технического жаргона?</span><span class="en-only">Which phrasings helped explain bug vs. configuration simply, without jargon?</span></div>
-        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее: не среагировать на язвительный тон или не уйти в технические детали?</span><span class="en-only">What was harder: not reacting to the sarcastic tone, or not diving into technical detail?</span></div>
-        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие идеи есть, чтобы клиенты сами понимали разницу баг/настройка ещё до звонка?</span><span class="en-only">What ideas came up for helping clients understand bug vs. configuration before they even call?</span></div>
+        <button class="wu-accordion-trigger" onclick="toggleAccordion(this)"><span>💬 <span class="ru-only">Заметки ведущего</span><span class="en-only">Facilitator notes</span></span><span class="chevron">▾</span></button>
+        <div class="wu-accordion-body"><div class="wu-script"><span class="ru-only">Правильного ответа нет — цель услышать вслух собственные речевые привычки. Если группа буксует, подскажите слова-кандидаты: «к сожалению», «постараемся», «на данный момент не можем».</span><span class="en-only">There's no right answer — the point is to hear your own speech habits out loud. If the group needs a nudge, offer candidate words: "unfortunately," "we'll try," "at this time we can't."</span></div></div>
       </div>
     </div>
   </div>
@@ -1029,10 +677,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="timing-row">
-      <span class="t-pill">⏱ <span class="ru-only">8 мин</span><span class="en-only">8 min</span></span>
       <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
       <span class="t-pill">🔁 <span class="ru-only">Третий раз за месяц</span><span class="en-only">Third time this month</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1083,7 +737,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как замедлить собственный темп речи, когда на вас кричат?</span><span class="en-only">How do you slow your own speaking pace when someone is shouting at you?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Чем «назвать поведение» отличается от «назвать человека» — и почему это важно?</span><span class="en-only">How is "naming the behavior" different from "naming the person" — and why does it matter?</span></div>
@@ -1125,7 +779,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="group-discuss-block">
       <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
       <div class="group-list">
         <div class="group-item"><span class="group-n">1</span><span class="ru-only">Что помогало сохранять спокойный темп речи, когда напряжение росло?</span><span class="en-only">What helped keep a calm pace as the tension rose?</span></div>
         <div class="group-item"><span class="group-n">2</span><span class="ru-only">Как отличить разовую вспышку от системного паттерна на практике?</span><span class="en-only">How do you tell a one-off outburst apart from a systemic pattern in practice?</span></div>
@@ -1211,10 +865,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="timing-row">
-      <span class="t-pill">⏱ <span class="ru-only">9 мин</span><span class="en-only">9 min</span></span>
       <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
       <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
       <span class="t-pill">🧊 <span class="ru-only">Второй срыв подряд</span><span class="en-only">Second miss in a row</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">9 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">19 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1265,7 +925,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем «признать без условий» отличается от признания с оговорками?</span><span class="en-only">How is "acknowledging with no conditions" different from an acknowledgment with caveats?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Почему новое обещание сейчас может навредить больше, чем помочь?</span><span class="en-only">Why might a new promise right now do more harm than good?</span></div>
@@ -1307,7 +967,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="group-discuss-block">
       <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
       <div class="group-list">
         <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки признания без условий прозвучали убедительно?</span><span class="en-only">Which unconditional-acknowledgment phrasings landed convincingly?</span></div>
         <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что сложнее: говорить «мы» вместо «они», или отдавать клиенту контроль над проверками?</span><span class="en-only">What's harder: saying "we" instead of "they," or handing the client control over the checkpoints?</span></div>
@@ -1393,10 +1053,16 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="timing-row">
-      <span class="t-pill">⏱ <span class="ru-only">7 мин</span><span class="en-only">7 min</span></span>
       <span class="t-pill">👥 <span class="ru-only">1 технический директор + 1 AM + 1 наблюдатель</span><span class="en-only">1 tech director + 1 AM + 1 observer</span></span>
       <span class="t-pill">💬 <span class="ru-only">Переписка</span><span class="en-only">Chat</span></span>
       <span class="t-pill">🙃 <span class="ru-only">Регулярный паттерн, не разовый случай</span><span class="en-only">Regular pattern, not a one-off</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1447,7 +1113,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем, 3–5 минут. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer, 3–5 minutes. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как отделить содержание сообщения от его пассивно-агрессивного тона?</span><span class="en-only">How do you separate a message's substance from its passive-aggressive tone?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Что помогает не отвечать тем же тоном?</span><span class="en-only">What helps you avoid answering in the same tone?</span></div>
@@ -1489,7 +1155,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="group-discuss-block">
       <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
       <div class="group-list">
         <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки лучше всего помогали отвечать на суть, не реагируя на тон?</span><span class="en-only">Which phrasings worked best for answering the substance without reacting to the tone?</span></div>
         <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее — не оправдываться за тон или не зеркалить его?</span><span class="en-only">What was harder — not justifying the tone, or not mirroring it?</span></div>
@@ -1975,6 +1641,68 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
           <div class="hist-block">
             <div class="hist-block-label"><span class="ru-only">Реальные цитаты</span><span class="en-only">Real quotes</span></div>
             <div class="hist-quote">«Мы платим деньги — это должно быть сделано, а не стоять в какой-то очереди!»</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 8 — former active Scenario 1: unstated expectations (Perception Check) -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H8</span>
+            <div>
+              <div class="hist-name"><span class="ru-only">«Я подразумевал другое» — недосказанные ожидания</span><span class="en-only">"I meant something different" — unstated expectations</span></div>
+              <div class="hist-sub"><span class="ru-only">Приём: Проверка понимания · заказчик уверен, что его обманули</span><span class="en-only">Technique: Perception Check · client believes he was deceived</span></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high"><span class="ru-only">Высокая</span><span class="en-only">High</span></span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Контекст</span><span class="en-only">Context</span></div>
+            <div class="hist-block-text"><span class="ru-only">Заказчик описал механику лишь частично на созвоне. CS настроил ровно то, что было сказано. Теперь заказчик называет результат «обманом», хотя детали никогда не фигурировали в переписке — искренне убеждён, что говорил всё правильно.</span><span class="en-only">The client described the mechanics only partially on a call. CS configured exactly what was said. Now the client calls the result "deception," even though the details never appeared in writing — he's genuinely convinced he communicated everything correctly.</span></div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Ключевые ловушки</span><span class="en-only">Key traps</span></div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">«Вы этого не писали» — правда, но звучит как обвинение</span><span class="en-only">"You never wrote that" — true, but sounds like an accusation</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Молча переделывать без нового соглашения — паттерн повторится</span><span class="en-only">Quietly redoing the work with no new agreement — the pattern repeats</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Признать коммуникационный разрыв. Зафиксировать требования письменно прямо сейчас. Ввести правило на будущее как защиту, а не наказание.</span><span class="en-only">Acknowledge the communication gap. Document requirements in writing right now. Introduce a rule for the future as protection, not punishment.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 9 — former active Scenario 2: bug vs configuration (Frame-Matching) -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H9</span>
+            <div>
+              <div class="hist-name"><span class="ru-only">«Это баг или так задумано?» — язвительный тон и техническая путаница</span><span class="en-only">"Is this a bug or intentional?" — sarcastic tone and technical confusion</span></div>
+              <div class="hist-sub"><span class="ru-only">Приём: Язык собеседника (Frame-Matching) · клиент не различает баг и настройку</span><span class="en-only">Technique: Frame-Matching · client can't tell a bug from a configuration</span></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-med"><span class="ru-only">Средняя</span><span class="en-only">Medium</span></span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Контекст</span><span class="en-only">Context</span></div>
+            <div class="hist-block-text"><span class="ru-only">Заказчик язвительно жалуется, что «опять не работает». На деле это не баг, а ещё не настроенный под его кейс модуль. Саппорт уже ответил за 8 минут, но заказчик этого не заметил — указывать на это не стоит.</span><span class="en-only">The client sarcastically complains that "it's broken again." In reality it's not a bug, just a module not yet configured for his case. Support already replied in 8 minutes, but the client didn't notice — pointing that out won't help.</span></div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Ключевые ловушки</span><span class="en-only">Key traps</span></div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Объяснять баг/настройку техническим жаргоном — заказчик потеряется</span><span class="en-only">Explaining bug vs. configuration in technical jargon — the client will get lost</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Указать, что саппорт уже отвечал — читается как упрёк, а не помощь</span><span class="en-only">Pointing out that support already replied — reads as a rebuke, not help</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Объяснить просто, без жаргона. Дать конкретный шаг с датой. Не унижать заказчика за незнание технических деталей.</span><span class="en-only">Explain simply, no jargon. Give a concrete step with a date. Don't belittle the client for not knowing technical details.</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -3458,12 +3186,12 @@ function genRenderResult(seed, lang){
     </div>
     <div class="block">
       <div class="block-label">${lang==='en'?"Questions for your pair's own debrief":'Вопросы для разбора внутри пары'}</div>
-      <div class="flow-note">${lang==='en'?"Right after the scene, without leaving the room: go through the checklist all three of you together — both participants plus the observer. We'll go over the insights together afterward on the group call.":'Сразу после сцены, не выходя из комнаты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Инсайты потом обсудим все вместе на общем колле.'}</div>
+      <div class="flow-note">${lang==='en'?"Right after the scene, without leaving the room: you have 5 minutes for this — go through the checklist all three of you together — both participants plus the observer. We'll go over the insights together afterward on the group call.":'Сразу после сцены, не выходя из комнаты: на это выделено 5 минут — пройдитесь по чек-листу все втроём, оба участника вместе с наблюдателем. Инсайты потом обсудим все вместе на общем колле.'}</div>
       <div class="debrief-list">${debriefHtml}</div>
     </div>
     <div class="group-discuss-block">
       <div class="block-label">🗣 ${lang==='en'?'Group discussion — after the pairs':'Общее обсуждение — после пар'}</div>
-      <div class="flow-note">${lang==='en'?"Once everyone's back, discuss together — without naming who did what, just the techniques and insights.":'Когда все вернулись, можно обсудить вместе — не называя, кто и как справился, только сами приёмы и находки.'}</div>
+      <div class="flow-note">${lang==='en'?"You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights.":'На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.'}</div>
       <div class="group-list">${groupHtml}</div>
     </div>`;
   document.getElementById('genResult').scrollIntoView({behavior:'smooth', block:'nearest'});
