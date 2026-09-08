@@ -519,6 +519,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
         <div class="pairs-controls">
           <button class="r-btn r-primary" onclick="formAllPairs()">👥 <span class="ru-only">Сформировать пары</span><span class="en-only">Form pairs</span></button>
           <button class="r-btn" onclick="resetPairs()">↺ <span class="ru-only">Заново</span><span class="en-only">Reshuffle</span></button>
+          <button class="r-btn" onclick="exportPairsCSV()">⬇ <span class="ru-only">Экспорт CSV</span><span class="en-only">Export CSV</span></button>
         </div>
         <div class="rand-count"><span class="ru-only">Отмечено:</span><span class="en-only">Checked in:</span> <span id="participantCountPairs">34</span> <span class="ru-only">из</span><span class="en-only">of</span> <span id="participantCountTotal">34</span> · <span id="pairsModeHint" style="color:var(--teal)">(1 CS + 1 <span class="ru-only">заказчик + 1 наблюдатель в группе</span><span class="en-only">client + 1 observer per group</span>)</span></div>
         <div class="pairs-grid" id="pairsGrid"></div>
@@ -2337,6 +2338,32 @@ function renderPairsGrid(){
 function resetPairs(){
   pairsState=[];
   document.getElementById('pairsGrid').innerHTML='';
+}
+
+function exportPairsCSV(){
+  if(!pairsState.length) return;
+  const en = document.body.dataset.lang==='en';
+  const headers = en
+    ? ['Group','CS','Client','Observer(s)']
+    : ['Группа','CS','Заказчик','Наблюдатель(и)'];
+  const csvEscape = v => {
+    const s = String(v==null ? '' : v);
+    return /[",\n]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+  };
+  const rows = pairsState.map((g,idx)=>[
+    idx+1, g.cs, g.cl, g.observers.filter(Boolean).join('; ')
+  ]);
+  const csv = '\uFEFF' + [headers, ...rows].map(r=>r.map(csvEscape).join(',')).join('\r\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `dueling-club-pairs-${stamp}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ── ROULETTE WHEEL ─────────────────────────────────────
