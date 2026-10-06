@@ -201,6 +201,7 @@ main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 .sc-difficulty{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;padding:3px 11px;border-radius:20px;margin-bottom:.85rem}
 .diff-high{background:var(--red-l);color:var(--red)}
 .diff-med{background:var(--amber-l);color:var(--amber)}
+.diff-low{background:var(--teal-l);color:var(--teal)}
 .diff-vhigh{background:var(--purple-l);color:var(--purple)}
 .sc-header h2{font-family:'Libre Baskerville',serif;font-size:clamp(20px,3.4vw,28px);font-weight:700;line-height:1.2;letter-spacing:-.4px;margin-bottom:.5rem;position:relative;padding-left:14px}
 .sc-header h2::before{content:"";position:absolute;left:0;top:.15em;bottom:.15em;width:3px;border-radius:2px;background:var(--grad-teal)}
@@ -479,9 +480,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="intro">
     <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
     <h1><span class="ru-only">CS-менеджер и заказчик — <span class="grad-text">трудный разговор</span></span><span class="en-only">CS Manager and Client — <span class="grad-text">a Difficult Conversation</span></span></h1>
-    <p><span class="ru-only">Боевой сценарий на основе реальных ситуаций и материалов воркшопа - тренируетесь в своей группе, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">A real-case scenario based on workshop material - you practice in your own group, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
+    <p><span class="ru-only">Семь сценариев по модулям воркшопа и реальным ситуациям - тренируетесь в своей группе, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Seven scenarios based on the workshop modules and real situations - you practice in your own group, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
     <div class="intro-meta">
-      <span class="meta-pill"><span class="ru-only">Сценарий + генератор</span><span class="en-only">Scenario + generator</span></span>
+      <span class="meta-pill"><span class="ru-only">7 сценариев + генератор</span><span class="en-only">7 scenarios + generator</span></span>
       <span class="meta-pill"><span class="ru-only">Реальные кейсы</span><span class="en-only">Real cases</span></span>
       <span class="meta-pill">Poker &amp; Casino B2B</span>
       <span class="meta-pill"><span class="ru-only">Работа в парах</span><span class="en-only">Pair work</span></span>
@@ -540,6 +541,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="sc-tabs">
     <button class="sc-tab active" onclick="showScenario('warmup',this)">🌤 <span class="ru-only">Разминка — лёгкий старт</span><span class="en-only">Warm-up — easy start</span></button>
     <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 1 - Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 1 - Tech Director: Passive Aggression</span></button>
+    <button class="sc-tab" onclick="showScenario('s9',this)"><span class="ru-only">Сценарий 2 - Язык обязательств: «так когда?»</span><span class="en-only">Scenario 2 - Language of commitments: “so when?”</span></button>
+    <button class="sc-tab" onclick="showScenario('s10',this)"><span class="ru-only">Сценарий 3 - Плохие новости: релиз сдвигается</span><span class="en-only">Scenario 3 - Bad news: the release slips</span></button>
+    <button class="sc-tab" onclick="showScenario('s11',this)"><span class="ru-only">Сценарий 4 - Доверие: после инцидента</span><span class="en-only">Scenario 4 - Trust: after an incident</span></button>
+    <button class="sc-tab" onclick="showScenario('s12',this)"><span class="ru-only">Сценарий 5 - CS как продукт: «зачем нам AM?»</span><span class="en-only">Scenario 5 - CS as a product: “why do we need an AM?”</span></button>
+    <button class="sc-tab" onclick="showScenario('s13',this)"><span class="ru-only">Сценарий 6 - Small talk: новый контакт</span><span class="en-only">Scenario 6 - Small talk: a new contact</span></button>
+    <button class="sc-tab" onclick="showScenario('s14',this)"><span class="ru-only">Сценарий 7 - Токсичный клиент: Манипулятор</span><span class="en-only">Scenario 7 - Toxic client: the Manipulator</span></button>
     <button class="sc-tab" onclick="showScenario('generator',this)">🎲 <span class="ru-only">Генератор своего сценария</span><span class="en-only">Build-your-own Generator</span></button>
   </div>
 
@@ -608,7 +615,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     <div class="sc-header">
       <div class="sc-difficulty" style="background:var(--teal-l);color:var(--teal)">🌤 <span class="ru-only">Разминка · Без риска</span><span class="en-only">Warm-up · No stakes</span></div>
       <h2><span class="ru-only">Лёгкий старт — прежде чем переходить к боевым кейсам</span><span class="en-only">Easy start — before moving to the real cases</span></h2>
-      <p class="subtitle"><span class="ru-only">5 минут на нейтральном материале, чтобы войти в роль — лучше всего вместе, на общий круг. Всего три карточки, чтобы уложиться по времени и на этой же встрече успеть боевой сценарий. Затем переходите к «Сценарий 1».</span><span class="en-only">5 minutes on neutral material to get into the role — best done together, as a group. Just three cards, so there's time left in the session for the real scenario. Then move on to "Scenario 1."</span></p>
+      <p class="subtitle"><span class="ru-only">5 минут на нейтральном материале, чтобы войти в роль — лучше всего вместе, на общий круг. Всего три карточки, чтобы уложиться по времени и на этой же встрече успеть два боевых сценария. Затем выбирайте сценарий по теме встречи.</span><span class="en-only">5 minutes on neutral material to get into the role — best done together, as a group. Just three cards, so there's time left in the session for two real scenarios. Then pick a scenario that fits the session’s topic.</span></p>
     </div>
 
     <div class="warmup-intro">
@@ -834,6 +841,1130 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       </div>
     </div>
   </div>
+
+  <div class="sc-panel" id="s9">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med">🤝 <span class="ru-only">Средняя · Модуль «Язык обязательств»</span><span class="en-only">Medium · Module “Language of commitments”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Формула обязательства: что - кто - когда - следующий статус</span><span class="en-only">Technique in focus: Commitment formula: what - who - when - next update</span></div>
+      <h2><span class="ru-only">«Так когда будет?» - обещание без даты и владельца</span><span class="en-only">“So when will it be ready?” - a promise with no date and no owner</span></h2>
+      <p class="subtitle"><span class="ru-only">Оператор третью неделю ждёт исправления в турнирном модуле. Дважды слышал «разберёмся, скоро будет» - и ни разу не получил ни даты, ни имени ответственного. Через 10 дней у него стартует турнирная серия. AM должен перестать говорить «разберёмся» и дать обязательство, которое можно проверить, даже если финальной даты пока нет.</span><span class="en-only">The operator has been waiting three weeks for a fix in the tournament module. Twice he heard “we’ll look into it, it’ll be soon” - and never got a date or the name of an owner. His tournament series starts in 10 days. AM has to stop saying “we’ll look into it” and give a commitment that can be checked, even if there’s no final date yet.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «Язык обязательств». В турнирном модуле некорректно считаются re-entry: часть игроков не может перезайти после вылета. Тикет в работе у разработки, оценки пока нет. Head of Product оператора спокоен, но настойчив: под турнирную серию уже куплен маркетинг, и ему нужно понимать, переносить запуск или нет. Прошлые ответы «скоро» и «разберёмся» он уже переслал своему CEO.</span><span class="en-only">Based on the “Language of commitments” module. The tournament module miscounts re-entries: some players can’t re-enter after being knocked out. The ticket is with development, no estimate yet. The operator’s Head of Product is calm but persistent: marketing for the tournament series is already paid for, and he needs to know whether to postpone the launch. He has already forwarded the earlier “soon” and “we’ll look into it” replies to his CEO.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«Мне не нужно “скоро”. Мне нужна дата.»<br>«Кто конкретно у вас этим занимается? Я хочу знать имя.»<br>«Вы уже два раза говорили “разберёмся”. Что изменилось с тех пор?»</span><span class="en-only">“I don’t need ‘soon’. I need a date.”<br>“Who exactly is working on this on your side? I want a name.”<br>“You’ve said ‘we’ll look into it’ twice already. What has changed since then?”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">HP</div>
+          <div><div class="char-name"><span class="ru-only">Head of Product оператора</span><span class="en-only">Operator’s Head of Product</span></div><div class="char-role"><span class="ru-only">Ждёт исправления третью неделю</span><span class="en-only">Third week waiting for a fix</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Не повышает голос, задаёт короткие точные вопросы. Отслеживает каждое обещание и сравнивает его с тем, что было сделано. Расплывчатые ответы воспринимает как знак, что вопросом никто не владеет.</span><span class="en-only">Doesn’t raise his voice, asks short precise questions. Tracks every promise and compares it with what was actually done. Takes vague answers as a sign that nobody owns the issue.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Каждый раз переспрашивать «а когда конкретно?» и «кто это делает?». На «постараемся», «скоро», «в ближайшее время» - фиксировать вслух: «то есть даты нет». Смягчаться, когда AM называет, что он сам сделает и к какому сроку, даже если это не финальная дата исправления.</span><span class="en-only">Keep asking “when exactly?” and “who’s doing it?”. Whenever you hear “we’ll try”, “soon”, “shortly” - say it back: “so there’s no date”. Soften when AM names what they will personally do and by when, even if it isn’t the final fix date.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Скоро» и «постараемся»</span><span class="en-only">“Soon” and “we’ll try”</span></span>
+              <span class="char-tag red"><span class="ru-only">«Это не от меня зависит»</span><span class="en-only">“It doesn’t depend on me”</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретный шаг + дата следующего статуса → снижает давление</span><span class="en-only">A concrete step + date of the next update → pressure eases</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Хочется назвать хоть какую-то дату, чтобы закрыть разговор, - но дату исправления вы не контролируете. Второй соблазн - спрятаться за разработку. Оба пути повторяют прошлую ошибку: обещание, которое некому выполнить.</span><span class="en-only">You want to name any date just to close the conversation - but you don’t control the fix date. The other temptation is to hide behind development. Both repeat the earlier mistake: a promise nobody can keep.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Признать, что прошлые ответы были пустыми. Разделить, что известно и что нет. Дать обязательство по тому, что вы контролируете: что вы делаете, к какому сроку, когда следующий статус. Предложить запасной вариант под турнирную серию.</span><span class="en-only">Admit that the earlier replies were empty. Separate what is known from what isn’t. Commit to what you control: what you’ll do, by when, and when the next update comes. Offer a fallback for the tournament series.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Что - кто - когда - следующий статус</span><span class="en-only">What - who - when - next update</span></span>
+              <span class="char-tag teal"><span class="ru-only">Обещать только то, что контролируете</span><span class="en-only">Only promise what you control</span></span>
+              <span class="char-tag amber"><span class="ru-only">Запасной план под дедлайн клиента</span><span class="en-only">A fallback plan for the client’s deadline</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Формула обязательства: что - кто - когда - следующий статус</span><span class="en-only">Observer’s task - Commitment formula: what - who - when - next update</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Назвал ли AM конкретное действие, ответственного и срок - или снова прозвучало «разберёмся», «скоро», «постараемся»?</span><span class="en-only">Did AM name a concrete action, an owner and a date - or did “we’ll look into it”, “soon”, “we’ll try” come up again?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Обещал ли AM только то, что контролирует сам (дату следующего статуса), или назвал дату исправления, которую не может гарантировать?</span><span class="en-only">Did AM only promise what they control (the date of the next update), or did they name a fix date they can’t guarantee?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Говорил ли AM «мы» и «я веду этот вопрос» - или переложил ответственность на разработку?</span><span class="en-only">Did AM say “we” and “I’m handling this” - or shift responsibility to development?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 Head of Product + 1 AM + 1 наблюдатель</span><span class="en-only">1 Head of Product + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Созвон</span><span class="en-only">Call</span></span>
+      <span class="t-pill">📅 <span class="ru-only">Турнирная серия через 10 дней</span><span class="en-only">Tournament series in 10 days</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Назвать дату исправления наугад, чтобы снять давление - через неделю это станет третьим сорванным обещанием</span><span class="en-only">Naming a random fix date to relieve the pressure - in a week it becomes the third broken promise</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Это не от меня зависит, это разработка» - клиент слышит, что вопросом никто не владеет</span><span class="en-only">“It doesn’t depend on me, it’s development” - the client hears that nobody owns the issue</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Снова «разберёмся в ближайшее время» - то же, что уже дважды не сработало</span><span class="en-only">Another “we’ll look into it shortly” - the same thing that already failed twice</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать прошлые пустые ответы, разделить известное и неизвестное, дать проверяемое обязательство по тому, что контролируете, и предложить запасной план под турнирную серию.</span><span class="en-only">Admit the earlier empty replies, separate known from unknown, give a checkable commitment on what you control, and offer a fallback for the tournament series.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Формула обязательства: что - кто - когда - следующий статус</span><span class="en-only">Technique: Commitment formula: what - who - when - next update</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> обязательство отличается от согласия тем, что его можно проверить. Рабочая формула из модуля: что именно делаем - кто отвечает - к какому сроку - когда следующий статус. Если финальной даты нет, обязательством становится дата следующего статуса и то, что за ней последует.</span><span class="en-only"><b>What it is:</b> a commitment differs from agreement in that it can be checked. The working formula from the module: what exactly we’ll do - who owns it - by when - when the next update comes. If there’s no final date, the commitment becomes the date of the next update and what follows it.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">«Разберёмся» без даты и имени - согласие без действия: клиент не знает, когда ждать, и начинает напоминать сам.</span><span class="en-only">“We’ll look into it” without a date or a name is agreement without action: the client doesn’t know when to expect anything and starts chasing.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Обещайте только то, что в вашей зоне контроля. Дату исправления можно не знать, а дату своего следующего сообщения - знаете всегда.</span><span class="en-only">Only promise what’s within your control. You may not know the fix date, but you always know the date of your next message.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Говорите о будущем через конкретику: «в четверг до 15:00 пришлю оценку от разработки» сильнее, чем «как только будет информация».</span><span class="en-only">Talk about the future in specifics: “by 3pm Thursday I’ll send you the dev estimate” is stronger than “as soon as we have information”.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Язык обязательств» + принцип конкретных договорённостей из переговорной практики.</span><span class="en-only">Based on the course module “Language of commitments” + the principle of concrete agreements from negotiation practice.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“You’re right - “we’ll look into it” isn’t an answer. Here’s what I can commit to.”</div><div class="phrase-ru">Вы правы - «разберёмся» это не ответ. Вот что я могу пообещать.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“I don’t have the fix date yet. What I do have: by Thursday 3pm you’ll get the dev estimate from me.”</div><div class="phrase-ru">Даты исправления пока нет. Что есть: в четверг до 15:00 пришлю вам оценку от разработки.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“I’m the owner of this on our side - if anything changes, you’ll hear it from me first.”</div><div class="phrase-ru">С нашей стороны этот вопрос веду я - если что-то изменится, вы узнаете первым от меня.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Let’s also agree on a plan B for the series, so your launch doesn’t depend on our estimate.”</div><div class="phrase-ru">Давайте сразу договоримся о плане Б для серии, чтобы ваш запуск не зависел от нашей оценки.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Head of Product</span><span class="en-only">Head of Product</span></span><span class="line-text"><span class="ru-only">Вы уже два раза говорили «разберёмся». Мне не нужно «скоро» - мне нужна дата. Серия стартует через 10 дней.</span><span class="en-only">You’ve said “we’ll look into it” twice. I don’t need “soon” - I need a date. The series starts in 10 days.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Вы правы, «разберёмся» - это не ответ, и мне жаль, что вы дважды его получили. Скажу честно, что известно: тикет у разработки, причина найдена, оценки срока пока нет. Что я могу пообещать: в четверг до 15:00 пришлю вам оценку от разработки - этим вопросом с нашей стороны занимаюсь я.</span><span class="en-only">You’re right, “we’ll look into it” isn’t an answer, and I’m sorry you got it twice. Here’s honestly what we know: the ticket is with development, the cause is found, there’s no estimate yet. What I can commit to: by 3pm Thursday I’ll send you the dev estimate - I’m the owner of this on our side.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Head of Product</span><span class="en-only">Head of Product</span></span><span class="line-text"><span class="ru-only">А если в четверг окажется, что к серии не успеваете?</span><span class="en-only">And if on Thursday it turns out you won’t make it in time for the series?</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Тогда в тот же четверг предложу обходной вариант: отключаем re-entry для серии и даём вам шаблон анонса для игроков. Решение о запуске останется за вами, но у вас будет время его принять.</span><span class="en-only">Then on the same Thursday I’ll propose a workaround: we turn off re-entry for the series and give you an announcement template for players. The launch decision stays with you, but you’ll have time to make it.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM не называет дату исправления, которую не контролирует. Он обещает дату следующего статуса, называет себя ответственным и заранее готовит запасной план - это и есть проверяемое обязательство.</span><span class="en-only">AM doesn’t name a fix date they don’t control. They promise the date of the next update, name themselves as owner and prepare a fallback in advance - that’s a checkable commitment.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем «разберёмся» отличается от обязательства - и как это звучит для клиента?</span><span class="en-only">How does “we’ll look into it” differ from a commitment - and how does it sound to the client?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Что можно пообещать, когда финальной даты нет?</span><span class="en-only">What can you promise when there’s no final date?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Почему важно назвать себя ответственным, даже если работу делает разработка?</span><span class="en-only">Why does it matter to name yourself as owner, even if development does the work?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Как запасной план меняет разговор о сроках?</span><span class="en-only">How does a fallback plan change the conversation about deadlines?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Постараемся сделать в ближайшее время»</span><span class="en-only">“We’ll try to get it done shortly”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Нет ни даты, ни ответственного - клиент снова не знает, когда ждать.</span><span class="en-only">No date, no owner - the client again doesn’t know when to expect anything.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Думаю, к пятнице точно успеем»</span><span class="en-only">“I think we’ll definitely make it by Friday”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Дата, которую AM не контролирует, - заготовка для следующего сорванного обещания.</span><span class="en-only">A date AM doesn’t control is a setup for the next broken promise.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«В четверг до 15:00 пришлю оценку от разработки, вопрос веду я»</span><span class="en-only">“By 3pm Thursday I’ll send the dev estimate, I’m the owner of this”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Конкретное действие, срок и ответственный - обязательство, которое можно проверить.</span><span class="en-only">A concrete action, a deadline and an owner - a commitment that can be checked.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки обязательств прозвучали убедительно, даже без финальной даты?</span><span class="en-only">Which commitment phrasings sounded convincing, even without a final date?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее - не назвать дату наугад или не сослаться на разработку?</span><span class="en-only">What was harder - not naming a random date, or not pointing at development?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Где в нашей реальной работе «разберёмся» встречается чаще всего и чем его заменить?</span><span class="en-only">Where in our real work does “we’ll look into it” come up most, and what should replace it?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-panel" id="s10">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high">📉 <span class="ru-only">Высокая · Модуль «Протокол плохих новостей»</span><span class="en-only">High · Module “Bad news protocol”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Протокол плохих новостей: суть - причина - влияние - план</span><span class="en-only">Technique in focus: Bad news protocol: the point - cause - impact - plan</span></div>
+      <h2><span class="ru-only">«Почему я узнаю об этом только сейчас?» - сообщить о переносе до того, как клиент заметит сам</span><span class="en-only">“Why am I only hearing this now?” - announcing a delay before the client notices</span></h2>
+      <p class="subtitle"><span class="ru-only">Релиз с новой кэш-игрой, под который оператор запланировал рекламную кампанию, сдвигается на две недели. Клиент пока ничего не знает. AM звонит первым и должен сообщить новость сразу, без долгой подводки, объяснить причину без оправданий и прийти с вариантами, а не только с проблемой.</span><span class="en-only">The release with a new cash game, which the operator has built an ad campaign around, slips by two weeks. The client doesn’t know yet. AM calls first and has to deliver the news straight away, without a long run-up, explain the cause without excuses and come with options, not just a problem.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «Протокол плохих новостей». На финальном тестировании нашли ошибку в расчёте рейка в новой игре - выпускать в таком виде нельзя. Новая дата релиза - через две недели. У оператора на дату релиза запланированы рассылка и баннеры, бюджет согласован. CEO оператора - человек прямой, ценит, когда его не держат в неведении.</span><span class="en-only">Based on the “Bad news protocol” module. Final testing found a rake calculation error in the new game - it can’t ship like this. The new release date is in two weeks. The operator has an email campaign and banners planned for the release date, with the budget approved. The operator’s CEO is direct and values not being kept in the dark.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«Подождите, вы сейчас говорите, что релиза не будет?»<br>«Почему я узнаю об этом только сейчас, а не неделю назад?»<br>«У меня кампания оплачена. Кто мне это компенсирует?»</span><span class="en-only">“Wait, are you saying there won’t be a release?”<br>“Why am I only hearing this now and not a week ago?”<br>“My campaign is paid for. Who’s going to compensate me?”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CEO</div>
+          <div><div class="char-name"><span class="ru-only">CEO оператора</span><span class="en-only">Operator CEO</span></div><div class="char-role"><span class="ru-only">Запланировал кампанию под релиз</span><span class="en-only">Planned a campaign around the release</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Прямой и быстрый. Плохие новости переносит нормально, если их сообщают сразу и с планом. Взрывается, когда чувствует, что его подводят издалека или что от него что-то скрывали.</span><span class="en-only">Direct and fast. Takes bad news well if it’s delivered straight away and with a plan. Blows up when he feels he’s being led around the houses or that something was hidden from him.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Если AM начинает издалека («как дела, как кампания?») - перебить: «давайте к делу». После новости - резко спросить, почему узнаёте только сейчас, и про компенсацию. Успокаиваться, когда слышите конкретные варианты и дату следующего шага.</span><span class="en-only">If AM starts from afar (“how are things, how’s the campaign?”) - interrupt: “let’s get to the point”. After the news - sharply ask why you’re only hearing it now and about compensation. Calm down when you hear concrete options and the date of the next step.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">Долгая подводка перед новостью</span><span class="en-only">A long run-up before the news</span></span>
+              <span class="char-tag red"><span class="ru-only">«Небольшая задержка»</span><span class="en-only">“A small delay”</span></span>
+              <span class="char-tag teal"><span class="ru-only">Суть в первые 30 секунд + варианты → включается в решение</span><span class="en-only">The point in the first 30 seconds + options → he joins the problem-solving</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Хочется смягчить: начать с приятного, назвать перенос «небольшой задержкой» или отправить письмо вместо звонка. Но каждая минута подводки клиент воспринимает как попытку спрятать главное.</span><span class="en-only">You want to soften it: start with something pleasant, call the slip “a small delay”, or send an email instead of calling. But every minute of run-up feels to the client like an attempt to hide the main point.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Сказать суть в первых фразах. Назвать причину коротко и без перекладывания вины. Признать влияние на кампанию клиента. Предложить варианты и договориться о следующем шаге. Не обещать компенсацию, которую не можете согласовать сами.</span><span class="en-only">State the point in the first sentences. Name the cause briefly without shifting blame. Acknowledge the impact on the client’s campaign. Offer options and agree on a next step. Don’t promise compensation you can’t approve yourself.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Суть - в первые 30 секунд</span><span class="en-only">The point in the first 30 seconds</span></span>
+              <span class="char-tag teal"><span class="ru-only">Причина без оправданий</span><span class="en-only">Cause without excuses</span></span>
+              <span class="char-tag amber"><span class="ru-only">Варианты + следующий шаг</span><span class="en-only">Options + next step</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Протокол плохих новостей: суть - причина - влияние - план</span><span class="en-only">Observer’s task - Bad news protocol: the point - cause - impact - plan</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Прозвучала ли суть новости в первых фразах - или ей предшествовала долгая подводка?</span><span class="en-only">Did the point of the news come in the first sentences - or was there a long run-up?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Назвал ли AM перенос прямо (две недели, новая дата) - или смягчал словами вроде «небольшая задержка»?</span><span class="en-only">Did AM name the delay plainly (two weeks, a new date) - or soften it with words like “a small delay”?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Пришёл ли AM с вариантами и следующим шагом - или оставил клиента наедине с проблемой?</span><span class="en-only">Did AM come with options and a next step - or leave the client alone with the problem?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 CEO + 1 AM + 1 наблюдатель</span><span class="en-only">1 CEO + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок, AM звонит первым</span><span class="en-only">Call, AM calls first</span></span>
+      <span class="t-pill">📉 <span class="ru-only">Перенос на 2 недели</span><span class="en-only">2-week delay</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Начать с приятного и подводить к новости несколько минут - клиент чувствует, что его готовят к удару, и злится сильнее</span><span class="en-only">Starting with something pleasant and taking several minutes to get to the news - the client feels he’s being prepared for a blow and gets angrier</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Небольшая задержка» вместо «перенос на две недели» - когда клиент узнает реальный масштаб, доверие упадёт</span><span class="en-only">“A small delay” instead of “a two-week delay” - when the client learns the real scale, trust drops</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Пообещать компенсацию кампании, чтобы погасить эмоцию, - без согласования это новое пустое обещание</span><span class="en-only">Promising compensation for the campaign to calm the emotion - without approval it’s another empty promise</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Суть в первые 30 секунд, причина коротко и без перекладывания вины, признать влияние на кампанию, предложить варианты и дату следующего шага; вопрос компенсации - передать с конкретным сроком ответа.</span><span class="en-only">The point in the first 30 seconds, the cause briefly without shifting blame, acknowledge the impact on the campaign, offer options and the date of the next step; take the compensation question forward with a concrete answer date.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Протокол плохих новостей: суть - причина - влияние - план</span><span class="en-only">Technique: Bad news protocol: the point - cause - impact - plan</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> последовательность из модуля для любой неприятной новости: сначала суть (что случилось и что это значит для клиента), затем причина в одном-двух предложениях, затем влияние на клиента, затем план и следующий шаг. Сообщаем первыми - до того, как клиент обнаружит проблему сам.</span><span class="en-only"><b>What it is:</b> the sequence from the module for any unpleasant news: first the point (what happened and what it means for the client), then the cause in one or two sentences, then the impact on the client, then the plan and next step. We tell them first - before the client discovers the problem himself.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Чем раньше клиент узнаёт новость от вас, тем больше у него вариантов - и тем меньше ощущения, что от него что-то скрывали.</span><span class="en-only">The earlier the client hears the news from you, the more options he has - and the less he feels something was hidden from him.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Плохие новости - голосом, а не письмом: на звонке клиент слышит, что вы рядом, и может сразу задать вопросы. Письмо - уже после, как фиксация договорённостей.</span><span class="en-only">Bad news by voice, not by email: on a call the client hears that you’re there and can ask questions right away. The email comes afterwards, to record what was agreed.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Отделяйте то, что можете решить сами, от того, что нужно согласовать: «вопрос компенсации я сегодня передам руководству, ответ - до пятницы».</span><span class="en-only">Separate what you can decide yourself from what needs approval: “I’ll take the compensation question to management today, you’ll have an answer by Friday”.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Протокол плохих новостей» + принципы кризисной коммуникации.</span><span class="en-only">Based on the course module “Bad news protocol” + crisis communication principles.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“I’m calling with bad news, and I wanted you to hear it from me first.”</div><div class="phrase-ru">Звоню с плохой новостью и хотел, чтобы вы узнали её первым от меня.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“The release is moving by two weeks - the new date is the 24th.”</div><div class="phrase-ru">Релиз переносится на две недели - новая дата 24-е.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Testing found an error in the rake calculation, and we won’t ship something that affects your money.”</div><div class="phrase-ru">На тестировании нашли ошибку в расчёте рейка - мы не будем выпускать то, что влияет на ваши деньги.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Here are two options for your campaign - and I’ll get back to you on compensation by Friday.”</div><div class="phrase-ru">Вот два варианта для вашей кампании, а по компенсации вернусь к вам с ответом до пятницы.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Звоню с плохой новостью и хотел, чтобы вы узнали её от меня первым. Релиз новой игры переносится на две недели, новая дата - 24-е. На финальном тесте нашли ошибку в расчёте рейка, и выпускать игру, которая неправильно считает ваши деньги, мы не будем.</span><span class="en-only">I’m calling with bad news and wanted you to hear it from me first. The new game’s release moves by two weeks, the new date is the 24th. Final testing found an error in the rake calculation, and we won’t ship a game that miscalculates your money.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">CEO оператора</span><span class="en-only">Operator CEO</span></span><span class="line-text"><span class="ru-only">Подождите. У меня кампания на эту дату оплачена. Почему я узнаю об этом только сейчас?</span><span class="en-only">Wait. My campaign for that date is paid for. Why am I only hearing this now?</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Ошибку нашли вчера вечером, сегодня утром подтвердили новую дату - и я сразу звоню вам. Понимаю, что это бьёт по кампании. Предлагаю два варианта: перенести рассылку на 24-е - баннеры и тексты мы поможем обновить, или запустить кампанию сейчас на текущие игры, а новую объявить отдельно.</span><span class="en-only">The error was found last night, the new date confirmed this morning - and I’m calling you right away. I understand this hits the campaign. Two options: move the mailing to the 24th - we’ll help update banners and copy, or run the campaign now on the current games and announce the new one separately.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">CEO оператора</span><span class="en-only">Operator CEO</span></span><span class="line-text"><span class="ru-only">А кто компенсирует мне потраченное?</span><span class="en-only">And who compensates what I’ve already spent?</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Решить это сам я не могу, но сегодня передам вопрос руководству с вашими цифрами. Ответ будет до пятницы. Пришлёте, какие расходы уже нельзя вернуть?</span><span class="en-only">I can’t decide that myself, but today I’ll take it to management with your numbers. You’ll have an answer by Friday. Could you send which costs can no longer be recovered?</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM говорит суть в первой же фразе, называет перенос прямо, причину - одним предложением без поиска виноватых. Компенсацию не обещает, но берёт вопрос в работу с конкретным сроком - и приходит с вариантами для кампании.</span><span class="en-only">AM states the point in the very first sentence, names the delay plainly and the cause in one sentence without blaming anyone. Doesn’t promise compensation, but takes the question on with a concrete deadline - and comes with options for the campaign.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Сколько времени прошло до сути новости - и как это повлияло на реакцию клиента?</span><span class="en-only">How long did it take to get to the point - and how did that affect the client’s reaction?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как назвать причину так, чтобы это не звучало как оправдание?</span><span class="en-only">How do you name the cause without it sounding like an excuse?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Что делать с требованием компенсации, если решение не за вами?</span><span class="en-only">What do you do with a compensation demand if the decision isn’t yours?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Почему плохую новость лучше сообщать звонком, а письмо отправлять после?</span><span class="en-only">Why is it better to deliver bad news by call and send the email afterwards?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Как ваша кампания, всё по плану? Кстати, есть небольшой нюанс по релизу...»</span><span class="en-only">“How’s your campaign, all on track? By the way, there’s a small detail about the release...”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Долгая подводка и «небольшой нюанс» - клиент почувствует, что новость прячут.</span><span class="en-only">A long run-up and “a small detail” - the client will feel the news is being hidden.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Не переживайте, всё компенсируем»</span><span class="en-only">“Don’t worry, we’ll compensate everything”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Обещание без согласования - снимает эмоцию сейчас, но создаёт новый срыв потом.</span><span class="en-only">A promise without approval - it calms the emotion now but creates a new failure later.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«Звоню с плохой новостью: релиз переносится на две недели, новая дата - 24-е»</span><span class="en-only">“I’m calling with bad news: the release moves by two weeks, the new date is the 24th”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Суть в первой фразе и конкретная дата - клиент может сразу думать о решении.</span><span class="en-only">The point in the first sentence and a concrete date - the client can start thinking about a solution right away.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие первые фразы звучали честно и при этом не пугали?</span><span class="en-only">Which opening lines sounded honest without being alarming?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что было сложнее - сказать новость сразу или не пообещать лишнего?</span><span class="en-only">What was harder - delivering the news straight away or not overpromising?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие плохие новости в нашей работе мы чаще всего откладываем - и почему?</span><span class="en-only">Which bad news in our work do we most often put off - and why?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-panel" id="s11">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-high">🧊 <span class="ru-only">Высокая · Модуль «Доверие после провала»</span><span class="en-only">High · Module “Trust after a failure”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Прозрачность после инцидента</span><span class="en-only">Technique in focus: Transparency after an incident</span></div>
+      <h2><span class="ru-only">«Теперь мы перепроверяем всё за вами» - инцидент, о котором клиент узнал от игроков</span><span class="en-only">“Now we double-check everything you do” - an incident the client learned about from players</span></h2>
+      <p class="subtitle"><span class="ru-only">В субботу вечером кэш-столы лежали почти три часа. Оператор узнал об этом из жалоб игроков, а не от нас. Обещанный разбор причин так и не пришёл - прошла неделя. Теперь операционный директор говорит, что команда перепроверяет за нами каждое обновление. AM должен восстановить доверие через прозрачность: признать, объяснить простым языком и дать клиенту способ проверять нас.</span><span class="en-only">On Saturday evening the cash tables were down for almost three hours. The operator found out from player complaints, not from us. The promised incident report never arrived - a week has passed. Now the operations director says his team double-checks every update we ship. AM has to rebuild trust through transparency: acknowledge, explain in plain language and give the client a way to check on us.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «Доверие после провала». Причина сбоя - ошибка конфигурации при плановом обновлении. Разбор причин внутри уже готов, но клиенту его не отправили. Это второй неприятный эпизод за квартал. Операционный директор не кричит, говорит холодно и с цифрами: сколько игроков ушло, сколько рейка потеряно.</span><span class="en-only">Based on the “Trust after a failure” module. The cause was a configuration error during a scheduled update. The internal root-cause analysis is ready but was never sent to the client. It’s the second unpleasant episode this quarter. The operations director doesn’t shout; he speaks coldly and with numbers: how many players left, how much rake was lost.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«Я узнал о сбое от своих игроков. Не от вас.»<br>«Вы обещали разбор неделю назад. Где он?»<br>«Теперь моя команда перепроверяет за вами каждое обновление. Это наше время и наши деньги.»</span><span class="en-only">“I found out about the outage from my players. Not from you.”<br>“You promised a report a week ago. Where is it?”<br>“Now my team double-checks every update you ship. That’s our time and our money.”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">OD</div>
+          <div><div class="char-name"><span class="ru-only">Операционный директор</span><span class="en-only">Operations Director</span></div><div class="char-role"><span class="ru-only">Второй инцидент за квартал</span><span class="en-only">Second incident this quarter</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Холодный, оперирует фактами и цифрами. Не ждёт извинений - ждёт доказательств, что ситуация под контролем. Общие слова воспринимает как попытку замять тему.</span><span class="en-only">Cold, works with facts and numbers. Doesn’t want apologies - wants proof that the situation is under control. Takes general statements as an attempt to brush the issue aside.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать с того, что узнали о сбое от игроков. На «приносим извинения за неудобства» - отвечать: «это не неудобство, это потерянные деньги». Смягчаться, когда AM признаёт конкретно, объясняет причину без жаргона и предлагает, как клиенту самому видеть статус системы.</span><span class="en-only">Start by saying you learned about the outage from players. To “we apologize for the inconvenience” - reply: “this isn’t an inconvenience, it’s lost money”. Soften when AM acknowledges specifically, explains the cause without jargon and offers a way for the client to see system status himself.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Приносим извинения за неудобства»</span><span class="en-only">“We apologize for the inconvenience”</span></span>
+              <span class="char-tag red"><span class="ru-only">Технический жаргон вместо объяснения</span><span class="en-only">Technical jargon instead of an explanation</span></span>
+              <span class="char-tag teal"><span class="ru-only">Конкретное признание + проверяемые меры → начинает обсуждать</span><span class="en-only">Specific acknowledgement + checkable measures → starts to engage</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Неловко: разбор готов, но его не отправили - и это уже ваша зона. Хочется уйти в технические подробности, чтобы показать, что всё под контролем, или пообещать, что такого больше не будет.</span><span class="en-only">It’s awkward: the report is ready but wasn’t sent - and that’s on you. You want to dive into technical detail to show everything is under control, or promise it won’t happen again.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Признать оба провала: сбой и молчание после него. Объяснить причину простым языком. Показать, что изменено, чтобы это не повторилось. Дать клиенту способ проверять нас самому - статус-страница, уведомления, отчёт после каждого релиза.</span><span class="en-only">Acknowledge both failures: the outage and the silence afterwards. Explain the cause in plain language. Show what has changed so it doesn’t repeat. Give the client a way to check on us himself - a status page, alerts, a report after every release.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Признать сбой и молчание</span><span class="en-only">Acknowledge the outage and the silence</span></span>
+              <span class="char-tag teal"><span class="ru-only">Причина простым языком</span><span class="en-only">The cause in plain language</span></span>
+              <span class="char-tag amber"><span class="ru-only">Проверяемость вместо обещаний</span><span class="en-only">Verifiability instead of promises</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Прозрачность после инцидента</span><span class="en-only">Observer’s task - Transparency after an incident</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Признал ли AM не только сбой, но и то, что клиент узнал о нём не от нас и не получил разбор вовремя?</span><span class="en-only">Did AM acknowledge not only the outage but also that the client didn’t hear it from us and didn’t get the report on time?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Объяснил ли AM причину понятно, без жаргона и без перекладывания вины на «технарей»?</span><span class="en-only">Did AM explain the cause clearly, without jargon and without blaming “the tech people”?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Предложил ли AM, как клиент сможет сам проверять ситуацию, - или ограничился обещанием «больше не повторится»?</span><span class="en-only">Did AM offer a way for the client to check the situation himself - or stop at “it won’t happen again”?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 операционный директор + 1 AM + 1 наблюдатель</span><span class="en-only">1 operations director + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Созвон</span><span class="en-only">Call</span></span>
+      <span class="t-pill">⚠ <span class="ru-only">Сбой + неделя тишины</span><span class="en-only">Outage + a week of silence</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">9 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">19 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Приносим извинения за неудобства» - формула, которая обесценивает потерянные деньги клиента</span><span class="en-only">“We apologize for the inconvenience” - a formula that belittles the client’s lost money</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Уйти в технические детали конфигурации - клиент слышит, что ему пытаются заговорить зубы</span><span class="en-only">Going deep into configuration detail - the client hears an attempt to talk him round</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Такого больше не повторится» - обещание, которое клиент уже не может проверить и потому не принимает</span><span class="en-only">“It won’t happen again” - a promise the client can no longer check, so he doesn’t accept it</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать сбой и молчание после него, объяснить причину в двух предложениях, показать изменения в процессе и дать клиенту инструменты проверки: уведомления, статус, отчёт после релизов.</span><span class="en-only">Acknowledge the outage and the silence after it, explain the cause in two sentences, show the process changes and give the client tools to check: alerts, status, a report after releases.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Прозрачность после инцидента</span><span class="en-only">Technique: Transparency after an incident</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> после инцидента доверие восстанавливается не обещаниями, а видимостью. Последовательность из модуля: признать без условий - услышать эмоцию - объяснить, не оправдываясь - показать конкретный план - отдать контроль клиенту. В случае инцидента контроль - это возможность видеть, что происходит, без запроса к нам.</span><span class="en-only"><b>What it is:</b> after an incident, trust comes back through visibility, not promises. The sequence from the module: acknowledge without conditions - hear the emotion - explain without excuses - show a concrete plan - give control to the client. With an incident, control means being able to see what’s happening without having to ask us.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Молчание после провала разрушает доверие сильнее, чем сам провал: клиент додумывает худшее.</span><span class="en-only">Silence after a failure damages trust more than the failure itself: the client imagines the worst.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Объясняйте причину на языке последствий для клиента, а не на языке системы: «при обновлении неверно применилась настройка, и столы перестали принимать игроков».</span><span class="en-only">Explain the cause in terms of consequences for the client, not in system terms: “during the update a setting was applied incorrectly and the tables stopped accepting players”.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Проверяемость сильнее обещаний: уведомление о сбое в течение 15 минут, отчёт после каждого релиза, общая точка контроля раз в месяц.</span><span class="en-only">Verifiability beats promises: an outage alert within 15 minutes, a report after every release, a shared monthly checkpoint.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Доверие после провала» + практика коммуникации инцидентов (post-mortem без поиска виноватых).</span><span class="en-only">Based on the course module “Trust after a failure” + incident communication practice (blameless post-mortems).</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“You should have heard about this from us, not from your players. That’s our failure too.”</div><div class="phrase-ru">Вы должны были узнать об этом от нас, а не от игроков. Это тоже наш провал.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“In short: a setting was applied incorrectly during the update, and the tables stopped accepting players.”</div><div class="phrase-ru">Коротко: при обновлении неверно применилась настройка, и столы перестали принимать игроков.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“I’m sending you the full report today - and from now on you’ll get one after every release.”</div><div class="phrase-ru">Сегодня отправлю вам полный разбор - и дальше вы будете получать отчёт после каждого релиза.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“If anything goes down, you’ll get an alert from us within 15 minutes.”</div><div class="phrase-ru">Если что-то упадёт, вы получите уведомление от нас в течение 15 минут.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Операционный директор</span><span class="en-only">Operations Director</span></span><span class="line-text"><span class="ru-only">Я узнал о сбое от своих игроков. Не от вас. И разбор, который вы обещали неделю назад, я так и не увидел.</span><span class="en-only">I found out about the outage from my players. Not from you. And I still haven’t seen the report you promised a week ago.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Вы правы по обоим пунктам. Сбой - наша ошибка, и то, что вы узнали о нём не от нас и не получили разбор вовремя, - тоже. Коротко о причине: при плановом обновлении неверно применилась настройка, и столы перестали принимать игроков почти на три часа.</span><span class="en-only">You’re right on both counts. The outage is our mistake, and so is the fact that you didn’t hear it from us and didn’t get the report on time. Briefly, the cause: during a scheduled update a setting was applied incorrectly, and the tables stopped accepting players for almost three hours.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Операционный директор</span><span class="en-only">Operations Director</span></span><span class="line-text"><span class="ru-only">Теперь моя команда перепроверяет за вами каждое обновление. Почему я должен верить, что это не повторится?</span><span class="en-only">Now my team double-checks every update. Why should I believe it won’t happen again?</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Я не буду просить поверить на слово. Предлагаю то, что вы сможете проверить сами: уведомление о любом сбое в течение 15 минут, короткий отчёт после каждого релиза и раз в месяц общий созвон по стабильности. Полный разбор с изменениями в процессе пришлю сегодня до конца дня.</span><span class="en-only">I won’t ask you to take my word for it. Here’s what you can check yourself: an alert about any outage within 15 minutes, a short report after every release and a monthly stability call. I’ll send the full report with the process changes today, before end of day.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM признаёт два провала - сбой и молчание, объясняет причину одним предложением без жаргона и вместо обещания «больше не повторится» даёт клиенту способы проверять ситуацию самому.</span><span class="en-only">AM acknowledges two failures - the outage and the silence, explains the cause in one sentence without jargon, and instead of “it won’t happen again” gives the client ways to check the situation himself.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Почему признать молчание после сбоя так же важно, как сам сбой?</span><span class="en-only">Why is acknowledging the silence after the outage as important as the outage itself?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как объяснить техническую причину так, чтобы клиент понял последствия, а не детали системы?</span><span class="en-only">How do you explain a technical cause so the client understands the consequences, not the system details?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Чем проверяемая мера отличается от обещания «больше не повторится»?</span><span class="en-only">How does a checkable measure differ from the promise “it won’t happen again”?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Что клиенту нужно видеть, чтобы перестать перепроверять за нами?</span><span class="en-only">What does the client need to see to stop double-checking us?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Приносим извинения за доставленные неудобства»</span><span class="en-only">“We apologize for any inconvenience caused”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Формула вместо признания - клиент потерял деньги, а не удобство.</span><span class="en-only">A formula instead of an acknowledgement - the client lost money, not convenience.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Это была ошибка девопсов, мы с ними уже поговорили»</span><span class="en-only">“It was the DevOps team’s mistake, we’ve already talked to them”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Перекладывание вины внутри компании - клиент слышит, что AM не владеет ситуацией.</span><span class="en-only">Shifting blame inside the company - the client hears that AM doesn’t own the situation.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«О любом сбое вы узнаете от нас в течение 15 минут»</span><span class="en-only">“You’ll hear about any outage from us within 15 minutes”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Проверяемая мера, которая отвечает на главную боль - узнать первыми.</span><span class="en-only">A checkable measure that addresses the main pain - hearing it first.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки признания звучали искренне, а не формально?</span><span class="en-only">Which acknowledgements sounded sincere rather than formal?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что сложнее - признать собственное молчание или объяснить причину без жаргона?</span><span class="en-only">What’s harder - admitting our own silence or explaining the cause without jargon?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие проверяемые меры мы реально можем предлагать клиентам после инцидентов?</span><span class="en-only">Which checkable measures can we realistically offer clients after incidents?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-panel" id="s12">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-med">📦 <span class="ru-only">Средняя · Модуль «CS как продукт»</span><span class="en-only">Medium · Module “CS as a product”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Ценность CS на языке результатов клиента</span><span class="en-only">Technique in focus: CS value in the client’s results language</span></div>
+      <h2><span class="ru-only">«Зачем мне вы, если я и так пишу в саппорт?» - показать ценность аккаунт-менеджмента</span><span class="en-only">“Why do I need you if I can just write to support?” - showing the value of account management</span></h2>
+      <p class="subtitle"><span class="ru-only">На квартальной встрече перед продлением договора коммерческий директор оператора прямо говорит, что хочет убрать выделенного AM и сэкономить: «вы просто пересылаете наши вопросы в разработку». AM должен показать свою ценность не списком действий, а на языке результатов клиента - и предложить, что изменится в следующем квартале.</span><span class="en-only">At the quarterly meeting before the contract renewal, the operator’s commercial director says plainly that he wants to drop the dedicated AM to save money: “you just forward our questions to development”. AM has to show their value not as a list of activities but in the client’s results language - and propose what will change next quarter.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «CS как продукт». За квартал AM провёл запуск двух турнирных серий, предупредил о переходе платёжного провайдера до того, как он затронул игроков, и закрыл 14 эскалаций. Но всё это клиент видел как отдельные письма, а не как результат. Коммерческий директор новый в компании и смотрит на AM как на строку расходов.</span><span class="en-only">Based on the “CS as a product” module. Over the quarter AM ran the launch of two tournament series, warned about a payment provider migration before it affected players and closed 14 escalations. But the client saw all this as separate emails, not as a result. The commercial director is new to the company and sees AM as a cost line.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«По сути, вы почтальон между нами и вашей разработкой.»<br>«Покажите мне, что я получаю за эти деньги.»<br>«Саппорт отвечает быстрее вас.»</span><span class="en-only">“Basically, you’re a postman between us and your development team.”<br>“Show me what I’m getting for this money.”<br>“Support replies faster than you do.”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">CD</div>
+          <div><div class="char-name"><span class="ru-only">Коммерческий директор</span><span class="en-only">Commercial Director</span></div><div class="char-role"><span class="ru-only">Пересматривает бюджет перед продлением</span><span class="en-only">Reviewing the budget before renewal</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Рациональный, мыслит цифрами и окупаемостью. Не враждебен - просто не видит связи между работой AM и своими показателями. Списки задач его не впечатляют.</span><span class="en-only">Rational, thinks in numbers and payback. Not hostile - just doesn’t see the link between AM’s work and his own metrics. Task lists don’t impress him.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать с предложения убрать AM. На перечисление сделанного («мы закрыли 14 тикетов») - отвечать: «и что это дало мне?». Заинтересоваться, когда AM переводит работу в деньги, риски и время команды клиента и предлагает план на следующий квартал.</span><span class="en-only">Start by proposing to drop the AM. To a list of activities (“we closed 14 tickets”) - reply: “and what did that give me?”. Get interested when AM translates the work into money, risks and the client team’s time and proposes a plan for next quarter.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">Список задач вместо результатов</span><span class="en-only">A task list instead of results</span></span>
+              <span class="char-tag red"><span class="ru-only">Обида: «я много работаю»</span><span class="en-only">Taking offence: “I work a lot”</span></span>
+              <span class="char-tag teal"><span class="ru-only">Результат в деньгах и рисках + план → начинает торговаться, а не отказываться</span><span class="en-only">Results in money and risk + a plan → he starts negotiating instead of cutting</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Обидно: вы много сделали, а это назвали пересылкой писем. Хочется защищаться и перечислять всё подряд - но длинный список только подтверждает, что ценность не видна.</span><span class="en-only">It stings: you did a lot, and it got called forwarding emails. You want to defend yourself and list everything - but a long list only confirms that the value isn’t visible.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Не спорить с оценкой, а признать, что ценность была плохо видна. Перевести 2-3 главных результата на язык клиента: деньги, риски, время его команды. Предложить, как сделать работу AM видимой: квартальные цели и регулярный отчёт.</span><span class="en-only">Don’t argue with the assessment - admit the value wasn’t visible enough. Translate 2-3 main results into the client’s language: money, risk, his team’s time. Propose how to make AM’s work visible: quarterly goals and a regular report.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Результат, а не активность</span><span class="en-only">Outcome, not activity</span></span>
+              <span class="char-tag teal"><span class="ru-only">Язык клиента: деньги, риски, время</span><span class="en-only">Client language: money, risk, time</span></span>
+              <span class="char-tag amber"><span class="ru-only">Цели на квартал и видимый отчёт</span><span class="en-only">Quarterly goals and a visible report</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Ценность CS на языке результатов клиента</span><span class="en-only">Observer’s task - CS value in the client’s results language</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Говорил ли AM о результатах для клиента (деньги, риски, время) - или перечислял свои действия?</span><span class="en-only">Did AM talk about results for the client (money, risk, time) - or list their own activities?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Удержался ли AM от обиды и защиты - признал ли, что ценность была плохо видна?</span><span class="en-only">Did AM avoid taking offence and getting defensive - did they admit the value wasn’t visible enough?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Предложил ли AM, что изменится дальше (цели, отчёт), - или только защищал прошлое?</span><span class="en-only">Did AM propose what will change going forward (goals, reporting) - or only defend the past?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 коммерческий директор + 1 AM + 1 наблюдатель</span><span class="en-only">1 commercial director + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📊 <span class="ru-only">Квартальная встреча</span><span class="en-only">Quarterly review</span></span>
+      <span class="t-pill">💰 <span class="ru-only">Перед продлением договора</span><span class="en-only">Before contract renewal</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Перечислять всё сделанное за квартал - чем длиннее список, тем меньше в нём видно пользы</span><span class="en-only">Listing everything done in the quarter - the longer the list, the less value shows in it</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Обидеться и защищаться: «я работаю на вас каждый день» - разговор уходит в эмоции</span><span class="en-only">Taking offence and getting defensive: “I work for you every day” - the conversation turns emotional</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Сразу предложить скидку на услуги AM - ценность обесценивается вместе с ценой</span><span class="en-only">Immediately offering a discount on AM services - the value is devalued along with the price</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать, что ценность была плохо видна, назвать 2-3 результата в деньгах, рисках и времени клиента и предложить квартальные цели с понятным отчётом.</span><span class="en-only">Admit the value wasn’t visible enough, name 2-3 results in the client’s money, risk and time, and propose quarterly goals with clear reporting.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Ценность CS на языке результатов клиента</span><span class="en-only">Technique: CS value in the client’s results language</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> идея модуля: клиентский сервис - это тоже продукт, и у него должна быть понятная клиенту ценность. Клиент покупает не количество писем и созвонов, а результат: запуски вовремя, предотвращённые проблемы, сэкономленное время своей команды. Если результат не назван, клиент его не видит.</span><span class="en-only"><b>What it is:</b> the idea of the module: customer service is a product too, and its value has to be clear to the client. The client doesn’t buy a number of emails and calls but a result: launches on time, problems prevented, his team’s time saved. If the result isn’t named, the client doesn’t see it.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Активность - это то, что сделали вы; результат - то, что изменилось у клиента. «Закрыли 14 эскалаций» - активность, «ни одна не дошла до игроков» - результат.</span><span class="en-only">Activity is what you did; a result is what changed for the client. “Closed 14 escalations” is activity, “none of them reached players” is a result.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Предотвращённые проблемы невидимы, пока о них не рассказать: предупреждение о смене платёжного провайдера сберегло клиенту дни разбора с игроками.</span><span class="en-only">Prevented problems are invisible until you talk about them: the warning about the payment provider change saved the client days of dealing with players.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Договоритесь о целях заранее - тогда на следующей встрече разговор пойдёт о том, достигнуты ли они, а не о том, нужен ли AM.</span><span class="en-only">Agree on goals in advance - then the next meeting is about whether they were met, not whether an AM is needed at all.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «CS как продукт» + практика value-based account management.</span><span class="en-only">Based on the course module “CS as a product” + value-based account management practice.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“That’s a fair question - and if you have to ask it, I haven’t made the value visible enough.”</div><div class="phrase-ru">Справедливый вопрос - и если вы его задаёте, значит, я плохо показывал ценность.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Two numbers from this quarter: both tournament series launched on time, and none of the 14 escalations reached your players.”</div><div class="phrase-ru">Две цифры за квартал: обе турнирные серии запущены вовремя, и ни одна из 14 эскалаций не дошла до ваших игроков.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Support answers questions. My job is to make sure fewer questions come up at all.”</div><div class="phrase-ru">Саппорт отвечает на вопросы. Моя задача - чтобы вопросов возникало меньше.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Let’s agree on three goals for next quarter - and judge my work by them.”</div><div class="phrase-ru">Давайте договоримся о трёх целях на следующий квартал - и оценивайте мою работу по ним.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Коммерческий директор</span><span class="en-only">Commercial Director</span></span><span class="line-text"><span class="ru-only">Честно, я не понимаю, за что мы платим. По сути, вы пересылаете наши вопросы в разработку. Саппорт делает то же самое бесплатно.</span><span class="en-only">Honestly, I don’t see what we’re paying for. Basically, you forward our questions to development. Support does the same thing for free.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Справедливый вопрос, и если вы его задаёте - значит, я плохо показывал результат. Две вещи за этот квартал: обе турнирные серии запущены в срок, а о смене платёжного провайдера вы узнали за три недели - до того, как это заметили игроки.</span><span class="en-only">That’s a fair question, and if you’re asking it, I haven’t shown the results well enough. Two things from this quarter: both tournament series launched on time, and you heard about the payment provider change three weeks ahead - before players noticed.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Коммерческий директор</span><span class="en-only">Commercial Director</span></span><span class="line-text"><span class="ru-only">Хорошо, но саппорт тоже мог бы об этом написать.</span><span class="en-only">Okay, but support could have written about that too.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Саппорт отвечает, когда вопрос уже возник. Моя работа - чтобы он не возникал. Предлагаю так: договоримся о трёх целях на следующий квартал, например запуск новой игры без переносов и сокращение эскалаций, и раз в месяц я присылаю короткий отчёт по ним. Тогда к продлению вы будете оценивать не меня, а результат.</span><span class="en-only">Support answers once a question has already come up. My job is to keep it from coming up. Here’s a proposal: let’s agree on three goals for next quarter, for example launching the new game without delays and cutting escalations, and once a month I’ll send a short report on them. Then at renewal you’ll be judging the result, not me.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM не обижается и не перечисляет всё подряд. Признаёт, что ценность была не видна, называет два результата на языке клиента и переводит разговор с «нужен ли AM» на «какие цели ставим».</span><span class="en-only">AM doesn’t take offence or list everything. Admits the value wasn’t visible, names two results in the client’s language and moves the conversation from “do we need an AM” to “which goals do we set”.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем результат отличается от активности - и какие примеры прозвучали в сцене?</span><span class="en-only">How does a result differ from an activity - and which examples came up in the scene?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как не обидеться, когда вашу работу называют пересылкой писем?</span><span class="en-only">How do you not take offence when your work is called forwarding emails?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Как рассказать о проблеме, которую вы предотвратили и которой клиент поэтому не видел?</span><span class="en-only">How do you talk about a problem you prevented, which the client therefore never saw?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Почему цели на квартал меняют разговор о продлении?</span><span class="en-only">Why do quarterly goals change the renewal conversation?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«За квартал я провёл 37 созвонов и ответил на 210 писем»</span><span class="en-only">“This quarter I held 37 calls and answered 210 emails”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Это активность, а не результат - клиент не видит, что изменилось для него.</span><span class="en-only">That’s activity, not a result - the client doesn’t see what changed for him.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Если дело в деньгах, можем дать скидку на сопровождение»</span><span class="en-only">“If it’s about money, we can give a discount on account management”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Скидка подтверждает, что ценность сомнительна, и не отвечает на вопрос клиента.</span><span class="en-only">A discount confirms the value is doubtful and doesn’t answer the client’s question.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«Ни одна из 14 эскалаций не дошла до ваших игроков»</span><span class="en-only">“None of the 14 escalations reached your players”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Результат в терминах клиента - его игроки и его репутация.</span><span class="en-only">A result in the client’s terms - his players and his reputation.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки результата прозвучали убедительнее всего?</span><span class="en-only">Which ways of stating results sounded most convincing?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Какие наши предотвращённые проблемы клиенты обычно не замечают?</span><span class="en-only">Which of our prevented problems do clients usually not notice?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Как сделать работу AM видимой без длинных отчётов?</span><span class="en-only">How do we make AM’s work visible without long reports?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-panel" id="s13">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-low">☕ <span class="ru-only">Невысокая · Модуль «Small talk»</span><span class="en-only">Low · Module “Small talk”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Small talk как мост к приоритетам собеседника</span><span class="en-only">Technique in focus: Small talk as a bridge to the other person’s priorities</span></div>
+      <h2><span class="ru-only">«Давайте сразу к делу» - первый созвон с новым контактом</span><span class="en-only">“Let’s get straight to business” - the first call with a new contact</span></h2>
+      <p class="subtitle"><span class="ru-only">У оператора сменился ключевой контакт: прежний Head of Operations, с которым было отличное взаимопонимание, ушёл. Новая руководительница сдержанна, отвечает коротко и с первой минуты предлагает «сразу к делу». AM должен наладить контакт без навязчивости и через короткий small talk понять, что важно ей лично в первые месяцы.</span><span class="en-only">The operator’s key contact has changed: the former Head of Operations, with whom there was great rapport, has left. The new head is reserved, gives short answers and from the first minute suggests getting “straight to business”. AM has to build rapport without being pushy and, through brief small talk, find out what matters to her personally in her first months.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «Small talk». Новый Head of Operations пришла из другой компании неделю назад, ей нужно быстро показать результат своему CEO. О нашей платформе она знает в основном по внутренним жалобам. Формально созвон - знакомство и обзор открытых вопросов. Если контакт не сложится, все вопросы будут идти через формальные тикеты.</span><span class="en-only">Based on the “Small talk” module. The new Head of Operations joined from another company a week ago and needs to show results to her CEO quickly. She knows our platform mostly from internal complaints. Formally, the call is an introduction and a review of open issues. If rapport doesn’t form, everything will go through formal tickets.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«Давайте сразу к делу, у меня 20 минут.»<br>«Мне уже рассказали, какие у вас проблемы.»<br>«Нормально. Обычная неделя.»</span><span class="en-only">“Let’s get straight to business, I have 20 minutes.”<br>“I’ve already been told what your problems are.”<br>“Fine. A normal week.”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">HO</div>
+          <div><div class="char-name"><span class="ru-only">Новый Head of Operations</span><span class="en-only">New Head of Operations</span></div><div class="char-role"><span class="ru-only">Неделя в компании</span><span class="en-only">One week in the company</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Сдержанная, присматривается. Не против общения, но не любит формальных вопросов вроде «как погода?». Открывается, когда видит, что собеседник интересуется её задачами, а не просто заполняет паузу.</span><span class="en-only">Reserved and sizing things up. Not against conversation but dislikes formal questions like “how’s the weather?”. Opens up when she sees genuine interest in her goals rather than filling a pause.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Отвечать коротко и предложить «сразу к делу». На шаблонные вопросы - односложно. Если AM спрашивает о её первых неделях, о том, что ей важно показать, - отвечать подробнее и самой начать задавать вопросы. На длинные рассказы AM о себе - смотреть на часы.</span><span class="en-only">Answer briefly and suggest getting “straight to business”. To template questions - answer in one word. If AM asks about her first weeks or what she needs to show - answer in more detail and start asking questions yourself. If AM talks about themselves at length - check the time.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">Шаблонные вопросы ради паузы</span><span class="en-only">Template questions to fill a pause</span></span>
+              <span class="char-tag red"><span class="ru-only">Длинный рассказ о себе и компании</span><span class="en-only">A long story about yourself and the company</span></span>
+              <span class="char-tag teal"><span class="ru-only">Вопрос про её задачи и первые недели → раскрывается</span><span class="en-only">A question about her goals and first weeks → she opens up</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Не хватает прежнего контакта, с которым всё было легко. Холодный тон новой руководительницы хочется принять на свой счёт - и либо сразу уйти в сухую повестку, либо перестараться с дружелюбием.</span><span class="en-only">You miss the previous contact, with whom everything was easy. You’re tempted to take the new head’s cool tone personally - and either jump straight into a dry agenda or overdo the friendliness.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Уважать её время и не навязываться. Использовать одну-две минуты small talk, чтобы узнать о её первых неделях и приоритетах. Связать повестку с тем, что ей важно показать. Закончить договорённостью о формате общения.</span><span class="en-only">Respect her time and don’t push. Use a minute or two of small talk to learn about her first weeks and priorities. Connect the agenda to what she needs to show. End with an agreement on how to communicate.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Открытые вопросы про её контекст</span><span class="en-only">Open questions about her context</span></span>
+              <span class="char-tag teal"><span class="ru-only">Слушать больше, чем говорить</span><span class="en-only">Listen more than you talk</span></span>
+              <span class="char-tag amber"><span class="ru-only">Мост от small talk к повестке</span><span class="en-only">A bridge from small talk to the agenda</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Small talk как мост к приоритетам собеседника</span><span class="en-only">Observer’s task - Small talk as a bridge to the other person’s priorities</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Был ли small talk про собеседницу и её контекст - или про погоду, выходные и самого AM?</span><span class="en-only">Was the small talk about her and her context - or about the weather, the weekend and AM themselves?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Уважал ли AM её запрос «сразу к делу», не теряя при этом возможность наладить контакт?</span><span class="en-only">Did AM respect her request to get “straight to business” without losing the chance to build rapport?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Связал ли AM услышанное в small talk с повесткой встречи и следующими шагами?</span><span class="en-only">Did AM connect what they heard in the small talk to the meeting agenda and next steps?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 Head of Operations + 1 AM + 1 наблюдатель</span><span class="en-only">1 Head of Operations + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📹 <span class="ru-only">Видеозвонок</span><span class="en-only">Video call</span></span>
+      <span class="t-pill">👋 <span class="ru-only">Первая встреча</span><span class="en-only">First meeting</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Задавать шаблонные вопросы («как погода?», «как выходные?») - разговор не сдвигается, а время уходит</span><span class="en-only">Asking template questions (“how’s the weather?”, “how was the weekend?”) - the conversation doesn’t move and time runs out</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Рассказывать о себе, компании и прежнем контакте - собеседница слышит, что её сравнивают</span><span class="en-only">Talking about yourself, the company and the previous contact - she hears that she’s being compared</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Полностью отказаться от контакта и сухо пройтись по тикетам - отношения останутся формальными</span><span class="en-only">Dropping rapport entirely and going drily through the tickets - the relationship stays formal</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Принять «сразу к делу», задать один-два открытых вопроса о её первых неделях и приоритетах, внимательно выслушать и построить повестку вокруг того, что ей важно показать.</span><span class="en-only">Accept “straight to business”, ask one or two open questions about her first weeks and priorities, listen carefully and build the agenda around what she needs to show.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Small talk как мост к приоритетам собеседника</span><span class="en-only">Technique: Small talk as a bridge to the other person’s priorities</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> small talk в работе AM - это не светская вежливость, а короткий способ узнать человека: его контекст, давление, приоритеты. Хороший small talk занимает минуту-две, крутится вокруг собеседника и плавно ведёт к делу через то, что вы услышали.</span><span class="en-only"><b>What it is:</b> small talk in AM work isn’t social politeness but a quick way to get to know a person: their context, pressures, priorities. Good small talk takes a minute or two, revolves around the other person and leads smoothly to business through what you heard.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Открытые вопросы о контексте работают лучше шаблонных: «как проходят первые недели?» даёт больше, чем «как погода?».</span><span class="en-only">Open questions about context work better than template ones: “how are your first weeks going?” gives more than “how’s the weather?”.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Говорите меньше, чем собеседник: в первой встрече цель - узнать, а не рассказать.</span><span class="en-only">Talk less than the other person: the goal of a first meeting is to learn, not to tell.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Перекидывайте мост: «вы сказали, что важно быстро показать результат - давайте начнём с вопросов, которые на это влияют».</span><span class="en-only">Build a bridge: “you said it’s important to show results quickly - let’s start with the issues that affect that”.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Small talk» + техники активного слушания.</span><span class="en-only">Based on the course module “Small talk” + active listening techniques.</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“Of course - before we dive in, one quick question: how are your first weeks going?”</div><div class="phrase-ru">Конечно - перед тем как начнём, один короткий вопрос: как проходят первые недели?</div></div>
+        <div class="phrase-card"><div class="phrase-en">“What would you like to have sorted out by the end of your first quarter?”</div><div class="phrase-ru">Что вам хотелось бы решить к концу первого квартала?</div></div>
+        <div class="phrase-card"><div class="phrase-en">“You mentioned the CEO wants quick results - let’s start with what affects that most.”</div><div class="phrase-ru">Вы сказали, что CEO ждёт быстрых результатов - давайте начнём с того, что на это влияет сильнее всего.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“How would you prefer to work with me - short weekly calls or async updates?”</div><div class="phrase-ru">Как вам удобнее работать со мной - короткие еженедельные созвоны или письменные апдейты?</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Head of Operations</span><span class="en-only">Head of Operations</span></span><span class="line-text"><span class="ru-only">Давайте сразу к делу, у меня 20 минут. Мне уже рассказали, какие у вас проблемы.</span><span class="en-only">Let’s get straight to business, I have 20 minutes. I’ve already been told what your problems are.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Конечно, уложимся. Один короткий вопрос перед тем, как начнём: вы только пришли - что вам важнее всего показать в первые месяцы?</span><span class="en-only">Of course, we’ll keep to time. One quick question before we start: you’ve just joined - what’s most important for you to show in the first months?</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Head of Operations</span><span class="en-only">Head of Operations</span></span><span class="line-text"><span class="ru-only">CEO хочет, чтобы к концу квартала прекратились жалобы игроков на выводы. Пока это главное.</span><span class="en-only">The CEO wants player complaints about withdrawals to stop by the end of the quarter. For now that’s the main thing.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Понятно, тогда давайте начнём именно с этого: из открытых вопросов два касаются выводов. Расскажу по ним коротко, а в конце предлагаю договориться, как нам удобнее общаться - созвоны или письменные апдейты.</span><span class="en-only">Got it, then let’s start exactly there: two of the open issues relate to withdrawals. I’ll go over them briefly, and at the end let’s agree how you’d prefer to communicate - calls or written updates.</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM принимает «сразу к делу», но задаёт один вопрос про её приоритеты - и сразу строит повестку вокруг ответа. Small talk длится полминуты, а даёт главное: что важно собеседнице.</span><span class="en-only">AM accepts “straight to business” but asks one question about her priorities - and immediately builds the agenda around the answer. The small talk takes thirty seconds but gives the main thing: what matters to her.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Какой вопрос в начале разговора дал больше всего информации?</span><span class="en-only">Which question at the start of the conversation gave the most information?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как уважать «давайте сразу к делу» и всё равно наладить контакт?</span><span class="en-only">How do you respect “let’s get straight to business” and still build rapport?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Кто больше говорил в сцене - AM или клиент? Как это повлияло на разговор?</span><span class="en-only">Who talked more in the scene - AM or the client? How did that affect the conversation?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Как связать то, что вы услышали в small talk, со следующими шагами?</span><span class="en-only">How do you connect what you heard in the small talk with next steps?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Как у вас погода? У нас всю неделю дожди»</span><span class="en-only">“How’s the weather where you are? It’s been raining all week here”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Шаблонный вопрос, который ничего не говорит о собеседнице и тратит её время.</span><span class="en-only">A template question that tells you nothing about her and wastes her time.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«С вашим предшественником мы работали очень тесно, он всегда...»</span><span class="en-only">“We worked very closely with your predecessor, he always...”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Сравнение с прежним контактом - собеседница слышит, что её уже оценивают.</span><span class="en-only">Comparing her with the previous contact - she hears that she’s already being judged.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«Что вам важнее всего показать в первые месяцы?»</span><span class="en-only">“What’s most important for you to show in the first months?”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Открытый вопрос о её задачах - даёт контекст и сразу ведёт к делу.</span><span class="en-only">An open question about her goals - gives context and leads straight to business.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие вопросы для начала разговора сработали лучше всего?</span><span class="en-only">Which opening questions worked best?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Где граница между small talk и навязчивостью?</span><span class="en-only">Where is the line between small talk and being pushy?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Как мы обычно знакомимся с новыми контактами у клиентов - и что стоит поменять?</span><span class="en-only">How do we usually get to know new client contacts - and what should change?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sc-panel" id="s14">
+    <div class="sc-header">
+      <div class="sc-difficulty diff-vhigh">🎭 <span class="ru-only">Очень высокая · Модуль «Токсичный клиент»</span><span class="en-only">Very high · Module “Toxic clients”</span></div>
+      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Границы с манипулятором: факт - рамка - альтернатива</span><span class="en-only">Technique in focus: Boundaries with a manipulator: fact - frame - alternative</span></div>
+      <h2><span class="ru-only">«Ваш прошлый менеджер всегда делал это для нас» - давление через сравнения и угрозы</span><span class="en-only">“Your previous manager always did this for us” - pressure through comparisons and threats</span></h2>
+      <p class="subtitle"><span class="ru-only">Оператор требует бесплатно доработать отчёт под свои нужды - работа на несколько недель, вне договора. Клиент не кричит, а давит: ссылается на «договорённости» с прежним менеджером, сравнивает с конкурентами и намекает, что расскажет коллегам по рынку о «гибкости» EvenBet. AM должен распознать манипуляцию, удержать границу и предложить честную альтернативу.</span><span class="en-only">The operator demands a free custom change to a report - several weeks of work, outside the contract. The client doesn’t shout but pushes: refers to “agreements” with the previous manager, compares us with competitors and hints he’ll tell industry peers about EvenBet’s “flexibility”. AM has to recognise the manipulation, hold the boundary and offer an honest alternative.</span></p>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
+      <div class="block-text"><span class="ru-only">По материалам модуля «Токсичный клиент»: не каждый трудный разговор - токсичность, но здесь повторяющийся паттерн. Это уже третья просьба о бесплатной доработке за полгода, две предыдущие частично выполнили «в порядке исключения». Письменных договорённостей с прежним менеджером нет. Доработка возможна как платный заказ или через общий роадмап.</span><span class="en-only">Based on the “Toxic clients” module: not every difficult conversation is toxic, but here it’s a repeating pattern. This is the third request for a free change in six months; the two previous ones were partly done “as an exception”. There are no written agreements with the previous manager. The change is possible as a paid order or via the general roadmap.</span></div>
+    </div>
+
+    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
+      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
+        <span class="ru-only">«С вашим прошлым менеджером мы всегда договаривались. Видимо, теперь всё иначе.»<br>«У конкурентов такие вещи делают за день и бесплатно.»<br>«Я, конечно, могу рассказать коллегам, какие вы гибкие.»</span><span class="en-only">“We always reached an agreement with your previous manager. Apparently things are different now.”<br>“Competitors do this kind of thing in a day and for free.”<br>“I could, of course, tell my colleagues how flexible you are.”</span>
+      </div>
+    </div>
+
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">MN</div>
+          <div><div class="char-name"><span class="ru-only">Владелец оператора</span><span class="en-only">Operator owner</span></div><div class="char-role"><span class="ru-only">Третья бесплатная просьба за полгода</span><span class="en-only">Third free request in six months</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
+            <div class="char-section-text"><span class="ru-only">Вежливый и обаятельный, пока получает своё. Давит не громкостью, а приёмами: ссылками на «договорённости», сравнениями, лестью и завуалированными угрозами. Проверяет, где у AM граница.</span><span class="en-only">Polite and charming as long as he gets his way. Pushes not with volume but with tactics: references to “agreements”, comparisons, flattery and veiled threats. Tests where AM’s boundary is.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
+            <div class="char-section-text"><span class="ru-only">Начать с комплимента AM, потом сослаться на прежнего менеджера. Если AM уступает - добавлять новые требования. Если AM спокойно называет рамку договора - переключиться на сравнение с конкурентами, затем на намёк про рынок. Сдаться и обсуждать альтернативу, только когда граница держится, а предложение конкретное.</span><span class="en-only">Start with a compliment to AM, then refer to the previous manager. If AM gives in - add new demands. If AM calmly names the contract frame - switch to comparing with competitors, then to the hint about the market. Give up and discuss the alternative only when the boundary holds and the offer is concrete.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
+            <div class="char-tags">
+              <span class="char-tag red"><span class="ru-only">«Прошлый менеджер всегда делал»</span><span class="en-only">“The previous manager always did it”</span></span>
+              <span class="char-tag red"><span class="ru-only">Намёк на репутацию на рынке</span><span class="en-only">A hint about market reputation</span></span>
+              <span class="char-tag teal"><span class="ru-only">Спокойная граница + конкретная альтернатива → переходит к торгу по существу</span><span class="en-only">A calm boundary + a concrete alternative → moves to real negotiation</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">AM</div>
+          <div><div class="char-name"><span class="ru-only">Account Manager</span><span class="en-only">Account Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
+            <div class="char-section-text"><span class="ru-only">Неуютно: клиент вежлив, но каждая фраза давит. Хочется либо уступить «ещё раз», чтобы не портить отношения, либо ответить резко на угрозу. Оба варианта закрепляют манипуляцию как рабочий способ.</span><span class="en-only">It’s uncomfortable: the client is polite, but every sentence pushes. You want to either give in “one more time” to keep the peace, or respond sharply to the threat. Both options cement manipulation as something that works.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача AM</span><span class="en-only">AM’s objective</span></div>
+            <div class="char-section-text"><span class="ru-only">Распознать приём и не реагировать на крючок. Вернуться к фактам: что в договоре, что нет. Спокойно обозначить границу без оправданий. Предложить честную альтернативу: платная доработка с оценкой или заявка в роадмап с понятным сроком рассмотрения.</span><span class="en-only">Recognise the tactic and don’t take the bait. Return to facts: what’s in the contract and what isn’t. Calmly state the boundary without excuses. Offer an honest alternative: a paid change with an estimate or a roadmap request with a clear review date.</span></div>
+          </div>
+          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
+            <div class="char-tags">
+              <span class="char-tag teal"><span class="ru-only">Видеть приём, а не реагировать на него</span><span class="en-only">See the tactic, don’t react to it</span></span>
+              <span class="char-tag teal"><span class="ru-only">Рамка договора без оправданий</span><span class="en-only">The contract frame without excuses</span></span>
+              <span class="char-tag amber"><span class="ru-only">Конкретная альтернатива вместо «нет»</span><span class="en-only">A concrete alternative instead of “no”</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="observer-block">
+      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя - Границы с манипулятором: факт - рамка - альтернатива</span><span class="en-only">Observer’s task - Boundaries with a manipulator: fact - frame - alternative</span></div>
+      <div class="observer-list">
+        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Распознал ли AM приёмы давления (ссылка на прошлого менеджера, сравнения, угроза) - или стал оправдываться за каждый?</span><span class="en-only">Did AM recognise the pressure tactics (the previous manager, comparisons, the threat) - or start justifying against each one?</span></div>
+        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Удержал ли AM границу - не пообещал ли бесплатную доработку «в порядке исключения»?</span><span class="en-only">Did AM hold the boundary - did they avoid promising a free change “as an exception”?</span></div>
+        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Предложил ли AM конкретную альтернативу - или ограничился отказом?</span><span class="en-only">Did AM offer a concrete alternative - or stop at a refusal?</span></div>
+      </div>
+      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены - в чек-листе ниже, вместе с обоими участниками - отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don’t jump into the conversation. Right after the scene - in the checklist below, together with both participants - check off these three points: on the technique, not the person.</span></div>
+    </div>
+
+    <div class="timing-row">
+      <span class="t-pill">👥 <span class="ru-only">1 владелец оператора + 1 AM + 1 наблюдатель</span><span class="en-only">1 operator owner + 1 AM + 1 observer</span></span>
+      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
+      <span class="t-pill">🔁 <span class="ru-only">Третья просьба за полгода</span><span class="en-only">Third request in six months</span></span>
+    </div>
+
+    <div class="time-budget">
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Развилки разговора - что обычно пробуют</span><span class="en-only">Conversation forks - what people usually try</span></div>
+      <div class="trap-list">
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Уступить «в последний раз», чтобы сохранить отношения, - клиент получает подтверждение, что давление работает</span><span class="en-only">Giving in “one last time” to keep the relationship - the client gets confirmation that pressure works</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Спорить с каждым аргументом: доказывать, что у конкурентов не так, и что прежний менеджер ничего не обещал - разговор уходит от сути</span><span class="en-only">Arguing with every point: proving competitors aren’t like that and the previous manager promised nothing - the conversation drifts from the point</span></div>
+        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Резко ответить на намёк про репутацию - конфликт переходит на личный уровень</span><span class="en-only">Reacting sharply to the reputation hint - the conflict becomes personal</span></div>
+        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Не реагировать на крючки, вернуться к фактам договора, спокойно обозначить границу и предложить конкретную альтернативу с оценкой и сроком.</span><span class="en-only">Don’t take the bait, return to the contract facts, calmly state the boundary and offer a concrete alternative with an estimate and a date.</span></div>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Границы с манипулятором: факт - рамка - альтернатива</span><span class="en-only">Technique: Boundaries with a manipulator: fact - frame - alternative</span></div>
+      <div class="theory-def"><span class="ru-only"><b>Что это:</b> манипуляция - это попытка получить уступку не аргументами, а давлением на эмоции: чувство вины, страх потерять клиента, желание понравиться. Из модуля: увидеть паттерн, назвать для себя приём и отвечать на запрос по существу, а не на крючок. Формула ответа - факт, рамка, альтернатива.</span><span class="en-only"><b>What it is:</b> manipulation is an attempt to get a concession through emotional pressure rather than arguments: guilt, fear of losing the client, the wish to be liked. From the module: see the pattern, name the tactic to yourself and respond to the request on its merits, not to the bait. The answer formula - fact, frame, alternative.</span></div>
+      <div class="theory-list">
+        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Отделяйте людей от проблемы (Фишер и Юри): спорить нужно не с клиентом, а с предложением, и оценивать его по объективным критериям - договор, объём работ, роадмап.</span><span class="en-only">Separate the people from the problem (Fisher & Ury): argue with the proposal, not the client, and judge it by objective criteria - the contract, the scope, the roadmap.</span></div>
+        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Не оправдывайтесь за каждую манипуляцию: чем больше вы объясняете, тем больше точек давления даёте. Достаточно одной спокойной фразы и возврата к сути.</span><span class="en-only">Don’t justify yourself against every manipulation: the more you explain, the more pressure points you give. One calm sentence and a return to the point is enough.</span></div>
+        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Отказ без альтернативы звучит как конец разговора. Альтернатива (платный заказ, роадмап, частичное решение) оставляет клиенту выбор, но в ваших рамках.</span><span class="en-only">A refusal without an alternative sounds like the end of the conversation. An alternative (a paid order, the roadmap, a partial solution) leaves the client a choice, but within your frame.</span></div>
+      </div>
+      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Токсичный клиент» + принципиальные переговоры (Фишер и Юри, «Путь к согласию»).</span><span class="en-only">Based on the course module “Toxic clients” + principled negotiation (Fisher & Ury, “Getting to Yes”).</span></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
+      <div class="phrase-bank">
+        <div class="phrase-card"><div class="phrase-en">“I understand the request. It’s outside the current contract, so I can’t do it for free.”</div><div class="phrase-ru">Понимаю запрос. Он за рамками текущего договора, поэтому бесплатно сделать его я не могу.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“I don’t have any record of that agreement - let’s work from what we can both see in the contract.”</div><div class="phrase-ru">Этой договорённости у меня нигде не зафиксировано - давайте опираться на то, что мы оба видим в договоре.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Here’s what I can offer: an estimate for a paid change by Wednesday, or a roadmap request reviewed this month.”</div><div class="phrase-ru">Что могу предложить: оценку платной доработки до среды или заявку в роадмап с рассмотрением в этом месяце.</div></div>
+        <div class="phrase-card"><div class="phrase-en">“Of course you’re free to share your experience - I’d just like it to be a good one, which is why I’m offering options.”</div><div class="phrase-ru">Конечно, вы вправе делиться опытом - мне бы хотелось, чтобы он был хорошим, поэтому и предлагаю варианты.</div></div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)">
+        <div class="trigger-left"><div class="trigger-icon">📋</div>
+          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам - потом открой</span><span class="en-only">Try on your own first - then reveal</span></div></div>
+        </div><div class="chevron">▾</div>
+      </button>
+      <div class="accordion-body"><div class="script-inner">
+        <div class="script-line"><span class="who cl"><span class="ru-only">Владелец оператора</span><span class="en-only">Operator owner</span></span><span class="line-text"><span class="ru-only">Слушайте, вы толковый менеджер, я сразу это понял. С вашим предшественником мы всегда договаривались о таких вещах. Нужен отчёт под нашу структуру - думаю, для вас это пустяк.</span><span class="en-only">Look, you’re a smart manager, I saw that right away. We always agreed on things like this with your predecessor. We need a report built for our structure - I think it’s nothing for you.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Спасибо. Запрос понимаю. По объёму это несколько недель работы разработки, и в текущий договор она не входит, поэтому бесплатно сделать её я не могу. Договорённостей с прежним менеджером у меня нигде не зафиксировано - давайте опираться на то, что мы оба видим в договоре.</span><span class="en-only">Thank you. I understand the request. In scope it’s several weeks of development work, and it’s not in the current contract, so I can’t do it for free. I don’t have any record of agreements with the previous manager - let’s work from what we can both see in the contract.</span></span></div>
+        <div class="script-line"><span class="who cl"><span class="ru-only">Владелец оператора</span><span class="en-only">Operator owner</span></span><span class="line-text"><span class="ru-only">У конкурентов такое делают за день. Я, конечно, могу рассказать коллегам, какие вы гибкие.</span><span class="en-only">Competitors do this in a day. I could, of course, tell my colleagues how flexible you are.</span></span></div>
+        <div class="script-line"><span class="who cs">AM</span><span class="line-text"><span class="ru-only">Вы вправе делиться опытом, и мне хочется, чтобы он был хорошим, - поэтому предлагаю два варианта. Первый: до среды пришлю оценку платной доработки со сроками. Второй: оформим заявку в роадмап, её рассмотрят в этом месяце, и я сообщу вам решение. Какой вариант вам ближе?</span><span class="en-only">You’re free to share your experience, and I’d like it to be a good one - so here are two options. First: by Wednesday I’ll send an estimate for a paid change with timelines. Second: we file a roadmap request, it’ll be reviewed this month and I’ll tell you the decision. Which one suits you better?</span></span></div>
+        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">AM не спорит с лестью, сравнениями и угрозой и не оправдывается за каждую. Отвечает на суть: факт - объём работ, рамка - договор, альтернатива - два конкретных варианта. Выбор остаётся у клиента, но внутри границы.</span><span class="en-only">AM doesn’t argue with the flattery, comparisons or threat and doesn’t justify against each one. Answers the substance: the fact - the scope, the frame - the contract, the alternative - two concrete options. The choice stays with the client, but inside the boundary.</span></span></div>
+      </div></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="debrief-list">
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Какие приёмы манипуляции прозвучали в сцене - и как AM на каждый отреагировал?</span><span class="en-only">Which manipulation tactics came up in the scene - and how did AM react to each?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как держать границу и при этом не звучать холодно или обиженно?</span><span class="en-only">How do you hold a boundary without sounding cold or offended?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Почему спорить с каждым аргументом - ловушка?</span><span class="en-only">Why is arguing with every point a trap?</span></div>
+        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Как альтернатива меняет реакцию клиента на отказ?</span><span class="en-only">How does an alternative change the client’s reaction to a refusal?</span></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">🧩 <span class="ru-only">Мини-квиз - ловушка или хороший ход?</span><span class="en-only">Mini-quiz - trap or good move?</span></div>
+      <div class="flow-note"><span class="ru-only">По одной реплике за раз - вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time - decide together whether it’s a trap or a good move, then click your answer to see a short explanation.</span></div>
+      <div class="quiz-list">
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«Ладно, в последний раз сделаем в порядке исключения»</span><span class="en-only">“Okay, we’ll do it as an exception one last time”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Уступка под давлением - клиент усвоит, что манипуляция работает, и придёт снова.</span><span class="en-only">A concession under pressure - the client learns that manipulation works and comes back.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="trap">
+          <div class="quiz-q"><span class="ru-only">«У конкурентов так не делают, это неправда»</span><span class="en-only">“Competitors don’t do that, it isn’t true”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Спор с крючком уводит от сути и превращает разговор в пикировку.</span><span class="en-only">Arguing with the bait leads away from the point and turns the talk into a sparring match.</span></div>
+        </div>
+        <div class="quiz-item" data-answer="good">
+          <div class="quiz-q"><span class="ru-only">«В договор это не входит - могу до среды прислать оценку платной доработки»</span><span class="en-only">“It’s not in the contract - I can send an estimate for a paid change by Wednesday”</span></div>
+          <div class="quiz-btns">
+            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
+            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
+          </div>
+          <div class="quiz-feedback"><span class="ru-only">Факт, рамка и конкретная альтернатива - граница держится, а разговор продолжается.</span><span class="en-only">Fact, frame and a concrete alternative - the boundary holds and the conversation goes on.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group-discuss-block">
+      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение - после групп</span><span class="en-only">Group discussion - after the groups</span></div>
+      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе - не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone’s back, discuss together - without naming who did what, just the techniques and insights themselves.</span></div>
+      <div class="group-list">
+        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие манипуляции клиентов мы встречаем чаще всего?</span><span class="en-only">Which client manipulations do we come across most often?</span></div>
+        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Какие формулировки помогали держать границу спокойно?</span><span class="en-only">Which phrasings helped hold the boundary calmly?</span></div>
+        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Когда «в порядке исключения» оправдано, а когда это начало паттерна?</span><span class="en-only">When is “as an exception” justified, and when is it the start of a pattern?</span></div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ════ SCENARIO GENERATOR (ported from the account-manager-cs Negotiation Dueling Club) ════ -->
   <div class="sc-panel" id="generator">
