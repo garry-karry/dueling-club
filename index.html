@@ -440,6 +440,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 [data-lang="en"] .ru-only{display:none}
 [data-lang="ru"] .en-only{display:none}
 
+.primer-block{background:#fff;border:1px solid var(--border-m);border-radius:var(--r);padding:1.1rem 1.3rem;margin:0 0 1.75rem;box-shadow:var(--shadow-lift)}
+.primer-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.primer-title{font-family:inherit;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:.2rem}
+.primer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin-top:.9rem}
+.primer-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:.85rem 1rem}
+.primer-card-title{font-size:13.5px;font-weight:600;color:var(--teal);margin-bottom:.35rem}
+.primer-card p{font-size:13px;color:var(--ink2);line-height:1.65;margin:0;text-align:justify}
+.primer-format{font-size:13px;color:var(--ink2);line-height:1.65;margin:.9rem 0 0;padding-top:.8rem;border-top:1px dashed var(--border-m);text-align:justify}
 /* Justified body text everywhere */
 .intro p,.sc-header .subtitle,.warmup-intro{max-width:none}
 .real-quote p,.line-text,.phrase-en,.quiz-feedback,.hidden-info-body,.wu-script,.warmup-text,.hist-quote,.hist-char-body,.hist-trap,.char-quote,.phrase-bank p,.theory-block p,.time-budget-note,.warmup-card p,.footer p,p,li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
@@ -471,9 +479,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="intro">
     <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
     <h1><span class="ru-only">CS-менеджер и заказчик — <span class="grad-text">трудный разговор</span></span><span class="en-only">CS Manager and Client — <span class="grad-text">a Difficult Conversation</span></span></h1>
-    <p><span class="ru-only">Три сценария на основе реальных ситуаций и материалов воркшопа — тренируетесь в своей паре, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Three scenarios based on real situations and workshop material — you practice in your own pair, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
+    <p><span class="ru-only">Боевой сценарий на основе реальных ситуаций и материалов воркшопа - тренируетесь в своей группе, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">A real-case scenario based on workshop material - you practice in your own group, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
     <div class="intro-meta">
-      <span class="meta-pill"><span class="ru-only">3 сценария</span><span class="en-only">3 scenarios</span></span>
+      <span class="meta-pill"><span class="ru-only">Сценарий + генератор</span><span class="en-only">Scenario + generator</span></span>
       <span class="meta-pill"><span class="ru-only">Реальные кейсы</span><span class="en-only">Real cases</span></span>
       <span class="meta-pill">Poker &amp; Casino B2B</span>
       <span class="meta-pill"><span class="ru-only">Работа в парах</span><span class="en-only">Pair work</span></span>
@@ -489,11 +497,49 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
   </div>
 
+
+  <div class="primer-block">
+    <div class="primer-head">
+      <div>
+        <div class="safety-title" style="margin-bottom:.3rem"><span class="ru-only">Вводная · если вы не были на воркшопах</span><span class="en-only">Primer · if you missed the workshops</span></div>
+        <div class="primer-title"><span class="ru-only">Конфликт с клиентом за 3 минуты</span><span class="en-only">Client conflict in 3 minutes</span></div>
+      </div>
+      <button class="collapse-toggle open" id="primerToggleBtn" onclick="toggleCollapse('primerToggleBtn','primerBody')"><span class="chevron">▾</span></button>
+    </div>
+    <div class="collapse-body open" id="primerBody">
+      <div class="primer-grid">
+      <div class="primer-card">
+        <div class="primer-card-title">⚡ <span class="ru-only">Что такое конфликт</span><span class="en-only">What a conflict is</span></div>
+        <p><span class="ru-only">Это не обязательно крик. Чаще всего это столкновение ожиданий: заказчик ждал одного - срок, функцию, реакцию, - а получил другое. Проявляется как раздражение, сарказм, холодность или угроза уйти. Наша цель - не выиграть спор, а сохранить отношения и сдвинуть вопрос.</span><span class="en-only">It isn't necessarily shouting. Most often it's a clash of expectations: the client expected one thing - a deadline, a feature, a response - and got another. It shows up as irritation, sarcasm, coldness or a threat to leave. Our goal isn't to win the argument but to keep the relationship and move the issue forward.</span></p>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-title">🧅 <span class="ru-only">Три слоя жалобы</span><span class="en-only">Three layers of a complaint</span></div>
+        <p><span class="ru-only">В любой жалобе есть эмоция, факт и ожидание. Сначала признаём эмоцию, потом разбираем факты, потом договариваемся, что будет дальше. Если смешивать слои, разговор буксует.</span><span class="en-only">Every complaint has an emotion, a fact and an expectation. Acknowledge the emotion first, then go through the facts, then agree on what happens next. Mixing the layers is why conversations stall.</span></p>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-title">🔁 <span class="ru-only">Вспышка или паттерн</span><span class="en-only">Outburst or pattern</span></div>
+        <p><span class="ru-only">Не каждый трудный разговор - токсичность. Разовая вспышка - нормальная реакция на проблему. Если поведение повторяется, это паттерн, и ему нужен другой уровень ответа: назвать поведение, договориться о правилах общения, при необходимости подключить руководителя.</span><span class="en-only">Not every difficult conversation is toxic. A one-off outburst is a normal reaction to a problem. If the behaviour repeats, it's a pattern and needs a different level of response: name the behaviour, agree on ground rules, and bring in a lead if needed.</span></p>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-title">🤝 <span class="ru-only">Язык обязательств</span><span class="en-only">Language of commitments</span></div>
+        <p><span class="ru-only">«Разберёмся» без даты и имени - согласие без действия. Вместо этого: что делаем, кто отвечает, к какому сроку и когда следующий статус. И говорим «мы», а не «они» или «разработка»: для заказчика мы одна компания.</span><span class="en-only">"We'll look into it" with no date or owner is agreement without action. Instead: what we'll do, who owns it, by when, and when the next update comes. And say "we", not "they" or "the dev team": to the client we are one company.</span></p>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-title">🧊 <span class="ru-only">Доверие после провала</span><span class="en-only">Trust after a failure</span></div>
+        <p><span class="ru-only">Пять шагов по порядку: признать без условий и без «но», услышать эмоцию, объяснить, не оправдываясь, предложить конкретный план, отдать заказчику контроль над точками проверки. Новое обещание без плана после срыва только добивает доверие.</span><span class="en-only">Five steps, in order: acknowledge without conditions or "but", hear the emotion, explain without excuses, offer a concrete plan, give the client control of the checkpoints. A new promise without a plan after a failure only finishes off the trust.</span></p>
+      </div>
+      <div class="primer-card">
+        <div class="primer-card-title">🧭 <span class="ru-only">Базовые приёмы</span><span class="en-only">Core techniques</span></div>
+        <p><span class="ru-only">Отделять людей от проблемы (Фишер и Юри): называть поведение, а не человека. Не зеркалить тон и темп. Отвечать на содержание, а не на интонацию. Перефразировать, чтобы проверить понимание. Эскалация к руководителю - инструмент, а не капитуляция.</span><span class="en-only">Separate the people from the problem (Fisher & Ury): name the behaviour, not the person. Don't mirror tone or pace. Respond to the content, not the tone. Paraphrase to check understanding. Escalating to a lead is a tool, not a surrender.</span></p>
+      </div>
+      </div>
+      <p class="primer-format"><span class="ru-only"><b>Формат клуба:</b> группы по три - заказчик, CS/AM и наблюдатель. Сцена 7-9 минут, разбор в комнате 5 минут с чек-листом наблюдателя, затем 5 минут общего обсуждения находок. Роль - это не вы: отрабатываем приём, а не сдаём экзамен.</span><span class="en-only"><b>Club format:</b> groups of three - client, CS/AM and observer. A 7-9 minute scene, a 5-minute debrief in the room with the observer’s checklist, then 5 minutes of group discussion. The role isn’t you: we practice a technique, not take an exam.</span></p>
+    </div>
+  </div>
+
   <div class="sc-tabs">
     <button class="sc-tab active" onclick="showScenario('warmup',this)">🌤 <span class="ru-only">Разминка — лёгкий старт</span><span class="en-only">Warm-up — easy start</span></button>
-    <button class="sc-tab" onclick="showScenario('s6',this)"><span class="ru-only">Сценарий 1 — Токсичный клиент: Агрессор</span><span class="en-only">Scenario 1 — Toxic Client: The Aggressor</span></button>
-    <button class="sc-tab" onclick="showScenario('s7',this)"><span class="ru-only">Сценарий 2 — После провала: доверие</span><span class="en-only">Scenario 2 — After a Failure: Trust</span></button>
-    <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 3 — Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 3 — Tech Director: Passive Aggression</span></button>
+    <button class="sc-tab" onclick="showScenario('s8',this)"><span class="ru-only">Сценарий 1 - Техдиректор: пассивная агрессия</span><span class="en-only">Scenario 1 - Tech Director: Passive Aggression</span></button>
     <button class="sc-tab" onclick="showScenario('generator',this)">🎲 <span class="ru-only">Генератор своего сценария</span><span class="en-only">Build-your-own Generator</span></button>
   </div>
 
@@ -562,7 +608,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     <div class="sc-header">
       <div class="sc-difficulty" style="background:var(--teal-l);color:var(--teal)">🌤 <span class="ru-only">Разминка · Без риска</span><span class="en-only">Warm-up · No stakes</span></div>
       <h2><span class="ru-only">Лёгкий старт — прежде чем переходить к боевым кейсам</span><span class="en-only">Easy start — before moving to the real cases</span></h2>
-      <p class="subtitle"><span class="ru-only">5 минут на нейтральном материале, чтобы войти в роль — лучше всего вместе, на общий круг. Всего три карточки, чтобы уложиться по времени и на этой же встрече взять два боевых сценария. Затем переходите к «Сценарий 1».</span><span class="en-only">5 minutes on neutral material to get into the role — best done together, as a group. Just three cards, so there's time left in the session for two real scenarios. Then move on to "Scenario 1."</span></p>
+      <p class="subtitle"><span class="ru-only">5 минут на нейтральном материале, чтобы войти в роль — лучше всего вместе, на общий круг. Всего три карточки, чтобы уложиться по времени и на этой же встрече успеть боевой сценарий. Затем переходите к «Сценарий 1».</span><span class="en-only">5 minutes on neutral material to get into the role — best done together, as a group. Just three cards, so there's time left in the session for the real scenario. Then move on to "Scenario 1."</span></p>
     </div>
 
     <div class="warmup-intro">
@@ -602,382 +648,6 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   </div>
 
   <!-- ════ SCENARIO 6: Toxic client — the Aggressor (workshop Module 6) ════ -->
-  <div class="sc-panel" id="s6">
-    <div class="sc-header">
-      <div class="sc-difficulty diff-high">🔥 <span class="ru-only">Высокая · Токсичный паттерн — Агрессор</span><span class="en-only">High · Toxic pattern — the Aggressor</span></div>
-      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Вербальная деэскалация</span><span class="en-only">Technique in focus: Verbal De-escalation</span></div>
-      <h2><span class="ru-only">«Это уже переходит все границы!» — клиент кричит и угрожает разрывом</span><span class="en-only">"This is completely out of line!" — the client shouts and threatens to walk</span></h2>
-      <p class="subtitle"><span class="ru-only">Клиент на повышенных тонах требует немедленного решения и грозит уйти к конкурентам. Это не разовая вспышка — за месяц уже третий такой звонок. CS должен не зеркалить тон, а замедлить темп и не эскалировать, при этом не показывая, что боится конфликта.</span><span class="en-only">The client is shouting, demanding an immediate fix, and threatening to leave for a competitor. This isn't a one-off — it's the third call like this in a month. CS must not mirror the tone, but slow the pace and avoid escalating — without looking afraid of the conflict either.</span></p>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
-      <div class="block-text"><span class="ru-only">По материалам модуля «Токсичный клиент» из воркшопа: не каждый трудный разговор — токсичность, это паттерн, а не одна вспышка. Здесь — третий агрессивный звонок за месяц от одного и того же клиента. Технически проблема несложная, но клиент сразу переходит на крик и угрозу уйти к конкуренту.</span><span class="en-only">Based on the workshop's "Toxic Client" module: not every hard conversation is toxicity — it's a pattern, not a single outburst. Here it's the third aggressive call this month from the same client. The problem itself is technically simple, but the client jumps straight to shouting and a threat to leave for a competitor.</span></div>
-    </div>
-
-    <div class="block" style="background:var(--amber-l);border-color:var(--amber)">
-      <div class="block-label" style="color:var(--amber)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
-      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
-        <span class="ru-only">«Это уже переходит все границы! Третий раз за месяц одно и то же!»<br>«Мы серьёзно рассматриваем переход к другому провайдеру — и я не шучу.»<br>«Мне не нужны ваши объяснения, мне нужно, чтобы это работало!»</span><span class="en-only">"This is completely out of line! Third time this month, same thing!"<br>"We're seriously considering switching providers — and I'm not joking."<br>"I don't need your explanations, I need this to work!"</span>
-      </div>
-    </div>
-
-    <div class="characters">
-      <div class="char-card">
-        <div class="char-head">
-          <div class="av av-cl">AG</div>
-          <div><div class="char-name"><span class="ru-only">Заказчик — Агрессор</span><span class="en-only">Client — the Aggressor</span></div><div class="char-role"><span class="ru-only">Владелец, третий похожий звонок за месяц</span><span class="en-only">Owner, third similar call this month</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
-            <div class="char-section-text"><span class="ru-only">Кричит и угрожает, но за этим почти всегда стоит собственный страх — потерять бюджет, контроль или лицо перед своим руководством. Реагирует на спокойный, но не робкий тон снижением громкости.</span><span class="en-only">Shouts and threatens, but underneath there's almost always the client's own fear — of losing budget, control, or face in front of their own leadership. Responds to a calm but not timid tone by lowering their volume.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
-            <div class="char-section-text"><span class="ru-only">Начать громко и быстро. Если CS зеркалит тон — эскалировать дальше. Если CS замедляется и остаётся по делу — постепенно снижать темп и переходить к фактам.</span><span class="en-only">Start loud and fast. If CS mirrors the tone — escalate further. If CS slows down and stays on-topic — gradually lower the pace and move to facts.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
-            <div class="char-tags">
-              <span class="char-tag red"><span class="ru-only">«Это переходит все границы»</span><span class="en-only">"This is out of line"</span></span>
-              <span class="char-tag red"><span class="ru-only">«Мы уходим к конкурентам»</span><span class="en-only">"We're leaving for a competitor"</span></span>
-              <span class="char-tag teal"><span class="ru-only">Спокойный темп без зеркалирования → снижает тон</span><span class="en-only">Calm, unmirrored pace → lowers tone</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="char-card">
-        <div class="char-head">
-          <div class="av av-cs">CS</div>
-          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
-            <div class="char-section-text"><span class="ru-only">Инстинкт — защищаться или ускоряться вслед за клиентом. Важно помнить: это не про вас лично, а про страх клиента потерять контроль. Замечаем паттерн — третий звонок за месяц — а не только этот всплеск.</span><span class="en-only">The instinct is to get defensive or speed up along with the client. It's important to remember: this isn't personal — it's the client's own fear of losing control. Notice the pattern — third call this month — not just this one outburst.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
-            <div class="char-section-text"><span class="ru-only">Не отвечать тем же тоном. Замедлить темп речи. Назвать поведение, а не человека. Если ничего не помогает — обозначить следующий шаг эскалации (руководитель на звонке) как инструмент, а не как отступление.</span><span class="en-only">Don't respond in the same tone. Slow your speaking pace. Name the behavior, not the person. If nothing helps — offer the next escalation step (a team lead joining the call) as a tool, not a retreat.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
-            <div class="char-tags">
-              <span class="char-tag teal"><span class="ru-only">Замедлить темп, не зеркалить громкость</span><span class="en-only">Slow the pace, don't mirror the volume</span></span>
-              <span class="char-tag teal"><span class="ru-only">Называть поведение, не человека</span><span class="en-only">Name the behavior, not the person</span></span>
-              <span class="char-tag amber"><span class="ru-only">Эскалация (тимлид на звонке) — как инструмент</span><span class="en-only">Escalation (team lead on the call) — as a tool</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="observer-block">
-      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Вербальная деэскалация</span><span class="en-only">Observer's task — Verbal De-escalation</span></div>
-      <div class="observer-list">
-        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Изменился ли темп речи CS в ответ на повышение тона клиента — ускорился (зеркалирование) или, наоборот, замедлился?</span><span class="en-only">Did CS's speaking pace change in response to the client's rising tone — did it speed up (mirroring) or actually slow down?</span></div>
-        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Называл ли CS поведение («этот тон») вместо человека («вы»)?</span><span class="en-only">Did CS name the behavior ("this tone") rather than the person ("you")?</span></div>
-        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Если паттерн (третий раз за месяц) прозвучал — предложил ли CS эскалацию как инструмент, а не как капитуляцию?</span><span class="en-only">If the pattern (third time this month) came up, did CS offer escalation as a tool, not as surrender?</span></div>
-      </div>
-      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these three points: on the technique, not the person.</span></div>
-    </div>
-
-    <div class="timing-row">
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
-      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
-      <span class="t-pill">🔁 <span class="ru-only">Третий раз за месяц</span><span class="en-only">Third time this month</span></span>
-    </div>
-
-    <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Развилки разговора — что обычно пробуют</span><span class="en-only">Conversation forks — what people usually try</span></div>
-      <div class="trap-list">
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Отвечать тем же тоном или скоростью — эскалация мгновенная</span><span class="en-only">Answering in the same tone or speed — instant escalation</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Оправдываться за команду или продукт — клиенту это неинтересно в моменте крика</span><span class="en-only">Making excuses for the team or product — the client doesn't care about this mid-shout</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Игнорировать паттерн («это же просто эмоции») — три звонка за месяц уже система, а не всплеск</span><span class="en-only">Ignoring the pattern ("it's just emotions") — three calls in a month is already a system, not a one-off</span></div>
-        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Замедлить темп, назвать поведение («этот тон мешает нам найти решение»), перейти к фактам, при повторении — предложить эскалацию как инструмент.</span><span class="en-only">Slow the pace, name the behavior ("this tone is getting in the way of finding a solution"), move to facts, and if it repeats — offer escalation as a tool.</span></div>
-      </div>
-    </div>
-
-    <div class="theory-block">
-      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Вербальная деэскалация</span><span class="en-only">Technique: Verbal De-escalation</span></div>
-      <div class="theory-def"><span class="ru-only"><b>Что это:</b> набор речевых действий, снижающих накал разговора без уступок по сути: подтвердить услышанное без осуждения, замедлить собственный темп речи, назвать поведение (а не человека), использовать паузу вместо мгновенного ответа. Стандартный инструмент конфликт-менеджмента и медиации.</span><span class="en-only"><b>What it is:</b> a set of verbal moves that lower the intensity of a conversation without conceding on substance: acknowledge without judgment, slow your own pace, name the behavior (not the person), use a pause instead of an instant reply. A standard conflict-management and mediation tool.</span></div>
-      <div class="theory-list">
-        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Называть поведение, а не человека — классический приём «отделить людей от проблемы» (Фишер и Юри): критика поведения не звучит как атака на личность и не провоцирует защиту.</span><span class="en-only">Name the behavior, not the person — the classic "separate people from the problem" principle (Fisher &amp; Ury): criticizing behavior doesn't read as a personal attack.</span></div>
-        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">Различайте паттерн и разовую вспышку: если поведение повторяется системно, нужен другой уровень ответа — принцип эскалационной лестницы (модуль курса «Токсичный клиент»).</span><span class="en-only">Tell a pattern apart from a one-off outburst: systemic repetition calls for a different level of response — the escalation-ladder principle from the course's "Toxic Client" module.</span></div>
-        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Эскалация как инструмент заботы, а не капитуляция: подключение третьей стороны (тимлида) — стандартный медиаторский приём, когда прямые попытки не снижают температуру.</span><span class="en-only">Escalation as an act of care, not surrender: bringing in a third party (a team lead) is a standard mediation move when direct attempts aren't lowering the temperature.</span></div>
-      </div>
-      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Токсичный клиент» + принципы деэскалации и медиации из переговорной практики.</span><span class="en-only">Drawing on the "Toxic Client" course module, plus de-escalation and mediation principles from negotiation practice.</span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
-      <div class="phrase-bank">
-        <div class="phrase-card"><div class="phrase-en">"This tone is getting in the way of us finding a solution."</div><div class="phrase-ru">Этот тон мешает нам найти решение.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"I hear you, and I'm not going to pretend this is fine."</div><div class="phrase-ru">Слышу вас, и не буду делать вид, что всё в порядке.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"Let's bring in my team lead to look at the pattern, not just today's call."</div><div class="phrase-ru">Предлагаю подключить моего руководителя, чтобы разобрать паттерн, а не только сегодняшний случай.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"This isn't a step back — it's the next step."</div><div class="phrase-ru">Это не отступление — это следующий шаг.</div></div>
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)">
-        <div class="trigger-left"><div class="trigger-icon">📋</div>
-          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
-        </div><div class="chevron">▾</div>
-      </button>
-      <div class="accordion-body"><div class="script-inner">
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Это уже переходит все границы! Третий раз за месяц одно и то же — и вы хотите, чтобы я снова спокойно это выслушал?!</span><span class="en-only">This is completely out of line! Third time this month, and you want me to calmly listen to this again?!</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Слышу вас — и то, что это уже третий раз, важно, я не буду делать вид, что это случайность. Этот тон мешает нам найти решение, а решение нужно нам обоим. Расскажите по порядку, что произошло сейчас — я записываю.</span><span class="en-only">I hear you — and the fact that this is the third time matters, I won't pretend it's a coincidence. This tone is getting in the way of us finding a solution, and we both need one. Walk me through what happened this time — I'm writing it down.</span></span></div>
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Мы серьёзно рассматриваем уход к другому провайдеру. Мне не нужны объяснения — мне нужно, чтобы это работало.</span><span class="en-only">We're seriously considering switching providers. I don't need explanations — I need this to work.</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Понимаю. Раз это повторяется третий раз — одного моего слова недостаточно. Предлагаю подключить моего руководителя на короткий созвон сегодня, чтобы разобрать паттерн, а не только сегодняшний случай. Это не отступление — это следующий шаг.</span><span class="en-only">Understood. Since this is the third time, my word alone isn't enough. I'd like to bring in my team lead for a short call today, to look at the pattern, not just today's incident. This isn't a step back — it's the next step.</span></span></div>
-        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">CS не спорит с угрозой ухода и не оправдывается. Называет поведение («этот тон»), а не человека — и переводит паттерн в конкретный следующий шаг.</span><span class="en-only">CS doesn't argue with the threat to leave and doesn't make excuses. Names the behavior ("this tone"), not the person — and turns the pattern into a concrete next step.</span></span></div>
-      </div></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
-      <div class="debrief-list">
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как замедлить собственный темп речи, когда на вас кричат?</span><span class="en-only">How do you slow your own speaking pace when someone is shouting at you?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Чем «назвать поведение» отличается от «назвать человека» — и почему это важно?</span><span class="en-only">How is "naming the behavior" different from "naming the person" — and why does it matter?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Как понять, что перед вами паттерн, а не разовая вспышка?</span><span class="en-only">How do you tell a pattern apart from a one-off outburst?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Когда эскалация к руководителю — это забота о клиенте, а не капитуляция?</span><span class="en-only">When is escalating to a team lead an act of care for the client, not a surrender?</span></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">🧩 <span class="ru-only">Мини-квиз — ловушка или хороший ход?</span><span class="en-only">Mini-quiz — trap or good move?</span></div>
-      <div class="flow-note"><span class="ru-only">По одной реплике за раз — вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time — decide together whether it's a trap or a good move, then click your answer to see a short explanation.</span></div>
-      <div class="quiz-list">
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">CS повышает голос в ответ, чтобы клиента было слышно</span><span class="en-only">CS raises their own voice back so they can be heard over the client</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Зеркалирование тона — прямой путь к мгновенной эскалации, даже если хочется быть услышанным.</span><span class="en-only">Mirroring the tone is a direct path to instant escalation, even if the intent is just to be heard.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="good">
-          <div class="quiz-q"><span class="ru-only">«Этот тон мешает нам найти решение»</span><span class="en-only">"This tone is getting in the way of us finding a solution"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Называет поведение, а не человека, и не звучит как атака в ответ.</span><span class="en-only">Names the behavior, not the person, and doesn't sound like a counter-attack.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«Это просто эмоции, ничего личного» — и переход к делу без паузы</span><span class="en-only">"It's just emotions, nothing personal" — moving straight to business without a pause</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Обесценивает то, что клиент только что выразил — лучше сначала признать, потом переходить к фактам.</span><span class="en-only">It dismisses what the client just expressed — better to acknowledge first, then move to facts.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="group-discuss-block">
-      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
-      <div class="group-list">
-        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Что помогало сохранять спокойный темп речи, когда напряжение росло?</span><span class="en-only">What helped keep a calm pace as the tension rose?</span></div>
-        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Как отличить разовую вспышку от системного паттерна на практике?</span><span class="en-only">How do you tell a one-off outburst apart from a systemic pattern in practice?</span></div>
-        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Когда эскалация — это забота о разговоре, а когда — уход от ответственности?</span><span class="en-only">When is escalating an act of care for the conversation, and when is it avoiding responsibility?</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════ SCENARIO 7: Trust after a failure (workshop Module 3) ════ -->
-  <div class="sc-panel" id="s7">
-    <div class="sc-header">
-      <div class="sc-difficulty diff-high">🧊 <span class="ru-only">Высокая · Доверие после провала</span><span class="en-only">High · Trust after a failure</span></div>
-      <div class="technique-badge">🎯 <span class="ru-only">Отрабатываемый приём: Протокол восстановления доверия</span><span class="en-only">Technique in focus: 5-Step Trust Repair Protocol</span></div>
-      <h2><span class="ru-only">«Слова сейчас мало что значат» — доверие пробито, обещания больше не работают</span><span class="en-only">"Words don't mean much right now" — trust is broken, promises no longer land</span></h2>
-      <p class="subtitle"><span class="ru-only">После сорванного обещанного срока клиент прямо говорит, что больше не верит словам. Любое новое обещание сейчас усилит недоверие. CS должен перестать обещать и начать говорить на языке действий — по пятишаговому протоколу восстановления доверия.</span><span class="en-only">After a missed promised deadline, the client says outright that they no longer trust words. Any new promise right now will deepen the distrust. CS must stop promising and start speaking the language of actions — following the five-step trust-recovery protocol.</span></p>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Контекст сценария</span><span class="en-only">Scenario Context</span></div>
-      <div class="block-text"><span class="ru-only">По материалам модуля «Доверие после провала»: обещанный срок сорван во второй раз подряд. Клиент не кричит — он холоден и констатирует факт: словам больше не верит. Здесь работает пятишаговый протокол: признать без условий → услышать эмоцию → объяснить, не оправдываясь → предложить конкретный план → отдать контроль заказчику.</span><span class="en-only">Based on the workshop's "Trust After Failure" module: a promised deadline has been missed for the second time in a row. The client isn't shouting — they're cold and stating a fact: they no longer believe the words. The five-step protocol applies here: acknowledge with no conditions → hear the emotion → explain, don't excuse → offer a concrete plan → give the client control.</span></div>
-    </div>
-
-    <div class="block" style="background:#EDE0F8;border-color:var(--purple)">
-      <div class="block-label" style="color:var(--purple)"><span class="ru-only">Типичные фразы (не дословная запись)</span><span class="en-only">Typical phrases (not a verbatim record)</span></div>
-      <div style="font-size:13px;color:var(--ink);line-height:1.8;font-style:italic">
-        <span class="ru-only">«Вы обещали второй раз — и второй раз сорвали срок.»<br>«Я понимаю, что сейчас слова мало что значат.»<br>«Мне не нужны новые обещания — мне нужно понять, что вообще происходит.»</span><span class="en-only">"You promised twice — and missed the deadline twice."<br>"I understand that words don't mean much right now."<br>"I don't need new promises — I need to understand what's actually going on."</span>
-      </div>
-    </div>
-
-    <div class="characters">
-      <div class="char-card">
-        <div class="char-head">
-          <div class="av av-cl">TR</div>
-          <div><div class="char-name"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></div><div class="char-role"><span class="ru-only">Операционный директор, второй сорванный срок подряд</span><span class="en-only">Operations Director, second missed deadline in a row</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Характер</span><span class="en-only">Character</span></div>
-            <div class="char-section-text"><span class="ru-only">Не кричит — говорит холодно и по фактам. Это опаснее крика: доверие не восстанавливается словами, только действиями. Слышит новое обещание как ещё один повод не верить.</span><span class="en-only">Doesn't shout — speaks coldly, by the facts. This is more dangerous than shouting: trust isn't restored by words, only by actions. Hears a new promise as one more reason not to believe.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Как себя вести в роли</span><span class="en-only">How to play the role</span></div>
-            <div class="char-section-text"><span class="ru-only">Начать холодно: «Вы обещали второй раз — и второй раз сорвали». На попытку нового обещания без плана — не смягчаться. Смягчиться только на признание без условий + конкретный план с контролем на стороне клиента.</span><span class="en-only">Start cold: "You promised twice — and missed it twice." Don't soften at another promise with no plan. Only soften at an unconditional acknowledgment plus a concrete plan that puts control in the client's hands.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Триггерные фразы</span><span class="en-only">Trigger phrases</span></div>
-            <div class="char-tags">
-              <span class="char-tag red"><span class="ru-only">«Второй раз подряд»</span><span class="en-only">"Second time in a row"</span></span>
-              <span class="char-tag red"><span class="ru-only">«Слова мало что значат»</span><span class="en-only">"Words don't mean much"</span></span>
-              <span class="char-tag teal"><span class="ru-only">Признание без условий + план → смягчается</span><span class="en-only">Unconditional acknowledgment + a plan → softens</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="char-card">
-        <div class="char-head">
-          <div class="av av-cs">CS</div>
-          <div><div class="char-name"><span class="ru-only">CS-менеджер</span><span class="en-only">CS Manager</span></div><div class="char-role"><span class="ru-only">Ваша роль</span><span class="en-only">Your role</span></div></div>
-        </div>
-        <div class="char-body">
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Внутреннее состояние</span><span class="en-only">Internal state</span></div>
-            <div class="char-section-text"><span class="ru-only">Соблазн — успокоить новым обещанием, потому что тишина между словами неудобна. Но именно новое обещание сейчас разрушит остатки доверия. Нужно говорить меньше и конкретнее.</span><span class="en-only">The temptation is to soothe with a new promise, because the silence between words feels uncomfortable. But a new promise right now would destroy what's left of the trust. Say less, and say it more concretely.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Задача CS</span><span class="en-only">CS objective</span></div>
-            <div class="char-section-text"><span class="ru-only">Признать провал без условий и без «но». Услышать эмоцию отдельно от фактов. Объяснить, не оправдываясь — говорить «мы», не «команда разработки». Предложить план, где контроль и точки проверки — у клиента.</span><span class="en-only">Acknowledge the failure with no conditions and no "but." Hear the emotion separately from the facts. Explain without excusing — say "we," not "the dev team." Offer a plan where control and checkpoints belong to the client.</span></div>
-          </div>
-          <div class="char-section"><div class="char-section-title"><span class="ru-only">Инструменты</span><span class="en-only">Tools</span></div>
-            <div class="char-tags">
-              <span class="char-tag teal"><span class="ru-only">Признать без условий</span><span class="en-only">Acknowledge with no conditions</span></span>
-              <span class="char-tag teal"><span class="ru-only">«Мы», не «они»</span><span class="en-only">"We," not "they"</span></span>
-              <span class="char-tag amber"><span class="ru-only">Контроль — на стороне клиента</span><span class="en-only">Control on the client's side</span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="observer-block">
-      <div class="block-label" style="color:var(--amber)">👁 <span class="ru-only">Задача наблюдателя — Протокол восстановления доверия</span><span class="en-only">Observer's task — 5-Step Trust Repair Protocol</span></div>
-      <div class="observer-list">
-        <div class="observer-item"><span class="observer-n">1</span><span class="ru-only">Было ли признание провала <b>без условий и без «но»</b> — или CS смягчил его оговорками?</span><span class="en-only">Was the acknowledgment of the failure <b>unconditional, with no "but"</b> — or did CS soften it with caveats?</span></div>
-        <div class="observer-item"><span class="observer-n">2</span><span class="ru-only">Использовал ли CS «мы», а не «команда разработки» / «они»?</span><span class="en-only">Did CS say "we," rather than "the dev team" or "they"?</span></div>
-        <div class="observer-item"><span class="observer-n">3</span><span class="ru-only">Была ли инициатива по точкам проверки отдана клиенту — или контроль остался у CS?</span><span class="en-only">Was the initiative over checkpoints handed to the client — or did CS keep control?</span></div>
-      </div>
-      <div class="flow-note" style="margin-top:.7rem;margin-bottom:0"><span class="ru-only">Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти три пункта: по приёму, а не по человеку.</span><span class="en-only">Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these three points: on the technique, not the person.</span></div>
-    </div>
-
-    <div class="timing-row">
-      <span class="t-pill">👥 <span class="ru-only">1 заказчик + 1 CS + 1 наблюдатель</span><span class="en-only">1 client + 1 CS + 1 observer</span></span>
-      <span class="t-pill">📞 <span class="ru-only">Звонок</span><span class="en-only">Call</span></span>
-      <span class="t-pill">🧊 <span class="ru-only">Второй срыв подряд</span><span class="en-only">Second miss in a row</span></span>
-    </div>
-
-    <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">9 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">19 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Развилки разговора — что обычно пробуют</span><span class="en-only">Conversation forks — what people usually try</span></div>
-      <div class="trap-list">
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Новое обещание без плана — после двух сорванных сроков звучит как третье в очереди на срыв</span><span class="en-only">A new promise with no plan — after two misses, it sounds like the third one waiting to break</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">«Это разработка задерживает» — клиент слышит две компании вместо одной</span><span class="en-only">"It's development that's delaying this" — the client hears two companies instead of one</span></div>
-        <div class="trap"><span class="trap-icon bad">✕</span><span class="ru-only">Оправдываться вместо объяснения — «но у нас было много других задач»</span><span class="en-only">Excusing instead of explaining — "but we had a lot of other tasks"</span></div>
-        <div class="trap"><span class="trap-icon good">✓</span><span class="ru-only">Признать без условий, объяснить не оправдываясь, говорить «мы», отдать клиенту контроль над точками проверки.</span><span class="en-only">Acknowledge with no conditions, explain without excusing, say "we," and give the client control over the checkpoints.</span></div>
-      </div>
-    </div>
-
-    <div class="theory-block">
-      <div class="block-label" style="color:var(--blue)">📚 <span class="ru-only">Приём: Протокол восстановления доверия (5 шагов)</span><span class="en-only">Technique: 5-Step Trust Repair Protocol</span></div>
-      <div class="theory-def"><span class="ru-only"><b>Что это:</b> из модуля курса «Доверие после провала» — последовательность из пяти шагов: признать без условий → услышать эмоцию → объяснить, не оправдываясь → предложить конкретный план → отдать контроль заказчику. Порядок шагов так же важен, как их содержание.</span><span class="en-only"><b>What it is:</b> from the course's "Trust After Failure" module — a five-step sequence: acknowledge with no conditions → hear the emotion → explain without excusing → offer a concrete plan → give the client control. The order matters as much as the content.</span></div>
-      <div class="theory-list">
-        <div class="theory-item"><span class="theory-icon">①</span><span class="ru-only">Разделяйте эмоциональную и операционную часть жалобы — сначала эмоция, потом факты. Смешивание этих слоёв — частая причина, почему разговор буксует.</span><span class="en-only">Separate the emotional and operational parts of a complaint — emotion first, then facts. Mixing these layers is a common reason conversations stall.</span></div>
-        <div class="theory-item"><span class="theory-icon">②</span><span class="ru-only">«Мы», а не «они»: заказчик воспринимает вас как единую точку контакта, а не представителя команды, которая его подвела.</span><span class="en-only">"We," not "they": the client sees you as a single point of contact, not a representative of the team that let them down.</span></div>
-        <div class="theory-item"><span class="theory-icon">③</span><span class="ru-only">Доверие восстанавливают действия, а не слова — принцип, общий и для переговорной теории, и для медиации: конкретный проверяемый план убедительнее любого нового обещания.</span><span class="en-only">Trust is rebuilt by actions, not words — a principle shared by negotiation theory and mediation alike: a concrete, verifiable plan is more convincing than any new promise.</span></div>
-      </div>
-      <div class="theory-source"><span class="ru-only">По мотивам модуля курса «Доверие после провала» + общие принципы восстановления доверия из переговорной и медиаторской практики.</span><span class="en-only">Drawing on the "Trust After Failure" course module, plus general trust-repair principles from negotiation and mediation practice.</span></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">💬 <span class="ru-only">Готовые фразы на английском</span><span class="en-only">Ready-to-use English phrases</span></div>
-      <div class="phrase-bank">
-        <div class="phrase-card"><div class="phrase-en">"You're right — and I'm not going to look for mitigating circumstances."</div><div class="phrase-ru">Вы правы — и я не буду искать смягчающие обстоятельства.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"I understand words don't mean much right now — that's why I want to show it through actions."</div><div class="phrase-ru">Понимаю, что слова сейчас мало что значат — именно поэтому хочу показать это действиями.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"You set the checkpoints — if there's no update, that's your signal to escalate."</div><div class="phrase-ru">Точки проверки назначаете вы — если статуса нет, это сигнал эскалировать.</div></div>
-        <div class="phrase-card"><div class="phrase-en">"We're taking direct ownership of this — not the dev team, me personally."</div><div class="phrase-ru">Мы берём это под личный контроль — не разработка, а я лично.</div></div>
-      </div>
-    </div>
-
-    <div class="accordion">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)">
-        <div class="trigger-left"><div class="trigger-icon">📋</div>
-          <div><div class="trigger-label"><span class="ru-only">Опорный сценарий</span><span class="en-only">Reference script</span></div><div class="trigger-sub"><span class="ru-only">Сначала попробуй сам — потом открой</span><span class="en-only">Try on your own first — then reveal</span></div></div>
-        </div><div class="chevron">▾</div>
-      </button>
-      <div class="accordion-body"><div class="script-inner">
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Вы обещали второй раз — и второй раз сорвали срок. Я не знаю, зачем мне верить в третье обещание.</span><span class="en-only">You promised twice — and missed it twice. I don't know why I'd believe a third promise.</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Вы правы — мы сорвали срок дважды, и я не буду искать смягчающие обстоятельства. Я понимаю, что сейчас слова мало что значат. Именно поэтому я хочу показать это действиями, а не ещё одним обещанием.</span><span class="en-only">You're right — we missed the deadline twice, and I'm not going to look for mitigating circumstances. I understand words don't mean much right now. That's exactly why I want to show this through actions, not another promise.</span></span></div>
-        <div class="script-line"><span class="who cl"><span class="ru-only">Заказчик</span><span class="en-only">Client</span></span><span class="line-text"><span class="ru-only">Хорошо. Что конкретно это значит?</span><span class="en-only">Fine. What does that actually mean?</span></span></div>
-        <div class="script-line"><span class="who cs">CS</span><span class="line-text"><span class="ru-only">Мы — не разработка, а я лично — берём это под личный контроль. Присылаю статус каждый понедельник и четверг, вне зависимости от того, есть новости или нет. Точки проверки назначаете вы: если в оговорённый день статуса нет — это ваш сигнал эскалировать выше меня.</span><span class="en-only">We — not "development," but I, personally — are taking direct ownership of this. I'll send a status every Monday and Thursday, whether or not there's news. You set the checkpoints: if there's no status on the agreed day, that's your signal to escalate above me.</span></span></div>
-        <div class="script-line"><span class="who note"><span class="ru-only">Ключевой момент</span><span class="en-only">Key note</span></span><span class="line-text"><span class="ru-only">CS не говорит «команда задерживает» — говорит «мы». Контроль над точками проверки CS отдаёт клиенту, а не оставляет у себя — это и есть язык действий, а не слов.</span><span class="en-only">CS doesn't say "the team is delaying this" — says "we." CS hands control over the checkpoints to the client instead of keeping it — that's the language of actions, not words.</span></span></div>
-      </div></div>
-    </div>
-
-    <div class="block">
-      <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
-      <div class="debrief-list">
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем «признать без условий» отличается от признания с оговорками?</span><span class="en-only">How is "acknowledging with no conditions" different from an acknowledgment with caveats?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Почему новое обещание сейчас может навредить больше, чем помочь?</span><span class="en-only">Why might a new promise right now do more harm than good?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">3</span><span class="ru-only">Что меняется, когда контроль над точками проверки передаётся клиенту?</span><span class="en-only">What changes when control over the checkpoints is handed to the client?</span></div>
-        <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">4</span><span class="ru-only">Почему «мы» вместо «разработка» — не формальность, а суть доверия?</span><span class="en-only">Why is "we" instead of "the dev team" not a formality, but the core of trust?</span></div>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-label">🧩 <span class="ru-only">Мини-квиз — ловушка или хороший ход?</span><span class="en-only">Mini-quiz — trap or good move?</span></div>
-      <div class="flow-note"><span class="ru-only">По одной реплике за раз — вдвоём решите, ловушка это или хороший ход, потом нажмите вариант, чтобы увидеть краткое пояснение.</span><span class="en-only">One line at a time — decide together whether it's a trap or a good move, then click your answer to see a short explanation.</span></div>
-      <div class="quiz-list">
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«В этот раз точно всё получится, обещаю»</span><span class="en-only">"This time it'll definitely work out, I promise"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">После двух сорванных сроков это ещё одно обещание без плана — доверие не восстанавливается словами.</span><span class="en-only">After two missed deadlines, this is just another promise with no plan — trust isn't rebuilt with words.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="trap">
-          <div class="quiz-q"><span class="ru-only">«У нас было много других задач в приоритете»</span><span class="en-only">"We had a lot of other tasks as priorities"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Звучит как оправдание, а не объяснение — клиенту это не помогает и не восстанавливает доверие.</span><span class="en-only">Sounds like an excuse, not an explanation — it doesn't help the client or rebuild trust.</span></div>
-        </div>
-        <div class="quiz-item" data-answer="good">
-          <div class="quiz-q"><span class="ru-only">«Точки проверки назначаете вы — если статуса нет, это сигнал эскалировать»</span><span class="en-only">"You set the checkpoints — if there's no status, that's your signal to escalate"</span></div>
-          <div class="quiz-btns">
-            <button class="quiz-btn" onclick="answerQuiz(this,'trap')">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button>
-            <button class="quiz-btn" onclick="answerQuiz(this,'good')">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button>
-          </div>
-          <div class="quiz-feedback"><span class="ru-only">Отдаёт контроль клиенту вместо очередного обещания — это язык действий.</span><span class="en-only">Hands control to the client instead of another promise — this is the language of actions.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="group-discuss-block">
-      <div class="block-label">🗣 <span class="ru-only">Общее обсуждение — после пар</span><span class="en-only">Group discussion — after the pairs</span></div>
-      <div class="flow-note"><span class="ru-only">На это 5 минут. Когда все вернулись, обсуждаем вместе — не называя, кто и как справился, только сами приёмы и находки.</span><span class="en-only">You have 5 minutes for this. Once everyone's back, discuss together — without naming who did what, just the techniques and insights themselves.</span></div>
-      <div class="group-list">
-        <div class="group-item"><span class="group-n">1</span><span class="ru-only">Какие формулировки признания без условий прозвучали убедительно?</span><span class="en-only">Which unconditional-acknowledgment phrasings landed convincingly?</span></div>
-        <div class="group-item"><span class="group-n">2</span><span class="ru-only">Что сложнее: говорить «мы» вместо «они», или отдавать клиенту контроль над проверками?</span><span class="en-only">What's harder: saying "we" instead of "they," or handing the client control over the checkpoints?</span></div>
-        <div class="group-item"><span class="group-n">3</span><span class="ru-only">Какие конкретные действия (не обещания) группа предложила бы в похожей ситуации?</span><span class="en-only">What concrete actions (not promises) would the group propose in a similar situation?</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════ SCENARIO 8: Passive-aggressive Technical Director (internal cross-functional communication) ════ -->
   <div class="sc-panel" id="s8">
     <div class="sc-header">
       <div class="sc-difficulty diff-med">🙃 <span class="ru-only">Средняя · Пассивная агрессия в переписке с техдиректором</span><span class="en-only">Medium · Passive aggression from the technical director</span></div>
@@ -1704,6 +1374,78 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
               <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Указать, что саппорт уже отвечал — читается как упрёк, а не помощь</span><span class="en-only">Pointing out that support already replied — reads as a rebuke, not help</span></div>
               <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Объяснить просто, без жаргона. Дать конкретный шаг с датой. Не унижать заказчика за незнание технических деталей.</span><span class="en-only">Explain simply, no jargon. Give a concrete step with a date. Don't belittle the client for not knowing technical details.</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 10 - former active Scenario 1: toxic client, Aggressor (verbal de-escalation) -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H10</span>
+            <div>
+              <div class="hist-name"><span class="ru-only">«Это уже переходит все границы!» - токсичный клиент: Агрессор</span><span class="en-only">"This is crossing every line!" - toxic client: the Aggressor</span></div>
+              <div class="hist-sub"><span class="ru-only">Приём: Вербальная деэскалация · третий агрессивный звонок за месяц</span><span class="en-only">Technique: Verbal de-escalation · third aggressive call this month</span></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high"><span class="ru-only">Высокая</span><span class="en-only">High</span></span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Контекст</span><span class="en-only">Context</span></div>
+            <div class="hist-block-text"><span class="ru-only">Клиент на повышенных тонах требует немедленного решения и грозит уйти к конкурентам. Это не разовая вспышка: за месяц уже третий такой звонок. Технически проблема несложная. CS должен не зеркалить тон, замедлить темп, назвать поведение, а не человека, и при повторении предложить эскалацию к руководителю как инструмент, а не отступление.</span><span class="en-only">The client raises his voice, demands an immediate fix and threatens to move to a competitor. It's not a one-off outburst: this is the third such call this month. The technical issue is simple. CS must not mirror the tone, slow down, name the behaviour rather than the person, and if it repeats, offer escalation to a team lead as a tool, not a retreat.</span></div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Ключевые ловушки</span><span class="en-only">Key traps</span></div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Отвечать тем же тоном или скоростью - эскалация мгновенная</span><span class="en-only">Matching the tone or pace - instant escalation</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Оправдываться за команду или продукт в момент крика</span><span class="en-only">Justifying the team or product mid-shouting</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Игнорировать паттерн: три звонка за месяц - уже система, а не всплеск</span><span class="en-only">Ignoring the pattern: three calls a month is a system, not an outburst</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Замедлить темп, назвать поведение («этот тон мешает нам найти решение»), перейти к фактам, при повторении - эскалация как инструмент</span><span class="en-only">Slow down, name the behaviour ("this tone is getting in the way of a solution"), move to facts, and if it repeats - escalation as a tool</span></div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Типичные фразы</span><span class="en-only">Typical lines</span></div>
+            <div class="hist-quote"><span class="ru-only">«Это уже переходит все границы! Третий раз за месяц одно и то же!» · «Мы серьёзно рассматриваем переход к другому провайдеру.»</span><span class="en-only">"This is crossing every line! Third time this month!" · "We're seriously considering moving to another provider."</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY 11 - former active Scenario 2: trust after a failure (5-step protocol) -->
+      <div class="hist-item">
+        <button class="hist-trigger" onclick="toggleHist(this)">
+          <div class="hist-trigger-left">
+            <span class="hist-num">H11</span>
+            <div>
+              <div class="hist-name"><span class="ru-only">«Слова сейчас мало что значат» - доверие после провала</span><span class="en-only">"Words don't mean much right now" - trust after a failure</span></div>
+              <div class="hist-sub"><span class="ru-only">Приём: Протокол восстановления доверия (5 шагов) · второй сорванный срок подряд</span><span class="en-only">Technique: 5-step trust recovery protocol · second missed deadline in a row</span></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="hist-difficulty hd-high"><span class="ru-only">Высокая</span><span class="en-only">High</span></span>
+            <span class="hist-chevron">▾</span>
+          </div>
+        </button>
+        <div class="hist-body">
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Контекст</span><span class="en-only">Context</span></div>
+            <div class="hist-block-text"><span class="ru-only">Обещанный срок сорван второй раз подряд. Клиент не кричит, он холоден и прямо говорит, что больше не верит словам. Любое новое обещание без плана усилит недоверие. Работает протокол: признать без условий, услышать эмоцию, объяснить, не оправдываясь, предложить конкретный план и отдать контроль над точками проверки заказчику.</span><span class="en-only">A promised deadline has been missed for the second time in a row. The client isn't shouting - he's cold and says plainly that he no longer trusts words. Any new promise without a plan deepens the distrust. The protocol: acknowledge without conditions, hear the emotion, explain without excuses, offer a concrete plan, and hand control of the checkpoints to the client.</span></div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Ключевые ловушки</span><span class="en-only">Key traps</span></div>
+            <div class="hist-traps">
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Новое обещание без плана - звучит как третье в очереди на срыв</span><span class="en-only">A new promise with no plan - sounds like the third one waiting to fail</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">«Это разработка задерживает» - клиент слышит две компании вместо одной</span><span class="en-only">"It's the dev team delaying" - the client hears two companies instead of one</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✕</span><span class="ru-only">Оправдываться вместо объяснения: «у нас было много других задач»</span><span class="en-only">Making excuses instead of explaining: "we had a lot of other priorities"</span></div>
+              <div class="hist-trap"><span class="hist-trap-icon">✓</span><span class="ru-only">Признать без условий, говорить «мы», предложить проверяемый план и отдать клиенту контроль над точками проверки</span><span class="en-only">Acknowledge without conditions, say "we", offer a verifiable plan and give the client control of the checkpoints</span></div>
+            </div>
+          </div>
+          <div class="hist-block">
+            <div class="hist-block-label"><span class="ru-only">Типичные фразы</span><span class="en-only">Typical lines</span></div>
+            <div class="hist-quote"><span class="ru-only">«Вы обещали второй раз - и второй раз сорвали срок.» · «Мне не нужны новые обещания - мне нужно понять, что вообще происходит.»</span><span class="en-only">"You promised twice - and missed the deadline twice." · "I don't need new promises - I need to understand what's actually going on."</span></div>
           </div>
         </div>
       </div>
