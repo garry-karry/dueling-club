@@ -55,6 +55,7 @@ button:active{transform:scale(.96)}
 .ht-select{font-size:13px;font-weight:500;padding:3px 6px;border-radius:14px;border:1px solid var(--border-m);background:#fff;color:var(--ink);cursor:pointer;font-family:'DM Sans',sans-serif}
 .ht-select:disabled{opacity:.5;cursor:not-allowed}
 .ht-unit{font-size:11px;color:var(--ink3)}
+.ht-phase{font-size:11px;font-weight:600;color:var(--teal);background:var(--teal-l);padding:3px 9px;border-radius:12px;white-space:nowrap}
 .ht-display{font-family:'Libre Baskerville',serif;font-size:20px;font-weight:700;letter-spacing:-1px;color:var(--ink);min-width:48px;font-variant-numeric:tabular-nums}
 .ht-display.warn{color:var(--amber)}
 .ht-display.danger{color:var(--red);animation:tpulse .7s ease-in-out infinite}
@@ -464,7 +465,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
   <div class="header-timer visible" id="headerTimer">
     <select class="ht-select" id="htMinutesSelect" onchange="setTimerMinutes(this)"></select>
     <span class="ht-unit"><span class="ru-only">мин</span><span class="en-only">min</span></span>
-    <div class="ht-display" id="htDisplay">7:00</div>
+    <span class="ht-phase" id="htPhase" style="display:none"></span>
+    <div class="ht-display" id="htDisplay">5:00</div>
     <button class="ht-btn go" id="htBtn" onclick="timerToggle()"><span class="ru-only">Старт</span><span class="en-only">Start</span></button>
     <button class="ht-btn" onclick="timerReset()">↺</button>
   </div>
@@ -737,10 +739,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -791,7 +794,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair's own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём — оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить — инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together — both participants plus the observer. Check off what you've discussed — we'll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как отделить содержание сообщения от его пассивно-агрессивного тона?</span><span class="en-only">How do you separate a message's substance from its passive-aggressive tone?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Что помогает не отвечать тем же тоном?</span><span class="en-only">What helps you avoid answering in the same tone?</span></div>
@@ -924,10 +927,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -978,7 +982,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем «разберёмся» отличается от обязательства - и как это звучит для клиента?</span><span class="en-only">How does “we’ll look into it” differ from a commitment - and how does it sound to the client?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Что можно пообещать, когда финальной даты нет?</span><span class="en-only">What can you promise when there’s no final date?</span></div>
@@ -1111,10 +1115,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1166,7 +1171,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Сколько времени прошло до сути новости - и как это повлияло на реакцию клиента?</span><span class="en-only">How long did it take to get to the point - and how did that affect the client’s reaction?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как назвать причину так, чтобы это не звучало как оправдание?</span><span class="en-only">How do you name the cause without it sounding like an excuse?</span></div>
@@ -1299,10 +1304,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">9 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">19 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1353,7 +1359,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Почему признать молчание после сбоя так же важно, как сам сбой?</span><span class="en-only">Why is acknowledging the silence after the outage as important as the outage itself?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как объяснить техническую причину так, чтобы клиент понял последствия, а не детали системы?</span><span class="en-only">How do you explain a technical cause so the client understands the consequences, not the system details?</span></div>
@@ -1486,10 +1492,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1540,7 +1547,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Чем результат отличается от активности - и какие примеры прозвучали в сцене?</span><span class="en-only">How does a result differ from an activity - and which examples came up in the scene?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как не обидеться, когда вашу работу называют пересылкой писем?</span><span class="en-only">How do you not take offence when your work is called forwarding emails?</span></div>
@@ -1673,10 +1680,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">7 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">17 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1727,7 +1735,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Какой вопрос в начале разговора дал больше всего информации?</span><span class="en-only">Which question at the start of the conversation gave the most information?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как уважать «давайте сразу к делу» и всё равно наладить контакт?</span><span class="en-only">How do you respect “let’s get straight to business” and still build rapport?</span></div>
@@ -1860,10 +1868,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">8 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">18 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -1914,7 +1923,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Какие приёмы манипуляции прозвучали в сцене - и как AM на каждый отреагировал?</span><span class="en-only">Which manipulation tactics came up in the scene - and how did AM react to each?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Как держать границу и при этом не звучать холодно или обиженно?</span><span class="en-only">How do you hold a boundary without sounding cold or offended?</span></div>
@@ -2048,10 +2057,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
     </div>
 
     <div class="time-budget">
-      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">9 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">В комнате</span><span class="en-only">In-room</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее</span><span class="en-only">Group</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
-      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">19 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🧩 <span class="ru-only">Подготовка к ролям</span><span class="en-only">Role prep</span></span><span class="tb-val">2 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🎭 <span class="ru-only">Ролевая игра</span><span class="en-only">Roleplay</span></span><span class="tb-val">10 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">🗣 <span class="ru-only">Разбор с наблюдателем</span><span class="en-only">Debrief with observer</span></span><span class="tb-val">3 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item"><span class="tb-label">👥 <span class="ru-only">Общее обсуждение</span><span class="en-only">Group discussion</span></span><span class="tb-val">5 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
+      <div class="tb-item tb-total"><span class="tb-label"><span class="ru-only">Итого</span><span class="en-only">Total</span></span><span class="tb-val">20 <span class="ru-only">мин</span><span class="en-only">min</span></span></div>
     </div>
 
     <div class="block">
@@ -2102,7 +2112,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
     <div class="block">
       <div class="block-label"><span class="ru-only">Вопросы для разбора внутри пары</span><span class="en-only">Questions for your pair’s own debrief</span></div>
-      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 5 минут: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 5 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
+      <div class="flow-note"><span class="ru-only">Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты: пройдитесь по чек-листу все втроём - оба участника вместе с наблюдателем. Отмечайте то, что успели обсудить - инсайты потом обсудим все вместе на общем колле.</span><span class="en-only">Right after the scene, without leaving the room: you have 3 minutes for this: go through the checklist all three of you together - both participants plus the observer. Check off what you’ve discussed - we’ll go over the insights together afterward on the group call.</span></div>
       <div class="debrief-list">
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">1</span><span class="ru-only">Как признать решение клиента и при этом не закрыть разговор?</span><span class="en-only">How do you acknowledge the client’s decision without ending the conversation?</span></div>
         <div class="dq"><input type="checkbox" class="dq-box"><span class="dq-n">2</span><span class="ru-only">Какой вопрос помог перейти от позиции «закрываем» к интересам клиента?</span><span class="en-only">Which question helped move from the position “we’re closing” to the client’s interests?</span></div>
@@ -2780,6 +2790,7 @@ function showScenario(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   activeScenario = id;
+  setTimerFor(id);
   // Hide the pairing/randomizer tool entirely on the warmup tab — it's a group activity there
   const toolsPanel = document.querySelector('.tools-panel');
   if (toolsPanel) toolsPanel.style.display = (id === 'warmup') ? 'none' : '';
@@ -2833,16 +2844,57 @@ function answerQuiz(btn, chosen){
 }
 
 // ── TIMER (lives in the header only) ───────────────────
-let timerTotal = 7 * 60, timerLeft = 7 * 60, timerRunning = false, timerInterval = null;
+let timerTotal = 5 * 60, timerLeft = 5 * 60, timerRunning = false, timerInterval = null;
+// Scenario timing: the timer runs through these phases one after another on its own
+const SCENARIO_PHASES = [
+  {ru:'Подготовка к ролям', en:'Role prep', m:2},
+  {ru:'Сцена', en:'Scene', m:10},
+  {ru:'Разбор с наблюдателем', en:'Debrief', m:3},
+  {ru:'Общее обсуждение', en:'Group discussion', m:5}
+];
+let timerPhases = null, phaseIdx = 0;
+function chime(n){
+  try {
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    for(let k=0;k<n;k++){const t=k*.25;
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=n===2?660:880;
+      g.gain.setValueAtTime(.3,ctx.currentTime+t);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+t+.2);
+      o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+.2);}
+  }catch(e){}
+}
+function renderPhase(){
+  const el=document.getElementById('htPhase');
+  if(!timerPhases){el.style.display='none';return;}
+  const ph=timerPhases[phaseIdx];
+  el.style.display='';
+  el.innerHTML=(phaseIdx+1)+'/'+timerPhases.length+' · <span class="ru-only">'+ph.ru+'</span><span class="en-only">'+ph.en+'</span>';
+}
+function loadPhases(){
+  timerPhases=SCENARIO_PHASES; phaseIdx=0;
+  timerTotal=timerLeft=timerPhases[0].m*60;
+  renderPhase(); renderHeaderTimer();
+}
+function setTimerFor(id){
+  if(timerRunning) return;
+  const sel=document.getElementById('htMinutesSelect');
+  if(id==='warmup'){ sel.value='5'; timerPhases=null; timerTotal=timerLeft=5*60; renderPhase(); renderHeaderTimer(); }
+  else { sel.value='phases'; loadPhases(); }
+}
 
 function initTimerSelect() {
   const sel = document.getElementById('htMinutesSelect');
   let opts = '';
-  for (let m = 1; m <= 15; m++) opts += `<option value="${m}"${m===7?' selected':''}>${m}</option>`;
+  opts += '<option value="phases">20 = 2+10+3+5</option>';
+  for (let m = 1; m <= 15; m++) opts += `<option value="${m}"${m===5?' selected':''}>${m}</option>`;
   sel.innerHTML = opts;
 }
 function setTimerMinutes(sel) {
-  if (timerRunning) { sel.value = Math.round(timerTotal/60); return; }
+  if (timerRunning) return;
+  if (sel.value === 'phases') { loadPhases(); return; }
+  timerPhases = null; renderPhase();
   const mins = parseInt(sel.value, 10) || 1;
   timerTotal = mins * 60; timerLeft = mins * 60;
   renderHeaderTimer();
@@ -2871,6 +2923,11 @@ function timerToggle() {
     htBtn.className='ht-btn go';
     sel.disabled = true;
     timerInterval = setInterval(()=>{
+      if (timerLeft<=0 && timerPhases && phaseIdx < timerPhases.length-1) {
+        phaseIdx++; timerTotal=timerLeft=timerPhases[phaseIdx].m*60;
+        renderPhase(); renderHeaderTimer(); chime(2);
+        return;
+      }
       if (timerLeft<=0) {
         clearInterval(timerInterval); timerRunning=false;
         htBtn.textContent='↺'; htBtn.className='ht-btn';
@@ -2895,7 +2952,9 @@ function timerToggle() {
   }
 }
 function timerReset() {
-  clearInterval(timerInterval); timerRunning=false; timerLeft=timerTotal;
+  clearInterval(timerInterval); timerRunning=false;
+  if (timerPhases) { phaseIdx=0; timerTotal=timerPhases[0].m*60; renderPhase(); }
+  timerLeft=timerTotal;
   renderHeaderTimer();
   const htBtn=document.getElementById('htBtn');
   htBtn.textContent=(document.body.dataset.lang==='en'?'Start':'Старт'); htBtn.className='ht-btn go';
@@ -4293,7 +4352,7 @@ function genRenderResult(seed, lang){
     </div>
     <div class="block">
       <div class="block-label">${lang==='en'?"Questions for your pair's own debrief":'Вопросы для разбора внутри пары'}</div>
-      <div class="flow-note">${lang==='en'?"Right after the scene, without leaving the room: you have 5 minutes for this — go through the checklist all three of you together — both participants plus the observer. We'll go over the insights together afterward on the group call.":'Сразу после сцены, не выходя из комнаты: на это выделено 5 минут — пройдитесь по чек-листу все втроём, оба участника вместе с наблюдателем. Инсайты потом обсудим все вместе на общем колле.'}</div>
+      <div class="flow-note">${lang==='en'?"Right after the scene, without leaving the room: you have 3 minutes for this - go through the checklist all three of you together — both participants plus the observer. We'll go over the insights together afterward on the group call.":'Сразу после сцены, не выходя из комнаты: на это выделено 3 минуты — пройдитесь по чек-листу все втроём, оба участника вместе с наблюдателем. Инсайты потом обсудим все вместе на общем колле.'}</div>
       <div class="debrief-list">${debriefHtml}</div>
     </div>
     <div class="group-discuss-block">
