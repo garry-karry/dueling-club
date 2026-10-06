@@ -2111,56 +2111,60 @@ function exportPairsCSV(){
 
 // ── ROULETTE WHEEL ─────────────────────────────────────
 const PARTICIPANTS = [
-  {name:'Mariya Logimakhova', team:'AM (L)', email:'Mariya.Logimakhova@evenbetgaming.com'},
+  {name:'Mariya Logimakhova', team:'AM (L)', email:'ml@evenbetgaming.com'},
   {name:'Aleksandr Minenok', team:'AM (L)', email:'Aleksandr.Minenok@evenbetgaming.com'},
   {name:'Ekaterina Radkova', team:'AM (L)', email:'Ekaterina.Radkova@evenbetgaming.com'},
-  {name:'Ilona Kursitys', team:'AM (L)', email:'Ilona.Kursitys@evenbetgaming.com'},
   {name:'Milena Borshcheva', team:'AM (L)', email:'Milena.Borshcheva@evenbetgaming.com'},
   {name:'Mariya Makdonald', team:'AM (L)', email:'Mariya.Makdonald@evenbetgaming.com'},
   {name:'Olga Samoilova', team:'AM (L)', email:'Olga.Samoilova@evenbetgaming.com'},
-
   {name:'Darya Baranova', team:'AM (B)', email:'darya.baranova@evenbetgaming.com'},
   {name:'Olga Zakharenko', team:'AM (B)', email:'Olga.Zakharenko@evenbetgaming.com'},
   {name:'Stanislav Miletskii', team:'AM (B)', email:'Stanislav.Miletskii@evenbetgaming.com'},
   {name:'Volha Salahub', team:'AM (B)', email:'Volha.Salahub@evenbetgaming.com'},
   {name:'Anastasiya Khizhnyak', team:'AM (B)', email:'Anastasiya.Khizhnyak@evenbetgaming.com'},
-
   {name:'Natalya Nazarenko', team:'AM (N)', email:'Natalya.Nazarenko@evenbetgaming.com'},
   {name:'Valery Budkevich', team:'AM (N)', email:'Valery.Budkevich@evenbetgaming.com'},
   {name:'Valentin Seregin', team:'AM (N)', email:'Valentin.Seregin@evenbetgaming.com'},
   {name:'Anton Grishukevich', team:'AM (N)', email:'Anton.Grishukevich@evenbetgaming.com'},
-
   {name:'Ivan Pritchin', team:'AM (P)', email:'ivan.pritchin@evenbetgaming.com'},
   {name:'Aidar Giliazetdinov', team:'AM (P)', email:'Aidar.Giliazetdinov@evenbetgaming.com'},
-  {name:'Alena Gorenysheva', team:'AM (P)', email:'Alena.Gorenysheva@evenbetgaming.com'},
   {name:'Dimitri Marutiani', team:'AM (P)', email:'Dimitri.Marutiani@evenbetgaming.com'},
   {name:'Yuliya Poshva', team:'AM (P)', email:'Yuliya.Poshva@evenbetgaming.com'},
-
   {name:'Elizaveta Mikhoparkina', team:'AM Casino (L)', email:'Elizaveta.Mikhoparkina@evenbetgaming.com'},
   {name:'Chingiz Zhumagaliev', team:'AM Casino (L)', email:'Chingiz.Zhumagaliev@evenbetgaming.com'},
   {name:'Valeriya Grudnina', team:'AM Casino (L)', email:'Valeriya.Grudnina@evenbetgaming.com'},
-
   {name:'Viktoriya Suhoveeva', team:'AM Casino (V)', email:'Viktoriya.Peregudova@evenbetgaming.com'},
   {name:'Aleksandr Karmanov', team:'AM Casino (V)', email:'aleksandr.karmanov@evenbetgaming.com'},
   {name:'Anna Aleksandrovich', team:'AM Casino (V)', email:'Anna.Aleksandrovich@evenbetgaming.com'},
   {name:'Rakhima Aldasheva', team:'AM Casino (V)', email:'Rakhima.Aldasheva@evenbetgaming.com'},
-
   {name:'Viktoriya Ledeneva', team:'Support', email:'vLedeneva@evenbetgaming.com'},
   {name:'Mariya Zmitrovich', team:'Support', email:'Mariya.Zmitrovich@evenbetgaming.com'},
-
-  {name:'Nikita Golodaev', team:'Business manager', email:'nikita.golodaev@evenbetgaming.com'},
-
-  {name:'Zakhar Galushkin', team:'Operation Efficiency', email:'zg@evenbetgaming.com'},
+  {name:'Ilona Kursitys', team:'AM (L)', email:'Ilona.Kursitys@evenbetgaming.com'},
   {name:'Kseniya Kadebskaya', team:'Operation Efficiency', email:'Kseniya.Kadebskaya@evenbetgaming.com'},
+  {name:'Alena Gorenysheva', team:'AM (P)', email:'Alena.Gorenysheva@evenbetgaming.com'},
+  {name:'Yuliya Fedchenko', team:'Operation Efficiency', email:'Yuliya.Fedchenko@evenbetgaming.com'},
+  {name:'Alexander Markaryan', team:'Support', email:'Alexander.Markaryan@evenbeter.com'},
+  {name:'Anastasiya Mihina', team:'Support', email:'Anastasiya.Belova@evenbeter.com'},
+  {name:'Anton Berezhko', team:'Support', email:'Anton.Berezhko@evenbeter.com'},
+  {name:'Denis Arabinka', team:'Support', email:'Denis.Arabinka@evenbeter.com'},
+  {name:'Dzmitry Zaitsau', team:'Support', email:'Dzmitry.Zaitsau@evenbeter.com'},
+  {name:'Evgeniia Polianskaia', team:'Support', email:'Evgeniia.Polianskaia@evenbeter.com'},
+  {name:'Jesika Korobko', team:'Support', email:'Dzhesika.Korobko@evenbeter.com'},
+  {name:'Kseniya Aleksentseva', team:'Support', email:'Kseniya.Aleksentseva@evenbeter.com'},
+  {name:'Sofiia Tarasenkova', team:'Support', email:'Sofiia.Tarasenkova@evenbeter.com'},
+  {name:'Yana Uglyanitsa', team:'Support', email:'Yana.Uglyanitsa@evenbeter.com'},
+  {name:'Nikita Golodaev', team:'Business manager', email:'nikita.golodaev@evenbetgaming.com'},
+  {name:'Zakhar Galushkin', team:'Operation Efficiency', email:'zg@evenbetgaming.com'},
   {name:'Anastasiya Rusanova', team:'Operation Efficiency', email:'Anastasiya.Rusanova@evenbetgaming.com'},
-  {name:'Yuliya Fedchenko', team:'Operation Efficiency', email:'Yuliya.Fedchenko@evenbetgaming.com'}
+  {name:'Ekaterina Nebogina', team:'Other', email:'ekaterina.nebogina@evenbetgaming.com'},
+  {name:'Leonid Matison', team:'Other', email:'leonid.matison@evenbetgaming.com'}
 ];
 const PARTICIPANT_NAMES = PARTICIPANTS.map(p=>p.name);
 const TEAM_OF = Object.fromEntries(PARTICIPANTS.map(p=>[p.name, p.team]));
 const EMAIL_OF = Object.fromEntries(PARTICIPANTS.map(p=>[p.name, p.email||'']));
 
 // ── ATTENDANCE (Step 0) — who's actually here today ────
-const attendance = Object.fromEntries(PARTICIPANT_NAMES.map(n=>[n,true]));
+const attendance = Object.fromEntries(PARTICIPANT_NAMES.map(n=>[n,TEAM_OF[n]!=='Other']));
 
 function getPresentNames(){ return PARTICIPANT_NAMES.filter(n=>attendance[n]); }
 
@@ -2500,6 +2504,24 @@ const GEN_TOX_EXTRA_TRIGGERS = {
 };
 
 // ── SKILL (primary technique selector — ported from the negotiation-duel project) ──
+// ── INTERNAL STATE (the temptation the "you" role has to resist, per toxicity type) ──
+const GEN_INTERNAL_STATE = {
+  ru:{
+    none:'Соблазн — расслабиться и слушать вполуха, раз ставки невысокие. Именно на спокойном материале удобнее всего закрепить привычку, которая пригодится в сложных разговорах.',
+    aggressor:'Соблазн — либо начать оправдываться, либо ответить тем же повышенным тоном. Оба варианта проигрышные: первый выглядит как слабость, второй — как эскалация.',
+    manipulator:'Соблазн — поддаться на сравнение или скрытую угрозу и изменить позицию без реального повода, лишь бы разговор закончился быстрее.',
+    chaotic:'Соблазн — включиться в спор о срочности прямо сейчас, вместо того чтобы предложить структуру, которая снимет проблему на будущее.',
+    silent_bomb:'Соблазн — не поднимать тему первым, раз собеседник молчит и внешне всё выглядит нормально — а потом разбираться с накопленным взрывом.'
+  },
+  en:{
+    none:'The temptation is to relax and listen with half an ear, since the stakes are low. This calm material is actually the best place to lock in a habit you\'ll need in harder conversations.',
+    aggressor:'The temptation is either to start justifying yourself, or to match the raised tone. Both lose: the first reads as weakness, the second as escalation.',
+    manipulator:'The temptation is to give in to a comparison or veiled threat and shift position without real cause, just to end the conversation faster.',
+    chaotic:'The temptation is to get pulled into arguing about urgency right now, instead of proposing structure that removes the problem going forward.',
+    silent_bomb:'The temptation is not to raise the topic first, since the other person is quiet and things look fine on the surface — then deal with the buildup later.'
+  }
+};
+
 const GEN_SKILL_THEORY = {
   ru:{
     deescalation:{ name:"Вербальная деэскалация", def:"Снижать накал разговора без уступок по сути: подтвердить услышанное без осуждения, замедлить свой темп речи, использовать паузу вместо мгновенного ответа.",
@@ -3128,17 +3150,40 @@ function genRenderResult(seed, lang){
   ];
   const groupHtml = groupQuestions.map((q,i)=>`<div class="group-item"><span class="group-n">${i+1}</span>${genEscape(q)}</div>`).join('');
 
+  const internalState = GEN_INTERNAL_STATE[lang][seed.toxicity] || GEN_INTERNAL_STATE[lang].none;
+  const youTags = skill.bullets.map(t=>`<span class="char-tag teal">${genEscape(t)}</span>`).join('');
+
   document.getElementById('genResult').innerHTML = `
     <div class="block">
       <div class="technique-badge">🎯 ${lang==='en'?'Technique in focus: '+genEscape(skill.name):'Отрабатываемый приём: '+genEscape(skill.name)}</div>
-      <div class="gen-persona">
-        <div class="gen-persona-av">${genEscape(sc.avatar)}</div>
-        <div>
-          <div class="gen-persona-name">${genEscape(sc.name)}</div>
-          <div class="gen-persona-role">${genEscape(sc.role)}</div>
+    </div>
+    <div class="characters">
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cl">${genEscape(sc.avatar)}</div>
+          <div><div class="char-name">${genEscape(sc.name)}</div><div class="char-role">${genEscape(sc.role)}</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section-text" style="padding:0 1.25rem 1.25rem">${genEscape(sc.persona)}</div>
         </div>
       </div>
-      <div class="gen-persona-sentence">${genEscape(sc.persona)}</div>
+      <div class="char-card">
+        <div class="char-head">
+          <div class="av av-cs">${genEscape(roleLbl.you[lang].slice(0,2).toUpperCase())}</div>
+          <div><div class="char-name">${genEscape(roleLbl.you[lang])}</div><div class="char-role">${lang==='en'?'Your role':'Ваша роль'}</div></div>
+        </div>
+        <div class="char-body">
+          <div class="char-section"><div class="char-section-title">${lang==='en'?'Internal state':'Внутреннее состояние'}</div>
+            <div class="char-section-text">${genEscape(internalState)}</div>
+          </div>
+          <div class="char-section"><div class="char-section-title">${lang==='en'?'Task':'Задача'}</div>
+            <div class="char-section-text">${genEscape(skill.def)}</div>
+          </div>
+          <div class="char-section"><div class="char-section-title">${lang==='en'?'Tools':'Инструменты'}</div>
+            <div class="char-tags">${youTags}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="block">
       <div class="block-label">${lang==='en'?'Context':'Контекст'}</div>
