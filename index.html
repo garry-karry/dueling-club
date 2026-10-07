@@ -47,7 +47,7 @@ button:active{transform:scale(.96)}
 
 /* ── STICKY HEADER ── */
 .site-header{border-bottom:2px solid transparent;border-image:var(--grad-teal) 1;padding:.85rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:rgba(245,242,236,.95);position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
-.logo{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;letter-spacing:-.3px;color:var(--ink);flex-shrink:0}
+.logo{display:flex;align-items:center;gap:9px;font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;letter-spacing:-.3px;color:var(--ink);flex-shrink:0}
 .logo span{background:var(--grad-teal);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* Timer in header */
 .header-timer{display:none;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:30px;padding:5px 8px 5px 14px}
@@ -72,7 +72,12 @@ button:active{transform:scale(.96)}
 main{max-width:920px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
 
 /* ── INTRO ── */
-.intro{margin-bottom:2rem}
+.intro{margin-bottom:2rem;display:flex;align-items:center;gap:2rem}
+.intro-text{flex:1;min-width:0}
+.intro-logo{order:2;width:200px;height:200px;flex-shrink:0;border-radius:50%;box-shadow:0 18px 40px rgba(60,20,110,.35),0 0 0 1px rgba(200,150,80,.25);animation:logoFloat 6s ease-in-out infinite}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@media(max-width:720px){.intro{flex-direction:column-reverse;align-items:flex-start;gap:1rem}.intro-logo{width:120px;height:120px}}
+.logo-img{width:32px;height:32px;border-radius:50%;display:block}
 .intro-label{display:inline-block;font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:.85rem;position:relative;transform:rotate(-1.2deg)}
 .intro-label::after{content:"";position:absolute;left:-2px;right:-8px;bottom:-6px;height:2px;border-radius:2px;background:var(--grad-teal)}
 .intro h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,5.2vw,44px);font-weight:700;line-height:1.12;letter-spacing:-.7px;margin-bottom:.85rem}
@@ -458,12 +463,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 .intro p,.sc-header .subtitle,.warmup-intro{max-width:none}
 .real-quote p,.line-text,.phrase-en,.quiz-feedback,.hidden-info-body,.wu-script,.warmup-text,.hist-quote,.hist-char-body,.hist-trap,.char-quote,.phrase-bank p,.theory-block p,.time-budget-note,.warmup-card p,.footer p,p,li{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto}
 </style>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230f6e63%22/%3E%3Cg stroke-linecap=%22round%22%3E%3Cline x1=%2214%22 y1=%2250%22 x2=%2246%22 y2=%2214%22 stroke=%22%23f6e7c8%22 stroke-width=%225%22/%3E%3Cline x1=%2250%22 y1=%2250%22 x2=%2218%22 y2=%2214%22 stroke=%22%23f6e7c8%22 stroke-width=%225%22/%3E%3Cline x1=%2214%22 y1=%2250%22 x2=%2222%22 y2=%2241%22 stroke=%22%237a4a21%22 stroke-width=%226%22/%3E%3Cline x1=%2250%22 y1=%2250%22 x2=%2242%22 y2=%2241%22 stroke=%22%237a4a21%22 stroke-width=%226%22/%3E%3C/g%3E%3Cg fill=%22%23ffd24a%22%3E%3Cpath d=%22M46 6l2 5 5 2-5 2-2 5-2-5-5-2 5-2z%22/%3E%3Cpath d=%22M18 6l2 5 5 2-5 2-2 5-2-5-5-2 5-2z%22/%3E%3Cpath d=%22M32 24l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z%22/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head>
 <body data-lang="ru">
 
 <header class="site-header">
-  <div class="logo">CS<span> · </span><span class="ru-only">Воркшоп</span><span class="en-only">Workshop</span></div>
+  <div class="logo"><img class="logo-img" src="assets/favicon-64.png" alt="" width="32" height="32">CS<span> · </span><span class="ru-only">Воркшоп</span><span class="en-only">Workshop</span></div>
 
   <!-- Timer — now lives permanently in the header -->
   <div class="header-timer visible" id="headerTimer">
@@ -484,6 +492,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
 
 <main>
   <div class="intro">
+    <img class="intro-logo" src="assets/logo.webp" alt="Дуэльный клуб" width="200" height="200">
+    <div class="intro-text">
     <div class="intro-label"><span class="ru-only">Практика</span><span class="en-only">Practice</span></div>
     <h1><span class="ru-only">CS-менеджер и заказчик — <span class="grad-text">трудный разговор</span></span><span class="en-only">CS Manager and Client — <span class="grad-text">a Difficult Conversation</span></span></h1>
     <p><span class="ru-only">Восемь сценариев по модулям воркшопа и реальным ситуациям - тренируетесь в своей группе, без общего зрителя. Опорный сценарий скрыт до клика — сначала попробуй сам. Более ранние сценарии — в архиве внизу страницы.</span><span class="en-only">Eight scenarios based on the workshop modules and real situations - you practice in your own group, no audience. The reference script is hidden until clicked — try on your own first. Earlier scenarios are archived at the bottom of the page.</span></p>
@@ -493,7 +503,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.6);padding:0}
       <span class="meta-pill">Poker &amp; Casino B2B</span>
       <span class="meta-pill"><span class="ru-only">Работа в парах</span><span class="en-only">Pair work</span></span>
     </div>
+    </div>
   </div>
+
 
   <div class="safety-block">
     <div class="safety-title"><span class="ru-only">Как это устроено</span><span class="en-only">How this works</span></div>
