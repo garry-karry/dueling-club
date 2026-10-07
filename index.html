@@ -465,6 +465,42 @@ footer{background:#08051A;border-top:1px solid var(--border);color:rgba(255,255,
 .role-briefs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:1rem;align-items:start}
 .hidden-info-toggle.am{background:var(--teal-l);border-color:var(--teal);color:var(--teal)}
 .role-brief .hidden-info-body .brief-list{font-size:12.5px}
+
+/* Starfield behind the content */
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0}
+body::before{
+  background-image:
+    radial-gradient(1.0px 1.0px at 165px 77px, rgba(255,255,255,0.37), transparent),
+    radial-gradient(0.8px 0.8px at 187px 298px, rgba(255,255,255,0.53), transparent),
+    radial-gradient(1.1px 1.1px at 44px 222px, rgba(205,180,255,0.43), transparent),
+    radial-gradient(0.9px 0.9px at 30px 289px, rgba(255,255,255,0.43), transparent),
+    radial-gradient(1.0px 1.0px at 295px 299px, rgba(255,255,255,0.69), transparent),
+    radial-gradient(1.0px 1.0px at 285px 68px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.1px 1.1px at 292px 157px, rgba(255,255,255,0.59), transparent),
+    radial-gradient(1.2px 1.2px at 297px 292px, rgba(255,255,255,0.48), transparent),
+    radial-gradient(1.2px 1.2px at 288px 30px, rgba(205,180,255,0.52), transparent),
+    radial-gradient(1.2px 1.2px at 160px 238px, rgba(170,225,255,0.51), transparent),
+    radial-gradient(1.2px 1.2px at 127px 92px, rgba(170,225,255,0.44), transparent),
+    radial-gradient(1.3px 1.3px at 268px 253px, rgba(170,225,255,0.61), transparent),
+    radial-gradient(0.9px 0.9px at 311px 37px, rgba(170,225,255,0.5), transparent),
+    radial-gradient(1.1px 1.1px at 77px 250px, rgba(255,255,255,0.69), transparent);
+  background-size:320px 320px;
+}
+body::after{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cpath transform='translate%2890 120%29' d='M0 -7 L1.54 -1.54 L7 0 L1.54 1.54 L0 7 L-1.54 1.54 L-7 0 L-1.54 -1.54Z' fill='%23E8C882' opacity='0.75'/%3E%3Cpath transform='translate%28470 70%29' d='M0 -5 L1.1 -1.1 L5 0 L1.1 1.1 L0 5 L-1.1 1.1 L-5 0 L-1.1 -1.1Z' fill='%23ffffff' opacity='0.6'/%3E%3Cpath transform='translate%28330 410%29' d='M0 -8 L1.76 -1.76 L8 0 L1.76 1.76 L0 8 L-1.76 1.76 L-8 0 L-1.76 -1.76Z' fill='%23CDB4FF' opacity='0.6'/%3E%3Cpath transform='translate%28560 520%29' d='M0 -6 L1.32 -1.32 L6 0 L1.32 1.32 L0 6 L-1.32 1.32 L-6 0 L-1.32 -1.32Z' fill='%23E8C882' opacity='0.65'/%3E%3Cpath transform='translate%28150 560%29' d='M0 -4.5 L0.99 -0.99 L4.5 0 L0.99 0.99 L0 4.5 L-0.99 0.99 L-4.5 0 L-0.99 -0.99Z' fill='%23AAE1FF' opacity='0.6'/%3E%3C/svg%3E"),
+    radial-gradient(2.0px 2.0px at 321px 348px, rgba(170,225,255,0.78), transparent),
+    radial-gradient(2.1px 2.1px at 467px 70px, rgba(232,200,130,0.88), transparent),
+    radial-gradient(2.0px 2.0px at 66px 62px, rgba(170,225,255,0.69), transparent),
+    radial-gradient(2.0px 2.0px at 456px 291px, rgba(232,200,130,0.87), transparent),
+    radial-gradient(1.7px 1.7px at 23px 472px, rgba(232,200,130,0.78), transparent),
+    radial-gradient(2.0px 2.0px at 60px 223px, rgba(255,255,255,0.64), transparent),
+    radial-gradient(2.1px 2.1px at 407px 400px, rgba(255,255,255,0.75), transparent);
+  background-size:640px 640px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px;
+  animation:twinkle 5s ease-in-out infinite alternate;
+}
+@keyframes twinkle{0%{opacity:.35}100%{opacity:1}}
+@media (prefers-reduced-motion: reduce){body::after{animation:none}}
 /* Readability on the dark theme: calmer sizes and spacing for body text */
 .block-text,.char-section-text,.trap,.theory-item,.theory-def,.observer-item,.dq,.group-item,.brief-list,.primer-card p,.warmup-text,.wu-script,.line-text,.sc-header .subtitle,.intro p{font-size:14px;line-height:1.75}
 .phrase-ru,.flow-note,.theory-source,.quiz-feedback{font-size:13px;line-height:1.65}
