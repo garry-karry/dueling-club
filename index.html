@@ -468,38 +468,66 @@ footer{background:#08051A;border-top:1px solid var(--border);color:rgba(255,255,
 
 /* Starfield behind the content */
 body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0}
+body::before,body::after{-webkit-mask-image:linear-gradient(to right,#000 0,#000 calc(50% - 520px),rgba(0,0,0,.22) calc(50% - 430px),rgba(0,0,0,.22) calc(50% + 430px),#000 calc(50% + 520px),#000 100%);mask-image:linear-gradient(to right,#000 0,#000 calc(50% - 520px),rgba(0,0,0,.22) calc(50% - 430px),rgba(0,0,0,.22) calc(50% + 430px),#000 calc(50% + 520px),#000 100%)}
 body::before{
   background-image:
-    radial-gradient(1.0px 1.0px at 165px 77px, rgba(255,255,255,0.37), transparent),
-    radial-gradient(0.8px 0.8px at 187px 298px, rgba(255,255,255,0.53), transparent),
-    radial-gradient(1.1px 1.1px at 44px 222px, rgba(205,180,255,0.43), transparent),
-    radial-gradient(0.9px 0.9px at 30px 289px, rgba(255,255,255,0.43), transparent),
-    radial-gradient(1.0px 1.0px at 295px 299px, rgba(255,255,255,0.69), transparent),
-    radial-gradient(1.0px 1.0px at 285px 68px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.1px 1.1px at 292px 157px, rgba(255,255,255,0.59), transparent),
-    radial-gradient(1.2px 1.2px at 297px 292px, rgba(255,255,255,0.48), transparent),
-    radial-gradient(1.2px 1.2px at 288px 30px, rgba(205,180,255,0.52), transparent),
-    radial-gradient(1.2px 1.2px at 160px 238px, rgba(170,225,255,0.51), transparent),
-    radial-gradient(1.2px 1.2px at 127px 92px, rgba(170,225,255,0.44), transparent),
-    radial-gradient(1.3px 1.3px at 268px 253px, rgba(170,225,255,0.61), transparent),
-    radial-gradient(0.9px 0.9px at 311px 37px, rgba(170,225,255,0.5), transparent),
-    radial-gradient(1.1px 1.1px at 77px 250px, rgba(255,255,255,0.69), transparent);
-  background-size:320px 320px;
+    radial-gradient(1.7px 1.6px at 0px 109px, rgba(255,255,255,0.92), transparent),
+    radial-gradient(0.9px 1.2px at 203px 214px, rgba(255,255,255,0.78), transparent),
+    radial-gradient(1.1px 1.4px at 172px 44px, rgba(175,228,255,0.68), transparent),
+    radial-gradient(1.7px 1.5px at 60px 68px, rgba(255,255,255,0.83), transparent),
+    radial-gradient(0.9px 1.3px at 249px 90px, rgba(255,255,255,0.73), transparent),
+    radial-gradient(1.1px 1.5px at 67px 214px, rgba(210,190,255,0.6), transparent),
+    radial-gradient(1.2px 1.1px at 138px 155px, rgba(255,255,255,0.63), transparent),
+    radial-gradient(1.2px 1.6px at 295px 51px, rgba(255,255,255,0.95), transparent),
+    radial-gradient(1.1px 1.1px at 168px 151px, rgba(210,190,255,0.58), transparent),
+    radial-gradient(1.0px 1.4px at 124px 7px, rgba(175,228,255,0.7), transparent),
+    radial-gradient(1.3px 1.7px at 247px 294px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1.0px 1.0px at 116px 127px, rgba(255,255,255,0.61), transparent),
+    radial-gradient(1.4px 1.3px at 198px 247px, rgba(255,255,255,0.72), transparent),
+    radial-gradient(1.0px 0.9px at 130px 122px, rgba(210,190,255,0.65), transparent),
+    radial-gradient(1.6px 1.4px at 150px 266px, rgba(255,255,255,0.92), transparent),
+    radial-gradient(1.7px 1.0px at 245px 286px, rgba(255,255,255,0.66), transparent),
+    radial-gradient(1.6px 1.1px at 8px 35px, rgba(175,228,255,0.71), transparent),
+    radial-gradient(1.1px 0.9px at 144px 188px, rgba(255,255,255,0.59), transparent),
+    radial-gradient(1.0px 1.3px at 169px 267px, rgba(255,255,255,0.79), transparent),
+    radial-gradient(1.6px 1.3px at 183px 159px, rgba(255,255,255,0.56), transparent),
+    radial-gradient(1.4px 1.3px at 159px 163px, rgba(255,255,255,0.95), transparent),
+    radial-gradient(1.0px 1.3px at 22px 66px, rgba(175,228,255,0.69), transparent),
+    radial-gradient(1.4px 1.6px at 213px 15px, rgba(210,190,255,0.78), transparent),
+    radial-gradient(1.4px 1.2px at 298px 6px, rgba(255,255,255,0.58), transparent),
+    radial-gradient(1.4px 1.7px at 213px 169px, rgba(210,190,255,0.92), transparent),
+    radial-gradient(1.5px 1.3px at 236px 277px, rgba(255,255,255,0.76), transparent),
+    radial-gradient(1.3px 1.1px at 44px 246px, rgba(255,255,255,0.64), transparent),
+    radial-gradient(1.5px 1.3px at 248px 130px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1.0px 1.4px at 265px 86px, rgba(175,228,255,0.81), transparent),
+    radial-gradient(1.3px 1.6px at 167px 207px, rgba(175,228,255,0.63), transparent),
+    radial-gradient(1.2px 1.5px at 102px 109px, rgba(210,190,255,0.64), transparent),
+    radial-gradient(1.6px 1.1px at 68px 254px, rgba(175,228,255,0.88), transparent),
+    radial-gradient(1.6px 1.5px at 141px 86px, rgba(255,255,255,0.73), transparent),
+    radial-gradient(1.1px 1.1px at 211px 195px, rgba(210,190,255,0.82), transparent);
+  background-size:300px 300px;
 }
 body::after{
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cpath transform='translate%2890 120%29' d='M0 -7 L1.54 -1.54 L7 0 L1.54 1.54 L0 7 L-1.54 1.54 L-7 0 L-1.54 -1.54Z' fill='%23E8C882' opacity='0.75'/%3E%3Cpath transform='translate%28470 70%29' d='M0 -5 L1.1 -1.1 L5 0 L1.1 1.1 L0 5 L-1.1 1.1 L-5 0 L-1.1 -1.1Z' fill='%23ffffff' opacity='0.6'/%3E%3Cpath transform='translate%28330 410%29' d='M0 -8 L1.76 -1.76 L8 0 L1.76 1.76 L0 8 L-1.76 1.76 L-8 0 L-1.76 -1.76Z' fill='%23CDB4FF' opacity='0.6'/%3E%3Cpath transform='translate%28560 520%29' d='M0 -6 L1.32 -1.32 L6 0 L1.32 1.32 L0 6 L-1.32 1.32 L-6 0 L-1.32 -1.32Z' fill='%23E8C882' opacity='0.65'/%3E%3Cpath transform='translate%28150 560%29' d='M0 -4.5 L0.99 -0.99 L4.5 0 L0.99 0.99 L0 4.5 L-0.99 0.99 L-4.5 0 L-0.99 -0.99Z' fill='%23AAE1FF' opacity='0.6'/%3E%3C/svg%3E"),
-    radial-gradient(2.0px 2.0px at 321px 348px, rgba(170,225,255,0.78), transparent),
-    radial-gradient(2.1px 2.1px at 467px 70px, rgba(232,200,130,0.88), transparent),
-    radial-gradient(2.0px 2.0px at 66px 62px, rgba(170,225,255,0.69), transparent),
-    radial-gradient(2.0px 2.0px at 456px 291px, rgba(232,200,130,0.87), transparent),
-    radial-gradient(1.7px 1.7px at 23px 472px, rgba(232,200,130,0.78), transparent),
-    radial-gradient(2.0px 2.0px at 60px 223px, rgba(255,255,255,0.64), transparent),
-    radial-gradient(2.1px 2.1px at 407px 400px, rgba(255,255,255,0.75), transparent);
-  background-size:640px 640px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px,520px 520px;
-  animation:twinkle 5s ease-in-out infinite alternate;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cpath transform='translate%28483 593%29' d='M0 -9.3 L1.8600000000000003 -1.8600000000000003 L9.3 0 L1.8600000000000003 1.8600000000000003 L0 9.3 L-1.8600000000000003 1.8600000000000003 L-9.3 0 L-1.8600000000000003 -1.8600000000000003Z' fill='%23AFE4FF' opacity='0.89'/%3E%3Ccircle cx='483' cy='593' r='8.370000000000001' fill='%23AFE4FF' opacity='0.1602'/%3E%3Cpath transform='translate%28214 209%29' d='M0 -9.0 L1.8 -1.8 L9.0 0 L1.8 1.8 L0 9.0 L-1.8 1.8 L-9.0 0 L-1.8 -1.8Z' fill='%23AFE4FF' opacity='0.93'/%3E%3Ccircle cx='214' cy='209' r='8.1' fill='%23AFE4FF' opacity='0.1674'/%3E%3Cpath transform='translate%28210 116%29' d='M0 -7.2 L1.4400000000000002 -1.4400000000000002 L7.2 0 L1.4400000000000002 1.4400000000000002 L0 7.2 L-1.4400000000000002 1.4400000000000002 L-7.2 0 L-1.4400000000000002 -1.4400000000000002Z' fill='%23FFFFFF' opacity='0.82'/%3E%3Ccircle cx='210' cy='116' r='6.48' fill='%23FFFFFF' opacity='0.14759999999999998'/%3E%3Cpath transform='translate%2862 425%29' d='M0 -9.8 L1.9600000000000002 -1.9600000000000002 L9.8 0 L1.9600000000000002 1.9600000000000002 L0 9.8 L-1.9600000000000002 1.9600000000000002 L-9.8 0 L-1.9600000000000002 -1.9600000000000002Z' fill='%23FFFFFF' opacity='0.92'/%3E%3Ccircle cx='62' cy='425' r='8.82' fill='%23FFFFFF' opacity='0.1656'/%3E%3Cpath transform='translate%28561 84%29' d='M0 -5.3 L1.06 -1.06 L5.3 0 L1.06 1.06 L0 5.3 L-1.06 1.06 L-5.3 0 L-1.06 -1.06Z' fill='%23FFFFFF' opacity='0.98'/%3E%3Ccircle cx='561' cy='84' r='4.77' fill='%23FFFFFF' opacity='0.1764'/%3E%3Cpath transform='translate%2850 495%29' d='M0 -6.6 L1.32 -1.32 L6.6 0 L1.32 1.32 L0 6.6 L-1.32 1.32 L-6.6 0 L-1.32 -1.32Z' fill='%23FFFFFF' opacity='0.9'/%3E%3Ccircle cx='50' cy='495' r='5.9399999999999995' fill='%23FFFFFF' opacity='0.162'/%3E%3Cpath transform='translate%28321 531%29' d='M0 -5.0 L1.0 -1.0 L5.0 0 L1.0 1.0 L0 5.0 L-1.0 1.0 L-5.0 0 L-1.0 -1.0Z' fill='%23F0D28C' opacity='0.89'/%3E%3Ccircle cx='321' cy='531' r='4.5' fill='%23F0D28C' opacity='0.1602'/%3E%3Cpath transform='translate%28304 436%29' d='M0 -10.0 L2.0 -2.0 L10.0 0 L2.0 2.0 L0 10.0 L-2.0 2.0 L-10.0 0 L-2.0 -2.0Z' fill='%23F0D28C' opacity='0.94'/%3E%3Ccircle cx='304' cy='436' r='9.0' fill='%23F0D28C' opacity='0.1692'/%3E%3Cpath transform='translate%28342 255%29' d='M0 -7.6 L1.52 -1.52 L7.6 0 L1.52 1.52 L0 7.6 L-1.52 1.52 L-7.6 0 L-1.52 -1.52Z' fill='%23F0D28C' opacity='0.81'/%3E%3Ccircle cx='342' cy='255' r='6.84' fill='%23F0D28C' opacity='0.1458'/%3E%3Cpath transform='translate%28130 430%29' d='M0 -5.5 L1.1 -1.1 L5.5 0 L1.1 1.1 L0 5.5 L-1.1 1.1 L-5.5 0 L-1.1 -1.1Z' fill='%23D2BEFF' opacity='0.88'/%3E%3Ccircle cx='130' cy='430' r='4.95' fill='%23D2BEFF' opacity='0.15839999999999999'/%3E%3C/svg%3E"),
+    radial-gradient(2.3px 2.4px at 319px 231px, rgba(175,228,255,0.81), transparent),
+    radial-gradient(1.6px 2.5px at 21px 347px, rgba(175,228,255,0.91), transparent),
+    radial-gradient(1.9px 2.4px at 9px 328px, rgba(240,210,140,0.88), transparent),
+    radial-gradient(1.8px 2.4px at 136px 121px, rgba(240,210,140,0.96), transparent),
+    radial-gradient(2.6px 1.7px at 55px 322px, rgba(175,228,255,0.99), transparent),
+    radial-gradient(2.3px 1.8px at 243px 131px, rgba(240,210,140,0.94), transparent),
+    radial-gradient(2.4px 2.1px at 18px 91px, rgba(240,210,140,0.85), transparent),
+    radial-gradient(1.9px 2.3px at 266px 256px, rgba(240,210,140,0.88), transparent),
+    radial-gradient(2.4px 2.5px at 44px 210px, rgba(255,255,255,0.83), transparent),
+    radial-gradient(2.1px 2.2px at 465px 3px, rgba(255,255,255,0.91), transparent),
+    radial-gradient(2.3px 2.1px at 419px 175px, rgba(255,255,255,0.87), transparent),
+    radial-gradient(2.6px 1.7px at 443px 418px, rgba(255,255,255,0.84), transparent),
+    radial-gradient(2.5px 2.6px at 158px 274px, rgba(175,228,255,0.85), transparent),
+    radial-gradient(2.3px 1.6px at 258px 42px, rgba(255,255,255,0.89), transparent);
+  background-size:640px 640px,480px 480px;
+  animation:twinkle 4s ease-in-out infinite alternate;
 }
-@keyframes twinkle{0%{opacity:.35}100%{opacity:1}}
+@keyframes twinkle{0%{opacity:.55}100%{opacity:1}}
 @media (prefers-reduced-motion: reduce){body::after{animation:none}}
 /* Readability on the dark theme: calmer sizes and spacing for body text */
 .block-text,.char-section-text,.trap,.theory-item,.theory-def,.observer-item,.dq,.group-item,.brief-list,.primer-card p,.warmup-text,.wu-script,.line-text,.sc-header .subtitle,.intro p{font-size:14px;line-height:1.75}
