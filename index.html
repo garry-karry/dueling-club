@@ -553,7 +553,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
     <select class="ht-select" id="htMinutesSelect" onchange="setTimerMinutes(this)"></select>
     <span class="ht-unit"><span class="ru-only">мин</span><span class="en-only">min</span></span>
     <span class="ht-phase" id="htPhase" style="display:none"></span>
-    <div class="ht-display" id="htDisplay">5:00</div>
+    <div class="ht-display" id="htDisplay">2:00</div>
     <button class="ht-btn go" id="htBtn" onclick="timerToggle()"><span class="ru-only">Старт</span><span class="en-only">Start</span></button>
     <button class="ht-btn" onclick="timerReset()">↺</button>
   </div>
@@ -3097,16 +3097,16 @@ function loadPhases(){
 function setTimerFor(id){
   if(timerRunning || id==='primer') return;
   const sel=document.getElementById('htMinutesSelect');
-  if(id==='warmup'){ sel.value='5'; timerPhases=null; timerTotal=timerLeft=5*60; renderPhase(); renderHeaderTimer(); }
-  else { sel.value='phases'; loadPhases(); }
+  sel.value='phases'; loadPhases();
 }
 
 function initTimerSelect() {
   const sel = document.getElementById('htMinutesSelect');
   let opts = '';
-  opts += '<option value="phases">20 = 2+10+3+5</option>';
-  for (let m = 1; m <= 15; m++) opts += `<option value="${m}"${m===5?' selected':''}>${m}</option>`;
+  opts += '<option value="phases" selected>20 = 2+10+3+5</option>';
+  for (let m = 1; m <= 15; m++) opts += `<option value="${m}">${m}</option>`;
   sel.innerHTML = opts;
+  loadPhases();
 }
 function setTimerMinutes(sel) {
   if (timerRunning) return;
