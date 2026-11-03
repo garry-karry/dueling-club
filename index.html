@@ -4395,6 +4395,11 @@ function genRenderResult(seed, lang){
         </div>
       </div>
     </div>
+    <button class="hidden-info-toggle colleague" onclick="genToggleHidden(this)">
+      <span>🔒 ${lang==='en'?'AM colleague brief (if the group has 4 people)':'Вводная для коллеги AM (если в группе 4 человека)'}</span>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="hidden-info-body"><ul class="brief-list">${lang==='en'?'<li>You’re AM’s colleague from a neighbouring team: development, QA, payments or the head of department. Before the scene, take a minute to agree with AM who you’ll be.</li><li>You know the technical or organisational side of the situation better than AM and can explain it in plain words.</li><li>You only join the conversation when AM brings you in or hands over to you. Answer briefly and to the point; don’t take over the conversation.</li><li>Don’t promise deadlines, discounts or terms that haven’t been approved, and don’t argue with the client on AM’s behalf.</li>':'<li>Вы - коллега AM из смежной команды: разработка, тестирование, платежи или руководитель отдела. Перед сценой за минуту договоритесь с AM, кем вы будете.</li><li>Вы знаете техническую или организационную сторону ситуации лучше AM и можете объяснить её простыми словами.</li><li>Вступаете в разговор, только когда AM вас позовёт или передаст слово. Отвечаете коротко и по делу, разговор не перехватываете.</li><li>Не обещаете сроки, скидки и условия, которые не согласованы, и не спорите с заказчиком вместо AM.</li>'}</ul></div>
     <div class="block">
       <div class="block-label">${lang==='en'?'Context':'Контекст'}</div>
       <div class="block-text">${genEscape(sc.context)} ${genEscape(intensityFlavor)}</div>
@@ -4425,7 +4430,7 @@ function genRenderResult(seed, lang){
     </div>
     <div class="observer-block">
       <div class="block-label" style="color:var(--amber)">👁 ${lang==='en'?"Observer's task — "+genEscape(skill.name):'Задача наблюдателя — '+genEscape(skill.name)}</div>
-      <div class="observer-list">${(skill.observer||[]).map((q,i)=>`<div class="observer-item"><span class="observer-n">${i+1}</span>${genEscape(q)}</div>`).join('')}</div>
+      <div class="observer-list">${(skill.observer||[]).map((q,i)=>`<div class="observer-item"><span class="observer-n">${i+1}</span>${genEscape(q)}</div>`).join('')}<div class="observer-item"><span class="observer-n">${(skill.observer||[]).length+1}</span>${lang==='en'?'If the group has an AM colleague: did AM lead the conversation and bring the colleague in when needed - or hand the hard questions over to them?':'Если в группе есть коллега AM: вёл ли AM разговор сам и подключал коллегу по делу - или переложил на него трудные вопросы?'}</div></div>
       <div class="flow-note" style="margin-top:.7rem;margin-bottom:0">${lang==='en'?"Don't jump into the conversation. Right after the scene — in the checklist below, together with both participants — check off these points: on the technique, not the person.":'Не вмешивайтесь в разговор. Сразу после сцены — в чек-листе ниже, вместе с обоими участниками — отметьте эти пункты: по приёму, а не по человеку.'}</div>
     </div>
     <div class="block">
