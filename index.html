@@ -3116,7 +3116,8 @@ function formAllPairs(){
   pairsState = groups.map(g=>{
     const roles=[g[0],g[1]];
     if(Math.random()<0.5) roles.reverse();
-    return {cs:roles[0], cl:roles[1], observers: g[2] ? [g[2]] : []};
+    // anyone beyond the trio (only happens when the reserve observer isn't here) stays in the group as an extra observer
+    return {cs:roles[0], cl:roles[1], observers: g.slice(2)};
   });
 
   // Leftover people never become a second observer anywhere — instead they form their own
