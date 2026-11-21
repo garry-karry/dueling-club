@@ -1,0 +1,26 @@
+/* Internal CS workshop summaries inside the existing Theory tab. */
+.theory-module-list{display:grid;gap:12px;margin-top:22px}
+.theory-module{background:var(--card);border:1px solid var(--border-m);border-radius:var(--r);overflow:hidden}
+.theory-module[open]{border-color:rgba(185,160,240,.5);box-shadow:var(--shadow-lift)}
+.theory-module>summary{display:flex;gap:12px;align-items:center;cursor:pointer;list-style:none;padding:16px 18px}
+.theory-module>summary::-webkit-details-marker{display:none}
+.theory-module>summary:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
+.theory-module-icon{font-size:25px;flex-shrink:0}
+.theory-module-heading{font-size:16px;font-weight:600;color:var(--ink);line-height:1.45;flex:1;min-width:0}
+.theory-module-heading small{display:block;font-weight:400;color:var(--ink3);font-size:12px;margin-top:3px}
+.theory-expand{color:var(--teal);font-size:17px;transition:transform .2s}
+.theory-module[open] .theory-expand{transform:rotate(180deg)}
+.theory-module-content{border-top:1px solid var(--border);padding:16px 18px 18px}
+.theory-module-lead{font-size:13px;line-height:1.75;color:var(--ink2);margin-bottom:14px}
+.theory-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.theory-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:13px 15px}
+.theory-card h4{font-size:13.5px;color:var(--teal);line-height:1.45;font-weight:600;margin:0 0 8px}
+.theory-card p{font-size:12.5px;color:var(--ink2);line-height:1.75;margin:0;text-align:left}
+.theory-source{font-size:11px;line-height:1.7;color:var(--ink3);margin-top:14px}
+@media(max-width:640px){
+ .theory-cards{grid-template-columns:1fr}
+ .theory-module>summary{padding:14px}
+ .theory-module-content{padding:14px}
+ .theory-card{padding:12px}
+}
+@media(prefers-reduced-motion:reduce){.theory-expand{transition:none}}
