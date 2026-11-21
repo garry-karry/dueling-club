@@ -296,6 +296,11 @@ const CASES=[
     }
   }
 ];
+// Extend both modes without modifying the six existing scenarios.
+const extras=Array.isArray(window.ExtraPracticeCases)?window.ExtraPracticeCases:[];
+for(const item of extras){
+ if(item&&["detective","chat"].includes(item.kind)) CASES.push(item);
+}
 const root=document.getElementById("gameModesLab");if(!root)return;
 const L=()=>document.body.dataset.lang==="en"?"en":"ru";
 const bi=(ru,en)=>{const f=document.createDocumentFragment();for(const [c,v] of [["ru",ru],["en",en]]){const el=document.createElement("span");el.className=c+"-only";el.textContent=v;f.append(el);}return f;};
