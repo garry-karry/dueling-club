@@ -18,7 +18,7 @@
   font-weight:600;cursor:pointer;white-space:normal;text-align:center;
   border:1px solid var(--border-m);flex-shrink:0;
 }
-.twist-button:focus-visible, .twist-secret summary:focus-visible,.twist-observer summary:focus-visible{
+.twist-button:focus-visible{
   outline:3px solid var(--teal);outline-offset:3px;
 }
 .twist-button:disabled{opacity:.45;cursor:not-allowed;transform:none;}
@@ -39,20 +39,17 @@
 .twist-card h3{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--ink);margin:.3rem 0 .9rem;}
 .twist-public-label{color:var(--teal);margin-bottom:.3rem;}
 .twist-card>p{font-size:14px;color:var(--ink);line-height:1.65;}
-.twist-secret,.twist-observer{
-  border:1px solid var(--border-m);background:var(--card);
-  border-radius:var(--r-sm);margin-top:.75rem;padding:.6rem .8rem;
-}
-.twist-secret summary,.twist-observer summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink);line-height:1.5;list-style-position:inside;}
-.twist-secret[open]{border-color:var(--amber);}
-.twist-observer[open]{border-color:var(--teal);}
-.twist-secret p,.twist-observer p{font-size:13px;line-height:1.65;color:var(--ink2);padding:.6rem 0 .1rem;}
-.twist-secret .twist-caution{color:var(--amber);font-size:12px;}
+.twist-private-actions { display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem; }
+.twist-private-actions .twist-button {flex:1;min-width:190px;white-space:normal;}
+.twist-caution {font-size:12px;line-height:1.6;color:var(--amber);margin-top:.7rem;}
+.twist-copy-status {font-size:12px;line-height:1.55;color:var(--teal);min-height:1.2rem;margin-top:.25rem;}
 .twist-card>p.twist-note{font-size:11.7px;color:var(--ink3);margin-top:.85rem;}
 @media (max-width:640px){
   .twist-head{align-items:stretch;flex-direction:column;}
   .twist-button{width:100%;}
   .twist-controls{display:grid;grid-template-columns:1fr 1fr;}
   .twist-count{grid-column:1/-1;margin-left:0;}
+  .twist-private-actions {flex-direction:column;}
+  .twist-private-actions .twist-button {width:100%;min-width:0;}
 }
 @media (prefers-reduced-motion: reduce){.twist-mode *{scroll-behavior:auto;}}
