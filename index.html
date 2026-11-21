@@ -414,6 +414,15 @@ footer{background:#08051A;border-top:1px solid var(--border);color:rgba(255,255,
 .history-title{font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
 .history-list{display:none;flex-direction:column;gap:6px}
 .history-list.open{display:flex}
+.history-archive{border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:.65rem .85rem;background:rgba(255,255,255,.025)}
+.history-archive>summary{cursor:pointer;list-style:none;margin-bottom:0}
+.history-archive>summary::-webkit-details-marker{display:none}
+.history-archive>summary:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.history-archive[open]>summary{margin-bottom:1rem}
+.history-archive[open] .history-list{display:flex}
+.history-archive-chevron{font-size:18px;color:var(--gold);transition:transform .2s}
+.history-archive[open] .history-archive-chevron{transform:rotate(180deg)}
+
 .history-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .hist-item{border:1px solid rgba(255,255,255,.1);border-radius:var(--r);overflow:hidden}
 .hist-trigger{width:100%;background:rgba(255,255,255,.05);border:none;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:12px;text-align:left;color:#fff;font-family:'DM Sans',sans-serif;transition:background .15s}
@@ -2253,12 +2262,12 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
       <div class="footer-meta">Poker &amp; Casino B2B</div>
     </div>
 
-    <div class="history-head">
-      <div class="history-title">📁 <span class="ru-only">История — архив предыдущих сценариев</span><span class="en-only">Archive — previous scenarios</span></div>
-      <button class="collapse-toggle on-dark" id="historyToggleBtn" onclick="toggleCollapse('historyToggleBtn','historyList')"><span class="chevron">▾</span></button>
-    </div>
-
-    <div class="history-list" id="historyList">
+    <details class="history-archive" id="historyArchive">
+      <summary class="history-head" aria-label="Previous scenarios archive">
+        <span class="history-title">📁 <span class="ru-only">История - архив предыдущих сценариев</span><span class="en-only">Archive - previous scenarios</span></span>
+        <span class="history-archive-chevron" aria-hidden="true">▾</span>
+      </summary>
+      <div class="history-list" id="historyList">
       <!-- HISTORY 1 -->
       <div class="hist-item">
         <button class="hist-trigger" onclick="toggleHist(this)">
@@ -2757,6 +2766,8 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
           </div>
         </div>
       </div>
+      </div>
+    </details>
     <div class="footer-copy"><span class="ru-only">EvenBet Gaming · CS Воркшоп · Конфиденциально</span><span class="en-only">EvenBet Gaming · CS Workshop · Confidential</span></div>
   </div>
 </footer>
@@ -4366,6 +4377,7 @@ drawWheel(0);renderHeaderTimer();
 </script>
 <script src="assets/twist-mode.js" defer></script>
 <script src="assets/warmup-deck.js" defer></script>
+<script src="assets/game-cases-extra.js" defer></script>
 <script src="assets/game-modes.js" defer></script>
 </body>
 </html>
