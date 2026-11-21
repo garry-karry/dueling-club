@@ -1,17 +1,26 @@
 # Unexpected Twist / Неожиданный поворот
 
-**Type:** optional facilitator-led practice mode for the internal Customer Success Dueling Club.
+**Type:** optional observer-led breakout-room practice mode for the internal Customer Success Dueling Club.
 
 **Scope:** existing scenarios 1-8 (`s9`-`s16`), in RU and EN. This is **not** a ninth scenario and does not replace the scenario generator, warm-up, roles or timer.
 
 ## How to run / Как провести
 
-1. Open an existing scenario and form a trio (CS / client / observer). Leave the regular scenario and timer running.
-2. The facilitator enables **Unexpected Twist / Неожиданный поворот** in the panel directly below the scenario tabs.
-3. After approximately 3-5 minutes of the live roleplay, click **Draw a twist / Выдать поворот**.
-4. Read the public event aloud to everybody. **Only the client** opens the private role cue, preferably on their own device. The observer may open the observer prompt.
-5. Allow the CS player to clarify facts, interests and what has changed; agree on a next step within verified authority. Discuss in the existing debrief.
-6. Three cards are available for each scenario, sampled without repetition until **Reset deck / Сбросить колоду**. The used set is separate for every scenario and lasts for the current page session only.
+1. Each trio enters a Teams breakout room: CS / client / observer. **The observer shares only the Dueling Club browser tab**, not the desktop, so a separate private chat will never be broadcast.
+2. The observer opens the selected scenario and enables **Unexpected Twist / Неожиданный поворот** below the scenario tabs. The normal scenario and timer continue.
+3. After approximately 3-5 minutes of dialogue, **the observer** clicks **Draw a twist / Выдать поворот**.
+4. The public change appears on the shared browser tab. The observer clicks **Copy private client cue / Копировать вводную заказчику**, then sends the copied text in a **private Teams DM to the person playing the client**. Do not paste it into the breakout-room group chat. The player reads the private cue on their own device.
+5. The observer may also click **Copy observer prompt / Копировать вопрос наблюдателю** for private notes. The CS player adapts the conversation; the observer records factual behaviour for debrief.
+6. Three cards are available for each scenario without repeats until **Reset deck / Сбросить колоду**. Deck states are independent and held only in the current browser session. Each breakout-room observer operates their own deck.
+
+### RU quick start / Порядок для наблюдателя
+
+1. В breakout-комнате **наблюдатель демонстрирует только вкладку клуба**.
+2. Через 3-5 минут наблюдатель нажимает **«Выдать поворот»**.
+3. Все видят общую вводную на экране. Наблюдатель нажимает **«Копировать вводную заказчику»** и отправляет её **в личный чат Teams участнику в роли заказчика**. Клиент читает её на собственном устройстве.
+4. CS продолжает разговор; наблюдатель может скопировать вопрос для себя. После сцены группа разбирает решения и новый риск.
+
+**Privacy reminder:** copying a cue does not display it on the shared page. If the observer shares the whole screen, opening Teams to send a private message can reveal it to everyone. Share **only the browser tab**. Clipboard copying requires browser clipboard permission and an HTTPS context.
 
 ## Learning outcomes
 
@@ -22,7 +31,7 @@
 
 ## Implementation
 
-- `assets/twist-mode.js`: mode state, 24 bilingual fictional twist cards, controls, independent per-scenario non-repeating decks.
+- `assets/twist-mode.js`: mode state, 24 bilingual fictional twist cards, observer controls, private clipboard copy for client and observer prompts, independent per-scenario non-repeating decks.
 - `assets/twist-mode.css`: scoped styles and mobile layout.
 - `index.html`: external CSS/JS links and one call to `UnexpectedTwist.setScenario(id)` in the existing scenario navigation function.
 - No external services, AI calls, database, or persistence are used.
@@ -30,16 +39,16 @@
 
 ## Review checklist (browser)
 
-- [ ] RU and EN toggle localizes labels, public event, hidden client cue and observer cue.
+- [ ] RU and EN toggle localizes labels, public event and clipboard text for client and observer prompts.
 - [ ] Mode appears on each of s9-s16 and is absent from Theory, Warm-up and Generator.
-- [ ] Mode does not start automatically and the first twist is hidden until the facilitator draws.
-- [ ] Revealing the event does not expose the client's private cue automatically.
+- [ ] Mode does not start automatically and the first twist is hidden until the breakout-room observer draws.
+- [ ] The client-only cue is not displayed anywhere on the shared page even after drawing; observer can copy it, send a private Teams DM, and see localized success/failure feedback.
 - [ ] Drawing three times returns distinct cards; fourth draw is disabled; reset re-enables drawing.
 - [ ] Switching to another scenario uses its own deck, returning retains the previous deck, and no stale card leaks between scenarios.
 - [ ] Existing timers, pair assignments, quizzes, archives and generator still work.
 - [ ] On a narrow mobile viewport, the mode controls remain operable.
 - [ ] The old eight scenarios remain intact.
 
-**Safety note:** Role secrets are only hidden visually via a disclosure widget, not access-controlled. This is intended for a cooperative internal training room, not for adversarial secrecy or sharing a single projected screen with both roles.
+**Safety note:** Private cues remain in JavaScript training data and are not security-protected against a user who inspects source. They do not appear in the shared UI. This is a cooperative internal training tool, not a confidential messaging system. The observer must share only the club tab, not the entire screen, before sending Teams DMs.
 
 **Sources:** current club repository; `Карта CS.docx` (28.10.2026); `Чек-лист переговоров CS.docx` (27.10.2026). Twist cases are fictional and are not validated customer production data.
