@@ -1,0 +1,55 @@
+/* Optional "Unexpected Twist" mode; scoped so the original eight scenarios are unchanged. */
+.twist-mode[hidden], .twist-body[hidden], .twist-card[hidden], .twist-empty[hidden] { display:none !important; }
+.twist-mode {
+  margin:-.65rem 0 1.7rem;
+  border:1px solid var(--border-m);
+  background:linear-gradient(120deg,rgba(185,160,240,.1),rgba(108,207,194,.075));
+  border-radius:var(--r);
+  box-shadow:var(--shadow-lift);
+  overflow:hidden;
+}
+.twist-head {padding:1rem 1.25rem; display:flex; align-items:center; justify-content:space-between; gap:1.2rem; }
+.twist-headcopy {flex:1;min-width:0;}
+.twist-eyebrow {font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--gold);margin-bottom:.2rem;}
+.twist-head h2 {font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.35;color:var(--ink);margin-bottom:.2rem;}
+.twist-head p {font-size:12.5px;line-height:1.55;color:var(--ink2);}
+.twist-button {
+  border-radius:22px;padding:.6rem 1rem;font-size:12.5px;font-family:'DM Sans',sans-serif;
+  font-weight:600;cursor:pointer;white-space:normal;text-align:center;
+  border:1px solid var(--border-m);flex-shrink:0;
+}
+.twist-button:focus-visible{
+  outline:3px solid var(--teal);outline-offset:3px;
+}
+.twist-button:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+.twist-primary{background:var(--grad-teal);border-color:transparent;color:#fff;box-shadow:var(--shadow-glow-teal);}
+.twist-secondary{background:var(--card);color:var(--ink2);}
+.twist-secondary:hover{background:var(--bg3);}
+.twist-body{padding:1rem 1.25rem 1.25rem;border-top:1px solid var(--border);}
+.twist-instructions {display:grid;gap:.42rem;color:var(--ink2);font-size:12.5px;line-height:1.6;}
+.twist-instructions b {color:var(--teal);}
+.twist-controls {display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:1rem 0 .8rem;}
+.twist-count {font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap;}
+.twist-empty {font-size:12.5px;color:var(--ink3);padding:.4rem 0;}
+.twist-card {
+  padding:1rem 1.1rem 1.15rem;border-radius:var(--r-sm);
+  background:var(--bg2);border:1px solid rgba(233,190,124,.45);
+}
+.twist-tag,.twist-public-label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--gold);font-weight:600;}
+.twist-card h3{font-family:'Libre Baskerville',serif;font-size:19px;color:var(--ink);margin:.3rem 0 .9rem;}
+.twist-public-label{color:var(--teal);margin-bottom:.3rem;}
+.twist-card>p{font-size:14px;color:var(--ink);line-height:1.65;}
+.twist-private-actions { display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem; }
+.twist-private-actions .twist-button {flex:1;min-width:190px;white-space:normal;}
+.twist-caution {font-size:12px;line-height:1.6;color:var(--amber);margin-top:.7rem;}
+.twist-copy-status {font-size:12px;line-height:1.55;color:var(--teal);min-height:1.2rem;margin-top:.25rem;}
+.twist-card>p.twist-note{font-size:11.7px;color:var(--ink3);margin-top:.85rem;}
+@media (max-width:640px){
+  .twist-head{align-items:stretch;flex-direction:column;}
+  .twist-button{width:100%;}
+  .twist-controls{display:grid;grid-template-columns:1fr 1fr;}
+  .twist-count{grid-column:1/-1;margin-left:0;}
+  .twist-private-actions {flex-direction:column;}
+  .twist-private-actions .twist-button {width:100%;min-width:0;}
+}
+@media (prefers-reduced-motion: reduce){.twist-mode *{scroll-behavior:auto;}}

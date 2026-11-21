@@ -544,6 +544,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/twist-mode.css">
 </head>
 <body data-lang="ru">
 
@@ -2964,6 +2965,7 @@ function showScenario(id, btn) {
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
   activeScenario = id;
+  if (window.UnexpectedTwist) window.UnexpectedTwist.setScenario(id);
   setTimerFor(id);
   // Hide the pairing/randomizer tool entirely on the warmup tab — it's a group activity there
   const toolsPanel = document.querySelector('.tools-panel');
@@ -4553,5 +4555,6 @@ document.getElementById('participantCountWheel').textContent=PARTICIPANT_NAMES.l
 initTimerSelect();
 drawWheel(0);renderHeaderTimer();
 </script>
+<script src="assets/twist-mode.js" defer></script>
 </body>
 </html>
