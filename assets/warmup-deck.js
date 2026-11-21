@@ -213,72 +213,78 @@
     ]
   },
   {
-    "id": "question",
-    "icon": "❓",
+    "id": "trap",
+    "icon": "🎯",
     "label": {
-      "ru": "Какой вопрос задашь?",
-      "en": "What would you ask?"
+      "ru": "Ловушка или хороший ход?",
+      "en": "Trap or good move?"
     },
     "items": [
       {
         "question": {
-          "ru": "Клиент требует запуск до кампании. Как выявить реальный критерий решения?",
-          "en": "The client demands a launch before the campaign. What question reveals the decision criterion?"
+          "ru": "«Я обещаю исправление к пятнице» - срок техдепом ещё не подтверждён.",
+          "en": "“I promise the fix by Friday” - engineering has not confirmed a date."
         },
         "hint": {
-          "ru": "«Какой сценарий игрока обязательно должен работать, чтобы кампания состоялась?»",
-          "en": "“Which player journey must work for the campaign to go ahead?”"
-        }
+          "ru": "Риск неподтверждённого обязательства. Можно обещать проверку статуса, но не срок исправления.",
+          "en": "Unverified commitment. You may promise a status check, not a fix deadline."
+        },
+        "correct": "trap"
       },
       {
         "question": {
-          "ru": "«Вы нас игнорируете». Как не спорить с оценкой?",
-          "en": "“You're ignoring us.” How can you avoid debating the accusation?"
+          "ru": "«Что должно работать к запуску турнира, чтобы вы смогли принять решение?»",
+          "en": "“What must work by the tournament launch so you can make a decision?”"
         },
         "hint": {
-          "ru": "«Какой вопрос остался без ответа и какое решение сейчас заблокировано?»",
-          "en": "“Which question is still unanswered, and what decision is blocked?”"
-        }
+          "ru": "Вопрос выявляет интерес и критерии вместо спора о требовании.",
+          "en": "The question explores interests and decision criteria, rather than debating a demand."
+        },
+        "correct": "good"
       },
       {
         "question": {
-          "ru": "«Дайте скидку или мы уйдём». Что спросить до передачи БД?",
-          "en": "“Give us a discount or we'll leave.” What should you ask before involving BD?"
+          "ru": "«Это не наша ошибка - разработчики опять затянули».",
+          "en": "“It isn't our fault - the developers are late again.”"
         },
         "hint": {
-          "ru": "«Что именно в текущем сотрудничестве не даёт получить нужный результат?»",
-          "en": "“What about the current partnership prevents the outcome you need?”"
-        }
+          "ru": "Перекладывание вины разрушает доверие и не даёт следующего шага.",
+          "en": "Shifting blame erodes trust without offering a next step."
+        },
+        "correct": "trap"
       },
       {
         "question": {
-          "ru": "«Мы не доверяем QA». Как перевести эмоцию в проверяемые критерии?",
-          "en": "“We don't trust QA.” How do you turn this into testable criteria?"
+          "ru": "«Подтверждённой оценки нет. Я уточню её у владельца задачи и сообщу дату следующего статуса».",
+          "en": "“There is no verified estimate. I'll check with the task owner and confirm when you'll get an update.”"
         },
         "hint": {
-          "ru": "«Какие проверки или доказательства помогли бы вам принять решение?»",
-          "en": "“What checks or evidence would help you make the decision?”"
-        }
+          "ru": "Чётко отделяет неизвестный срок от контролируемой коммуникации.",
+          "en": "Separates an unknown delivery date from a controllable communication step."
+        },
+        "correct": "good"
       },
       {
         "question": {
-          "ru": "Новый контакт очень лаконичен в переписке. Как не приписывать ему культурный стереотип?",
-          "en": "A new stakeholder is very brief in writing. How do you avoid cultural stereotyping?"
+          "ru": "«Спасибо, что наконец-то написали» - «Могли бы не язвить».",
+          "en": "“Thanks for finally replying” - “You don't have to be sarcastic.”"
         },
         "hint": {
-          "ru": "«В каком формате и с какой периодичностью вам удобнее получать обновления?»",
-          "en": "“Which update format and cadence would work best for you?”"
-        }
+          "ru": "Ответ на тон усиливает конфликт, а вопрос клиента остаётся без решения.",
+          "en": "Responding to tone escalates and leaves the substantive issue unresolved."
+        },
+        "correct": "trap"
       },
       {
         "question": {
-          "ru": "«Эти QBR ничего не дают». Как выяснить нужный результат?",
-          "en": "“These QBRs add no value.” How do you learn the desired outcome?"
+          "ru": "«Давайте уточним, какие данные нужны вам до решения о продлении сотрудничества».",
+          "en": "“Let's clarify which data you need before deciding whether to renew.”"
         },
         "hint": {
-          "ru": "«Какие решения вы хотите принимать на таких встречах и чего сейчас не хватает?»",
-          "en": "“Which decisions should these meetings help you make, and what's missing today?”"
-        }
+          "ru": "Вместо защиты продукта помогает понять критерии решения.",
+          "en": "Instead of defending the product, it clarifies decision criteria."
+        },
+        "correct": "good"
       }
     ]
   }
@@ -298,7 +304,7 @@
     '<div class="pm-current" id="warmupCurrent" hidden>',
       '<div class="pm-eyebrow"><span class="ru-only">Вопрос на общий звонок</span><span class="en-only">Question for the group call</span></div>',
       '<h3 id="warmupQuestion"></h3>',
-      '<button type="button" class="pm-btn pm-reveal" id="warmupReveal">💡 <span class="ru-only">Показать ориентир после ответов</span><span class="en-only">Reveal reference after responses</span></button>',
+      '<div id="warmupTrapButtons" class="pm-choices" hidden><button type="button" class="pm-btn pm-choice" data-choice="trap">✕ <span class="ru-only">Ловушка</span><span class="en-only">Trap</span></button><button type="button" class="pm-btn pm-choice" data-choice="good">✓ <span class="ru-only">Хороший ход</span><span class="en-only">Good move</span></button></div><button type="button" class="pm-btn pm-reveal" id="warmupReveal">💡 <span class="ru-only">Показать ориентир после ответов</span><span class="en-only">Reveal reference after responses</span></button>',
       '<div class="pm-reference" id="warmupReference" hidden><h4><span class="ru-only">Один из возможных ответов</span><span class="en-only">One possible answer</span></h4><p id="warmupRefText"></p></div>',
     '</div>',
     '<p class="pm-hint" id="warmupPlaceholder"><span class="ru-only">Выберите тип разминки и нажмите «Новая карточка». Пусть ответят несколько человек - без рейтинга и оценок.</span><span class="en-only">Choose a warm-up type and draw a card. Invite a few people to answer, without scoring or rankings.</span></p>'
@@ -310,6 +316,7 @@
   const placeholder=document.getElementById("warmupPlaceholder");
   const reference=document.getElementById("warmupReference");
   const reveal=document.getElementById("warmupReveal");
+  const trapButtons=document.getElementById("warmupTrapButtons");
   function refresh(){
     const state=states[selected];
     const total=packs.find(p=>p.id===selected).items.length;
@@ -323,6 +330,8 @@
     document.getElementById("warmupRefText").replaceChildren(bi(state.current.hint.ru,state.current.hint.en));
     reference.hidden=!state.revealed;
     reveal.hidden=state.revealed;
+    trapButtons.hidden=selected!=="trap" || state.revealed;
+    trapButtons.querySelectorAll("button").forEach(b=>b.classList.toggle("selected",state.answer===b.dataset.choice));
   }
   for(const pack of packs) {
     const button=document.createElement("button");
@@ -336,9 +345,19 @@
     const available=pack.items.filter((_,i)=>!state.used.has(i));
     if(!available.length)return;
     const index=pack.items.indexOf(available[Math.floor(Math.random()*available.length)]);
-    state.used.add(index);state.current=pack.items[index];state.revealed=false;refresh();
+    state.used.add(index);state.current=pack.items[index];state.revealed=false;state.answer=null;refresh();
   });
   reset.addEventListener("click",()=>{states[selected]={used:new Set(),current:null,revealed:false};refresh();});
+  trapButtons.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    const state=states[selected];
+    if(!state.current||state.revealed)return;
+    state.answer=b.dataset.choice;
+    state.revealed=true;
+    const correct=state.current.correct;
+    const title=document.querySelector("#warmupReference h4");
+    if(title)title.replaceChildren(bi(state.answer===correct?"Верно":"Обсудите почему",state.answer===correct?"Correct":"Discuss why"));
+    refresh();
+  }));
   reveal.addEventListener("click",()=>{states[selected].revealed=true;refresh();});
   refresh();
 })();
