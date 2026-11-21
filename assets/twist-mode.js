@@ -513,14 +513,14 @@
       '<div class="twist-headcopy">',
         '<div class="twist-eyebrow">⚡ <span class="ru-only">Дополнительный режим</span><span class="en-only">Optional practice mode</span></div>',
         '<h2><span class="ru-only">Неожиданный поворот</span><span class="en-only">Unexpected Twist</span></h2>',
-        '<p><span class="ru-only">Ведущий меняет условия прямо во время переговоров. Основной сценарий и таймер остаются без изменений.</span><span class="en-only">The facilitator changes the situation mid-conversation. The original scenario and timer stay intact.</span></p>',
+        '<p><span class="ru-only">Наблюдатель демонстрирует вкладку Дуэльного клуба в своей breakout-комнате и меняет условия во время переговоров. Таймер и основной сценарий не меняются.</span><span class="en-only">The observer shares the Dueling Club tab in their breakout room and changes the situation mid-conversation. The timer and original scenario stay intact.</span></p>',
       '</div>',
       '<button type="button" class="twist-button twist-primary" id="twistToggle" aria-controls="twistBody" aria-expanded="false"><span class="ru-only">Включить режим</span><span class="en-only">Enable mode</span></button>',
     '</div>',
     '<div class="twist-body" id="twistBody" hidden>',
       '<div class="twist-instructions">',
-        '<div><b><span class="ru-only">Когда</span><span class="en-only">When</span>:</b> <span class="ru-only">после 3-5 минут диалога, не заранее</span><span class="en-only">after 3-5 minutes of roleplay, not before</span></div>',
-        '<div><b><span class="ru-only">Как</span><span class="en-only">How</span>:</b> <span class="ru-only">ведущий открывает общую вводную, заказчик отдельно читает скрытую карточку, CS перестраивает разговор</span><span class="en-only">the facilitator reveals the shared event, the client privately reads the hidden cue, and CS adjusts</span></div>',
+        '<div><b><span class="ru-only">Когда</span><span class="en-only">When</span>:</b> <span class="ru-only">наблюдатель нажимает после 3-5 минут диалога, не заранее</span><span class="en-only">the observer clicks after 3-5 minutes of roleplay, not before</span></div>',
+        '<div><b><span class="ru-only">Как</span><span class="en-only">How</span>:</b> <span class="ru-only">наблюдатель открывает общий поворот, копирует тайную вводную для заказчика и пересылает её личным сообщением в Teams; CS продолжает разговор</span><span class="en-only">the observer reveals the shared event, copies the client-only cue and sends it by private Teams message; CS continues</span></div>',
         '<div><b><span class="ru-only">Цель</span><span class="en-only">Goal</span>:</b> <span class="ru-only">пауза - факт - интерес - шаг; без неподтверждённых обязательств</span><span class="en-only">pause - fact - interest - next step; no unverified commitments</span></div>',
       '</div>',
       '<div class="twist-controls">',
@@ -532,17 +532,14 @@
       '<article id="twistCard" class="twist-card" hidden aria-live="polite">',
         '<div class="twist-tag">⚡ <span class="ru-only">Изменение условий</span><span class="en-only">Situation changed</span></div>',
         '<h3 id="twistTitle"></h3>',
-        '<div class="twist-public-label"><span class="ru-only">Огласить всем участникам</span><span class="en-only">Read aloud to everyone</span></div>',
+        '<div class="twist-public-label"><span class="ru-only">Видно всем на демонстрации</span><span class="en-only">Visible to everyone on the shared screen</span></div>',
         '<p id="twistPublic"></p>',
-        '<details id="twistClientSecret" class="twist-secret">',
-          '<summary>🔒 <span class="ru-only">Только заказчику - тайная вводная</span><span class="en-only">Client only - hidden role cue</span></summary>',
-          '<p class="twist-caution"><span class="ru-only">Откройте только на экране заказчика. Не показывайте CS до конца диалога.</span><span class="en-only">Open privately on the client device. Do not reveal to CS before the scene ends.</span></p>',
-          '<p id="twistClientText"></p>',
-        '</details>',
-        '<details id="twistObserver" class="twist-observer">',
-          '<summary>👁 <span class="ru-only">Наблюдателю - что проверить</span><span class="en-only">Observer - what to look for</span></summary>',
-          '<p id="twistObserverText"></p>',
-        '</details>',
+        '<div class="twist-private-actions">',
+          '<button type="button" id="twistCopyClient" class="twist-button twist-secondary">🔒 <span class="ru-only">Копировать вводную заказчику</span><span class="en-only">Copy private client cue</span></button>',
+          '<button type="button" id="twistCopyObserver" class="twist-button twist-secondary">👁 <span class="ru-only">Копировать вопрос наблюдателю</span><span class="en-only">Copy observer prompt</span></button>',
+        '</div>',
+        '<p class="twist-caution"><span class="ru-only">Тайная вводная не отображается на общем экране. Отправьте её заказчику в личном чате Teams. Демонстрируйте только вкладку клуба, не весь рабочий стол.</span><span class="en-only">The private cue is never shown on the shared screen. Send it to the client in a private Teams chat. Share the club browser tab, not your whole desktop.</span></p>',
+        '<p id="twistCopyStatus" class="twist-copy-status" role="status" aria-live="polite"></p>',
         '<p class="twist-note"><span class="ru-only">Все вводные учебные и вымышленные. Не обещайте клиенту сроки, severity или коммерческие условия без согласований.</span><span class="en-only">All twists are fictional training prompts. Do not promise dates, severity or commercial terms without approval.</span></p>',
       '</article>',
     '</div>'
@@ -554,8 +551,33 @@
   const reset = document.getElementById("twistReset");
   const card = document.getElementById("twistCard");
   const empty = document.getElementById("twistEmpty");
-  const secret = document.getElementById("twistClientSecret");
-  const observer = document.getElementById("twistObserver");
+  const copyClientButton = document.getElementById("twistCopyClient");
+  const copyObserverButton = document.getElementById("twistCopyObserver");
+  const copyStatus = document.getElementById("twistCopyStatus");
+  function resetCopyStatus() { copyStatus.textContent = ""; }
+  // Private cues are never placed into the shared DOM; copy directly from the deck.
+  async function copyPrivateCue(which) {
+    if (!activeId || !states[activeId].current) return;
+    const item = states[activeId].current;
+    const lang = document.body.dataset.lang === "en" ? "en" : "ru";
+    const heading = which === "client"
+      ? (lang === "en" ? "PRIVATE - CLIENT ONLY" : "ЛИЧНО - ТОЛЬКО ЗАКАЗЧИКУ")
+      : (lang === "en" ? "OBSERVER PROMPT" : "ВОПРОС НАБЛЮДАТЕЛЮ");
+    const message = heading + "\n" + item.title[lang] + "\n\n" + item[which][lang];
+    try {
+      if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") throw new Error("Clipboard unavailable");
+      await navigator.clipboard.writeText(message);
+      copyStatus.textContent = lang === "en"
+        ? (which === "client" ? "Client cue copied. Send it in a private chat." : "Observer prompt copied.")
+        : (which === "client" ? "Вводная скопирована. Отправьте заказчику личным сообщением." : "Вопрос наблюдателя скопирован.");
+    } catch (error) {
+      copyStatus.textContent = lang === "en"
+        ? "Could not copy. Check clipboard permissions. Do not reveal private cues on the shared screen."
+        : "Не удалось скопировать. Проверьте разрешение на буфер обмена. Не показывайте секретную вводную при демонстрации.";
+    }
+  }
+  copyClientButton.addEventListener("click", () => copyPrivateCue("client"));
+  copyObserverButton.addEventListener("click", () => copyPrivateCue("observer"));
 
   function render() {
     if (!activeId) return;
@@ -571,8 +593,6 @@
     if (state.current) {
       fill("twistTitle",state.current.title.ru,state.current.title.en);
       fill("twistPublic",state.current.public.ru,state.current.public.en);
-      fill("twistClientText",state.current.client.ru,state.current.client.en);
-      fill("twistObserverText",state.current.observer.ru,state.current.observer.en);
     } else if (used === max) {
       empty.hidden = false;
     }
@@ -581,8 +601,7 @@
     activeId = SCENARIOS.includes(id) ? id : null;
     section.hidden = !activeId;
     if (!activeId) return;
-    secret.open = false;
-    observer.open = false;
+    resetCopyStatus();
     render();
   }
   toggle.addEventListener("click",function(){
@@ -599,16 +618,14 @@
     const chosen = pool[Math.floor(Math.random() * pool.length)];
     state.used.add(chosen.id);
     state.current = chosen;
-    secret.open = false;
-    observer.open = false;
+    resetCopyStatus();
     render();
     card.scrollIntoView({behavior:"smooth",block:"nearest"});
   });
   reset.addEventListener("click",function(){
     if (!activeId) return;
     states[activeId] = {used:new Set(),current:null};
-    secret.open = false;
-    observer.open = false;
+    resetCopyStatus();
     render();
   });
   window.UnexpectedTwist = Object.freeze({setScenario});
