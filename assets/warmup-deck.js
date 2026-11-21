@@ -292,7 +292,16 @@
   const root = document.getElementById("warmupLab");
   if (!root) return;
   const bi = (ru,en) => { const d=document.createDocumentFragment(); for(const [k,s] of [["ru",ru],["en",en]]) {const el=document.createElement("span");el.className=k+"-only";el.textContent=s;d.append(el);}return d; };
-  const states = Object.fromEntries(packs.map(p=>[p.id,{used:new Set(),current:null,revealed:false}]));
+  const states = Object.fromEntries(packs.map(p=>[p.id,{used:new Set(),current:null,revealed:false,answer:null,choiceOrder:null}]));
+  // Shuffle only when a new card is drawn. Re-rendering must not move choices.
+  function shuffle(array) {
+    const result=array.slice();
+    for(let i=result.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [result[i],result[j]]=[result[j],result[i]];
+    }
+    return result;
+  }
   let selected = packs[0].id;
   root.innerHTML = [
     '<div class="pm-switches" id="warmupPacks" role="group" aria-label="Warm-up categories"></div>',
@@ -328,6 +337,23 @@
     if(!state.current)return;
     document.getElementById("warmupQuestion").replaceChildren(bi(state.current.question.ru,state.current.question.en));
     document.getElementById("warmupRefText").replaceChildren(bi(state.current.hint.ru,state.current.hint.en));
+    const referenceTitle=document.querySelector("#warmupReference h4");
+    if(selected==="trap" && state.revealed){
+      const right=state.current.correct==="trap";
+      const didAnswer=state.answer!==null && state.answer!==undefined;
+      const isCorrect=didAnswer && state.answer===state.current.correct;
+      referenceTitle.replaceChildren(bi(
+        (didAnswer ? (isCorrect ? "✓ Верно. " : "✕ Неверно. ") : "") + "Правильный ответ: " + (right ? "ловушка" : "хороший ход"),
+        (didAnswer ? (isCorrect ? "✓ Correct. " : "✕ Not quite. ") : "") + "Correct answer: " + (right ? "trap" : "good move")
+      ));
+    } else {
+      referenceTitle.replaceChildren(bi("Один из возможных ответов","One possible answer"));
+    }
+    if(selected==="trap" && Array.isArray(state.choiceOrder)){
+      const buttons=Array.from(trapButtons.querySelectorAll("button"));
+      const byChoice=Object.fromEntries(buttons.map(b=>[b.dataset.choice,b]));
+      trapButtons.replaceChildren(...state.choiceOrder.map(choice=>byChoice[choice]));
+    }
     reference.hidden=!state.revealed;
     reveal.hidden=state.revealed;
     trapButtons.hidden=selected!=="trap" || state.revealed;
@@ -345,17 +371,16 @@
     const available=pack.items.filter((_,i)=>!state.used.has(i));
     if(!available.length)return;
     const index=pack.items.indexOf(available[Math.floor(Math.random()*available.length)]);
-    state.used.add(index);state.current=pack.items[index];state.revealed=false;state.answer=null;refresh();
+    state.used.add(index);state.current=pack.items[index];state.revealed=false;state.answer=null;
+    state.choiceOrder=selected==="trap"?shuffle(["trap","good"]):null;
+    refresh();
   });
-  reset.addEventListener("click",()=>{states[selected]={used:new Set(),current:null,revealed:false};refresh();});
+  reset.addEventListener("click",()=>{states[selected]={used:new Set(),current:null,revealed:false,answer:null,choiceOrder:null};refresh();});
   trapButtons.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
     const state=states[selected];
     if(!state.current||state.revealed)return;
     state.answer=b.dataset.choice;
     state.revealed=true;
-    const correct=state.current.correct;
-    const title=document.querySelector("#warmupReference h4");
-    if(title)title.replaceChildren(bi(state.answer===correct?"Верно":"Обсудите почему",state.answer===correct?"Correct":"Discuss why"));
     refresh();
   }));
   reveal.addEventListener("click",()=>{states[selected].revealed=true;refresh();});
