@@ -1,4 +1,5 @@
-// Nine additional fictional Interest Detective cases. Loaded before game-modes.js.
+// Nine additional fictional Interest Detective cases and nine Chat Duel cases.
+// Loaded before game-modes.js to keep original cards intact.
 window.ExtraPracticeCases = [
   {
     "kind": "detective",
@@ -547,6 +548,348 @@ window.ExtraPracticeCases = [
     "reveal": {
       "ru": "Возможный интерес: получить время или поддержку перед решением. Уточните, что необходимо для ответа, и зафиксируйте взаимно согласованный follow-up.",
       "en": "Likely interest: obtain time or input before deciding. Clarify what is needed and agree on a follow-up together."
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-bug-or-scope",
+    "title": {
+      "ru": "Баг или доработка?",
+      "en": "Bug or change request?"
+    },
+    "context": {
+      "ru": "Ответьте клиенту, который считает запрос исправлением ошибки. Проверки согласованного ТЗ ещё не было.",
+      "en": "Reply to a client who believes their request is a bug fix. The agreed specification has not yet been reviewed."
+    },
+    "incoming": {
+      "ru": "«Вы серьёзно называете это доработкой? Оно должно было работать с первого дня».",
+      "en": "“Are you seriously calling this a change request? It should have worked from day one.”"
+    },
+    "facts": {
+      "ru": "Классификация запроса пока не подтверждена. Нужно сопоставить фактическое поведение с согласованным ТЗ; вопросы цены относятся к BD.",
+      "en": "The request has not been classified yet. Actual behaviour must be checked against the agreed specification; pricing belongs to BD."
+    },
+    "rubric": [
+      {
+        "ru": "Признал расхождение ожиданий",
+        "en": "Acknowledged the expectation gap"
+      },
+      {
+        "ru": "Предложил проверку по ТЗ без предвзятого вывода",
+        "en": "Proposed a specification review without pre-judging"
+      },
+      {
+        "ru": "Не обсуждал стоимость за BD",
+        "en": "Did not negotiate pricing for BD"
+      }
+    ],
+    "sample": {
+      "ru": "«Понимаю, почему это выглядит как ошибка. Предлагаю сравнить текущую механику с согласованным ТЗ и примерами поведения. После проверки сможем определить дальнейшие действия; коммерческие вопросы при необходимости подключу к BD».",
+      "en": "“I see why this looks like a defect. Let's compare the current behaviour with the agreed specification and examples. Once validated, we'll identify next steps and involve BD if commercial terms arise.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-priority",
+    "title": {
+      "ru": "Спор о приоритете",
+      "en": "Priority dispute"
+    },
+    "context": {
+      "ru": "Ответьте оператору, который требует немедленно пометить тикет критическим. Влияние на игроков ещё проверяется.",
+      "en": "Reply to an operator demanding a critical ticket priority. Player impact is still being assessed."
+    },
+    "incoming": {
+      "ru": "«У нас это критично. Если вы оставите normal, значит наш бизнес вам неважен».",
+      "en": "“This is critical for us. If you keep it at normal, our business clearly doesn't matter to you.”"
+    },
+    "facts": {
+      "ru": "Есть жалобы, но воспроизводимость и масштаб ещё не подтверждены. Приоритет должен определяться согласованными критериями и проверенными данными.",
+      "en": "Complaints have been received, but reproduction and scope are not verified. Priority must follow agreed criteria and evidence."
+    },
+    "rubric": [
+      {
+        "ru": "Признал бизнес-импакт без обещания severity",
+        "en": "Acknowledged impact without promising severity"
+      },
+      {
+        "ru": "Запросил примеры и признаки масштаба",
+        "en": "Asked for examples and evidence of scope"
+      },
+      {
+        "ru": "Объяснил путь пересмотра через ответственных",
+        "en": "Explained how responsible owners review priority"
+      }
+    ],
+    "sample": {
+      "ru": "«Понимаю, что для вас это срочно и влияет на работу. Зафиксируем конкретные сбои и охват, чтобы команда проверила приоритет по согласованным критериям. Я сообщу результат проверки, не называя категорию заранее».",
+      "en": "“I understand the urgency and business impact. Let's capture the failures and their scope so the team can review priority against the agreed criteria. I'll share the verified assessment rather than pre-assign a category.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-escalation",
+    "title": {
+      "ru": "Эскалация к руководству",
+      "en": "Escalation to leadership"
+    },
+    "context": {
+      "ru": "Ответьте клиенту, который хочет обойти CS и написать CEO. Вопрос по тикету ещё не закрыт.",
+      "en": "Reply to a client who wants to bypass CS and contact the CEO. The ticket remains unresolved."
+    },
+    "incoming": {
+      "ru": "«Раз от вас толку нет, пишу вашему директору. Может, тогда кто-то ответит».",
+      "en": "“If you can't help, I'm emailing your CEO. Maybe someone will finally respond.”"
+    },
+    "facts": {
+      "ru": "Подтверждён только открытый статус задачи и отсутствие согласованного плана; право клиента на эскалацию не ограничиваем.",
+      "en": "Only the open ticket status and lack of an agreed plan are confirmed; the client is free to escalate."
+    },
+    "rubric": [
+      {
+        "ru": "Не спорил с правом на эскалацию",
+        "en": "Did not challenge the right to escalate"
+      },
+      {
+        "ru": "Признал отсутствие нужного статуса",
+        "en": "Acknowledged the information gap"
+      },
+      {
+        "ru": "Предложил ответственное и проверяемое продолжение",
+        "en": "Offered an owned and verifiable next step"
+      }
+    ],
+    "sample": {
+      "ru": "«Понимаю, почему вы хотите эскалировать вопрос. Я соберу подтверждённые факты и историю решения в одном месте, подключу ответственных и согласую с вами время следующего обновления. Эскалацию со своей стороны не блокирую».",
+      "en": "“I understand why you want to escalate. I'll consolidate verified facts and the ticket history, involve the responsible owners and agree when you'll receive the next update. I won't block your escalation.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-dev-blame",
+    "title": {
+      "ru": "«Разработка опять тянет»",
+      "en": "“Engineering is delaying again”"
+    },
+    "context": {
+      "ru": "Ответьте клиенту от имени одной компании. Нельзя перекладывать вину на разработчиков.",
+      "en": "Respond to the client as one company. Do not shift blame to engineering."
+    },
+    "incoming": {
+      "ru": "«Ваши разработчики опять ничего не сделали. Зачем тогда нужен CS?»",
+      "en": "“Your developers have done nothing again. What's the point of CS?”"
+    },
+    "facts": {
+      "ru": "В YouTrack есть запрос, но новый срок и причина задержки не подтверждены. CS может координировать прозрачный статус.",
+      "en": "A request exists in YouTrack, but a new date and the cause of delay are unverified. CS can coordinate an accurate status."
+    },
+    "rubric": [
+      {
+        "ru": "Говорил «мы», а не «они»",
+        "en": "Used “we” rather than “they”"
+      },
+      {
+        "ru": "Отделил известное от неизвестного",
+        "en": "Separated known facts from unknowns"
+      },
+      {
+        "ru": "Назвал свою зону ответственности без ETA",
+        "en": "Explained their ownership without inventing an ETA"
+      }
+    ],
+    "sample": {
+      "ru": "«Вопрос находится у нас в работе, и я отвечаю за прозрачную коммуникацию по нему. Проверю статус в YouTrack с владельцем задачи и вернусь с подтверждённой информацией о следующем шаге».",
+      "en": "“We are tracking this request, and I'm responsible for clear communication on it. I'll check the YouTrack status with the owner and come back with verified information on the next step.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-post-incident",
+    "title": {
+      "ru": "Доверие после сбоя",
+      "en": "Trust after an incident"
+    },
+    "context": {
+      "ru": "Напишите ответ после инцидента, не обещая, что такое никогда не повторится.",
+      "en": "Write a response after an incident without promising it can never recur."
+    },
+    "incoming": {
+      "ru": "«Вы уже второй раз говорите, что всё под контролем. Почему я должен вам верить?»",
+      "en": "“This is the second time you've said things are under control. Why should I believe you?”"
+    },
+    "facts": {
+      "ru": "Расследование продолжается, финальная причина не подтверждена. Можно предложить последовательность проверки и прозрачные точки обновления.",
+      "en": "The investigation is still under way; the root cause is not confirmed. An investigation plan and transparent checkpoints are possible."
+    },
+    "rubric": [
+      {
+        "ru": "Признал причину недоверия",
+        "en": "Acknowledged why trust has been damaged"
+      },
+      {
+        "ru": "Не выдал гипотезу за RCA",
+        "en": "Did not present a hypothesis as final RCA"
+      },
+      {
+        "ru": "Предложил проверяемые шаги",
+        "en": "Offered checkable actions"
+      }
+    ],
+    "sample": {
+      "ru": "«Понимаю, почему прежние слова уже не убеждают. Мы не будем давать гарантий без проверки. Зафиксирую, что подтверждено по инциденту, кто ведёт расследование и когда предоставим следующий статус».",
+      "en": "“I understand why previous assurances no longer help. We won't promise an outcome without verification. I'll share the confirmed incident facts, investigation owner and next update point.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-qbr",
+    "title": {
+      "ru": "QBR без пользы",
+      "en": "QBR with no value"
+    },
+    "context": {
+      "ru": "Ответьте на отказ от регулярной встречи, не защищая презентации ради презентаций.",
+      "en": "Reply to the rejection of a recurring meeting without defending reporting for its own sake."
+    },
+    "incoming": {
+      "ru": "«Ваши QBR - это час красивых слайдов, а решения всё равно принимаем сами».",
+      "en": "“Your QBRs are an hour of polished slides, and we still make all the decisions ourselves.”"
+    },
+    "facts": {
+      "ru": "Непонятно, какие решения клиент хотел поддержать QBR. Вместо формального ритуала можно обсудить цели и полезный формат.",
+      "en": "The decisions the client wants QBRs to support are unclear. Explore useful outcomes and a lighter format instead of defending a ritual."
+    },
+    "rubric": [
+      {
+        "ru": "Признал бесполезность текущего формата для клиента",
+        "en": "Acknowledged the current format may not help"
+      },
+      {
+        "ru": "Спросил о решениях и критериях пользы",
+        "en": "Asked what decisions the review should support"
+      },
+      {
+        "ru": "Предложил адаптацию, не навязал QBR",
+        "en": "Offered adaptation without imposing QBR"
+      }
+    ],
+    "sample": {
+      "ru": "«Спасибо, что сказали прямо. Если текущий формат не помогает принимать решения, его нужно менять. Какие вопросы или риски стоит обсуждать вместе, чтобы встреча была полезной? Можем предложить короткий рабочий формат вместо презентации».",
+      "en": "“Thank you for the direct feedback. If the format doesn't support decisions, it should change. Which questions or risks would make the discussion useful? We can try a shorter working session instead of a slide presentation.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-silence",
+    "title": {
+      "ru": "«Посмотрим» вместо решения",
+      "en": "“We'll see” instead of a decision"
+    },
+    "context": {
+      "ru": "Ответьте новому контакту без предположений о культурных особенностях и без давления.",
+      "en": "Reply to a new contact without cultural assumptions or pressuring them."
+    },
+    "incoming": {
+      "ru": "«Посмотрим. Вернёмся к этому позже».",
+      "en": "“We'll see. Let's revisit this later.”"
+    },
+    "facts": {
+      "ru": "Причина отсрочки неизвестна. Важно уточнить, нужны ли данные, дополнительный участник или время.",
+      "en": "The reason for postponement is unknown. Clarify whether more data, a decision maker or time is needed."
+    },
+    "rubric": [
+      {
+        "ru": "Не трактовал краткость как отказ",
+        "en": "Did not interpret brevity as rejection"
+      },
+      {
+        "ru": "Уточнил, что нужно для решения",
+        "en": "Asked what is needed for a decision"
+      },
+      {
+        "ru": "Предложил согласовать удобный follow-up",
+        "en": "Suggested an agreed follow-up"
+      }
+    ],
+    "sample": {
+      "ru": "«Конечно. Чтобы подготовить полезное продолжение, подскажите, какие данные или участники понадобятся для решения? Можем согласовать удобное время, когда вернёмся к теме».",
+      "en": "“Of course. To make the next discussion useful, is there any information or stakeholder you need before deciding? We can agree on a suitable follow-up point.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-retention",
+    "title": {
+      "ru": "Пауза или закрытие",
+      "en": "Pause or closure"
+    },
+    "context": {
+      "ru": "Ответьте клиенту, который рассматривает закрытие покерного продукта, не обещая рост и не удерживая любой ценой.",
+      "en": "Reply to a client considering closure of their poker offering without promising growth or pushing retention at any cost."
+    },
+    "incoming": {
+      "ru": "«Покер больше не в приоритете. Пожалуй, закроем направление к концу периода».",
+      "en": "“Poker is no longer a priority. We'll probably close the vertical at the end of the period.”"
+    },
+    "facts": {
+      "ru": "Причины решения не установлены. Возможна контрольная встреча для обсуждения критериев, но решение остаётся за клиентом.",
+      "en": "The decision criteria are unknown. A checkpoint discussion may help, but the client retains the final decision."
+    },
+    "rubric": [
+      {
+        "ru": "Уважал право закрыть направление",
+        "en": "Respected the client's right to close"
+      },
+      {
+        "ru": "Спросил о причинах и критериях решения",
+        "en": "Explored reasons and decision criteria"
+      },
+      {
+        "ru": "Не обещал гарантированное улучшение метрик",
+        "en": "Did not guarantee KPI improvement"
+      }
+    ],
+    "sample": {
+      "ru": "«Понимаю, что приоритеты могут меняться. Прежде чем определять следующие шаги, хотел бы понять, что повлияло на решение и есть ли условия, при которых временная пауза была бы полезнее закрытия. Решение, конечно, остаётся за вами».",
+      "en": "“I understand priorities change. Before discussing next steps, I'd like to understand what drove the decision and whether a temporary pause would serve you better than closure. The decision remains yours.”"
+    }
+  },
+  {
+    "kind": "chat",
+    "id": "chat-internal-jab",
+    "title": {
+      "ru": "Колкость в YouTrack",
+      "en": "A jab in YouTrack"
+    },
+    "context": {
+      "ru": "Вы отвечаете инженеру в комментарии к задаче, а не заказчику. Не переносите конфликт в общий чат; запросите недостающие факты.",
+      "en": "You are replying to an engineer inside a YouTrack ticket, not a customer. Don't escalate a personal conflict in the public thread; request missing facts."
+    },
+    "incoming": {
+      "ru": "«Может, CS для разнообразия приложит нормальное описание, а не “клиенту не работает”?»",
+      "en": "“Maybe CS could attach a proper description for once instead of ‘it's broken for the client’?”"
+    },
+    "facts": {
+      "ru": "В тикете действительно отсутствуют шаги воспроизведения и окружение. CS может собрать данные, не соглашаясь с персональной оценкой.",
+      "en": "The ticket really lacks reproduction steps and environment details. CS can collect them without engaging with the personal jab."
+    },
+    "rubric": [
+      {
+        "ru": "Отделил замечание по тикету от тона",
+        "en": "Separated the ticket issue from the tone"
+      },
+      {
+        "ru": "Запросил конкретные недостающие сведения",
+        "en": "Requested the missing details"
+      },
+      {
+        "ru": "Зафиксировал шаг в YouTrack, не начал перепалку",
+        "en": "Recorded the next step in YouTrack without arguing"
+      }
+    ],
+    "sample": {
+      "ru": "«Спасибо, вижу, что для проверки не хватает окружения и шагов воспроизведения. Уточню их у клиента и дополню задачу. Если нужны ещё данные, перечислите, пожалуйста, их здесь».",
+      "en": "“Thanks, I see the environment and reproduction steps are missing. I'll request them from the client and update this ticket. Please list any other required details here.”"
     }
   }
 ];
