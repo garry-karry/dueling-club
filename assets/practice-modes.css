@@ -33,3 +33,12 @@
 .pm-result{margin-top:12px;font-weight:500;color:var(--ink)}
 .pm-section-note{font-size:12px;color:var(--ink3);line-height:1.65;margin:.6rem 0}
 @media(max-width:640px){.pm-switches{grid-template-columns:1fr 1fr}.pm-category{font-size:12px;padding:.7rem}.pm-current{padding:1rem}.pm-counter{width:100%;margin-left:0}}
+
+/* Detective result: show why a selected answer is right or wrong. */
+.pm-option.pm-correct-option{border-color:var(--teal);background:var(--teal-l);opacity:1}
+.pm-option.pm-wrong-option{border-color:var(--red);background:var(--red-l);opacity:1}
+.pm-option-feedback{padding:.7rem 0;border-bottom:1px solid var(--border);color:var(--ink2)}
+.pm-option-feedback:last-of-type{border-bottom:0}
+.pm-feedback-heading{font-size:12px;font-weight:700;color:var(--ink);margin:0 0 .3rem}
+.pm-feedback-question{font-size:12.5px;font-weight:600;color:var(--ink);margin:0 0 .25rem}
+.pm-option-feedback .pm-feedback{font-size:12px;line-height:1.6;margin:0}

@@ -306,7 +306,16 @@ const L=()=>document.body.dataset.lang==="en"?"en":"ru";
 const bi=(ru,en)=>{const f=document.createDocumentFragment();for(const [c,v] of [["ru",ru],["en",en]]){const el=document.createElement("span");el.className=c+"-only";el.textContent=v;f.append(el);}return f;};
 const text=(el,obj)=>el.replaceChildren(bi(obj.ru,obj.en));
 const detective=CASES.filter(x=>x.kind==="detective"),chat=CASES.filter(x=>x.kind==="chat");
-const pools={detective:{used:new Set(),current:null,chosen:new Set(),revealed:false},chat:{used:new Set(),current:null,revealed:false,reply:""}};
+const pools={detective:{used:new Set(),current:null,chosen:new Set(),revealed:false,optionOrder:null},chat:{used:new Set(),current:null,revealed:false,reply:""}};
+// Fisher-Yates: a fresh randomized sequence for each new case, stable on re-renders.
+function shuffleOptions(length){
+ const order=Array.from({length},(_,i)=>i);
+ for(let i=order.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [order[i],order[j]]=[order[j],order[i]];
+ }
+ return order;
+}
 let mode="detective";
 root.innerHTML=[
 '<div class="pm-switches"><button type="button" class="pm-category selected" data-mode="detective">🔎 <span class="ru-only">Детектив интересов</span><span class="en-only">Interest Detective</span></button><button type="button" class="pm-category" data-mode="chat">💬 <span class="ru-only">Чат-дуэль</span><span class="en-only">Chat Duel</span></button></div>',
@@ -319,10 +328,16 @@ function el(tag,className){const x=document.createElement(tag);if(className)x.cl
 function add(tag,cls,obj,parent){const x=el(tag,cls);if(obj)text(x,obj);parent.append(x);return x;}
 function renderDetective(c,state){
  add("p","pm-eyebrow",{ru:"Выберите два вопроса, которые проясняют интерес",en:"Pick two questions that clarify the interest"},area);
- for(let i=0;i<c.options.length;i++){
+ // Store original option indices in state so selection and feedback refer to the right options.
+ const order=state.optionOrder||Array.from(c.options.keys());
+ for(const i of order){
   const o=c.options[i],b=el("button","pm-option");b.type="button";b.setAttribute("aria-pressed",String(state.chosen.has(i)));
   b.append(bi(o.text.ru,o.text.en));
   if(state.chosen.has(i))b.classList.add("selected");
+  if(state.revealed){
+   b.classList.toggle("pm-correct-option",o.good);
+   b.classList.toggle("pm-wrong-option",!o.good&&state.chosen.has(i));
+  }
   b.disabled=state.revealed||(!state.chosen.has(i)&&state.chosen.size>=2);
   b.addEventListener("click",()=>{if(state.chosen.has(i))state.chosen.delete(i);else if(state.chosen.size<2)state.chosen.add(i);render();});
   area.append(b);
@@ -330,8 +345,24 @@ function renderDetective(c,state){
  const btn=el("button","pm-btn pm-primary");btn.type="button";btn.disabled=state.chosen.size!==2||state.revealed;btn.append(bi("Обсудить выбор","Review choices"));
  btn.addEventListener("click",()=>{state.revealed=true;render();});area.append(btn);
  if(state.revealed){
+  const correctSelected=[...state.chosen].filter(i=>c.options[i].good).length;
   const tips=el("div","pm-reference");
-  for(let i=0;i<c.options.length;i++){const q=c.options[i];add("p","pm-feedback",q.feedback,tips);}
+  add("h4","",{
+    ru:correctSelected===2?"✓ Оба вопроса подходят":"Выбрано подходящих вопросов: "+correctSelected+" из 2",
+    en:correctSelected===2?"✓ Both questions work":"Suitable questions selected: "+correctSelected+" of 2"
+  },tips);
+  // Explain in exactly the same stable order as the visible choices.
+  for(const i of order){
+   const q=c.options[i],selected=state.chosen.has(i);
+   const header=q.good
+     ? (selected?{ru:"✓ Выбрали верно",en:"✓ Correct choice"}:{ru:"✓ Подходящий вопрос (не выбран)",en:"✓ Good question (not selected)"})
+     : (selected?{ru:"✕ Выбран неверно",en:"✕ Incorrect selection"}:{ru:"Не подходит",en:"Not suitable"});
+   const item=el("div","pm-option-feedback");
+   add("h5","pm-feedback-heading",header,item);
+   add("p","pm-feedback-question",q.text,item);
+   add("p","pm-feedback",q.feedback,item);
+   tips.append(item);
+  }
   add("p","pm-result",c.reveal,tips);area.append(tips);
  }
 }
@@ -364,8 +395,10 @@ function render(){
 root.querySelectorAll("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;render();}));
 next.addEventListener("click",()=>{const state=pools[mode],deck=mode==="detective"?detective:chat;
  const possibilities=deck.filter((_,i)=>!state.used.has(i));if(!possibilities.length)return;
- const c=possibilities[Math.floor(Math.random()*possibilities.length)];state.used.add(deck.indexOf(c));state.current=c;state.revealed=false;state.chosen=new Set();state.reply="";render();
+ const c=possibilities[Math.floor(Math.random()*possibilities.length)];state.used.add(deck.indexOf(c));state.current=c;state.revealed=false;state.chosen=new Set();
+ state.optionOrder=mode==="detective"?shuffleOptions(c.options.length):null;
+ state.reply="";render();
 });
-reset.addEventListener("click",()=>{pools[mode]={used:new Set(),current:null,chosen:new Set(),revealed:false,reply:""};render();});
+reset.addEventListener("click",()=>{pools[mode]={used:new Set(),current:null,chosen:new Set(),revealed:false,optionOrder:null,reply:""};render();});
 render();
 })();
