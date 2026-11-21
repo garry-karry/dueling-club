@@ -17,7 +17,7 @@ Avoid personal scoring, unverified launch dates, commercial promises or fabricat
 
 ## Breakout rooms / Игровые режимы (5-7 min)
 
-Each room has a client, CS and observer. The new **Игровые режимы / Game modes** tab offers two modes, each with three fictional RU/EN situations.
+Each room has a client, CS and observer. The new **Игровые режимы / Game modes** tab offers two modes, each with twelve fictional RU/EN situations.
 
 ### Детектив интересов / Interest Detective
 1. The team receives a client situation.
@@ -42,8 +42,9 @@ Scenario mini-quizzes «Trap or good move?» are deliberately removed from the 8
 
 - `assets/warmup-deck.js`: independent packs, no-repeat draw, interactive Trap/Good buttons, answer references.
 - `assets/game-modes.js`: Interest Detective and Chat Duel, session-only state (no network requests), scenario-independent exercises.
+- `assets/game-cases-extra.js`: nine new RU/EN cases per mode, loaded before game-modes.js. Total: 12 per mode (24).
 - `assets/practice-modes.css`: scoped responsive layout.
-- `index.html`: group warm-up replacement, new tab/panel, remove eight scenario mini-quizzes while retaining group debriefs.
+- `index.html`: group warm-up replacement, new tab/panel, remove eight scenario mini-quizzes while retaining group debriefs; the **whole footer archive is collapsed by default** in one native details panel.
 - Existing scenarios `s9` to `s16`, Theory, generator, timer, participant pairing, archives and Unexpected Twist remain in place.
 - Default timer selection: Warm-up 5 minutes; Game modes 7 minutes; existing scenario timer phases preserved.
 
@@ -54,7 +55,8 @@ Scenario mini-quizzes «Trap or good move?» are deliberately removed from the 8
 - [ ] Trap/Good selection reveals an explanation and the controls reset on next card.
 - [ ] Detective requires exactly two questions before revealing feedback.
 - [ ] Chat Duel accepts text, shows a rubric after reveal, and never uploads responses.
-- [ ] Three cards per game mode without repeats until reset.
+- [ ] Twelve cards per game mode without repeats until reset. Confirm all 24 cards have RU/EN text, unique titles and valid content.
+- [ ] Entire footer archive is initially collapsed; opening it reveals all 12 historical scenarios, with individual entries still expandable.
 - [ ] Existing 8 scenario panels, observer checklists, group discussions and Unexpected Twist still work.
 - [ ] Warm-up 5min and Game modes 7min timer presets do not break 20min scenario phases.
 - [ ] Browser visual smoke-test on desktop and mobile.
