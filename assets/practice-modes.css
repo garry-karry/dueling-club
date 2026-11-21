@@ -1,0 +1,35 @@
+
+/* Rotating group warm-up and breakout-room practice modes */
+.pm-switches{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:9px;margin:0 0 1rem}
+.pm-category{border:1px solid var(--border-m);border-radius:var(--r-sm);background:var(--card);color:var(--ink2);padding:.8rem .9rem;font:500 13px 'DM Sans',sans-serif;text-align:left;cursor:pointer}
+.pm-category:hover{background:var(--bg3)}
+.pm-category.selected{background:var(--teal-l);color:var(--teal);border-color:var(--teal)}
+.pm-category:focus-visible,.pm-btn:focus-visible,.pm-option:focus-visible,.pm-textarea:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.pm-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:1rem 0}
+.pm-btn{font:500 13px 'DM Sans',sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--border-m);padding:8px 14px;border-radius:var(--r-sm);cursor:pointer}
+.pm-btn:hover{background:var(--bg3)}
+.pm-btn:disabled{opacity:.45;cursor:not-allowed}
+.pm-primary{background:var(--grad-teal);border-color:transparent;color:#fff}
+.pm-primary:hover{filter:brightness(1.12)}
+.pm-counter{color:var(--ink3);font-size:12px;margin-left:auto}
+.pm-hint{font-size:13px;line-height:1.7;color:var(--ink2);margin:.75rem 0}
+.pm-current{background:var(--card);border:1px solid var(--border-m);border-radius:var(--r);padding:1.15rem 1.3rem;margin-top:.9rem}
+.pm-current[hidden],.pm-reference[hidden],.pm-choices[hidden],#gameCard[hidden]{display:none!important}
+.pm-eyebrow{display:block;font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:var(--teal);margin:0 0 .5rem}
+.pm-current h3{font:700 20px/1.4 'Libre Baskerville',serif;color:var(--ink);margin:0 0 .9rem}
+.pm-reference{background:var(--bg2);border-left:3px solid var(--teal);border-radius:var(--r-sm);padding:12px 14px;margin-top:12px;color:var(--ink2);font-size:13px;line-height:1.7}
+.pm-reference h4{font-weight:600;color:var(--teal);margin:0 0 .5rem;font-size:13px}
+.pm-reference p{margin:0 0 .7rem}.pm-reference p:last-child{margin-bottom:0}
+.pm-choices{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0}
+.pm-choice.selected,.pm-option.selected{background:var(--teal-l);color:var(--teal);border-color:var(--teal)}
+.pm-context{font-size:13px;line-height:1.7;color:var(--ink2);margin-bottom:1rem}
+.pm-message{background:var(--red-l);padding:12px;border-radius:var(--r-sm);color:var(--ink);font-size:14px;margin-bottom:12px}
+.pm-option{display:block;width:100%;font-size:13px;line-height:1.6;text-align:left;padding:10px 12px;background:var(--bg2);color:var(--ink2);border:1px solid var(--border);border-radius:var(--r-sm);margin:7px 0;cursor:pointer}
+.pm-option:disabled{cursor:default;opacity:.75}
+.pm-textarea{width:100%;min-height:100px;resize:vertical;background:var(--bg2);color:var(--ink);border:1px solid var(--border-m);border-radius:var(--r-sm);padding:12px;font:13px/1.6 'DM Sans',sans-serif;margin-bottom:10px}
+.pm-check{display:flex;align-items:start;gap:9px;margin:7px 0;font-size:13px;color:var(--ink2)}
+.pm-check input{accent-color:var(--teal);margin-top:5px}
+.pm-feedback{margin-bottom:7px}
+.pm-result{margin-top:12px;font-weight:500;color:var(--ink)}
+.pm-section-note{font-size:12px;color:var(--ink3);line-height:1.65;margin:.6rem 0}
+@media(max-width:640px){.pm-switches{grid-template-columns:1fr 1fr}.pm-category{font-size:12px;padding:.7rem}.pm-current{padding:1rem}.pm-counter{width:100%;margin-left:0}}
