@@ -21,7 +21,8 @@
     "observer": {
       "ru": "Уточнил ли CS источник даты и согласовал статус-проверку без нового обещания?",
       "en": "Did CS verify the source of the date and agree on an update without making a new promise?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s9",
@@ -34,13 +35,14 @@
       "ru": "Заказчик показывает письмо месячной давности со словами «планируем в следующем релизе» и считает это гарантией.",
       "en": "The client shows a month-old email saying “planned for the next release” and reads it as a guarantee."
     },
-    "client": {
-      "ru": "Попросите признать, что формулировка звучала уверенно. Вам нужна ясность, а не спор о словах.",
-      "en": "Ask CS to acknowledge that the wording sounded confident. You need clarity, not a semantic debate."
-    },
     "observer": {
       "ru": "Отделил ли менеджер ожидание от подтверждённого обязательства и признал возможную неоднозначность?",
       "en": "Did CS distinguish expectation from confirmed commitment and acknowledge possible ambiguity?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "В переписке «планируем» не переводили в подтверждённое обязательство. Не обвиняйте клиента в трактовке слов - уточните ожидание и найдите источник договорённости.",
+      "en": "The word “planned” was never turned into a confirmed commitment. Do not blame the client's interpretation - clarify the expectation and find the decision record."
     }
   },
   {
@@ -61,7 +63,8 @@
     "observer": {
       "ru": "Предложил ли CS честный статус вместо придуманного ETA?",
       "en": "Did CS offer a candid status rather than inventing an ETA?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s10",
@@ -81,7 +84,8 @@
     "observer": {
       "ru": "Выделил ли CS проверку импакта и полномочия QA, не называя дефект некритичным?",
       "en": "Did CS prioritise impact assessment by QA without dismissing the finding?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s10",
@@ -101,7 +105,8 @@
     "observer": {
       "ru": "Предложены ли варианты и зависимости без обещания выпуска в конкретный день?",
       "en": "Were options and dependencies presented without an unverified launch guarantee?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s10",
@@ -114,13 +119,14 @@
       "ru": "Коллега предполагает, что временная конфигурация может обойти проблему. Тестов этого варианта ещё нет.",
       "en": "A colleague suggests a temporary configuration workaround, but it has not been tested."
     },
-    "client": {
-      "ru": "Спросите, кто и когда проверит workaround и какова цена его неудачи.",
-      "en": "Ask who will test the workaround and what happens if it fails."
-    },
     "observer": {
       "ru": "Не выдал ли CS гипотезу за работающее решение?",
       "en": "Did CS avoid presenting a hypothetical workaround as proven?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Предложенный обход не проходил проверку QA. Вы можете инициировать её, но не обещайте, что решение безопасно или будет доступно к дате.",
+      "en": "The suggested workaround has not passed QA. You may request validation but cannot promise that it is safe or available by a given date."
     }
   },
   {
@@ -141,7 +147,8 @@
     "observer": {
       "ru": "Разделил ли CS симптом, подтверждённую причину и гипотезу?",
       "en": "Did CS separate symptoms, verified root cause and hypothesis?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s11",
@@ -154,13 +161,14 @@
       "ru": "Новые данные не согласуются с предварительной гипотезой причины инцидента. Финальное RCA ещё не готово.",
       "en": "New evidence contradicts the preliminary incident root-cause hypothesis. Final RCA is not ready."
     },
-    "client": {
-      "ru": "Спросите, как будет исправлена коммуникация о причине и что уже известно точно.",
-      "en": "Ask how the explanation will be corrected and what is verified now."
-    },
     "observer": {
       "ru": "Скорректировал ли CS прежний статус без выдуманной уверенности?",
       "en": "Did CS correct earlier messaging without unjustified certainty?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "У внутреннего расследования две конфликтующие гипотезы. Признайте, что предварительный RCA нельзя представлять как окончательный, и согласуйте владельца новой проверки.",
+      "en": "The internal investigation has two conflicting hypotheses. Do not present preliminary RCA as final; identify who owns the next review."
     }
   },
   {
@@ -181,7 +189,8 @@
     "observer": {
       "ru": "Передал ли CS вопрос БД без обсуждения суммы или обещания компенсации?",
       "en": "Did CS route the request to BD without negotiating or promising compensation?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s12",
@@ -194,13 +203,14 @@
       "ru": "Заказчик говорит, что прямые сообщения в разработку быстрее работы через CS, и показывает две противоречивые версии одной задачи.",
       "en": "The client says messaging developers is faster than going through CS and shows two conflicting versions of one request."
     },
-    "client": {
-      "ru": "Вы хотите скорость, но боитесь повторять одну и ту же информацию.",
-      "en": "You want speed but hate repeating the same information."
-    },
     "observer": {
       "ru": "Показал ли CS ценность единой истории задачи, не защищая свою роль ради роли?",
       "en": "Did CS explain the value of one source of truth without defending the role for its own sake?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Вы видите две разные версии запроса в трекере и чате. Предложите одну согласованную запись и владельца синхронизации, не превращая CS в искусственный барьер.",
+      "en": "You see two conflicting versions of a request in the tracker and chat. Propose a shared record and an update owner without making CS an artificial gatekeeper."
     }
   },
   {
@@ -221,7 +231,8 @@
     "observer": {
       "ru": "Дал ли CS конкретный результат своей работы без выдуманных KPI?",
       "en": "Did CS explain a concrete outcome without inventing KPIs?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s12",
@@ -241,7 +252,8 @@
     "observer": {
       "ru": "Выяснил ли CS желаемый результат и предложил адаптированный формат?",
       "en": "Did CS uncover the desired outcome and offer a tailored format?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s13",
@@ -261,7 +273,8 @@
     "observer": {
       "ru": "Проверил ли CS предпочтительный канал вместо культурных догадок?",
       "en": "Did CS check channel preference instead of relying on cultural assumptions?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s13",
@@ -274,13 +287,14 @@
       "ru": "Вежливая шутка CS не вызвала реакции, а клиент сразу перешёл к срокам. Контекст ещё не известен.",
       "en": "CS's friendly joke gets no reaction; the client immediately switches to delivery timelines. The context is unclear."
     },
-    "client": {
-      "ru": "Вам нужно успеть на другую встречу. Если CS прямо спросит о приоритетах, объясните это.",
-      "en": "You have another meeting soon. Explain if CS asks about your priorities."
-    },
     "observer": {
       "ru": "Отказался ли CS от ярлыка «холодный клиент» и уточнил контекст?",
       "en": "Did CS avoid labelling the client as cold and check the context?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Причина реакции клиента неизвестна. Задайте вопрос о приоритетах и доступном времени, не делайте вывод о культуре или личности по одному эпизоду.",
+      "en": "The client's reaction is unexplained. Ask about priorities and time available; do not infer culture or personality from one moment."
     }
   },
   {
@@ -301,7 +315,8 @@
     "observer": {
       "ru": "Переуточнил ли CS роли и критерии решения, не предполагая полномочий?",
       "en": "Did CS recheck decision roles and criteria rather than assume authority?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s14",
@@ -321,7 +336,8 @@
     "observer": {
       "ru": "Отделил ли CS сравнение от фактов и передал коммерческий вопрос БД?",
       "en": "Did CS test the claim and route commercial terms to BD?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s14",
@@ -334,13 +350,14 @@
       "ru": "Клиент сообщает, что владелец хочет «ответ сегодня, иначе эскалация», но сам не знает всех технических деталей.",
       "en": "The client says the owner wants “an answer today or we escalate,” but lacks technical details."
     },
-    "client": {
-      "ru": "Вам важен короткий статус для владельца, даже если решение не готово.",
-      "en": "You need a short status for the owner even if a final solution is not ready."
-    },
     "observer": {
       "ru": "Не заменил ли CS проверку под давлением ложной гарантией?",
       "en": "Did CS avoid substituting a false guarantee for evidence under pressure?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Технический владелец не подтвердил ответ. Дайте понятный промежуточный статус и время следующей проверки, не обещая решения сегодня.",
+      "en": "The technical owner has not confirmed an answer. Offer an honest interim status and next checkpoint without promising a resolution today."
     }
   },
   {
@@ -361,7 +378,8 @@
     "observer": {
       "ru": "Ограничил ли CS персональные обвинения, не игнорируя предмет претензии?",
       "en": "Did CS set boundaries on personal attacks while addressing the real concern?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s15",
@@ -381,7 +399,8 @@
     "observer": {
       "ru": "Восстановил ли CS историю решений без упрёков ушедшему сотруднику?",
       "en": "Did CS restore decision history without blaming the former contact?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s15",
@@ -394,13 +413,14 @@
       "ru": "На вопрос о причинах падения активности команда не может сейчас подтвердить показатели из BO.",
       "en": "The team cannot currently verify the BO figures needed to explain the activity decline."
     },
-    "client": {
-      "ru": "Спросите, какой вывод можно сделать из доступных фактов и кто даст проверенную статистику.",
-      "en": "Ask what can be concluded from verified evidence and who will provide the figures."
-    },
     "observer": {
       "ru": "Отказался ли CS делать выводы из неподтверждённых чисел?",
       "en": "Did CS refuse to conclude from unverified figures?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Отчёт BO ещё не сверен. Не объясняйте спад придуманными числами - определите, кто проверит данные и когда стороны обсудят результат.",
+      "en": "The BO report is unverified. Do not explain the decline using guessed figures - identify who checks the data and when the results will be discussed."
     }
   },
   {
@@ -421,7 +441,8 @@
     "observer": {
       "ru": "Оставил ли CS право решения за клиентом и согласовал проверяемые шаги?",
       "en": "Did CS leave the decision with the client and agree on verifiable actions?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s16",
@@ -441,7 +462,8 @@
     "observer": {
       "ru": "Предусмотрел ли CS проверку compliance/legal и не объявил ли безопасность доказанной?",
       "en": "Did CS route to compliance/legal review without claiming safety is established?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s16",
@@ -461,7 +483,8 @@
     "observer": {
       "ru": "Разделил ли CS действительно значимый риск и остальные непроверенные замечания?",
       "en": "Did CS distinguish a significant risk from other unassessed findings?"
-    }
+    },
+    "recipient": "client"
   },
   {
     "scenario": "s16",
@@ -474,13 +497,14 @@
       "ru": "Одно из «визуальных» замечаний может мешать части игроков читать интерфейс. Фактический охват пока неизвестен.",
       "en": "One supposedly visual finding may prevent some players from reading the interface. Actual impact is still unknown."
     },
-    "client": {
-      "ru": "Просите оценить доступность и влияние на игроков до переноса задачи в список необязательных.",
-      "en": "Request accessibility and player-impact assessment before treating it as non-blocking."
-    },
     "observer": {
       "ru": "Проверил ли CS реальное влияние, избегая преждевременной классификации?",
       "en": "Did CS assess impact rather than prematurely call the issue minor?"
+    },
+    "recipient": "manager",
+    "manager": {
+      "ru": "Визуальное замечание может затрагивать доступность для игроков. Запросите оценку влияния, а не классифицируйте его как необязательное без экспертизы.",
+      "en": "A visual finding may affect accessibility for players. Ask for impact assessment rather than calling it non-blocking without expert review."
     }
   }
 ];
@@ -520,7 +544,7 @@
     '<div class="twist-body" id="twistBody" hidden>',
       '<div class="twist-instructions">',
         '<div><b><span class="ru-only">Когда</span><span class="en-only">When</span>:</b> <span class="ru-only">наблюдатель нажимает после 3-5 минут диалога, не заранее</span><span class="en-only">the observer clicks after 3-5 minutes of roleplay, not before</span></div>',
-        '<div><b><span class="ru-only">Как</span><span class="en-only">How</span>:</b> <span class="ru-only">наблюдатель открывает общий поворот, копирует тайную вводную для заказчика и пересылает её личным сообщением в Teams; CS продолжает разговор</span><span class="en-only">the observer reveals the shared event, copies the client-only cue and sends it by private Teams message; CS continues</span></div>',
+        '<div><b><span class="ru-only">Как</span><span class="en-only">How</span>:</b> <span class="ru-only">наблюдатель показывает общий поворот и отправляет приватную вводную нужному участнику (заказчику или менеджеру CS) в Teams</span><span class="en-only">the observer reveals the shared event and privately messages the role-specific cue to either the client or the CS manager</span></div>',
         '<div><b><span class="ru-only">Цель</span><span class="en-only">Goal</span>:</b> <span class="ru-only">пауза - факт - интерес - шаг; без неподтверждённых обязательств</span><span class="en-only">pause - fact - interest - next step; no unverified commitments</span></div>',
       '</div>',
       '<div class="twist-controls">',
@@ -535,10 +559,10 @@
         '<div class="twist-public-label"><span class="ru-only">Видно всем на демонстрации</span><span class="en-only">Visible to everyone on the shared screen</span></div>',
         '<p id="twistPublic"></p>',
         '<div class="twist-private-actions">',
-          '<button type="button" id="twistCopyClient" class="twist-button twist-secondary">🔒 <span class="ru-only">Копировать вводную заказчику</span><span class="en-only">Copy private client cue</span></button>',
+          '<button type="button" id="twistCopyRole" class="twist-button twist-secondary">🔒 <span class="ru-only">Копировать вводную для роли</span><span class="en-only">Copy role-specific cue</span></button>',
           '<button type="button" id="twistCopyObserver" class="twist-button twist-secondary">👁 <span class="ru-only">Копировать вопрос наблюдателю</span><span class="en-only">Copy observer prompt</span></button>',
         '</div>',
-        '<p class="twist-caution"><span class="ru-only">Тайная вводная не отображается на общем экране. Отправьте её заказчику в личном чате Teams. Демонстрируйте только вкладку клуба, не весь рабочий стол.</span><span class="en-only">The private cue is never shown on the shared screen. Send it to the client in a private Teams chat. Share the club browser tab, not your whole desktop.</span></p>',
+        '<p class="twist-caution"><span class="ru-only">Тайная вводная не показывается на демонстрации. Отправьте её в Teams лично участнику, указанному на кнопке - заказчику или менеджеру CS. Показывайте только вкладку клуба.</span><span class="en-only">The private cue stays off the shared screen. Send it in Teams to the role named on the button - client or CS manager. Share only the club tab.</span></p>',
         '<p id="twistCopyStatus" class="twist-copy-status" role="status" aria-live="polite"></p>',
         '<p class="twist-note"><span class="ru-only">Все вводные учебные и вымышленные. Не обещайте клиенту сроки, severity или коммерческие условия без согласований.</span><span class="en-only">All twists are fictional training prompts. Do not promise dates, severity or commercial terms without approval.</span></p>',
       '</article>',
@@ -551,7 +575,7 @@
   const reset = document.getElementById("twistReset");
   const card = document.getElementById("twistCard");
   const empty = document.getElementById("twistEmpty");
-  const copyClientButton = document.getElementById("twistCopyClient");
+  const copyRoleButton = document.getElementById("twistCopyRole");
   const copyObserverButton = document.getElementById("twistCopyObserver");
   const copyStatus = document.getElementById("twistCopyStatus");
   function resetCopyStatus() { copyStatus.textContent = ""; }
@@ -560,23 +584,29 @@
     if (!activeId || !states[activeId].current) return;
     const item = states[activeId].current;
     const lang = document.body.dataset.lang === "en" ? "en" : "ru";
-    const heading = which === "client"
-      ? (lang === "en" ? "PRIVATE - CLIENT ONLY" : "ЛИЧНО - ТОЛЬКО ЗАКАЗЧИКУ")
-      : (lang === "en" ? "OBSERVER PROMPT" : "ВОПРОС НАБЛЮДАТЕЛЮ");
-    const message = heading + "\n" + item.title[lang] + "\n\n" + item[which][lang];
+    const recipient = item.recipient;
+    const forRole = which === "role";
+    const heading = !forRole
+      ? (lang === "en" ? "OBSERVER PROMPT" : "ВОПРОС НАБЛЮДАТЕЛЮ")
+      : recipient === "client"
+        ? (lang === "en" ? "PRIVATE - CLIENT ONLY" : "ЛИЧНО - ТОЛЬКО ЗАКАЗЧИКУ")
+        : (lang === "en" ? "PRIVATE - CS MANAGER ONLY" : "ЛИЧНО - ТОЛЬКО МЕНЕДЖЕРУ CS");
+    const cue = forRole ? item[recipient] : item.observer;
+    if (!cue || !cue[lang]) return;
+    const message = heading + "\n" + item.title[lang] + "\n\n" + cue[lang];
     try {
       if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") throw new Error("Clipboard unavailable");
       await navigator.clipboard.writeText(message);
       copyStatus.textContent = lang === "en"
-        ? (which === "client" ? "Client cue copied. Send it in a private chat." : "Observer prompt copied.")
-        : (which === "client" ? "Вводная скопирована. Отправьте заказчику личным сообщением." : "Вопрос наблюдателя скопирован.");
+        ? (!forRole ? "Observer prompt copied." : recipient === "client" ? "Copied. Send to the client in a private Teams chat." : "Copied. Send to the CS manager in a private Teams chat.")
+        : (!forRole ? "Вопрос наблюдателя скопирован." : recipient === "client" ? "Скопировано. Отправьте заказчику в личный чат Teams." : "Скопировано. Отправьте менеджеру CS в личный чат Teams.");
     } catch (error) {
       copyStatus.textContent = lang === "en"
-        ? "Could not copy. Check clipboard permissions. Do not reveal private cues on the shared screen."
-        : "Не удалось скопировать. Проверьте разрешение на буфер обмена. Не показывайте секретную вводную при демонстрации.";
+        ? "Could not copy. Check clipboard permission. Never reveal the cue on the shared screen."
+        : "Не удалось скопировать. Проверьте доступ к буферу обмена. Не показывайте вводную на демонстрации.";
     }
   }
-  copyClientButton.addEventListener("click", () => copyPrivateCue("client"));
+  copyRoleButton.addEventListener("click", () => copyPrivateCue("role"));
   copyObserverButton.addEventListener("click", () => copyPrivateCue("observer"));
 
   function render() {
@@ -593,6 +623,11 @@
     if (state.current) {
       fill("twistTitle",state.current.title.ru,state.current.title.en);
       fill("twistPublic",state.current.public.ru,state.current.public.en);
+      const recipient = state.current.recipient;
+      copyRoleButton.replaceChildren(document.createTextNode("🔒 "), bi(
+        recipient === "client" ? "Копировать вводную заказчику" : "Копировать вводную менеджеру CS",
+        recipient === "client" ? "Copy client-only cue" : "Copy CS manager-only cue"
+      ));
     } else if (used === max) {
       empty.hidden = false;
     }
