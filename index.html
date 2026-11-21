@@ -2860,6 +2860,11 @@ function loadPhases(){
 function setTimerFor(id){
   if(timerRunning || id==='primer') return;
   const sel=document.getElementById('htMinutesSelect');
+  if(id==='warmup' || id==='games'){
+    sel.value=id==='warmup'?'5':'7';
+    setTimerMinutes(sel);
+    return;
+  }
   sel.value='phases'; loadPhases();
 }
 
